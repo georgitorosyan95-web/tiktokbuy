@@ -5,24 +5,146 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TTBuy — Магазин TikTok аккаунтов</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
         body {
-            font-family: Arial, sans-serif;
             background-color: #0f172a;
-            color: #ffffff;
+            color: #f8fafc;
+            line-height: 1.6;
+        }
+        header {
+            background: #1e293b;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #334155;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ef4444;
+        }
+        .hero {
             text-align: center;
-            padding: 50px;
+            padding: 60px 20px;
+            background: linear-gradient(to bottom, #1e293b, #0f172a);
         }
-        h1 {
-            color: #fe2c55;
+        .hero h1 {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: #fff;
         }
-        p {
+        .hero p {
             font-size: 18px;
             color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 25px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #ef4444;
+        }
+        .card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        .card p {
+            color: #94a3b8;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        .price {
+            font-size: 22px;
+            font-weight: bold;
+            color: #22c55e;
+            margin-bottom: 20px;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            background: #ef4444;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .btn:hover {
+            background: #dc2626;
+        }
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #1e293b;
+            color: #64748b;
+            margin-top: 60px;
+            border-top: 1px solid #334155;
         }
     </style>
 </head>
 <body>
-    <h1>TTBuy — Скоро открытие!</h1>
-    <p>Лучший магазин проверенных TikTok аккаунтов.</p>
+
+    <header>
+        <div class="logo">⚡ TTBuy</div>
+        <div style="color: #94a3b8; font-size: 14px;">Поддержка 24/7</div>
+    </header>
+
+    <div class="hero">
+        <h1>Магазин проверенных TikTok аккаунтов</h1>
+        <p>Готовые аккаунты с отлежкой, подписчиками и возможностью запуска прямых трансляций. Моментальная выдача после оплаты!</p>
+    </div>
+
+    <div class="container">
+        <div class="products-grid">
+            <div class="card">
+                <h3>Аккаунт с доступом к Live (Трансляции)</h3>
+                <p>Чистый аккаунт с историей, полностью готов к стримам и продвижению.</p>
+                <div class="price">1 490 ₽</div>
+                <a href="#" class="btn">Купить аккаунт</a>
+            </div>
+            <div class="card">
+                <h3>Аккаунт 1,000+ подписчиков</h3>
+                <p>Живая аудитория, открыта монетизация и стримы, без нарушений.</p>
+                <div class="price">2 990 ₽</div>
+                <a href="#" class="btn">Купить аккаунт</a>
+            </div>
+            <div class="card">
+                <h3>Премиум набор (Сотка + Отлежка)</h3>
+                <p>Прокачанный аккаунт с 5,000 подписчиков и высокой активностью алгоритмов.</p>
+                <div class="price">6 490 ₽</div>
+                <a href="#" class="btn">Купить аккаунт</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 TTBuy. Все права защищены.</p>
+    </footer>
+
 </body>
 </html>
