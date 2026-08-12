@@ -10,23 +10,23 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: #0b0f19; color: #f8fafc; line-height: 1.6; overflow-x: hidden; }
         
-        header { background: #1e293b; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; flex-wrap: nowrap; gap: 10px; position: sticky; top: 0; z-index: 100; }
-        .logo { display: flex; align-items: center; gap: 6px; font-size: 20px; font-weight: bold; color: #fff; white-space: nowrap; }
-        .logo-icon { width: 20px; height: 20px; flex-shrink: 0; }
+        header { background: #1e293b; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; flex-wrap: wrap; gap: 10px; position: sticky; top: 0; z-index: 100; }
+        .logo { display: flex; align-items: center; gap: 6px; font-size: 18px; font-weight: bold; color: #fff; white-space: nowrap; }
+        .logo-icon { width: 18px; height: 18px; flex-shrink: 0; }
         .logo span { background: linear-gradient(90deg, #fe2c55, #229ed9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-left: 2px; }
         
-        .header-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-        .header-auth { display: flex; align-items: center; gap: 8px; }
+        .header-right { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+        .header-auth { display: flex; align-items: center; gap: 6px; }
         
         .nav-btn { 
             background: transparent; 
             border: 1px solid #25f4ee; 
             color: #f8fafc; 
-            padding: 6px 14px; 
+            padding: 5px 10px; 
             border-radius: 6px; 
             cursor: pointer; 
             font-weight: 700; 
-            font-size: 13px; 
+            font-size: 12px; 
             transition: all 0.2s; 
             white-space: nowrap; 
             text-shadow: 0 0 5px rgba(37, 244, 238, 0.5);
@@ -56,56 +56,57 @@
             background: #0f172a;
             border: 1px solid #fe2c55;
             color: #fff;
-            padding: 6px 12px;
+            padding: 5px 10px;
             border-radius: 6px;
             cursor: pointer;
             font-weight: 700;
-            font-size: 13px;
+            font-size: 12px;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
             transition: all 0.2s;
             box-shadow: 0 0 10px rgba(254, 44, 85, 0.3);
+            white-space: nowrap;
         }
         .cart-btn:hover { background: #fe2c55; }
-        .cart-badge { background: #25f4ee; color: #0f172a; padding: 1px 6px; border-radius: 10px; font-size: 11px; font-weight: 900; }
+        .cart-badge { background: #25f4ee; color: #0f172a; padding: 1px 5px; border-radius: 10px; font-size: 10px; font-weight: 900; }
 
-        .user-info { display: flex; align-items: center; gap: 10px; color: #94a3b8; font-size: 13px; }
-        .logout-btn { background: transparent; border: 1px solid #ef4444; color: #ef4444; padding: 5px 10px; border-radius: 6px; cursor: pointer; font-weight: 600; transition: background 0.2s, color 0.2s; }
+        .user-info { display: flex; align-items: center; gap: 8px; color: #94a3b8; font-size: 12px; }
+        .logout-btn { background: transparent; border: 1px solid #ef4444; color: #ef4444; padding: 4px 8px; border-radius: 6px; cursor: pointer; font-weight: 600; transition: background 0.2s, color 0.2s; }
         .logout-btn:hover { background: #ef4444; color: white; }
 
         /* Поиск маркетплейса */
-        .search-bar-container { max-width: 600px; margin: 30px auto 10px auto; padding: 0 15px; position: relative; z-index: 2; }
-        .search-input { width: 100%; padding: 14px 20px; background: rgba(30, 41, 59, 0.9); border: 2px solid #334155; border-radius: 12px; color: #fff; font-size: 16px; outline: none; transition: border-color 0.2s, box-shadow 0.2s; box-shadow: 0 4px 12px rgba(0,0,0,0.3); backdrop-filter: blur(5px); }
+        .search-bar-container { max-width: 600px; margin: 20px auto 10px auto; padding: 0 15px; position: relative; z-index: 2; }
+        .search-input { width: 100%; padding: 12px 16px; background: rgba(30, 41, 59, 0.9); border: 2px solid #334155; border-radius: 12px; color: #fff; font-size: 14px; outline: none; transition: border-color 0.2s, box-shadow 0.2s; box-shadow: 0 4px 12px rgba(0,0,0,0.3); backdrop-filter: blur(5px); }
         .search-input:focus { border-color: #25f4ee; box-shadow: 0 0 15px rgba(37, 244, 238, 0.3); }
 
         /* Плавающая кнопка техподдержки Telegram */
         .support-float {
             position: fixed;
-            bottom: 25px;
-            right: 25px;
+            bottom: 20px;
+            right: 20px;
             background: linear-gradient(135deg, #229ed9, #1b8ec2);
             color: white;
-            padding: 12px 20px;
+            padding: 10px 16px;
             border-radius: 30px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             text-decoration: none;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 13px;
             box-shadow: 0 4px 20px rgba(34, 158, 217, 0.5);
-            z-index: 999;
+            z-index: 99;
             transition: transform 0.2s, box-shadow 0.2s;
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
         .support-float:hover { transform: scale(1.05); box-shadow: 0 6px 25px rgba(34, 158, 217, 0.7); }
-        .support-float svg { width: 22px; height: 22px; fill: white; flex-shrink: 0; }
+        .support-float svg { width: 18px; height: 18px; fill: white; flex-shrink: 0; }
 
         /* Hero секция с анимированным фоном социальных иконок */
         .hero { 
             text-align: center; 
-            padding: 80px 20px; 
+            padding: 50px 15px; 
             background: linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(30, 41, 59, 0.92)); 
             position: relative; 
             overflow: hidden; 
@@ -117,8 +118,8 @@
             z-index: 3;
         }
 
-        .hero h1 { font-size: 38px; font-weight: 900; margin-bottom: 15px; color: #fff; text-shadow: -3px -3px 0 #25f4ee, 3px 3px 0 #fe2c55; }
-        .hero p { font-size: 16px; color: #f1f5f9; max-width: 650px; margin: 0 auto; font-weight: 600; text-shadow: 0 0 8px rgba(37, 244, 238, 0.4); }
+        .hero h1 { font-size: 26px; font-weight: 900; margin-bottom: 12px; color: #fff; text-shadow: -2px -2px 0 #25f4ee, 2px 2px 0 #fe2c55; word-break: break-word; }
+        .hero p { font-size: 14px; color: #f1f5f9; max-width: 650px; margin: 0 auto; font-weight: 600; text-shadow: 0 0 8px rgba(37, 244, 238, 0.4); }
 
         /* Плавающие иконки на заднем плане */
         .bg-icons-container {
@@ -154,66 +155,73 @@
                 filter: drop-shadow(0 0 20px rgba(254, 44, 85, 0.7));
             }
             100% {
-                transform: translateY(-40px) translateX(25px) scale(1.3) rotate(15deg);
+                transform: translateY(-30px) translateX(15px) scale(1.2) rotate(15deg);
                 opacity: 0.4;
             }
         }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px 15px; position: relative; z-index: 2; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 15px 12px; position: relative; z-index: 2; }
 
-        .success-banner { position: relative; background: linear-gradient(135deg, rgba(254, 44, 85, 0.15), rgba(37, 244, 238, 0.15)); border: 2px solid #fe2c55; color: #ffffff; padding: 25px 15px; border-radius: 16px; text-align: center; margin-bottom: 25px; box-shadow: 0 0 30px rgba(254, 44, 85, 0.3); display: none; }
-        .success-banner h2 { font-size: 22px; font-weight: 800; background: linear-gradient(90deg, #fe2c55, #25f4ee); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; }
-        .success-banner p { color: #cbd5e1; font-size: 14px; }
+        .success-banner { position: relative; background: linear-gradient(135deg, rgba(254, 44, 85, 0.15), rgba(37, 244, 238, 0.15)); border: 2px solid #fe2c55; color: #ffffff; padding: 20px 12px; border-radius: 16px; text-align: center; margin-bottom: 20px; box-shadow: 0 0 30px rgba(254, 44, 85, 0.3); display: none; }
+        .success-banner h2 { font-size: 18px; font-weight: 800; background: linear-gradient(90deg, #fe2c55, #25f4ee); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 6px; }
+        .success-banner p { color: #cbd5e1; font-size: 13px; }
 
         .fireworks-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden; }
-        .firework-particle { position: absolute; width: 8px; height: 8px; border-radius: 50%; animation: explode 1s forwards ease-out; }
+        .firework-particle { position: absolute; width: 6px; height: 6px; border-radius: 50%; animation: explode 1s forwards ease-out; }
         @keyframes explode { 0% { transform: translate(0, 0) scale(1); opacity: 1; } 100% { transform: translate(var(--dx), var(--dy)) scale(0.2); opacity: 0; } }
 
-        .section-title { font-size: 20px; margin: 30px 0 15px 0; color: #fff; border-bottom: 2px solid #334155; padding-bottom: 8px; }
+        .section-title { font-size: 17px; margin: 25px 0 12px 0; color: #fff; border-bottom: 2px solid #334155; padding-bottom: 6px; }
 
         /* Модальные окна */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(5px); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 15px; }
-        .auth-container, .cart-modal-container { background: #1e293b; border: 1px solid #334155; border-radius: 16px; padding: 25px; width: 100%; max-width: 450px; position: relative; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5); max-height: 90vh; overflow-y: auto; }
-        .close-modal { position: absolute; top: 15px; right: 20px; background: none; border: none; color: #94a3b8; font-size: 24px; cursor: pointer; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(5px); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 12px; }
+        .auth-container, .cart-modal-container { background: #1e293b; border: 1px solid #334155; border-radius: 16px; padding: 20px; width: 100%; max-width: 400px; position: relative; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5); max-height: 90vh; overflow-y: auto; }
+        .close-modal { position: absolute; top: 12px; right: 15px; background: none; border: none; color: #94a3b8; font-size: 22px; cursor: pointer; }
         .close-modal:hover { color: #fff; }
-        .auth-container h2, .cart-modal-container h2 { margin-bottom: 20px; font-size: 20px; color: #fff; text-align: center; }
+        .auth-container h2, .cart-modal-container h2 { margin-bottom: 15px; font-size: 18px; color: #fff; text-align: center; }
         
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 5px; color: #94a3b8; font-size: 13px; }
-        .form-group input { width: 100%; padding: 12px; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #fff; font-size: 15px; }
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; margin-bottom: 4px; color: #94a3b8; font-size: 12px; }
+        .form-group input { width: 100%; padding: 10px; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #fff; font-size: 14px; }
         .form-group input:focus { outline: none; border-color: #fe2c55; }
 
         /* Стили корзины */
-        .cart-items-list { max-height: 250px; overflow-y: auto; margin-bottom: 15px; padding-right: 5px; }
-        .cart-item { display: flex; justify-content: space-between; align-items: center; background: #0f172a; padding: 10px 14px; border-radius: 8px; margin-bottom: 8px; border: 1px solid #334155; }
+        .cart-items-list { max-height: 220px; overflow-y: auto; margin-bottom: 12px; padding-right: 4px; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; background: #0f172a; padding: 8px 12px; border-radius: 8px; margin-bottom: 6px; border: 1px solid #334155; }
         .cart-item-info span { display: block; }
-        .cart-item-title { font-size: 14px; font-weight: bold; color: #fff; }
-        .cart-item-price { font-size: 12px; color: #22c55e; }
-        .cart-item-remove { background: none; border: none; color: #ef4444; cursor: pointer; font-size: 16px; }
-        .cart-total { display: flex; justify-content: space-between; font-size: 18px; font-weight: bold; margin-bottom: 20px; border-top: 1px solid #334155; padding-top: 15px; color: #fff; }
+        .cart-item-title { font-size: 13px; font-weight: bold; color: #fff; }
+        .cart-item-price { font-size: 11px; color: #22c55e; }
+        .cart-item-remove { background: none; border: none; color: #ef4444; cursor: pointer; font-size: 15px; }
+        .cart-total { display: flex; justify-content: space-between; font-size: 16px; font-weight: bold; margin-bottom: 15px; border-top: 1px solid #334155; padding-top: 12px; color: #fff; }
 
-        .custom-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; z-index: 99999; }
-        .custom-modal-box { background: #1e293b; border: 1px solid #334155; border-radius: 16px; width: 100%; max-width: 380px; padding: 24px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5); color: #ffffff; }
-        .custom-modal-title { font-size: 16px; font-weight: 900; color: #ffffff; text-transform: uppercase; letter-spacing: 1.5px; }
-        .custom-modal-body { font-size: 14px; color: #9ca3af; line-height: 1.5; margin: 15px 0 20px 0; }
+        .custom-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; z-index: 99999; padding: 15px; }
+        .custom-modal-box { background: #1e293b; border: 1px solid #334155; border-radius: 16px; width: 100%; max-width: 340px; padding: 20px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5); color: #ffffff; }
+        .custom-modal-title { font-size: 15px; font-weight: 900; color: #ffffff; text-transform: uppercase; letter-spacing: 1.5px; }
+        .custom-modal-body { font-size: 13px; color: #9ca3af; line-height: 1.5; margin: 12px 0 16px 0; }
         .custom-modal-footer { display: flex; justify-content: flex-end; }
-        .custom-modal-btn { background: linear-gradient(90deg, #fe2c55, #25f4ee); color: #ffffff; border: none; padding: 10px 24px; border-radius: 10px; font-weight: 600; cursor: pointer; }
+        .custom-modal-btn { background: linear-gradient(90deg, #fe2c55, #25f4ee); color: #ffffff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 13px; }
 
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 20px; transition: transform 0.2s, border-color 0.2s; display: flex; flex-direction: column; justify-content: space-between; }
-        .card:hover { transform: translateY(-5px); border-color: #fe2c55; }
-        .card h3 { font-size: 17px; margin-bottom: 8px; color: #fff; }
-        .card p { color: #94a3b8; font-size: 13px; margin-bottom: 12px; flex-grow: 1; }
-        .price { font-size: 18px; font-weight: bold; color: #22c55e; margin-bottom: 15px; }
+        .products-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
+        @media(min-width: 640px) {
+            .products-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media(min-width: 1024px) {
+            .products-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 16px; transition: transform 0.2s, border-color 0.2s; display: flex; flex-direction: column; justify-content: space-between; }
+        .card:hover { border-color: #fe2c55; }
+        .card h3 { font-size: 16px; margin-bottom: 6px; color: #fff; }
+        .card p { color: #94a3b8; font-size: 12px; margin-bottom: 10px; flex-grow: 1; }
+        .price { font-size: 16px; font-weight: bold; color: #22c55e; margin-bottom: 12px; }
         .card-buttons { display: flex; gap: 8px; }
-        .btn { display: block; width: 100%; background: linear-gradient(90deg, #fe2c55, #25f4ee); color: white; text-align: center; padding: 10px; border-radius: 8px; border: none; font-weight: bold; font-size: 14px; cursor: pointer; transition: opacity 0.2s; }
+        .btn { display: block; width: 100%; background: linear-gradient(90deg, #fe2c55, #25f4ee); color: white; text-align: center; padding: 9px; border-radius: 8px; border: none; font-weight: bold; font-size: 13px; cursor: pointer; transition: opacity 0.2s; }
         .btn:hover { opacity: 0.9; }
         .btn-secondary { background: #334155; color: #fff; }
         .btn-secondary:hover { background: #475569; }
 
-        .toggle-auth { text-align: center; margin-top: 15px; color: #94a3b8; font-size: 13px; cursor: pointer; }
+        .toggle-auth { text-align: center; margin-top: 12px; color: #94a3b8; font-size: 12px; cursor: pointer; }
         .toggle-auth span { color: #fe2c55; font-weight: bold; }
-        footer { text-align: center; padding: 25px; background: #1e293b; color: #64748b; margin-top: 50px; border-top: 1px solid #334155; font-size: 14px; }
+        footer { text-align: center; padding: 20px; background: #1e293b; color: #64748b; margin-top: 40px; border-top: 1px solid #334155; font-size: 13px; }
     </style>
 </head>
 <body>
@@ -242,27 +250,18 @@
     </header>
 
     <div class="hero">
-        <!-- Анимированные иконки на заднем плане (приближаются, двигаются, яркие) -->
         <div class="bg-icons-container">
-            <!-- TikTok Иконка 1 -->
-            <div class="floating-icon" style="top: 15%; left: 10%; width: 55px; height: 55px; animation-duration: 7s; animation-delay: 0s;">
+            <div class="floating-icon" style="top: 15%; left: 10%; width: 45px; height: 45px; animation-duration: 7s; animation-delay: 0s;">
                 <svg viewBox="0 0 24 24" fill="#fe2c55"><path d="M19.589 6.686a4.793 4.793 0 01-3.7-1.542V13.8a6.857 6.857 0 11-6.857-6.857c.328 0 .65.03.964.088v3.655a3.171 3.171 0 102.214 3.028V1h3.643a8.471 8.471 0 003.743 3.128v2.558z"/></svg>
             </div>
-            <!-- Telegram Иконка 1 -->
-            <div class="floating-icon" style="top: 20%; right: 15%; width: 50px; height: 50px; animation-duration: 9s; animation-delay: 1s;">
+            <div class="floating-icon" style="top: 20%; right: 15%; width: 40px; height: 40px; animation-duration: 9s; animation-delay: 1s;">
                 <svg viewBox="0 0 24 24" fill="#229ed9"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.25.38-.51 1.08-.78 4.22-1.84 7.03-3.05 8.43-3.62 4.01-1.66 4.84-1.95 5.38-1.96.12 0 .39.03.56.17.14.12.18.28.2.45-.02.07-.02.13-.04.2z"/></svg>
             </div>
-            <!-- TikTok Иконка 2 -->
-            <div class="floating-icon" style="bottom: 15%; left: 20%; width: 65px; height: 65px; animation-duration: 8s; animation-delay: 2s;">
+            <div class="floating-icon" style="bottom: 15%; left: 20%; width: 50px; height: 50px; animation-duration: 8s; animation-delay: 2s;">
                 <svg viewBox="0 0 24 24" fill="#25f4ee"><path d="M19.589 6.686a4.793 4.793 0 01-3.7-1.542V13.8a6.857 6.857 0 11-6.857-6.857c.328 0 .65.03.964.088v3.655a3.171 3.171 0 102.214 3.028V1h3.643a8.471 8.471 0 003.743 3.128v2.558z"/></svg>
             </div>
-            <!-- Telegram Иконка 2 -->
-            <div class="floating-icon" style="bottom: 25%; right: 25%; width: 45px; height: 45px; animation-duration: 10s; animation-delay: 1.5s;">
+            <div class="floating-icon" style="bottom: 25%; right: 25%; width: 35px; height: 35px; animation-duration: 10s; animation-delay: 1.5s;">
                 <svg viewBox="0 0 24 24" fill="#229ed9"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.25.38-.51 1.08-.78 4.22-1.84 7.03-3.05 8.43-3.62 4.01-1.66 4.84-1.95 5.38-1.96.12 0 .39.03.56.17.14.12.18.28.2.45-.02.07-.02.13-.04.2z"/></svg>
-            </div>
-            <!-- Дополнительная иконка TikTok -->
-            <div class="floating-icon" style="top: 40%; left: 5%; width: 40px; height: 40px; animation-duration: 6s; animation-delay: 3s;">
-                <svg viewBox="0 0 24 24" fill="#fe2c55"><path d="M19.589 6.686a4.793 4.793 0 01-3.7-1.542V13.8a6.857 6.857 0 11-6.857-6.857c.328 0 .65.03.964.088v3.655a3.171 3.171 0 102.214 3.028V1h3.643a8.471 8.471 0 003.743 3.128v2.558z"/></svg>
             </div>
         </div>
 
@@ -272,9 +271,8 @@
         </div>
     </div>
 
-    <!-- Строка поиска в стиле маркетплейса -->
     <div class="search-bar-container">
-        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Поиск аккаунтов, каналов, услуг или номеров..." oninput="filterProducts()">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Поиск аккаунтов, каналов, услуг..." oninput="filterProducts()">
     </div>
 
     <div class="container">
@@ -285,7 +283,6 @@
         </div>
 
         <div id="catalog-container">
-            <!-- Каталог аккаунтов -->
             <h2 class="section-title">Готовые каталоги аккаунтов</h2>
             <div class="products-grid">
                 <div class="card" data-name="Аккаунт с доступом к Live (Трансляции)">
@@ -317,7 +314,6 @@
                 </div>
             </div>
 
-            <!-- Покупка Telegram каналов -->
             <h2 class="section-title">📢 Покупка Telegram каналов</h2>
             <div class="products-grid">
                 <div class="card" data-name="Telegram канал с монетизацией">
@@ -340,7 +336,6 @@
                 </div>
             </div>
 
-            <!-- Виртуальные номера -->
             <h2 class="section-title">📱 Виртуальные номера</h2>
             <div class="products-grid">
                 <div class="card" data-name="Номер для регистрации TikTok">
@@ -363,7 +358,6 @@
                 </div>
             </div>
 
-            <!-- Услуги накрутки TikTok -->
             <h2 class="section-title">⚡ Накрутка TikTok</h2>
             <div class="products-grid">
                 <div class="card" data-name="TikTok: Подписчики">
@@ -395,7 +389,6 @@
                 </div>
             </div>
 
-            <!-- Услуги накрутки Telegram -->
             <h2 class="section-title">✈️ Накрутка Telegram</h2>
             <div class="products-grid">
                 <div class="card" data-name="Telegram: Подписчики на канал">
@@ -429,14 +422,11 @@
         </div>
     </div>
 
-    <!-- Модальное окно корзины -->
     <div class="modal-overlay" id="cartModal">
         <div class="cart-modal-container">
             <button class="close-modal" onclick="closeCartModal()">&times;</button>
             <h2>Корзина товаров</h2>
-            <div class="cart-items-list" id="cart-items-list">
-                <!-- Сюда динамически добавляются товары -->
-            </div>
+            <div class="cart-items-list" id="cart-items-list"></div>
             <div class="cart-total">
                 <span>Итого:</span>
                 <span id="cart-total-price">0 ₽</span>
@@ -445,7 +435,6 @@
         </div>
     </div>
 
-    <!-- Модальное окно авторизации -->
     <div class="modal-overlay" id="authModal">
         <div class="auth-container">
             <button class="close-modal" onclick="closeAuth()">&times;</button>
@@ -461,7 +450,6 @@
         </div>
     </div>
 
-    <!-- Кастомное модальное окно уведомлений -->
     <div id="custom-alert" class="custom-modal-overlay">
         <div class="custom-modal-box">
             <div class="custom-modal-title">Системное уведомление</div>
@@ -500,11 +488,9 @@
             document.getElementById('custom-alert').style.display = 'none';
         });
 
-        // Функция поиска по каталогу (как на маркетплейсах)
         function filterProducts() {
             const query = document.getElementById('searchInput').value.toLowerCase();
             const cards = document.querySelectorAll('.card');
-            
             cards.forEach(card => {
                 const name = card.getAttribute('data-name').toLowerCase();
                 const text = card.innerText.toLowerCase();
@@ -516,7 +502,6 @@
             });
         }
 
-        // Функции корзины
         function addToCart(name, price) {
             cart.push({ name, price });
             updateCartUI();
@@ -539,7 +524,7 @@
             let total = 0;
 
             if (cart.length === 0) {
-                listEl.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 20px;">Корзина пуста</p>';
+                listEl.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 15px; font-size: 13px;">Корзина пуста</p>';
             } else {
                 cart.forEach((item, index) => {
                     total += item.price;
@@ -557,13 +542,8 @@
             totalEl.textContent = total + ' ₽';
         }
 
-        function openCartModal() {
-            document.getElementById('cartModal').style.display = 'flex';
-        }
-
-        function closeCartModal() {
-            document.getElementById('cartModal').style.display = 'none';
-        }
+        function openCartModal() { document.getElementById('cartModal').style.display = 'flex'; }
+        function closeCartModal() { document.getElementById('cartModal').style.display = 'none'; }
 
         async function checkoutCart() {
             if (cart.length === 0) {
@@ -577,7 +557,6 @@
                 openAuth('login');
                 return;
             }
-            
             showModal(`Заказ успешно оформлен! Общая сумма: ${cart.reduce((sum, i) => sum + i.price, 0)} ₽. Перейдите в Telegram-бот @TTBuySupportBot для завершения оплаты.`);
             cart = [];
             updateCartUI();
@@ -615,7 +594,7 @@
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             if (isLoginMode) {
-                const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+                const { error } = await supabaseClient.api ? await supabaseClient.auth.signInWithPassword({ email, password }) : await supabaseClient.auth.signInWithPassword({ email, password });
                 if (error) showModal('Ошибка входа: ' + error.message);
                 else { closeAuth(); showSuccessBanner(); checkUser(); }
             } else {
@@ -631,7 +610,7 @@
             if (session) {
                 userHeader.innerHTML = `
                     <div class="user-info">
-                        <span>${session.user.email}</span>
+                        <span style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${session.user.email}</span>
                         <button class="logout-btn" onclick="logout()">Выйти</button>
                     </div>
                 `;
@@ -664,7 +643,7 @@
                 const particle = document.createElement('div');
                 particle.className = 'firework-particle';
                 const angle = Math.random() * Math.PI * 2;
-                const distance = Math.random() * 100 + 50;
+                const distance = Math.random() * 80 + 30;
                 particle.style.setProperty('--dx', Math.cos(angle) * distance + 'px');
                 particle.style.setProperty('--dy', Math.sin(angle) * distance + 'px');
                 particle.style.background = ['#fe2c55', '#25f4ee', '#22c55e', '#e1306c'][Math.floor(Math.random() * 4)];
