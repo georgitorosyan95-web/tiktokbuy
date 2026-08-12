@@ -238,8 +238,6 @@
         .btn-secondary:hover { background: #475569; }
 
         .badge-seller { position: absolute; top: 12px; right: 16px; font-size: 10px; background: rgba(34, 158, 217, 0.2); color: #229ed9; padding: 2px 6px; border-radius: 4px; font-weight: bold; border: 1px solid rgba(34, 158, 217, 0.4); }
-        .badge-promo { position: absolute; top: 12px; right: 16px; font-size: 10px; background: rgba(254, 44, 85, 0.25); color: #fe2c55; padding: 2px 6px; border-radius: 4px; font-weight: bold; border: 1px solid rgba(254, 44, 85, 0.5); animation: pulse-badge 1.5s infinite; }
-        @keyframes pulse-badge { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
 
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(5px); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 12px; }
         .modal-box { background: #1e293b; border: 1px solid #334155; border-radius: 16px; padding: 20px; width: 100%; max-width: 480px; position: relative; box-shadow: 0 20px 25px rgba(0,0,0,0.5); max-height: 90vh; overflow-y: auto; color: #fff; }
@@ -345,12 +343,11 @@
             <h2 class="section-title">Каталог аккаунтов и SMM услуг</h2>
             <div class="products-grid" id="products-grid">
                 
-                <!-- Товар: Акционная акция TikTok 130k (Франция) -->
-                <div class="card promo-card" data-category="accounts tiktok" data-name="TikTok Аккаунт 130k подписчиков (Франция)" onclick="openDetails('TikTok Аккаунт 130k подписчиков (Франция)', 2500, 'Специальная акция! Прокачанный французский TikTok аккаунт на 130 000 подписчиков с живой европейской аудиторией. Универсальная тематика (Lifestyle / Тренды), чистая история, отсутствие теневых банов и возможность подключения монетизации. После покупки на ваш email придут логин и пароль от аккаунта, а также пароль от родной почты. Деньги поступят продавцу только после вашего подтверждения в личном кабинете!', 'Регион: Франция | 130k фолловеров | Отлежка: 8 мес.', 'Родная почта + полный контроль', 'Безопасная сделка (Эскроу)')">
-                    <div class="badge-promo">🔥 СУПЕР АКЦИЯ -40%</div>
+                <!-- Акционные предложения (без лишних текстовых комментариев в карточках) -->
+                <div class="card promo-card" data-category="accounts tiktok" data-name="TikTok Аккаунт 130k подписчиков (Франция)" onclick="openDetails('TikTok Аккаунт 130k подписчиков (Франция)', 2500, 'Прокачанный французский TikTok аккаунт на 130 000 подписчиков с живой европейской аудиторией. Универсальная тематика (Lifestyle / Тренды), чистая история, отсутствие теневых банов и возможность подключения монетизации. После покупки на ваш email придут логин и пароль от аккаунта, а также пароль от родной почты. Деньги поступят продавцу только после вашего подтверждения в личном кабинете!', 'Регион: Франция | 130k фолловеров | Отлежка: 8 мес.', 'Родная почта + полный контроль', 'Безопасная сделка (Эскроу)')">
                     <div>
                         <h3>TikTok Аккаунт 130k подписчиков (Франция)</h3>
-                        <p>Готовый европейский аккаунт по спеццене! Логин, пароль и почта отправляются на email, оплата — после вашего подтверждения.</p>
+                        <p>Готовый европейский аккаунт по спеццене. Логин, пароль и почта отправляются на email, оплата — после вашего подтверждения.</p>
                     </div>
                     <div>
                         <div class="card-meta"><span>🛒 Акция дня</span><span class="rating">★ 5.0 (64)</span></div>
@@ -362,7 +359,97 @@
                     </div>
                 </div>
 
-                <!-- Товар: Аккаунт TikTok -->
+                <div class="card promo-card" data-category="accounts telegram" data-name="Telegram Канал 25 000 подписчиков (Крипто / Финансы)" onclick="openDetails('Telegram Канал 25 000 подписчиков (Крипто / Финансы)', 1800, 'Готовый премиальный Telegram канал в финансовой тематике с активной аудиторией. Передача прав владельца и полная выгрузка данных на ваш email.', 'Регион: Глобальный | 25k участников | Отлежка: 1.5 года', 'Полные права администратора', 'Безопасная сделка (Эскроу)')">
+                    <div>
+                        <h3>Telegram Канал 25 000 подписчиков (Крипто / Финансы)</h3>
+                        <p>Раскрученный канал с живыми подписчиками. Полный перенос прав и доступов сразу после подтверждения сделки.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta"><span>🛒 Акция дня</span><span class="rating">★ 4.9 (41)</span></div>
+                        <div class="price"><span class="price-old">3 000 ₽</span> 1 800 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('Telegram Канал 25k (Крипто)', 1800)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Telegram Канал 25k (Крипто)', 1800)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card promo-card" data-category="accounts instagram" data-name="Instagram Профиль 85 000 подписчиков (Lifestyle / Путешествия)" onclick="openDetails('Instagram Профиль 85 000 подписчиков (Lifestyle / Путешествия)', 3200, 'Популярный аккаунт в сфере путешествий и лайфстайла с охватной аудиторией из США. Родная почта и все данные для смены привязок отправляются на ваш email.', 'Регион: США | 85k фолловеров | Отлежка: 1 год', 'Родная почта + полный доступ', 'Безопасная сделка (Эскроу)')">
+                    <div>
+                        <h3>Instagram Профиль 85 000 подписчиков (Lifestyle / Путешествия)</h3>
+                        <p>Американский инстаграм-профиль с лояльной аудиторией. Чистая история, данные высылаются на email.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta"><span>🛒 Акция дня</span><span class="rating">★ 4.9 (53)</span></div>
+                        <div class="price"><span class="price-old">5 500 ₽</span> 3 200 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('Instagram Профиль 85k', 3200)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Instagram Профиль 85k', 3200)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card promo-card" data-category="accounts youtube" data-name="YouTube Канал 40 000 подписчиков (Гейминг / Стримы)" onclick="openDetails('YouTube Канал 40 000 подписчиков (Гейминг / Стримы)', 4500, 'Канал с активной игровой аудиторией, полностью готовый к стримам и подключению монетизации. Передача через Brand Account на ваш email.', 'Регион: СНГ | 40k подписчиков | Без страйков', 'Полный доступ владельца', 'Безопасная сделка (Эскроу)')">
+                    <div>
+                        <h3>YouTube Канал 40 000 подписчиков (Гейминг / Стримы)</h3>
+                        <p>Игровой канал с историей и живыми зрителями. Безопасная передача прав через бренд-аккаунт.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta"><span>🛒 Акция дня</span><span class="rating">★ 5.0 (29)</span></div>
+                        <div class="price"><span class="price-old">7 500 ₽</span> 4 500 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('YouTube Канал 40k', 4500)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('YouTube Канал 40k', 4500)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card promo-card" data-category="accounts vk" data-name="VK Сообщество 50 000 подписчиков (Юмор / Развлечения)" onclick="openDetails('VK Сообщество 50 000 подписчиков (Юмор / Развлечения)', 1200, 'Раскрученная группа ВКонтакте развлекательной тематики с высокой активностью и живыми комментариями. Передача прав главного администратора.', 'Регион: Россия | 50k участников | Отлежка: 2 года', 'Полные права администратора', 'Безопасная сделка (Эскроу)')">
+                    <div>
+                        <h3>VK Сообщество 50 000 подписчиков (Юмор / Развлечения)</h3>
+                        <p>Активная группа ВКонтакте с устоявшейся базой участников. Мгновенная передача административных прав.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta"><span>🛒 Акция дня</span><span class="rating">★ 4.8 (37)</span></div>
+                        <div class="price"><span class="price-old">2 200 ₽</span> 1 200 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('VK Сообщество 50k', 1200)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('VK Сообщество 50k', 1200)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card promo-card" data-category="accounts tiktok" data-name="TikTok Аккаунт 75 000 подписчиков (Танцы / Тренды)" onclick="openDetails('TikTok Аккаунт 75 000 подписчиков (Танцы / Тренды)', 1900, 'Немецкий TikTok аккаунт с высокой вовлеченностью в трендовых направлениях. Полный доступ к профилю и родной почте.', 'Регион: Германия | 75k фолловеров | Отлежка: 6 мес.', 'Родная почта + полный доступ', 'Безопасная сделка (Эскроу)')">
+                    <div>
+                        <h3>TikTok Аккаунт 75 000 подписчиков (Танцы / Тренды)</h3>
+                        <p>Европейский молодежный аккаунт по сниженной цене. Данные отправляются на ваш email.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta"><span>🛒 Акция дня</span><span class="rating">★ 4.9 (45)</span></div>
+                        <div class="price"><span class="price-old">3 500 ₽</span> 1 900 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('TikTok Аккаунт 75k (Германия)', 1900)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('TikTok Аккаунт 75k (Германия)', 1900)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card promo-card" data-category="accounts telegram" data-name="Telegram Чат 35 000 участников (Инвестиции / Трейдинг)" onclick="openDetails('Telegram Чат 35 000 участников (Инвестиции / Трейдинг)', 2100, 'Живой инвестиционный чат с высокой активностью пользователей и готовой модерацией. Передача прав владельца.', 'Регион: СНГ | 35k участников | Отлежка: 1 год', 'Права владельца чата', 'Безопасная сделка (Эскроу)')">
+                    <div>
+                        <h3>Telegram Чат 35 000 участников (Инвестиции / Трейдинг)</h3>
+                        <p>Прокачанный чат для обсуждения финансов и инвестиций. Полная передача прав владения.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta"><span>🛒 Акция дня</span><span class="rating">★ 5.0 (58)</span></div>
+                        <div class="price"><span class="price-old">3 800 ₽</span> 2 100 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('Telegram Чат 35k', 2100)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Telegram Чат 35k', 2100)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Остальные товары каталога -->
                 <div class="card" data-category="accounts tiktok" data-name="TikTok Аккаунт с монетизацией (50k подписчиков)" onclick="openDetails('TikTok Аккаунт с монетизацией (50k подписчиков)', 3490, 'Прокачанный TikTok аккаунт с живой аудиторией, подключенной Creator Rewards Program и отсутствием теневых банов. После оплаты на ваш email придут логин/пароль от аккаунта и пароль от родной почты. Деньги продавцу поступят только после вашего подтверждения о доставке.', 'США | Отлежка: 1 год | Без блокировок', 'Родная почта + полный доступ', 'Безопасная сделка (Эскроу)')">
                     <div class="badge-seller">🔥 Топ аккаунт</div>
                     <div>
@@ -379,7 +466,6 @@
                     </div>
                 </div>
 
-                <!-- Товар: Аккаунт Telegram -->
                 <div class="card" data-category="accounts telegram" data-name="Telegram Аккаунт с отлежкой 3+ года (Трастовый)" onclick="openDetails('Telegram Аккаунт с отлежкой 3+ года', 450, 'Возрастной аккаунт Telegram с высокой трастовостью, идеально подходит под создание каналов или чатов. На email придет логин, пароль и файл сессии. Деньги спишутся со счета только после вашего подтверждения.', 'Европа | Отлежка: 3 года | 2FA настроен', 'Файл сессии + Данные входа на email', 'Безопасная сделка (Эскроу)')">
                     <div class="badge-seller">Secure 🔒</div>
                     <div>
@@ -396,7 +482,6 @@
                     </div>
                 </div>
 
-                <!-- Товар: Аккаунт Instagram -->
                 <div class="card" data-category="accounts instagram" data-name="Instagram Бизнес Аккаунт (12k подписчиков)" onclick="openDetails('Instagram Бизнес Аккаунт (12k подписчиков)', 1890, 'Оформленный аккаунт под интернет-магазин или блог. На ваш email придет логин, пароль от аккаунта и пароль от родной почты. Деньги переведутся продавцу только после подтверждения доставки.', 'СНГ | Отлежка: 8 месяцев | Бизнес-профиль', 'Родная почта (Gmail) с письмом', 'Безопасная сделка (Эскроу)')">
                     <div class="badge-seller">Business</div>
                     <div>
@@ -413,7 +498,6 @@
                     </div>
                 </div>
 
-                <!-- Товар 1 -->
                 <div class="card" data-category="tiktok" data-name="TikTok: Полный комплекс (Подписчики, Лайки, Комментарии, Просмотры, Репосты)" onclick="openDetails('TikTok: Полный комплекс', 490, 'Всё включено: живые подписчики, лайки, кастомные комментарии, просмотры роликов и репосты в TikTok.', 'Без списаний', 'По ссылке', 'Автозапуск')">
                     <div class="badge-seller">Top SMM 🚀</div>
                     <div>
@@ -430,7 +514,6 @@
                     </div>
                 </div>
 
-                <!-- Товар 2 -->
                 <div class="card" data-category="tiktok" data-name="TikTok: Накрутка Подписчиков (На выбор)" onclick="openDetails('TikTok: Накрутка Подписчиков', 250, 'Качественные фолловеры с гарантией.', 'Плавный нагон', 'По нику', 'Автостарт')">
                     <div class="badge-seller">Выбор количества</div>
                     <div>
@@ -456,7 +539,6 @@
                     </div>
                 </div>
 
-                <!-- Товар 5 -->
                 <div class="card" data-category="telegram" data-name="Telegram: Полный комплекс (Подписчики, Просмотры, Реакции, Комментарии, Опросы)" onclick="openDetails('Telegram: Полный комплекс', 590, 'Полный спектр накрутки для Telegram: подписчики в канал, просмотры постов, все виды эмодзи-реакций, комментарии.', 'С гарантией', 'По ссылке', 'Плавный старт')">
                     <div class="badge-seller">Hit Sales 🔥</div>
                     <div>
@@ -473,7 +555,6 @@
                     </div>
                 </div>
 
-                <!-- Товар 9 -->
                 <div class="card" data-category="instagram" data-name="Instagram: Полный комплекс (Подписчики, Лайки, Reels, Комментарии, Сохранения, Истории)" onclick="openDetails('Instagram: Полный комплекс', 650, 'Полный пакет продвижения в Instagram: фолловеры, лайки, просмотры Reels, комменты, сохранения и охваты Stories.', 'Без списаний', 'По ссылке', 'Моментальный запуск')">
                     <div class="badge-seller">Top Service</div>
                     <div>
@@ -490,7 +571,6 @@
                     </div>
                 </div>
 
-                <!-- Товар 19 -->
                 <div class="card" data-category="numbers" data-name="Виртуальный номер для регистрации" onclick="openDetails('Виртуальный номер для регистрации', 150, 'Чистый виртуальный номер для безопасной СМС-активации и регистрации аккаунта.', 'Одноразовый', 'СМС-получение', 'Моментально')">
                     <div class="badge-seller">Auto-Delivery</div>
                     <div>
