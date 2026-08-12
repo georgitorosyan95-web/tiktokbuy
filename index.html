@@ -2,29 +2,54 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TTBuy — Премиум маркетплейс digital-активов и SMM продвижения</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
+        :root {
+            --bg-main: #0b0f19;
+            --bg-card: #1e293b;
+            --bg-sub: #0f172a;
+            --border-color: #334155;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-pink: #fe2c55;
+            --accent-cyan: #25f4ee;
+            --accent-blue: #229ed9;
+            --accent-green: #22c55e;
+            --accent-red: #ef4444;
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background: #0b0f19; color: #f8fafc; line-height: 1.6; overflow-x: hidden; }
-        
-        header { background: #1e293b; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; flex-wrap: wrap; gap: 10px; position: sticky; top: 0; z-index: 100; }
-        
-        /* Стили для логотипа */
-        .logo { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: bold; color: #fff; white-space: nowrap; cursor: pointer; }
-        .logo-img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; flex-shrink: 0; display: block; }
-        .logo span { background: linear-gradient(90deg, #fe2c55, #229ed9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
-        .header-right { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+        body { background: var(--bg-main); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
+        body.modal-open { overflow: hidden; }
+
+        /* Header */
+        header { 
+            background: var(--bg-card); 
+            padding: 12px 20px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 1px solid var(--border-color); 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+        }
+
+        .logo { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 800; color: #fff; cursor: pointer; user-select: none; }
+        .logo-img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 1px solid var(--accent-cyan); }
+        .logo span { background: linear-gradient(90deg, var(--accent-pink), var(--accent-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        .header-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
         .header-auth { display: flex; align-items: center; gap: 6px; }
-        
+
         .nav-btn { 
             background: transparent; 
-            border: 1px solid #25f4ee; 
-            color: #f8fafc; 
-            padding: 5px 10px; 
+            border: 1px solid var(--accent-cyan); 
+            color: var(--text-main); 
+            padding: 6px 12px; 
             border-radius: 6px; 
             cursor: pointer; 
             font-weight: 700; 
@@ -32,190 +57,120 @@
             transition: all 0.2s; 
             white-space: nowrap;
         }
+        .nav-btn:hover { border-color: var(--accent-pink); color: #fff; }
+        .nav-btn.register { background: linear-gradient(90deg, var(--accent-pink), var(--accent-cyan)); border: none; color: white; }
 
-        /* --- Глитч-эффект --- */
-        .hero-title-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-bottom: 10px;
-        }
-
-        .glitch-logo {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            object-fit: cover;
-            box-shadow: 0 0 15px rgba(37, 244, 238, 0.4);
-            animation: glitch-img 3s infinite;
-        }
-
-        .glitch-text {
-            font-size: 26px;
-            font-weight: 900;
-            text-transform: uppercase;
+        .action-btn {
+            background: var(--bg-sub);
+            border: 1px solid var(--border-color);
             color: #fff;
-            letter-spacing: 1px;
-            position: relative;
-            text-shadow: 2px 0 #fe2c55, -2px 0 #25f4ee;
-            animation: glitch-skew 2s infinite linear alternate-reverse;
-        }
-
-        @keyframes glitch-skew {
-            0%, 20%, 23%, 80%, 83%, 100% { text-shadow: 2px 0 #fe2c55, -2px 0 #25f4ee; transform: skew(0deg); }
-            21% { text-shadow: 4px 0 #fe2c55, -4px 0 #25f4ee; transform: skew(2deg); }
-            81% { text-shadow: -3px 0 #fe2c55, 3px 0 #25f4ee; transform: skew(-2deg); }
-        }
-
-        @keyframes glitch-img {
-            0%, 100% { transform: translate(0); filter: drop-shadow(0 0 5px #25f4ee); }
-            92% { transform: translate(0); }
-            93% { transform: translate(-2px, 1px); filter: drop-shadow(2px 0 #fe2c55); }
-            95% { transform: translate(2px, -1px); filter: drop-shadow(-2px 0 #25f4ee); }
-            97% { transform: translate(0); }
-        }
-
-        .nav-btn:hover { border-color: #fe2c55; color: #fff; }
-        .nav-btn.register { 
-            background: linear-gradient(90deg, #fe2c55, #25f4ee); 
-            border: 1px solid #fe2c55; 
-            color: white; 
-        }
-
-        .cart-btn, .cabinet-btn, .seller-btn {
-            background: #0f172a;
-            border: 1px solid #fe2c55;
-            color: #fff;
-            padding: 5px 10px;
+            padding: 6px 12px;
             border-radius: 6px;
             cursor: pointer;
             font-weight: 700;
             font-size: 12px;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
             transition: all 0.2s;
             white-space: nowrap;
         }
-        .cart-btn:hover, .cabinet-btn:hover, .seller-btn:hover { background: #fe2c55; }
-        .seller-btn { border-color: #229ed9; }
-        .seller-btn:hover { background: #229ed9; }
-        .cart-badge { background: #25f4ee; color: #0f172a; padding: 1px 5px; border-radius: 10px; font-size: 10px; font-weight: 900; }
+        .action-btn:hover { border-color: var(--accent-pink); }
+        .action-btn.seller { border-color: var(--accent-blue); }
+        .action-btn.seller:hover { background: var(--accent-blue); color: #fff; }
 
-        .user-info { display: flex; align-items: center; gap: 8px; color: #94a3b8; font-size: 12px; }
-        .logout-btn { background: transparent; border: 1px solid #ef4444; color: #ef4444; padding: 4px 8px; border-radius: 6px; cursor: pointer; font-weight: 600; }
-        .logout-btn:hover { background: #ef4444; color: white; }
+        .cart-badge { background: var(--accent-cyan); color: var(--bg-sub); padding: 2px 6px; border-radius: 10px; font-size: 10px; font-weight: 900; }
+        .user-info { display: flex; align-items: center; gap: 10px; color: var(--text-muted); font-size: 12px; }
+        .logout-btn { background: transparent; border: 1px solid var(--accent-red); color: var(--accent-red); padding: 4px 10px; border-radius: 6px; cursor: pointer; font-weight: 600; }
+        .logout-btn:hover { background: var(--accent-red); color: white; }
 
-        /* Поиск и категории */
-        .search-bar-container { max-width: 600px; margin: 20px auto 10px auto; padding: 0 15px; position: relative; z-index: 2; }
-        .search-input { width: 100%; padding: 12px 16px; background: rgba(30, 41, 59, 0.9); border: 2px solid #334155; border-radius: 12px; color: #fff; font-size: 14px; outline: none; }
-        .search-input:focus { border-color: #25f4ee; }
-
-        .categories-scroll { display: flex; gap: 8px; overflow-x: auto; max-width: 1100px; margin: 15px auto; padding: 0 15px; scrollbar-width: none; }
-        .categories-scroll::-webkit-scrollbar { display: none; }
-        .cat-chip { background: #1e293b; border: 1px solid #334155; color: #94a3b8; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
-        .cat-chip:hover, .cat-chip.active { background: linear-gradient(90deg, #fe2c55, #25f4ee); color: #fff; border-color: transparent; }
-
-        .support-float {
-            position: fixed; bottom: 20px; right: 20px;
-            background: linear-gradient(135deg, #229ed9, #1b8ec2);
-            color: white; padding: 10px 16px; border-radius: 30px;
-            display: flex; align-items: center; gap: 8px; text-decoration: none;
-            font-weight: 700; font-size: 13px; box-shadow: 0 4px 20px rgba(34, 158, 217, 0.5);
-            z-index: 99; transition: transform 0.2s; border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .support-float:hover { transform: scale(1.05); }
-        .support-float svg { width: 18px; height: 18px; fill: white; }
-
+        /* Hero section */
         .hero { 
             text-align: center; padding: 45px 15px; 
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(30, 41, 59, 0.92)); 
-            position: relative; overflow: hidden; border-bottom: 1px solid #334155;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95)); 
+            position: relative; overflow: hidden; border-bottom: 1px solid var(--border-color);
         }
         .hero-content { position: relative; z-index: 3; }
-        .hero h1 { font-size: 22px; font-weight: 900; margin-bottom: 10px; color: #fff; text-shadow: -2px -2px 0 #25f4ee, 2px 2px 0 #fe2c55; }
-        .hero p { font-size: 13px; color: #f1f5f9; max-width: 650px; margin: 0 auto; font-weight: 600; }
+        .hero-title-container { display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 12px; }
+        .glitch-logo { width: 48px; height: 48px; border-radius: 12px; object-fit: cover; box-shadow: 0 0 15px rgba(37, 244, 238, 0.4); }
+        .glitch-text { font-size: 24px; font-weight: 900; text-transform: uppercase; color: #fff; text-shadow: 2px 0 var(--accent-pink), -2px 0 var(--accent-cyan); }
+        .hero p { font-size: 13px; color: #e2e8f0; max-width: 650px; margin: 0 auto; font-weight: 500; }
 
-        .bg-icons-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; overflow: hidden; }
-        .floating-icon { position: absolute; opacity: 0.3; animation: floatAndZoom 8s infinite ease-in-out alternate; }
-        .floating-icon svg { width: 100%; height: 100%; }
-        @keyframes floatAndZoom {
-            0% { transform: translateY(0px) scale(0.8); }
-            100% { transform: translateY(-25px) scale(1.2) rotate(10deg); }
-        }
+        /* Search & Categories */
+        .search-bar-container { max-width: 600px; margin: 20px auto 10px auto; padding: 0 15px; }
+        .search-input { width: 100%; padding: 12px 16px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; color: #fff; font-size: 14px; outline: none; transition: border-color 0.2s; }
+        .search-input:focus { border-color: var(--accent-cyan); }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 15px 12px; position: relative; z-index: 2; }
-        .section-title { font-size: 17px; margin: 25px 0 12px 0; color: #fff; border-bottom: 2px solid #334155; padding-bottom: 6px; }
+        .categories-scroll { display: flex; gap: 8px; overflow-x: auto; max-width: 1200px; margin: 15px auto; padding: 0 15px; scrollbar-width: none; }
+        .categories-scroll::-webkit-scrollbar { display: none; }
+        .cat-chip { background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-muted); padding: 7px 16px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
+        .cat-chip:hover, .cat-chip.active { background: linear-gradient(90deg, var(--accent-pink), var(--accent-cyan)); color: #fff; border-color: transparent; }
 
-        /* Карточки товаров */
+        /* Grid & Cards */
+        .container { max-width: 1200px; margin: 0 auto; padding: 15px; }
+        .section-title { font-size: 18px; margin: 20px 0 15px 0; color: #fff; border-bottom: 2px solid var(--border-color); padding-bottom: 8px; }
+
         .products-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
         @media(min-width: 640px) { .products-grid { grid-template-columns: repeat(2, 1fr); } }
         @media(min-width: 1024px) { .products-grid { grid-template-columns: repeat(3, 1fr); } }
 
-        .card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 16px; transition: transform 0.2s, border-color 0.2s; display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; position: relative; }
-        .card:hover { border-color: #fe2c55; transform: translateY(-2px); }
-        .card h3 { font-size: 15px; margin-bottom: 6px; color: #fff; }
-        .card p { color: #94a3b8; font-size: 12px; margin-bottom: 10px; flex-grow: 1; }
-        
-        .quantity-selector-box { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 8px; margin-bottom: 10px; }
-        .quantity-selector-box label { display: block; font-size: 11px; color: #94a3b8; margin-bottom: 4px; font-weight: 600; }
-        .quantity-selector-box select { width: 100%; background: #1e293b; color: #fff; border: 1px solid #334155; padding: 6px; border-radius: 6px; font-size: 12px; outline: none; }
-        .quantity-selector-box select:focus { border-color: #25f4ee; }
+        .card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; transition: transform 0.2s, border-color 0.2s; display: flex; flex-direction: column; justify-content: space-between; position: relative; }
+        .card:hover { border-color: var(--accent-pink); transform: translateY(-2px); }
+        .card h3 { font-size: 15px; margin-bottom: 6px; color: #fff; padding-right: 70px; }
+        .card p { color: var(--text-muted); font-size: 12px; margin-bottom: 12px; flex-grow: 1; }
 
-        .card-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 11px; color: #64748b; }
+        .quantity-selector-box { background: var(--bg-sub); border: 1px solid var(--border-color); border-radius: 8px; padding: 8px; margin-bottom: 12px; }
+        .quantity-selector-box label { display: block; font-size: 11px; color: var(--text-muted); margin-bottom: 4px; font-weight: 600; }
+        .quantity-selector-box select { width: 100%; background: var(--bg-card); color: #fff; border: 1px solid var(--border-color); padding: 6px; border-radius: 6px; font-size: 12px; outline: none; }
+
+        .card-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 11px; color: var(--text-muted); }
         .rating { color: #facc15; font-weight: bold; }
-        .price { font-size: 16px; font-weight: bold; color: #22c55e; margin-bottom: 12px; }
+        .price { font-size: 16px; font-weight: bold; color: var(--accent-green); margin-bottom: 12px; }
         .card-buttons { display: flex; gap: 8px; }
-        
-        .btn { display: block; width: 100%; background: linear-gradient(90deg, #fe2c55, #25f4ee); color: white; text-align: center; padding: 9px; border-radius: 8px; border: none; font-weight: bold; font-size: 13px; cursor: pointer; transition: opacity 0.2s; }
+
+        .btn { display: block; width: 100%; background: linear-gradient(90deg, var(--accent-pink), var(--accent-cyan)); color: white; text-align: center; padding: 9px; border-radius: 8px; border: none; font-weight: bold; font-size: 13px; cursor: pointer; transition: opacity 0.2s; }
         .btn:hover { opacity: 0.9; }
-        .btn-secondary { background: #334155; color: #fff; }
+        .btn-secondary { background: var(--border-color); color: #fff; }
         .btn-secondary:hover { background: #475569; }
 
-        .badge-seller { position: absolute; top: 12px; right: 16px; font-size: 10px; background: rgba(34, 158, 217, 0.2); color: #229ed9; padding: 2px 6px; border-radius: 4px; font-weight: bold; border: 1px solid rgba(34, 158, 217, 0.4); }
+        .badge-seller { position: absolute; top: 12px; right: 12px; font-size: 10px; background: rgba(34, 158, 217, 0.15); color: var(--accent-blue); padding: 3px 8px; border-radius: 6px; font-weight: bold; border: 1px solid rgba(34, 158, 217, 0.3); }
 
-        /* Модальные окна */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(5px); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 12px; }
-        .modal-box { background: #1e293b; border: 1px solid #334155; border-radius: 16px; padding: 20px; width: 100%; max-width: 480px; position: relative; box-shadow: 0 20px 25px rgba(0,0,0,0.5); max-height: 90vh; overflow-y: auto; color: #fff; }
-        .close-modal { position: absolute; top: 12px; right: 15px; background: none; border: none; color: #94a3b8; font-size: 22px; cursor: pointer; }
+        /* Modals */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(11, 15, 25, 0.85); backdrop-filter: blur(5px); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 15px; }
+        .modal-box { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 20px; width: 100%; max-width: 480px; position: relative; max-height: 90vh; overflow-y: auto; color: #fff; }
+        .close-modal { position: absolute; top: 12px; right: 15px; background: none; border: none; color: var(--text-muted); font-size: 22px; cursor: pointer; }
         .close-modal:hover { color: #fff; }
-        
-        .modal-box h2 { font-size: 18px; margin-bottom: 12px; }
-        .modal-details-prop { font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: flex; justify-content: space-between; border-bottom: 1px solid #334155; padding-bottom: 4px; }
-        .modal-details-prop span:last-child { font-weight: bold; color: #fff; }
 
-        .pay-methods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 12px 0; }
-        .pay-method { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 8px; text-align: center; font-size: 11px; cursor: pointer; color: #94a3b8; }
-        .pay-method.active { border-color: #25f4ee; color: #fff; background: rgba(37,244,238,0.1); }
-
-        .cabinet-tabs { display: flex; gap: 10px; margin-bottom: 15px; border-bottom: 1px solid #334155; padding-bottom: 8px; }
-        .cab-tab { background: none; border: none; color: #94a3b8; font-weight: bold; font-size: 13px; cursor: pointer; }
-        .cab-tab.active { color: #25f4ee; }
-        .purchase-item { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 10px; margin-bottom: 8px; font-size: 12px; }
-        .purchase-data { background: #1e293b; padding: 6px; border-radius: 6px; margin-top: 6px; font-family: monospace; color: #22c55e; word-break: break-all; }
+        .pay-methods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 12px 0; }
+        .pay-method { background: var(--bg-sub); border: 1px solid var(--border-color); border-radius: 8px; padding: 8px; text-align: center; font-size: 11px; cursor: pointer; color: var(--text-muted); }
+        .pay-method.active { border-color: var(--accent-cyan); color: #fff; background: rgba(37,244,238,0.1); }
 
         .form-group { margin-bottom: 12px; }
-        .form-group label { display: block; margin-bottom: 4px; color: #94a3b8; font-size: 12px; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #fff; font-size: 14px; outline: none; }
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #25f4ee; }
-        
-        .cart-items-list { max-height: 180px; overflow-y: auto; margin-bottom: 12px; }
-        .cart-item { display: flex; justify-content: space-between; align-items: center; background: #0f172a; padding: 8px 12px; border-radius: 8px; margin-bottom: 6px; border: 1px solid #334155; }
-        .cart-total { display: flex; justify-content: space-between; font-size: 15px; font-weight: bold; margin-bottom: 12px; border-top: 1px solid #334155; padding-top: 10px; }
+        .form-group label { display: block; margin-bottom: 4px; color: var(--text-muted); font-size: 12px; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; background: var(--bg-sub); border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 13px; outline: none; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--accent-cyan); }
 
-        .reviews-section { margin-top: 15px; border-top: 1px solid #334155; padding-top: 10px; }
-        .review-card { background: #0f172a; padding: 8px; border-radius: 6px; margin-bottom: 6px; font-size: 12px; }
-        .review-author { font-weight: bold; color: #25f4ee; margin-bottom: 2px; }
+        .cart-items-list { max-height: 200px; overflow-y: auto; margin-bottom: 12px; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; background: var(--bg-sub); padding: 10px; border-radius: 8px; margin-bottom: 6px; border: 1px solid var(--border-color); }
+        .cart-total { display: flex; justify-content: space-between; font-size: 15px; font-weight: bold; margin-bottom: 12px; border-top: 1px solid var(--border-color); padding-top: 10px; }
 
-        footer { text-align: center; padding: 20px; background: #1e293b; color: #64748b; margin-top: 40px; border-top: 1px solid #334155; font-size: 13px; }
+        .support-float {
+            position: fixed; bottom: 20px; right: 20px;
+            background: linear-gradient(135deg, var(--accent-blue), #1b8ec2);
+            color: white; padding: 10px 16px; border-radius: 30px;
+            display: flex; align-items: center; gap: 8px; text-decoration: none;
+            font-weight: 700; font-size: 13px; box-shadow: 0 4px 20px rgba(34, 158, 217, 0.4);
+            z-index: 99; transition: transform 0.2s;
+        }
+        .support-float:hover { transform: scale(1.05); }
+
+        footer { text-align: center; padding: 20px; background: var(--bg-card); color: var(--text-muted); margin-top: 40px; border-top: 1px solid var(--border-color); font-size: 13px; }
     </style>
 </head>
 <body>
 
     <a href="https://t.me/TTBuySupportBot" target="_blank" class="support-float">
-        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.25.38-.51 1.08-.78 4.22-1.84 7.03-3.05 8.43-3.62 4.01-1.66 4.84-1.95 5.38-1.96.12 0 .39.03.56.17.14.12.18.28.2.45-.02.07-.02.13-.04.2z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.25.38-.51 1.08-.78 4.22-1.84 7.03-3.05 8.43-3.62 4.01-1.66 4.84-1.95 5.38-1.96.12 0 .39.03.56.17.14.12.18.28.2.45-.02.07-.02.13-.04.2z"/></svg>
         Техподдержка
     </a>
 
@@ -225,9 +180,9 @@
             <span>TTBuy</span>
         </div>
         <div class="header-right">
-            <button class="seller-btn" onclick="openCreateProductModal()">➕ Продать товар</button>
-            <button class="cabinet-btn" id="cabinet-nav-btn" style="display:none;" onclick="openCabinetModal()">👤 Кабинет</button>
-            <button class="cart-btn" onclick="openCartModal()">
+            <button class="action-btn seller" onclick="openModal('createProductModal')">➕ Продать товар</button>
+            <button class="action-btn" id="cabinet-nav-btn" style="display:none;" onclick="openModal('cabinetModal')">👤 Кабинет</button>
+            <button class="action-btn" onclick="openModal('cartModal')">
                 🛒 Корзина <span class="cart-badge" id="cart-badge">0</span>
             </button>
             <div id="user-header">
@@ -240,28 +195,21 @@
     </header>
 
     <div class="hero">
-        <div class="bg-icons-container">
-            <div class="floating-icon" style="top: 15%; left: 8%; width: 45px; height: 45px;"><svg viewBox="0 0 24 24" fill="#fe2c55"><path d="M19.589 6.686a4.793 4.793 0 01-3.7-1.542V13.8a6.857 6.857 0 11-6.857-6.857c.328 0 .65.03.964.088v3.655a3.171 3.171 0 102.214 3.028V1h3.643a8.471 8.471 0 003.743 3.128v2.558z"/></svg></div>
-            <div class="floating-icon" style="top: 20%; right: 12%; width: 40px; height: 40px;"><svg viewBox="0 0 24 24" fill="#229ed9"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.25.38-.51 1.08-.78 4.22-1.84 7.03-3.05 8.43-3.62 4.01-1.66 4.84-1.95 5.38-1.96.12 0 .39.03.56.17.14.12.18.28.2.45-.02.07-.02.13-.04.2z"/></svg></div>
-            <div class="floating-icon" style="bottom: 20%; left: 15%; width: 42px; height: 42px;"><svg viewBox="0 0 24 24" fill="#e1306c"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div>
-            <div class="floating-icon" style="bottom: 15%; right: 18%; width: 48px; height: 48px;"><svg viewBox="0 0 24 24" fill="#ff0000"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></div>
-        </div>
         <div class="hero-content">
             <div class="hero-title-container">
                 <img src="photo_2026-08-12_08-06-33_3.jpg" alt="Logo" class="glitch-logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/48?text=TT';">
-                <h1 class="glitch-text">ПРЕМИУМ МАРКЕТПЛЕЙС DIGITAL-АКТИВОВ И SMM УСЛУГ</h1>
+                <h1 class="glitch-text">МАРКЕТПЛЕЙС DIGITAL-АКТИВОВ И SMM УСЛУГ</h1>
             </div>
-            <p>Выбирайте комплексные пакеты или настраивайте любые отдельные услуги (подписчики, лайки, комментарии, просмотры, репосты, реакции) с выбором количества.</p>
+            <p>Пакеты продвижения, готовые аккаунты, виртуальные номера и гибкие SMM-услуги с выбором количества.</p>
         </div>
     </div>
 
     <div class="search-bar-container">
-        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Поиск: подписчики, лайки, комментарии, просмотры, реакции..." oninput="filterProducts()">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Поиск по названию или описанию..." oninput="filterProducts()">
     </div>
 
-    <!-- Фильтры категорий -->
     <div class="categories-scroll">
-        <button class="cat-chip active" onclick="filterCategory('all', this)">🔥 Все услуги и товары</button>
+        <button class="cat-chip active" onclick="filterCategory('all', this)">🔥 Все услуги</button>
         <button class="cat-chip" onclick="filterCategory('tiktok', this)">🎵 TikTok</button>
         <button class="cat-chip" onclick="filterCategory('telegram', this)">📢 Telegram</button>
         <button class="cat-chip" onclick="filterCategory('instagram', this)">📸 Instagram</button>
@@ -272,499 +220,123 @@
     </div>
 
     <div class="container">
-        <div id="catalog-container">
-            <h2 class="section-title">Каталог комплексов и отдельных SMM-услуг на выбор</h2>
-            <div class="products-grid" id="products-grid">
-                
-                <!-- Товар 1: TikTok - Комплекс -->
-                <div class="card" data-category="tiktok" data-name="TikTok: Полный комплекс (Подписчики, Лайки, Комментарии, Просмотры, Репосты)" onclick="openDetails('TikTok: Полный комплекс', 490, 'Всё включено: живые подписчики, лайки, кастомные комментарии, просмотры роликов и репосты в TikTok.', 'Без списаний', 'По ссылке', 'Автозапуск', [
-                    {author: 'Алексей', stars: '★★★★★', text: 'Отличный комплекс.'}, {author: 'Дмитрий', stars: '★★★★★', text: 'Все супер.'}
-                ])">
-                    <div class="badge-seller">Top SMM 🚀</div>
-                    <div>
-                        <h3>TikTok: Полный комплекс (Подписчики, Лайки, Комменты, Просмотры, Репосты)</h3>
-                        <p>Максимальная раскрутка видео и профиля: от подписчиков до реакций и комментариев.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 4.9 (94)</span></div>
-                        <div class="price">490 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('TikTok: Полный комплекс', 490)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('TikTok: Полный комплекс', 490)">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Товар 2: TikTok - Отдельная услуга: Подписчики -->
-                <div class="card" data-category="tiktok" data-name="TikTok: Накрутка Подписчиков (На выбор)" onclick="event.stopPropagation()">
-                    <div class="badge-seller">Выбор количества</div>
-                    <div>
-                        <h3>TikTok: Накрутка Подписчиков</h3>
-                        <p>Выберите желаемое количество живых подписчиков для вашего TikTok профиля.</p>
-                        <div class="quantity-selector-box">
-                            <label>Количество подписчиков:</label>
-                            <select class="qty-select" data-base-price="0.5" onchange="updateCardPrice(this)">
-                                <option value="100">100 подписчиков — 50 ₽</option>
-                                <option value="500" selected>500 подписчиков — 250 ₽</option>
-                                <option value="1000">1 000 подписчиков — 480 ₽</option>
-                                <option value="5000">5 000 подписчиков — 2 200 ₽</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>⚡ Автостарт</span><span class="rating">★ 4.9 (120)</span></div>
-                        <div class="price card-price-el">250 ₽</div>
-                        <div class="card-buttons">
-                            <button class="btn btn-secondary" onclick="addSelectedToCart(this, 'TikTok: Подписчики')">В корзину</button>
-                            <button class="btn" onclick="buySelectedDirect(this, 'TikTok: Подписчики')">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Товар 3: TikTok - Отдельная услуга: Лайки -->
-                <div class="card" data-category="tiktok" data-name="TikTok: Накрутка Лайков (На выбор)" onclick="event.stopPropagation()">
-                    <div class="badge-seller">Выбор количества</div>
-                    <div>
-                        <h3>TikTok: Накрутка Лайков</h3>
-                        <p>Быстрое добавление сердечек и лайков на ваши ролики.</p>
-                        <div class="quantity-selector-box">
-                            <label>Количество лайков:</label>
-                            <select class="qty-select" data-base-price="0.25" onchange="updateCardPrice(this)">
-                                <option value="200">200 лайков — 50 ₽</option>
-                                <option value="500" selected>500 лайков — 125 ₽</option>
-                                <option value="1000">1 000 лайков — 230 ₽</option>
-                                <option value="5000">5 000 лайков — 1 000 ₽</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>⚡ Автостарт</span><span class="rating">★ 4.8 (85)</span></div>
-                        <div class="price card-price-el">125 ₽</div>
-                        <div class="card-buttons">
-                            <button class="btn btn-secondary" onclick="addSelectedToCart(this, 'TikTok: Лайки')">В корзину</button>
-                            <button class="btn" onclick="buySelectedDirect(this, 'TikTok: Лайки')">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Товар 4: TikTok - Отдельная услуга: Комментарии -->
-                <div class="card" data-category="tiktok" data-name="TikTok: Накрутка Комментариев (На выбор)" onclick="event.stopPropagation()">
-                    <div class="badge-seller">Выбор количества</div>
-                    <div>
-                        <h3>TikTok: Накрутка Комментариев</h3>
-                        <p>Живые тематические или кастомные комментарии под вашим видео в TikTok.</p>
-                        <div class="quantity-selector-box">
-                            <label>Количество комментариев:</label>
-                            <select class="qty-select" data-base-price="2.5" onchange="updateCardPrice(this)">
-                                <option value="20">20 комментариев — 50 ₽</option>
-                                <option value="50" selected>50 комментариев — 125 ₽</option>
-                                <option value="100">100 комментариев — 240 ₽</option>
-                                <option value="500">500 комментариев — 1 100 ₽</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>⚡ Автостарт</span><span class="rating">★ 4.9 (64)</span></div>
-                        <div class="price card-price-el">125 ₽</div>
-                        <div class="card-buttons">
-                            <button class="btn btn-secondary" onclick="addSelectedToCart(this, 'TikTok: Комментарии')">В корзину</button>
-                            <button class="btn" onclick="buySelectedDirect(this, 'TikTok: Комментарии')">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Товар 5: Telegram - Комплекс -->
-                <div class="card" data-category="telegram" data-name="Telegram: Полный комплекс (Подписчики, Просмотры, Реакции, Комментарии, Опросы)" onclick="openDetails('Telegram: Полный комплекс', 590, 'Полный спектр накрутки для Telegram: подписчики в канал, просмотры постов, все виды эмодзи-реакций, комментарии.', 'С гарантией', 'По ссылке', 'Плавный старт', [
-                    {author: 'Максим', stars: '★★★★★', text: 'Отличный комплекс.'}
-                ])">
-                    <div class="badge-seller">Hit Sales 🔥</div>
-                    <div>
-                        <h3>Telegram: Полный комплекс (Подписчики, Просмотры, Реакции, Комменты, Опросы)</h3>
-                        <p>Всё для канала: фолловеры, автопросмотры, любые реакции, комменты и голоса в опросах.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 4.9 (142)</span></div>
-                        <div class="price">590 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('Telegram: Полный комплекс', 590)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('Telegram: Полный комплекс', 590)">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Товар 6: Telegram - Отдельная услуга: Подписчики -->
-                <div class="card" data-category="telegram" data-name="Telegram: Накрутка Подписчиков в канал (На выбор)" onclick="event.stopPropagation()">
-                    <div class="badge-seller">Выбор количества</div>
-                    <div>
-                        <h3>Telegram: Подписчики в канал</h3>
-                        <p>Качественные подписчики в ваш Telegram канал или группу на выбор.</p>
-                        <div class="quantity-selector-box">
-                            <label>Количество подписчиков:</label>
-                            <select class="qty-select" data-base-price="0.6" onchange="updateCardPrice(this)">
-                                <option value="100">100 подписчиков — 60 ₽</option>
-                                <option value="500" selected>500 подписчиков — 300 ₽</option>
-                                <option value="1000">1 000 подписчиков — 550 ₽</option>
-                                <option value="5000">5 000 подписчиков — 2 500 ₽</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>⚡ Автостарт</span><span class="rating">★ 4.9 (210)</span></div>
-                        <div class="price card-price-el">300 ₽</div>
-                        <div class="card-buttons">
-                            <button class="btn btn-secondary" onclick="addSelectedToCart(this, 'Telegram: Подписчики')">В корзину</button>
-                            <button class="btn" onclick="buySelectedDirect(this, 'Telegram: Подписчики')">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Товар 7: Telegram - Отдельная услуга: Просмотры -->
-                <div class="card" data-category="telegram" data-name="Telegram: Накрутка Просмотров (На выбор)" onclick="event.stopPropagation()">
-                    <div class="badge-seller">Выбор количества</div>
-                    <div>
-                        <h3>Telegram: Просмотры на посты</h3>
-                        <p>Автопросмотры на последние или будущие посты в канале.</p>
-                        <div class="quantity-selector-box">
-                            <label>Количество просмотров:</label>
-                            <select class="qty-select" data-base-price="0.08" onchange="updateCardPrice(this)">
-                                <option value="500">500 просмотров — 40 ₽</option>
-                                <option value="1000" selected>1 000 просмотров — 80 ₽</option>
-                                <option value="5000">5 000 просмотров — 350 ₽</option>
-                                <option value="10000">10 000 просмотров — 650 ₽</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>⚡ Моментально</span><span class="rating">★ 5.0 (95)</span></div>
-                        <div class="price card-price-el">80 ₽</div>
-                        <div class="card-buttons">
-                            <button class="btn btn-secondary" onclick="addSelectedToCart(this, 'Telegram: Просмотры')">В корзину</button>
-                            <button class="btn" onclick="buySelectedDirect(this, 'Telegram: Просмотры')">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Товар 8: Telegram - Отдельная услуга: Реакции -->
-                <div class="card" data-category="telegram" data-name="Telegram: Накрутка Реакций (На выбор)" onclick="event.stopPropagation()">
-                    <div class="badge-seller">Выбор количества</div>
-                    <div>
-                        <h3>Telegram: Эмодзи-реакции на посты</h3>
-                        <p>Положительные реакции (огонь, сердечки, лайки) на ваши публикации в Telegram.</p>
-                        <div class="quantity-selector-box">
-                            <label>Количество реакций:</label>
-                            <select class="qty-select" data-base-price="0.2" onchange="updateCardPrice(this)">
-                                <option value="100">100 реакций — 20 ₽</option>
-                                <option value="500" selected>500 реакций — 100 ₽</option>
-                                <option value="1000">1 000 реакций — 180 ₽</option>
-                                <option value="5000">5 000 реакций — 800 ₽</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>⚡ Автостарт</span><span class="rating">★ 4.9 (112)</span></div>
-                        <div class="price card-price-el">100 ₽</div>
-                        <div class="card-buttons">
-                            <button class="btn btn-secondary" onclick="addSelectedToCart(this, 'Telegram: Реакции')">В корзину</button>
-                            <button class="btn" onclick="buySelectedDirect(this, 'Telegram: Реакции')">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Товар 9: Instagram - Комплекс -->
-                <div class="card" data-category="instagram" data-name="Instagram: Полный комплекс (Подписчики, Лайки, Reels, Комментарии, Сохранения, Истории)" onclick="openDetails('Instagram: Полный комплекс', 650, 'Полный пакет продвижения в Instagram: фолловеры, лайки, просмотры Reels, комменты, сохранения и охваты Stories.', 'Без списаний', 'По ссылке', 'Моментальный запуск', [
-                    {author: 'Светлана', stars: '★★★★★', text: 'Супер комплекс.'}
-                ])">
-                    <div class="badge-seller">Top Service</div>
-                    <div>
-                        <h3>Instagram: Полный комплекс (Подписчики, Лайки, Reels, Комменты, Сторис)</h3>
-                        <p>Всё для аккаунта Instagram: от подписчиков и просмотров Reels до сохранений и охватов историй.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 4.9 (118)</span></div>
-                        <div class="price">650 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('Instagram: Полный комплекс', 650)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('Instagram: Полный комплекс', 650)">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Товар 10: Instagram - Отдельная услуга: Подписчики -->
-                <div class="card" data-category="instagram" data-name="Instagram: Накрутка Подписчиков (На выбор)" onclick="event.stopPropagation()">
-                    <div class="badge-seller">Выбор количества</div>
-                    <div>
-                        <h3>Instagram: Накрутка Подписчиков</h3>
-                        <p>Живые фолловеры для вашего профиля Instagram с гарантией от списаний.</p>
-                        <div class="quantity-selector-box">
-                            <label>Количество подписчиков:</label>
-                            <select class="qty-select" data-base-price="0.7" onchange="updateCardPrice(this)">
-                                <option value="100">100 подписчиков — 70 ₽</option>
-                                <option value="500" selected>500 подписчиков — 350 ₽</option>
-                                <option value="1000">1 000 подписчиков — 650 ₽</option>
-                                <option value="5000">5 000 подписчиков — 3 000 ₽</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>⚡ Автостарт</span><span class="rating">★ 4.9 (180)</span></div>
-                        <div class="price card-price-el">350 ₽</div>
-                        <div class="card-buttons">
-                            <button class="btn btn-secondary" onclick="addSelectedToCart(this, 'Instagram: Подписчики')">В корзину</button>
-                            <button class="btn" onclick="buySelectedDirect(this, 'Instagram: Подписчики')">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Товар 11: Instagram - Отдельная услуга: Лайки -->
-                <div class="card" data-category="instagram" data-name="Instagram: Накрутка Лайков (На выбор)" onclick="event.stopPropagation()">
-                    <div class="badge-seller">Выбор количества</div>
-                    <div>
-                        <h3>Instagram: Накрутка Лайков на пост</h3>
-                        <p>Быстрые и качественные лайки на ваши фото и публикации.</p>
-                        <div class="quantity-selector-box">
-                            <label>Количество лайков:</label>
-                            <select class="qty-select" data-base-price="0.3" onchange="updateCardPrice(this)">
-                                <option value="200">200 лайков — 60 ₽</option>
-                                <option value="500" selected>500 лайков — 150 ₽</option>
-                                <option value="1000">1 000 лайков — 280 ₽</option>
-                                <option value="5000">5 000 лайков — 1 300 ₽</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>⚡ Автостарт</span><span class="rating">★ 4.8 (92)</span></div>
-                        <div class="price card-price-el">150 ₽</div>
-                        <div class="card-buttons">
-                            <button class="btn btn-secondary" onclick="addSelectedToCart(this, 'Instagram: Лайки')">В корзину</button>
-                            <button class="btn" onclick="buySelectedDirect(this, 'Instagram: Лайки')">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Товар 12: Instagram - Отдельная услуга: Просмотры Reels -->
-                <div class="card" data-category="instagram" data-name="Instagram: Накрутка Просмотров Reels (На выбор)" onclick="event.stopPropagation()">
-                    <div class="badge-seller">Выбор количества</div>
-                    <div>
-                        <h3>Instagram: Просмотры Reels</h3>
-                        <p>Вывод ваших видео Reels в рекомендации за счет быстрого роста просмотров.</p>
-                        <div class="quantity-selector-box">
-                            <label>Количество просмотров:</label>
-                            <select class="qty-select" data-base-price="0.1" onchange="updateCardPrice(this)">
-                                <option value="1000">1 000 просмотров — 100 ₽</option>
-                                <option value="5000" selected>5 000 просмотров — 500 ₽</option>
-                                <option value="10000">10 000 просмотров — 950 ₽</option>
-                                <option value="50000">50 000 просмотров — 4 200 ₽</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>⚡ Моментально</span><span class="rating">★ 4.9 (150)</span></div>
-                        <div class="price card-price-el">500 ₽</div>
-                        <div class="card-buttons">
-                            <button class="btn btn-secondary" onclick="addSelectedToCart(this, 'Instagram: Просмотры Reels')">В корзину</button>
-                            <button class="btn" onclick="buySelectedDirect(this, 'Instagram: Просмотры Reels')">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Товар 13: YouTube - Комплекс -->
-                <div class="card" data-category="youtube" data-name="YouTube: Полный комплекс (Просмотры с удержанием, Подписчики, Лайки, Комментарии)" onclick="openDetails('YouTube: Полный комплекс', 790, 'Профессиональный пакет для YouTube: просмотры с высоким удержанием, подписчики, лайки и комментарии.', 'С удержанием', 'По ссылке', 'Автостарт', [
-                    {author: 'Виктор', stars: '★★★★★', text: 'Отличный комплекс.'}
-                ])">
-                    <div class="badge-seller">Pro Package</div>
-                    <div>
-                        <h3>YouTube: Полный комплекс (Просмотры с удержанием, Подписчики, Лайки, Комменты)</h3>
-                        <p>Всё для монетизации и трендов YouTube: просмотры, подписчики, лайки и комменты.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 4.8 (76)</span></div>
-                        <div class="price">790 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('YouTube: Полный комплекс', 790)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('YouTube: Полный комплекс', 790)">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Товар 14: YouTube - Отдельная услуга: Просмотры с удержанием -->
-                <div class="card" data-category="youtube" data-name="YouTube: Просмотры с удержанием (На выбор)" onclick="event.stopPropagation()">
-                    <div class="badge-seller">Выбор количества</div>
-                    <div>
-                        <h3>YouTube: Просмотры с удержанием</h3>
-                        <p>Качественные просмотры видео с высоким процентом удержания для рекомендаций YouTube.</p>
-                        <div class="quantity-selector-box">
-                            <label>Количество просмотров:</label>
-                            <select class="qty-select" data-base-price="0.6" onchange="updateCardPrice(this)">
-                                <option value="500">500 просмотров — 300 ₽</option>
-                                <option value="1000" selected>1 000 просмотров — 600 ₽</option>
-                                <option value="5000">5 000 просмотров — 2 800 ₽</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>⚡ Автостарт</span><span class="rating">★ 4.9 (134)</span></div>
-                        <div class="price card-price-el">600 ₽</div>
-                        <div class="card-buttons">
-                            <button class="btn btn-secondary" onclick="addSelectedToCart(this, 'YouTube: Просмотры с удержанием')">В корзину</button>
-                            <button class="btn" onclick="buySelectedDirect(this, 'YouTube: Просмотры с удержанием')">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Товар 15: YouTube - Отдельная услуга: Подписчики -->
-                <div class="card" data-category="youtube" data-name="YouTube: Накрутка Подписчиков (На выбор)" onclick="event.stopPropagation()">
-                    <div class="badge-seller">Выбор количества</div>
-                    <div>
-                        <h3>YouTube: Накрутка Подписчиков на канал</h3>
-                        <p>Активные подписчики на ваш YouTube канал для достижения порога монетизации.</p>
-                        <div class="quantity-selector-box">
-                            <label>Количество подписчиков:</label>
-                            <select class="qty-select" data-base-price="2.5" onchange="updateCardPrice(this)">
-                                <option value="100">100 подписчиков — 250 ₽</option>
-                                <option value="500" selected>500 подписчиков — 1 250 ₽</option>
-                                <option value="1000">1 000 подписчиков — 2 400 ₽</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>⚡ С гарантией</span><span class="rating">★ 4.8 (88)</span></div>
-                        <div class="price card-price-el">1 250 ₽</div>
-                        <div class="card-buttons">
-                            <button class="btn btn-secondary" onclick="addSelectedToCart(this, 'YouTube: Подписчики')">В корзину</button>
-                            <button class="btn" onclick="buySelectedDirect(this, 'YouTube: Подписчики')">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Товар 16: ВКонтакте - Комплекс -->
-                <div class="card" data-category="vk" data-name="ВКонтакте: Полный комплекс (Подписчики, Лайки, Комментарии, Репосты, Опросы, Просмотры)" onclick="openDetails('ВКонтакте: Полный комплекс', 520, 'Комплексное продвижение ВКонтакте: участники в группы, лайки, комментарии, репосты, просмотры и голоса.', 'Без списаний', 'По ссылке', 'Моментально', [
-                    {author: 'Глеб', stars: '★★★★★', text: 'Отличный комплекс.'}
-                ])">
-                    <div class="badge-seller">Top Service</div>
-                    <div>
-                        <h3>ВКонтакте: Полный комплекс (Подписчики, Лайки, Комменты, Репосты, Просмотры)</h3>
-                        <p>Всё для пабликов и страниц ВК: участники, лайки, комментарии, репосты и просмотры.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 4.9 (53)</span></div>
-                        <div class="price">520 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('ВКонтакте: Полный комплекс', 520)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('ВКонтакте: Полный комплекс', 520)">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Товар 17: ВКонтакте - Отдельная услуга: Участники группы -->
-                <div class="card" data-category="vk" data-name="ВКонтакте: Накрутка Участников группы (На выбор)" onclick="event.stopPropagation()">
-                    <div class="badge-seller">Выбор количества</div>
-                    <div>
-                        <h3>ВКонтакте: Участники в группу / паблик</h3>
-                        <p>Живые участники и подписчики в сообщество ВКонтакте.</p>
-                        <div class="quantity-selector-box">
-                            <label>Количество участников:</label>
-                            <select class="qty-select" data-base-price="0.5" onchange="updateCardPrice(this)">
-                                <option value="100">100 участников — 50 ₽</option>
-                                <option value="500" selected>500 участников — 250 ₽</option>
-                                <option value="1000">1 000 участников — 480 ₽</option>
-                                <option value="5000">5 000 участников — 2 200 ₽</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>⚡ Автостарт</span><span class="rating">★ 4.9 (140)</span></div>
-                        <div class="price card-price-el">250 ₽</div>
-                        <div class="card-buttons">
-                            <button class="btn btn-secondary" onclick="addSelectedToCart(this, 'ВКонтакте: Участники группы')">В корзину</button>
-                            <button class="btn" onclick="buySelectedDirect(this, 'ВКонтакте: Участники группы')">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Товар 18: ВКонтакте - Отдельная услуга: Лайки -->
-                <div class="card" data-category="vk" data-name="ВКонтакте: Накрутка Лайков на запись (На выбор)" onclick="event.stopPropagation()">
-                    <div class="badge-seller">Выбор количества</div>
-                    <div>
-                        <h3>ВКонтакте: Лайки на записи и фото</h3>
-                        <p>Быстрое добавление лайков и сердечек на ваши посты ВКонтакте.</p>
-                        <div class="quantity-selector-box">
-                            <label>Количество лайков:</label>
-                            <select class="qty-select" data-base-price="0.2" onchange="updateCardPrice(this)">
-                                <option value="200">200 лайков — 40 ₽</option>
-                                <option value="500" selected>500 лайков — 100 ₽</option>
-                                <option value="1000">1 000 лайков — 180 ₽</option>
-                                <option value="5000">5 000 лайков — 800 ₽</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>⚡ Моментально</span><span class="rating">★ 4.8 (95)</span></div>
-                        <div class="price card-price-el">100 ₽</div>
-                        <div class="card-buttons">
-                            <button class="btn btn-secondary" onclick="addSelectedToCart(this, 'ВКонтакте: Лайки')">В корзину</button>
-                            <button class="btn" onclick="buySelectedDirect(this, 'ВКонтакте: Лайки')">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Товар 19: Виртуальные номера -->
-                <div class="card" data-category="numbers" data-name="Виртуальный номер для регистрации" onclick="openDetails('Виртуальный номер для регистрации', 150, 'Чистый виртуальный номер для безопасной СМС-активации и регистрации аккаунта.', 'Одноразовый', 'СМС-получение', 'Моментально', [
-                    {author: 'Евгений', stars: '★★★★★', text: 'СМС прилетело сразу.'}
-                ])">
-                    <div class="badge-seller">Auto-Delivery</div>
-                    <div>
-                        <h3>Виртуальный номер для СМС (Любой сервис)</h3>
-                        <p>Чистый виртуальный номер для безопасной регистрации и получения кода верификации.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>📱 СМС активация</span><span class="rating">★ 4.9 (125)</span></div>
-                        <div class="price">150 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('Виртуальный номер для регистрации', 150)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('Виртуальный номер для регистрации', 150)">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <!-- Модальное окно деталей товара -->
-    <div class="modal-overlay" id="detailsModal">
-        <div class="modal-box">
-            <button class="close-modal" onclick="closeDetailsModal()">&times;</button>
-            <h2 id="det-title">Название товара</h2>
-            <p id="det-desc" style="color: #94a3b8; font-size: 13px; margin-bottom: 15px;"></p>
+        <h2 class="section-title">Каталог товаров и услуг</h2>
+        <div class="products-grid" id="products-grid">
             
-            <div class="modal-details-prop"><span>Параметры / Отлежка:</span> <span id="det-age">-</span></div>
-            <div class="modal-details-prop"><span>Тип выдачи / Доступа:</span> <span id="det-mail">-</span></div>
-            <div class="modal-details-prop"><span>Скорость / Старт:</span> <span id="det-delivery">-</span></div>
-            <div class="modal-details-prop" style="margin-top: 10px; border:none; font-size: 16px;"><span>Цена:</span> <span id="det-price" style="color:#22c55e;">-</span></div>
-
-            <div class="card-buttons" style="margin-top: 15px;">
-                <button class="btn btn-secondary" id="det-add-cart">В корзину</button>
-                <button class="btn" id="det-buy">Купить сразу</button>
+            <!-- TikTok Комплекс -->
+            <div class="card" data-category="tiktok" data-name="tiktok полный комплекс">
+                <div class="badge-seller">Top SMM 🚀</div>
+                <div>
+                    <h3>TikTok: Полный комплекс</h3>
+                    <p>Максимальная раскрутка: живые подписчики, лайки, кастомные комментарии и просмотры.</p>
+                </div>
+                <div>
+                    <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 4.9 (94)</span></div>
+                    <div class="price">490 ₽</div>
+                    <div class="card-buttons">
+                        <button class="btn btn-secondary" onclick="addToCart('TikTok: Полный комплекс', 490)">В корзину</button>
+                        <button class="btn" onclick="buyDirect('TikTok: Полный комплекс', 490)">Купить</button>
+                    </div>
+                </div>
             </div>
 
-            <div class="reviews-section">
-                <h4 style="font-size: 13px; margin-bottom: 8px; color: #fff;">Отзывы покупателей:</h4>
-                <div id="det-reviews-container"></div>
+            <!-- TikTok Подписчики -->
+            <div class="card" data-category="tiktok" data-name="tiktok накрутка подписчиков">
+                <div class="badge-seller">Выбор количества</div>
+                <div>
+                    <h3>TikTok: Подписчики</h3>
+                    <p>Выберите желаемый объём живых подписчиков для вашего профиля.</p>
+                    <div class="quantity-selector-box">
+                        <label>Количество:</label>
+                        <select class="qty-select" data-base-price="0.5" onchange="updateCardPrice(this)">
+                            <option value="100">100 шт — 50 ₽</option>
+                            <option value="500" selected>500 шт — 250 ₽</option>
+                            <option value="1000">1 000 шт — 480 ₽</option>
+                            <option value="5000">5 000 шт — 2 200 ₽</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <div class="card-meta"><span>⚡ Автостарт</span><span class="rating">★ 4.9 (120)</span></div>
+                    <div class="price card-price-el">250 ₽</div>
+                    <div class="card-buttons">
+                        <button class="btn btn-secondary" onclick="addSelectedToCart(this, 'TikTok: Подписчики')">В корзину</button>
+                        <button class="btn" onclick="buySelectedDirect(this, 'TikTok: Подписчики')">Купить</button>
+                    </div>
+                </div>
             </div>
+
+            <!-- Telegram Подписчики -->
+            <div class="card" data-category="telegram" data-name="telegram подписчики канал">
+                <div class="badge-seller">Выбор количества</div>
+                <div>
+                    <h3>Telegram: Подписчики в канал</h3>
+                    <p>Качественные подписчики в ваш Telegram канал или группу с гарантией.</p>
+                    <div class="quantity-selector-box">
+                        <label>Количество:</label>
+                        <select class="qty-select" data-base-price="0.6" onchange="updateCardPrice(this)">
+                            <option value="100">100 шт — 60 ₽</option>
+                            <option value="500" selected>500 шт — 300 ₽</option>
+                            <option value="1000">1 000 шт — 550 ₽</option>
+                            <option value="5000">5 000 шт — 2 500 ₽</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <div class="card-meta"><span>⚡ Автостарт</span><span class="rating">★ 4.9 (210)</span></div>
+                    <div class="price card-price-el">300 ₽</div>
+                    <div class="card-buttons">
+                        <button class="btn btn-secondary" onclick="addSelectedToCart(this, 'Telegram: Подписчики')">В корзину</button>
+                        <button class="btn" onclick="buySelectedDirect(this, 'Telegram: Подписчики')">Купить</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Номера СМС -->
+            <div class="card" data-category="numbers" data-name="виртуальный номер смс регистрация">
+                <div class="badge-seller">Auto-Delivery</div>
+                <div>
+                    <h3>Виртуальный номер СМС</h3>
+                    <p>Чистый номер для одноразовой верификации и регистрации аккаунта.</p>
+                </div>
+                <div>
+                    <div class="card-meta"><span>📱 СМС Активация</span><span class="rating">★ 4.9 (125)</span></div>
+                    <div class="price">150 ₽</div>
+                    <div class="card-buttons">
+                        <button class="btn btn-secondary" onclick="addToCart('Виртуальный номер СМС', 150)">В корзину</button>
+                        <button class="btn" onclick="buyDirect('Виртуальный номер СМС', 150)">Купить</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Готовые Аккаунты -->
+            <div class="card" data-category="accounts" data-name="аккаунт telegram отлежка tdata">
+                <div class="badge-seller">Готовый аккаунт</div>
+                <div>
+                    <h3>Telegram Аккаунт (TData)</h3>
+                    <p>Прогретый аккаунт с отлежкой более 30 дней. Формат TData, под любые задачи.</p>
+                </div>
+                <div>
+                    <div class="card-meta"><span>📦 Мгновенно</span><span class="rating">★ 5.0 (42)</span></div>
+                    <div class="price">290 ₽</div>
+                    <div class="card-buttons">
+                        <button class="btn btn-secondary" onclick="addToCart('Telegram Аккаунт (TData)', 290)">В корзину</button>
+                        <button class="btn" onclick="buyDirect('Telegram Аккаунт (TData)', 290)">Купить</button>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
-    <!-- Модальное окно Создания товара -->
+    <!-- Модальное окно создания товара -->
     <div class="modal-overlay" id="createProductModal">
         <div class="modal-box">
-            <button class="close-modal" onclick="closeCreateProductModal()">&times;</button>
-            <h2>➕ Разместить свой товар / услугу</h2>
-            <p style="color: #94a3b8; font-size: 12px; margin-bottom: 15px;">Заполните данные для публикации на маркетплейсе.</p>
+            <button class="close-modal" onclick="closeModal('createProductModal')">&times;</button>
+            <h2>➕ Разместить свой товар</h2>
+            <p style="color: var(--text-muted); font-size: 12px; margin-bottom: 15px;">Заполните параметры для публикации.</p>
             <form id="create-product-form">
-                <div class="form-group">
-                    <label>Название услуги / товара</label>
-                    <input type="text" id="new-prod-name" placeholder="Например: Telegram Подписчики на выбор" required>
-                </div>
+                <div class="form-group"><label>Название</label><input type="text" id="new-prod-name" required placeholder="Например: TG Аккаунт 2024"></div>
                 <div class="form-group">
                     <label>Категория</label>
                     <select id="new-prod-cat">
@@ -773,31 +345,25 @@
                         <option value="instagram">Instagram</option>
                         <option value="youtube">YouTube</option>
                         <option value="vk">ВКонтакте</option>
-                        <option value="numbers">Номера для СМС</option>
+                        <option value="numbers">Номера СМС</option>
                         <option value="accounts">Аккаунты</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label>Цена (в рублях)</label>
-                    <input type="number" id="new-prod-price" placeholder="300" required>
-                </div>
-                <div class="form-group">
-                    <label>Описание</label>
-                    <textarea id="new-prod-desc" rows="3" placeholder="Описание услуги..." required></textarea>
-                </div>
-                <button type="submit" class="btn">Опубликовать товар</button>
+                <div class="form-group"><label>Цена (₽)</label><input type="number" id="new-prod-price" required placeholder="250"></div>
+                <div class="form-group"><label>Описание</label><textarea id="new-prod-desc" rows="3" required placeholder="Подробности о товаре..."></textarea></div>
+                <button type="submit" class="btn">Опубликовать</button>
             </form>
         </div>
     </div>
 
-    <!-- Модальное окно Корзины -->
+    <!-- Модальное окно корзины -->
     <div class="modal-overlay" id="cartModal">
         <div class="modal-box">
-            <button class="close-modal" onclick="closeCartModal()">&times;</button>
+            <button class="close-modal" onclick="closeModal('cartModal')">&times;</button>
             <h2>Корзина товаров</h2>
             <div class="cart-items-list" id="cart-items-list"></div>
             
-            <label style="font-size: 12px; color: #94a3b8; display:block; margin-bottom: 6px;">Выберите способ оплаты:</label>
+            <label style="font-size: 12px; color: var(--text-muted); display:block; margin-bottom: 6px;">Способ оплаты:</label>
             <div class="pay-methods">
                 <div class="pay-method active" onclick="selectPay(this)">СБП / Карты</div>
                 <div class="pay-method" onclick="selectPay(this)">ЮMoney</div>
@@ -805,55 +371,48 @@
             </div>
 
             <div class="cart-total">
-                <span>Итого к оплате:</span>
+                <span>Итого:</span>
                 <span id="cart-total-price">0 ₽</span>
             </div>
-            <button class="btn" onclick="checkoutCart()">Оформить и оплатить заказ</button>
+            <button class="btn" onclick="checkoutCart()">Оформить и оплатить</button>
         </div>
     </div>
 
-    <!-- Модальное окно Личного кабинета -->
+    <!-- Модальное окно личного кабинета -->
     <div class="modal-overlay" id="cabinetModal">
         <div class="modal-box">
-            <button class="close-modal" onclick="closeCabinetModal()">&times;</button>
+            <button class="close-modal" onclick="closeModal('cabinetModal')">&times;</button>
             <h2>Личный кабинет</h2>
-            <div class="cabinet-tabs">
-                <button class="cab-tab active" onclick="switchCabTab('purchases', this)">📦 Мои покупки</button>
-                <button class="cab-tab" onclick="switchCabTab('settings', this)">⚙️ Настройки</button>
-            </div>
-            <div id="cab-content-purchases">
-                <p style="font-size: 12px; color: #94a3b8; margin-bottom: 10px;">Купленные цифровые товары и услуги:</p>
+            <div style="margin-top: 15px;">
+                <div class="form-group"><label>Email аккаунта</label><input type="text" id="cab-email" disabled></div>
+                <h4 style="font-size: 13px; margin: 15px 0 8px 0;">Мои покупки:</h4>
                 <div id="purchases-list"></div>
             </div>
-            <div id="cab-content-settings" style="display: none;">
-                <div class="form-group"><label>Связанный Email</label><input type="text" id="cab-email" disabled style="background:#111827;"></div>
-                <button class="btn" onclick="showModal('Настройки сохранены!')">Сохранить</button>
-            </div>
         </div>
     </div>
 
-    <!-- Модальное окно Авторизации -->
+    <!-- Модальное окно авторизации -->
     <div class="modal-overlay" id="authModal">
         <div class="modal-box">
-            <button class="close-modal" onclick="closeAuth()">&times;</button>
-            <h2 id="auth-title">Регистрация покупателя</h2>
-            <form id="auth-form">
-                <div class="form-group"><label for="email">Электронная почта</label><input type="email" id="email" placeholder="example@mail.com" required></div>
-                <div class="form-group"><label for="password">Пароль</label><input type="password" id="password" placeholder="••••••••" required></div>
-                <button type="submit" class="btn" id="auth-btn">Зарегистрироваться</button>
+            <button class="close-modal" onclick="closeModal('authModal')">&times;</button>
+            <h2 id="auth-title">Вход в систему</h2>
+            <form id="auth-form" style="margin-top: 12px;">
+                <div class="form-group"><label>Email</label><input type="email" id="email" required placeholder="email@domain.com"></div>
+                <div class="form-group"><label>Пароль</label><input type="password" id="password" required placeholder="••••••••"></div>
+                <button type="submit" class="btn" id="auth-btn">Войти</button>
             </form>
-            <div style="text-align: center; margin-top: 12px; font-size: 12px; cursor: pointer; color: #94a3b8;" onclick="toggleMode()">
-                <span id="toggle-text" style="color: #fe2c55; font-weight: bold;">Уже есть аккаунт? Войти</span>
+            <div style="text-align: center; margin-top: 12px; font-size: 12px; cursor: pointer;" onclick="toggleAuthMode()">
+                <span id="toggle-text" style="color: var(--accent-pink); font-weight: bold;">Нет аккаунта? Зарегистрироваться</span>
             </div>
         </div>
     </div>
 
-    <!-- Системное уведомление -->
-    <div class="modal-overlay" id="custom-alert" style="z-index: 10000;">
+    <!-- Уведомления -->
+    <div class="modal-overlay" id="alertModal">
         <div class="modal-box" style="max-width: 320px; text-align: center;">
-            <div style="font-size: 15px; font-weight: 900; margin-bottom: 10px;">Уведомление</div>
-            <div id="custom-modal-text" style="font-size: 13px; color: #9ca3af; margin-bottom: 15px;">Текст</div>
-            <button class="btn" id="custom-modal-ok">OK</button>
+            <h3 style="margin-bottom: 8px;">Уведомление</h3>
+            <p id="alert-text" style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px;"></p>
+            <button class="btn" onclick="closeModal('alertModal')">OK</button>
         </div>
     </div>
 
@@ -864,184 +423,87 @@
         const SUPABASE_ANON_KEY = 'sb_publishable_Zqf1YNo4kRt6aBGtouWjEQ_Wokiy4mE'; 
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        let cart = [];
-        let myPurchases = [];
+        let cart = JSON.parse(localStorage.getItem('ttbuy_cart')) || [];
+        let myPurchases = JSON.parse(localStorage.getItem('ttbuy_purchases')) || [];
 
-        async function trackVisitor() {
-            try {
-                let userIp = 'Не определен';
-                const response = await fetch('https://api.ipify.org?format=json');
-                if (response.ok) {
-                    const data = await response.json();
-                    userIp = data.ip;
-                }
-                await supabaseClient.from('visitors').insert([{ ip: userIp, device: navigator.userAgent }]);
-            } catch (err) { console.error('Трекинг:', err); }
-        }
-        trackVisitor();
-
-        function showModal(message) {
-            document.getElementById('custom-modal-text').textContent = message;
-            document.getElementById('custom-alert').style.display = 'flex';
-        }
-        document.getElementById('custom-modal-ok').addEventListener('click', () => {
-            document.getElementById('custom-alert').style.display = 'none';
+        // Инициализация приложения
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartUI();
+            updatePurchasesUI();
+            
+            // Отслеживание сессии авторизации Supabase в реальном времени
+            supabaseClient.auth.onAuthStateChange((event, session) => {
+                updateUserHeader(session);
+            });
         });
+
+        function saveState() {
+            localStorage.setItem('ttbuy_cart', JSON.stringify(cart));
+            localStorage.setItem('ttbuy_purchases', JSON.stringify(myPurchases));
+        }
+
+        function showAlert(msg) {
+            document.getElementById('alert-text').textContent = msg;
+            openModal('alertModal');
+        }
+
+        function openModal(id) {
+            document.getElementById(id).style.display = 'flex';
+            document.body.classList.add('modal-open');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+            document.body.classList.remove('modal-open');
+        }
 
         function updateCardPrice(selectEl) {
             const card = selectEl.closest('.card');
             const basePrice = parseFloat(selectEl.getAttribute('data-base-price'));
-            const qty = parseInt(selectEl.value);
+            const qty = parseInt(selectEl.value, 10);
             const calculatedPrice = Math.round(qty * basePrice);
-            const priceEl = card.querySelector('.card-price-el');
-            priceEl.textContent = calculatedPrice.toLocaleString() + ' ₽';
+            card.querySelector('.card-price-el').textContent = calculatedPrice.toLocaleString() + ' ₽';
         }
 
-        function filterCategory(cat, element) {
-            if(element) {
+        function filterCategory(cat, btn) {
+            if (btn) {
                 document.querySelectorAll('.cat-chip').forEach(el => el.classList.remove('active'));
-                element.classList.add('active');
-            } else if (cat === 'all') {
-                document.querySelectorAll('.cat-chip').forEach(el => el.classList.remove('active'));
-                const firstChip = document.querySelector('.cat-chip');
-                if(firstChip) firstChip.classList.add('active');
+                btn.classList.add('active');
             }
-
-            const cards = document.querySelectorAll('.card');
-            cards.forEach(card => {
+            document.querySelectorAll('.card').forEach(card => {
                 const cardCat = card.getAttribute('data-category');
-                if (cat === 'all' || cardCat.includes(cat)) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
+                card.style.display = (cat === 'all' || cardCat === cat) ? 'flex' : 'none';
             });
         }
 
         function filterProducts() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            const cards = document.querySelectorAll('.card');
-            cards.forEach(card => {
-                const name = card.getAttribute('data-name').toLowerCase();
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            document.querySelectorAll('.card').forEach(card => {
+                const name = card.getAttribute('data-name');
                 const text = card.innerText.toLowerCase();
-                if (name.includes(query) || text.includes(query)) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
+                card.style.display = (name.includes(query) || text.includes(query)) ? 'flex' : 'none';
             });
-        }
-
-        function openCreateProductModal() { document.getElementById('createProductModal').style.display = 'flex'; }
-        function closeCreateProductModal() { document.getElementById('createProductModal').style.display = 'none'; }
-
-        const createProductForm = document.getElementById('create-product-form');
-        createProductForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('new-prod-name').value;
-            const cat = document.getElementById('new-prod-cat').value;
-            const price = Number(document.getElementById('new-prod-price').value);
-            const desc = document.getElementById('new-prod-desc').value;
-
-            const grid = document.getElementById('products-grid');
-            const newCard = document.createElement('div');
-            newCard.className = 'card';
-            newCard.setAttribute('data-category', cat);
-            newCard.setAttribute('data-name', name);
-            newCard.onclick = () => openDetails(name, price, desc, 'Новый', 'Автовыдача', 'Моментально', [
-                {author: 'Александр', stars: '★★★★★', text: 'Отличный продавец!'}
-            ]);
-
-            newCard.innerHTML = `
-                <div class="badge-seller">User Listing</div>
-                <div>
-                    <h3>${name}</h3>
-                    <p>${desc}</p>
-                </div>
-                <div>
-                    <div class="card-meta"><span>📦 Моментально</span><span class="rating">★ 5.0 (1)</span></div>
-                    <div class="price">${price.toLocaleString()} ₽</div>
-                    <div class="card-buttons" onclick="event.stopPropagation()">
-                        <button class="btn btn-secondary" onclick="addToCart('${name}', ${price})">В корзину</button>
-                        <button class="btn" onclick="buyDirect('${name}', ${price})">Купить</button>
-                    </div>
-                </div>
-            `;
-            grid.prepend(newCard);
-            closeCreateProductModal();
-            createProductForm.reset();
-            showModal('Ваш товар успешно опубликован!');
-        });
-
-        function openDetails(name, price, desc, age, mail, delivery, reviews) {
-            document.getElementById('det-title').textContent = name;
-            document.getElementById('det-desc').textContent = desc;
-            document.getElementById('det-age').textContent = age;
-            document.getElementById('det-mail').textContent = mail;
-            document.getElementById('det-delivery').textContent = delivery;
-            document.getElementById('det-price').textContent = price.toLocaleString() + ' ₽';
-            
-            const reviewsContainer = document.getElementById('det-reviews-container');
-            reviewsContainer.innerHTML = '';
-            reviews.forEach(rev => {
-                reviewsContainer.innerHTML += `
-                    <div class="review-card">
-                        <div class="review-author">${rev.author} <span style="color: #facc15;">${rev.stars}</span></div>
-                        <div>${rev.text}</div>
-                    </div>
-                `;
-            });
-
-            document.getElementById('det-add-cart').onclick = () => { addToCart(name, price); closeDetailsModal(); };
-            document.getElementById('det-buy').onclick = () => { buyDirect(name, price); closeDetailsModal(); };
-            document.getElementById('detailsModal').style.display = 'flex';
-        }
-        function closeDetailsModal() { document.getElementById('detailsModal').style.display = 'none'; }
-
-        function addSelectedToCart(btnEl, serviceName) {
-            const card = btnEl.closest('.card');
-            const selectEl = card.querySelector('.qty-select');
-            const qty = selectEl.value;
-            const basePrice = parseFloat(selectEl.getAttribute('data-base-price'));
-            const price = Math.round(parseInt(qty) * basePrice);
-            const fullName = `${serviceName} (${qty} шт.)`;
-
-            cart.push({ name: fullName, price: price });
-            updateCartUI();
-            showModal(`Товар "${fullName}" добавлен в корзину!`);
-        }
-
-        async function buySelectedDirect(btnEl, serviceName) {
-            const { data: { session } } = await supabaseClient.auth.getSession();
-            if (!session) {
-                showModal('Для покупки необходимо войти в систему.');
-                openAuth('login');
-                return;
-            }
-            const card = btnEl.closest('.card');
-            const selectEl = card.querySelector('.qty-select');
-            const qty = selectEl.value;
-            const basePrice = parseFloat(selectEl.getAttribute('data-base-price'));
-            const price = Math.round(parseInt(qty) * basePrice);
-            const fullName = `${serviceName} (${qty} шт.)`;
-
-            myPurchases.push({
-                name: fullName,
-                date: new Date().toLocaleDateString(),
-                data: 'LINK/API: ' + Math.random().toString(36).substring(7) + ' | СТАТУС: Запуск заказа (' + qty + ' шт.)'
-            });
-            updatePurchasesUI();
-            showModal(`Покупка "${fullName}" успешно завершена! Детали в Личном кабинете.`);
         }
 
         function addToCart(name, price) {
             cart.push({ name, price });
+            saveState();
             updateCartUI();
-            showModal(`Товар "${name}" добавлен в корзину!`);
+            showAlert(`Товар "${name}" добавлен в корзину!`);
+        }
+
+        function addSelectedToCart(btnEl, serviceName) {
+            const selectEl = btnEl.closest('.card').querySelector('.qty-select');
+            const qty = selectEl.value;
+            const basePrice = parseFloat(selectEl.getAttribute('data-base-price'));
+            const price = Math.round(parseInt(qty, 10) * basePrice);
+            const fullName = `${serviceName} (${qty} шт.)`;
+            addToCart(fullName, price);
         }
 
         function removeFromCart(index) {
             cart.splice(index, 1);
+            saveState();
             updateCartUI();
         }
 
@@ -1053,14 +515,17 @@
             let total = 0;
 
             if (cart.length === 0) {
-                listEl.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 15px; font-size: 13px;">Корзина пуста</p>';
+                listEl.innerHTML = '<p style="color: var(--text-muted); text-align: center; padding: 15px; font-size: 13px;">Корзина пуста</p>';
             } else {
                 cart.forEach((item, index) => {
                     total += item.price;
                     listEl.innerHTML += `
                         <div class="cart-item">
-                            <div><div style="font-weight:bold; font-size:12px;">${item.name}</div><div style="font-size:11px; color:#22c55e;">${item.price.toLocaleString()} ₽</div></div>
-                            <button style="background:none; border:none; color:#ef4444; cursor:pointer; font-size:16px;" onclick="removeFromCart(${index})">&times;</button>
+                            <div>
+                                <div style="font-weight:bold; font-size:12px;">${item.name}</div>
+                                <div style="font-size:11px; color:var(--accent-green);">${item.price.toLocaleString()} ₽</div>
+                            </div>
+                            <button style="background:none; border:none; color:var(--accent-red); cursor:pointer; font-size:16px;" onclick="removeFromCart(${index})">&times;</button>
                         </div>
                     `;
                 });
@@ -1068,130 +533,115 @@
             totalEl.textContent = total.toLocaleString() + ' ₽';
         }
 
-        function selectPay(el) {
-            document.querySelectorAll('.pay-method').forEach(m => m.classList.remove('active'));
-            el.classList.add('active');
-        }
-
-        function openCartModal() { document.getElementById('cartModal').style.display = 'flex'; }
-        function closeCartModal() { document.getElementById('cartModal').style.display = 'none'; }
-
-        async function checkoutCart() {
-            if (cart.length === 0) { showModal('Корзина пуста!'); return; }
+        async function buyDirect(name, price) {
             const { data: { session } } = await supabaseClient.auth.getSession();
             if (!session) {
-                showModal('Для оформления заказа необходимо войти в систему.');
-                closeCartModal();
-                openAuth('login');
-                return;
-            }
-            
-            cart.forEach(item => {
-                myPurchases.push({
-                    name: item.name,
-                    date: new Date().toLocaleDateString(),
-                    data: 'LINK/API: ' + Math.random().toString(36).substring(7) + ' | СТАТУС: В работе (Автозапуск)'
-                });
-            });
-
-            showModal(`Заказ успешно оплачен! Детали выданы в Личном кабинете.`);
-            cart = [];
-            updateCartUI();
-            closeCartModal();
-            updatePurchasesUI();
-        }
-
-        async function buyDirect(itemName, price) {
-            const { data: { session } } = await supabaseClient.auth.getSession();
-            if (!session) {
-                showModal('Для покупки необходимо войти в систему.');
+                showAlert('Для покупки необходимо войти в систему.');
                 openAuth('login');
                 return;
             }
             myPurchases.push({
-                name: itemName,
+                name,
                 date: new Date().toLocaleDateString(),
-                data: 'LINK/API: ' + Math.random().toString(36).substring(7) + ' | СТАТУС: В работе (Автозапуск)'
+                data: 'KEY/API: ' + Math.random().toString(36).substring(2, 9).toUpperCase() + ' | Выполнено'
             });
+            saveState();
             updatePurchasesUI();
-            showModal(`Покупка "${itemName}" успешно завершена! Детали доступны в Личном кабинете.`);
+            showAlert(`Покупка "${name}" успешно завершена! Данные отправлены в Кабинет.`);
         }
 
-        function openCabinetModal() { document.getElementById('cabinetModal').style.display = 'flex'; }
-        function closeCabinetModal() { document.getElementById('cabinetModal').style.display = 'none'; }
+        async function buySelectedDirect(btnEl, serviceName) {
+            const selectEl = btnEl.closest('.card').querySelector('.qty-select');
+            const qty = selectEl.value;
+            const basePrice = parseFloat(selectEl.getAttribute('data-base-price'));
+            const price = Math.round(parseInt(qty, 10) * basePrice);
+            buyDirect(`${serviceName} (${qty} шт.)`, price);
+        }
 
-        function switchCabTab(tab, element) {
-            document.querySelectorAll('.cab-tab').forEach(t => t.classList.remove('active'));
-            if (element) element.classList.add('active');
-
-            if(tab === 'purchases') {
-                document.getElementById('cab-content-purchases').style.display = 'block';
-                document.getElementById('cab-content-settings').style.display = 'none';
-            } else {
-                document.getElementById('cab-content-purchases').style.display = 'none';
-                document.getElementById('cab-content-settings').style.display = 'block';
+        async function checkoutCart() {
+            if (cart.length === 0) { showAlert('Корзина пуста!'); return; }
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            if (!session) {
+                closeModal('cartModal');
+                showAlert('Авторизуйтесь для оформления заказа.');
+                openAuth('login');
+                return;
             }
+            cart.forEach(item => {
+                myPurchases.push({
+                    name: item.name,
+                    date: new Date().toLocaleDateString(),
+                    data: 'ORDER-' + Math.random().toString(36).substring(2, 8).toUpperCase() + ' | Запущен'
+                });
+            });
+            cart = [];
+            saveState();
+            updateCartUI();
+            updatePurchasesUI();
+            closeModal('cartModal');
+            showAlert('Заказ успешно оплачен и запущен!');
         }
 
         function updatePurchasesUI() {
             const list = document.getElementById('purchases-list');
-            if(myPurchases.length === 0) {
-                list.innerHTML = '<p style="color:#64748b; font-size:12px;">У вас пока нет купленных товаров.</p>';
+            if (myPurchases.length === 0) {
+                list.innerHTML = '<p style="color:var(--text-muted); font-size:12px;">У вас пока нет покупок.</p>';
                 return;
             }
             list.innerHTML = '';
             myPurchases.forEach(p => {
                 list.innerHTML += `
-                    <div class="purchase-item">
-                        <div style="font-weight:bold; color:#fff;">${p.name} <span style="font-weight:normal; color:#64748b; float:right;">${p.date}</span></div>
-                        <div class="purchase-data">Детали: ${p.data}</div>
+                    <div style="background:var(--bg-sub); border:1px solid var(--border-color); padding:10px; border-radius:8px; margin-bottom:8px; font-size:12px;">
+                        <div style="font-weight:bold;">${p.name} <span style="color:var(--text-muted); float:right; font-weight:normal;">${p.date}</span></div>
+                        <div style="color:var(--accent-green); margin-top:4px; font-family:monospace;">${p.data}</div>
                     </div>
                 `;
             });
         }
 
-        let isLoginMode = false;
+        function selectPay(el) {
+            document.querySelectorAll('.pay-method').forEach(m => m.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        // Авторизация
+        let isLoginMode = true;
         function openAuth(mode) {
             isLoginMode = (mode === 'login');
-            updateAuthModalUI();
-            document.getElementById('authModal').style.display = 'flex';
-        }
-        function closeAuth() { document.getElementById('authModal').style.display = 'none'; }
-        function toggleMode() { isLoginMode = !isLoginMode; updateAuthModalUI(); }
-
-        function updateAuthModalUI() {
-            document.getElementById('auth-title').innerText = isLoginMode ? 'Вход в аккаунт' : 'Регистрация покупателя';
+            document.getElementById('auth-title').innerText = isLoginMode ? 'Вход в систему' : 'Регистрация';
             document.getElementById('auth-btn').innerText = isLoginMode ? 'Войти' : 'Зарегистрироваться';
             document.getElementById('toggle-text').innerText = isLoginMode ? 'Нет аккаунта? Зарегистрироваться' : 'Уже есть аккаунт? Войти';
+            openModal('authModal');
         }
 
-        const authForm = document.getElementById('auth-form');
-        authForm.addEventListener('submit', async (e) => {
+        function toggleAuthMode() { openAuth(isLoginMode ? 'register' : 'login'); }
+
+        document.getElementById('auth-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
+
             if (isLoginMode) {
                 const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
-                if (error) showModal('Ошибка входа: ' + error.message);
-                else { closeAuth(); checkUser(); showModal('Успешный вход в систему!'); }
+                if (error) showAlert('Ошибка входа: ' + error.message);
+                else closeModal('authModal');
             } else {
                 const { error } = await supabaseClient.auth.signUp({ email, password });
-                if (error) showModal('Ошибка регистрации: ' + error.message);
-                else { showModal('Регистрация успешна! Теперь войдите.'); isLoginMode = true; updateAuthModalUI(); }
+                if (error) showAlert('Ошибка регистрации: ' + error.message);
+                else { showAlert('Регистрация прошла успешно!'); closeModal('authModal'); }
             }
         });
 
-        async function checkUser() {
-            const { data: { session } } = await supabaseClient.auth.getSession();
+        function updateUserHeader(session) {
             const userHeader = document.getElementById('user-header');
             const cabinetNavBtn = document.getElementById('cabinet-nav-btn');
-            
+
             if (session) {
                 cabinetNavBtn.style.display = 'flex';
                 document.getElementById('cab-email').value = session.user.email;
                 userHeader.innerHTML = `
                     <div class="user-info">
-                        <span style="max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${session.user.email}</span>
+                        <span style="max-width: 120px; overflow: hidden; text-overflow: ellipsis;">${session.user.email}</span>
                         <button class="logout-btn" onclick="logout()">Выйти</button>
                     </div>
                 `;
@@ -1208,12 +658,43 @@
 
         async function logout() {
             await supabaseClient.auth.signOut();
-            checkUser();
-            showModal('Вы вышли из аккаунта.');
+            showAlert('Вы вышли из системы.');
         }
 
-        checkUser();
-        updatePurchasesUI();
+        // Форма размещения нового товара пользователем
+        document.getElementById('create-product-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('new-prod-name').value;
+            const cat = document.getElementById('new-prod-cat').value;
+            const price = Number(document.getElementById('new-prod-price').value);
+            const desc = document.getElementById('new-prod-desc').value;
+
+            const newCard = document.createElement('div');
+            newCard.className = 'card';
+            newCard.setAttribute('data-category', cat);
+            newCard.setAttribute('data-name', name.toLowerCase());
+
+            newCard.innerHTML = `
+                <div class="badge-seller">User Listing</div>
+                <div>
+                    <h3>${name}</h3>
+                    <p>${desc}</p>
+                </div>
+                <div>
+                    <div class="card-meta"><span>📦 Мгновенно</span><span class="rating">★ 5.0 (Новый)</span></div>
+                    <div class="price">${price.toLocaleString()} ₽</div>
+                    <div class="card-buttons">
+                        <button class="btn btn-secondary" onclick="addToCart('${name}', ${price})">В корзину</button>
+                        <button class="btn" onclick="buyDirect('${name}', ${price})">Купить</button>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('products-grid').prepend(newCard);
+            closeModal('createProductModal');
+            document.getElementById('create-product-form').reset();
+            showAlert('Ваш товар успешно опубликован!');
+        });
     </script>
 </body>
 </html>
