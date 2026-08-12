@@ -12,7 +12,7 @@
         
         header { background: #1e293b; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; flex-wrap: wrap; gap: 10px; position: sticky; top: 0; z-index: 100; }
         
-        /* Стили для маленького логотипа в шапке */
+        /* Стили для логотипа в шапке */
         .logo { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: bold; color: #fff; white-space: nowrap; cursor: pointer; }
         .logo-img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; flex-shrink: 0; display: block; }
         .logo span { background: linear-gradient(90deg, #fe2c55, #229ed9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -33,7 +33,7 @@
             white-space: nowrap;
         }
 
-        /* --- Обновленные стили увеличенного логотипа и жесткого глитча --- */
+        /* Увеличенный логотип и глитч */
         .hero-title-container {
             display: flex;
             flex-direction: column;
@@ -64,7 +64,6 @@
             animation: hard-glitch-main 2.2s infinite steps(1);
         }
 
-        /* Слои для хроматического разрыва (RGB Split / Slice Glitch) */
         .glitch-logo-wrapper::before,
         .glitch-logo-wrapper::after {
             content: '';
@@ -91,7 +90,6 @@
             z-index: 2;
         }
 
-        /* Кадры жестких встрясок и помех */
         @keyframes hard-glitch-main {
             0%, 82%, 100% { transform: translate(0, 0) skew(0deg); filter: none; }
             83% { transform: translate(-6px, 3px) skew(4deg); filter: hue-rotate(90deg) contrast(170%); }
@@ -273,8 +271,11 @@
         .cart-total { display: flex; justify-content: space-between; font-size: 15px; font-weight: bold; margin-bottom: 12px; border-top: 1px solid #334155; padding-top: 10px; }
 
         .reviews-section { margin-top: 15px; border-top: 1px solid #334155; padding-top: 10px; }
-        .review-card { background: #0f172a; padding: 8px; border-radius: 6px; margin-bottom: 6px; font-size: 12px; }
-        .review-author { font-weight: bold; color: #25f4ee; margin-bottom: 2px; }
+        .reviews-scroll-container { max-height: 250px; overflow-y: auto; padding-right: 5px; }
+        .reviews-scroll-container::-webkit-scrollbar { width: 5px; }
+        .reviews-scroll-container::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        .review-card { background: #0f172a; padding: 8px 10px; border-radius: 6px; margin-bottom: 6px; font-size: 12px; border: 1px solid #1e293b; }
+        .review-author { font-weight: bold; color: #25f4ee; margin-bottom: 2px; display: flex; justify-content: space-between; }
 
         footer { text-align: center; padding: 20px; background: #1e293b; color: #64748b; margin-top: 40px; border-top: 1px solid #334155; font-size: 13px; }
     </style>
@@ -345,13 +346,8 @@
             <h2 class="section-title">Каталог комплексов и отдельных SMM-услуг на выбор</h2>
             <div class="products-grid" id="products-grid">
                 
-                <!-- Товар 1: TikTok - Комплекс -->
-                <div class="card" data-category="tiktok" data-name="TikTok: Полный комплекс (Подписчики, Лайки, Комментарии, Просмотры, Репосты)" onclick="openDetails('TikTok: Полный комплекс', 490, 'Всё включено: живые подписчики, лайки, кастомные комментарии, просмотры роликов и репосты в TikTok.', 'Без списаний', 'По ссылке', 'Автозапуск', [
-                    {author: 'Алексей', stars: '★★★★★', text: 'Все супер, просмотры и лайки прилетели моментально!'},
-                    {author: 'John_S', stars: '★★★☆☆', text: 'The delivery was slow, but overall acceptable quality.'},
-                    {author: 'Дмитрий', stars: '★★☆☆☆', text: 'Часть подписчиков отписалась через день, обидно.'},
-                    {author: 'Emily_R', stars: '★★★★★', text: 'Awesome service! Increased my video engagement significantly.'}
-                ])">
+                <!-- Товар 1 -->
+                <div class="card" data-category="tiktok" data-name="TikTok: Полный комплекс (Подписчики, Лайки, Комментарии, Просмотры, Репосты)" onclick="openDetails('TikTok: Полный комплекс', 490, 'Всё включено: живые подписчики, лайки, кастомные комментарии, просмотры роликов и репосты в TikTok.', 'Без списаний', 'По ссылке', 'Автозапуск')">
                     <div class="badge-seller">Top SMM 🚀</div>
                     <div>
                         <h3>TikTok: Полный комплекс (Подписчики, Лайки, Комменты, Просмотры, Репосты)</h3>
@@ -367,13 +363,13 @@
                     </div>
                 </div>
 
-                <!-- Товар 2: TikTok - Отдельная услуга: Подписчики -->
-                <div class="card" data-category="tiktok" data-name="TikTok: Накрутка Подписчиков (На выбор)" onclick="event.stopPropagation()">
+                <!-- Товар 2 -->
+                <div class="card" data-category="tiktok" data-name="TikTok: Накрутка Подписчиков (На выбор)" onclick="openDetails('TikTok: Накрутка Подписчиков', 250, 'Качественные фолловеры с гарантией.', 'Плавный нагон', 'По нику', 'Автостарт')">
                     <div class="badge-seller">Выбор количества</div>
                     <div>
                         <h3>TikTok: Накрутка Подписчиков</h3>
                         <p>Выберите желаемое количество живых подписчиков для вашего TikTok профиля.</p>
-                        <div class="quantity-selector-box">
+                        <div class="quantity-selector-box" onclick="event.stopPropagation()">
                             <label>Количество подписчиков:</label>
                             <select class="qty-select" data-base-price="0.5" onchange="updateCardPrice(this)">
                                 <option value="100">100 подписчиков — 50 ₽</option>
@@ -386,20 +382,20 @@
                     <div>
                         <div class="card-meta"><span>⚡ Автостарт</span><span class="rating">★ 4.9 (120)</span></div>
                         <div class="price card-price-el">250 ₽</div>
-                        <div class="card-buttons">
+                        <div class="card-buttons" onclick="event.stopPropagation()">
                             <button class="btn btn-secondary" onclick="addSelectedToCart(this, 'TikTok: Подписчики')">В корзину</button>
                             <button class="btn" onclick="buySelectedDirect(this, 'TikTok: Подписчики')">Купить</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Товар 3: TikTok - Отдельная услуга: Лайки -->
-                <div class="card" data-category="tiktok" data-name="TikTok: Накрутка Лайков (На выбор)" onclick="event.stopPropagation()">
+                <!-- Товар 3 -->
+                <div class="card" data-category="tiktok" data-name="TikTok: Накрутка Лайков (На выбор)" onclick="openDetails('TikTok: Накрутка Лайков', 125, 'Быстрое добавление сердечек на ваши ролики.', 'Высокая скорость', 'По ссылке', 'Мгновенно')">
                     <div class="badge-seller">Выбор количества</div>
                     <div>
                         <h3>TikTok: Накрутка Лайков</h3>
                         <p>Быстрое добавление сердечек и лайков на ваши ролики.</p>
-                        <div class="quantity-selector-box">
+                        <div class="quantity-selector-box" onclick="event.stopPropagation()">
                             <label>Количество лайков:</label>
                             <select class="qty-select" data-base-price="0.25" onchange="updateCardPrice(this)">
                                 <option value="200">200 лайков — 50 ₽</option>
@@ -412,20 +408,20 @@
                     <div>
                         <div class="card-meta"><span>⚡ Автостарт</span><span class="rating">★ 4.8 (85)</span></div>
                         <div class="price card-price-el">125 ₽</div>
-                        <div class="card-buttons">
+                        <div class="card-buttons" onclick="event.stopPropagation()">
                             <button class="btn btn-secondary" onclick="addSelectedToCart(this, 'TikTok: Лайки')">В корзину</button>
                             <button class="btn" onclick="buySelectedDirect(this, 'TikTok: Лайки')">Купить</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Товар 4: TikTok - Отдельная услуга: Комментарии -->
-                <div class="card" data-category="tiktok" data-name="TikTok: Накрутка Комментариев (На выбор)" onclick="event.stopPropagation()">
+                <!-- Товар 4 -->
+                <div class="card" data-category="tiktok" data-name="TikTok: Накрутка Комментариев (На выбор)" onclick="openDetails('TikTok: Накрутка Комментариев', 125, 'Разные комментарии от тематических профилей.', 'Без спама', 'По ссылке', 'Автостарт')">
                     <div class="badge-seller">Выбор количества</div>
                     <div>
                         <h3>TikTok: Накрутка Комментариев</h3>
                         <p>Живые тематические или кастомные комментарии под вашим видео в TikTok.</p>
-                        <div class="quantity-selector-box">
+                        <div class="quantity-selector-box" onclick="event.stopPropagation()">
                             <label>Количество комментариев:</label>
                             <select class="qty-select" data-base-price="2.5" onchange="updateCardPrice(this)">
                                 <option value="20">20 комментариев — 50 ₽</option>
@@ -438,20 +434,15 @@
                     <div>
                         <div class="card-meta"><span>⚡ Автостарт</span><span class="rating">★ 4.9 (64)</span></div>
                         <div class="price card-price-el">125 ₽</div>
-                        <div class="card-buttons">
+                        <div class="card-buttons" onclick="event.stopPropagation()">
                             <button class="btn btn-secondary" onclick="addSelectedToCart(this, 'TikTok: Комментарии')">В корзину</button>
                             <button class="btn" onclick="buySelectedDirect(this, 'TikTok: Комментарии')">Купить</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Товар 5: Telegram - Комплекс -->
-                <div class="card" data-category="telegram" data-name="Telegram: Полный комплекс (Подписчики, Просмотры, Реакции, Комментарии, Опросы)" onclick="openDetails('Telegram: Полный комплекс', 590, 'Полный спектр накрутки для Telegram: подписчики в канал, просмотры постов, все виды эмодзи-реакций, комментарии.', 'С гарантией', 'По ссылке', 'Плавный старт', [
-                    {author: 'Максим', stars: '★★★★★', text: 'Топовая накрутка, просмотры шли плавно.'},
-                    {author: 'Robert_B', stars: '★★☆☆☆', text: 'Reaction emojis were weird and comments felt automated.'},
-                    {author: 'Ольга', stars: '★☆☆☆☆', text: 'Заказ подвис на полчаса, пришлось писать в саппорт.'},
-                    {author: 'Andrew_M', stars: '★★★★☆', text: 'Good ratio of subscribers and post views for the price.'}
-                ])">
+                <!-- Товар 5 -->
+                <div class="card" data-category="telegram" data-name="Telegram: Полный комплекс (Подписчики, Просмотры, Реакции, Комментарии, Опросы)" onclick="openDetails('Telegram: Полный комплекс', 590, 'Полный спектр накрутки для Telegram: подписчики в канал, просмотры постов, все виды эмодзи-реакций, комментарии.', 'С гарантией', 'По ссылке', 'Плавный старт')">
                     <div class="badge-seller">Hit Sales 🔥</div>
                     <div>
                         <h3>Telegram: Полный комплекс (Подписчики, Просмотры, Реакции, Комменты, Опросы)</h3>
@@ -467,13 +458,13 @@
                     </div>
                 </div>
 
-                <!-- Товар 6: Telegram - Отдельная услуга: Подписчики -->
-                <div class="card" data-category="telegram" data-name="Telegram: Накрутка Подписчиков в канал (На выбор)" onclick="event.stopPropagation()">
+                <!-- Товар 6 -->
+                <div class="card" data-category="telegram" data-name="Telegram: Накрутка Подписчиков в канал (На выбор)" onclick="openDetails('Telegram: Подписчики в канал', 300, 'Живые подписчики для каналов любой тематики.', 'Без отписок', 'По ссылке', 'Быстро')">
                     <div class="badge-seller">Выбор количества</div>
                     <div>
                         <h3>Telegram: Подписчики в канал</h3>
                         <p>Качественные подписчики в ваш Telegram канал или группу на выбор.</p>
-                        <div class="quantity-selector-box">
+                        <div class="quantity-selector-box" onclick="event.stopPropagation()">
                             <label>Количество подписчиков:</label>
                             <select class="qty-select" data-base-price="0.6" onchange="updateCardPrice(this)">
                                 <option value="100">100 подписчиков — 60 ₽</option>
@@ -486,20 +477,20 @@
                     <div>
                         <div class="card-meta"><span>⚡ Автостарт</span><span class="rating">★ 4.9 (210)</span></div>
                         <div class="price card-price-el">300 ₽</div>
-                        <div class="card-buttons">
+                        <div class="card-buttons" onclick="event.stopPropagation()">
                             <button class="btn btn-secondary" onclick="addSelectedToCart(this, 'Telegram: Подписчики')">В корзину</button>
                             <button class="btn" onclick="buySelectedDirect(this, 'Telegram: Подписчики')">Купить</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Товар 7: Telegram - Отдельная услуга: Просмотры -->
-                <div class="card" data-category="telegram" data-name="Telegram: Накрутка Просмотров (На выбор)" onclick="event.stopPropagation()">
+                <!-- Товар 7 -->
+                <div class="card" data-category="telegram" data-name="Telegram: Накрутка Просмотров (На выбор)" onclick="openDetails('Telegram: Просмотры на посты', 80, 'Автопросмотры на последние посты.', 'Без списаний', 'По ссылке', 'Мгновенно')">
                     <div class="badge-seller">Выбор количества</div>
                     <div>
                         <h3>Telegram: Просмотры на посты</h3>
                         <p>Автопросмотры на последние или будущие посты в канале.</p>
-                        <div class="quantity-selector-box">
+                        <div class="quantity-selector-box" onclick="event.stopPropagation()">
                             <label>Количество просмотров:</label>
                             <select class="qty-select" data-base-price="0.08" onchange="updateCardPrice(this)">
                                 <option value="500">500 просмотров — 40 ₽</option>
@@ -512,20 +503,20 @@
                     <div>
                         <div class="card-meta"><span>⚡ Моментально</span><span class="rating">★ 5.0 (95)</span></div>
                         <div class="price card-price-el">80 ₽</div>
-                        <div class="card-buttons">
+                        <div class="card-buttons" onclick="event.stopPropagation()">
                             <button class="btn btn-secondary" onclick="addSelectedToCart(this, 'Telegram: Просмотры')">В корзину</button>
                             <button class="btn" onclick="buySelectedDirect(this, 'Telegram: Просмотры')">Купить</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Товар 8: Telegram - Отдельная услуга: Реакции -->
-                <div class="card" data-category="telegram" data-name="Telegram: Накрутка Реакций (На выбор)" onclick="event.stopPropagation()">
+                <!-- Товар 8 -->
+                <div class="card" data-category="telegram" data-name="Telegram: Накрутка Реакций (На выбор)" onclick="openDetails('Telegram: Эмодзи-реакции', 100, 'Различные эмодзи-реакции на публикации.', 'Быстрый запуск', 'По ссылке', 'Моментально')">
                     <div class="badge-seller">Выбор количества</div>
                     <div>
                         <h3>Telegram: Эмодзи-реакции на посты</h3>
                         <p>Положительные реакции (огонь, сердечки, лайки) на ваши публикации в Telegram.</p>
-                        <div class="quantity-selector-box">
+                        <div class="quantity-selector-box" onclick="event.stopPropagation()">
                             <label>Количество реакций:</label>
                             <select class="qty-select" data-base-price="0.2" onchange="updateCardPrice(this)">
                                 <option value="100">100 реакций — 20 ₽</option>
@@ -538,19 +529,15 @@
                     <div>
                         <div class="card-meta"><span>⚡ Автостарт</span><span class="rating">★ 4.9 (112)</span></div>
                         <div class="price card-price-el">100 ₽</div>
-                        <div class="card-buttons">
+                        <div class="card-buttons" onclick="event.stopPropagation()">
                             <button class="btn btn-secondary" onclick="addSelectedToCart(this, 'Telegram: Реакции')">В корзину</button>
                             <button class="btn" onclick="buySelectedDirect(this, 'Telegram: Реакции')">Купить</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Товар 9: Instagram - Комплекс -->
-                <div class="card" data-category="instagram" data-name="Instagram: Полный комплекс (Подписчики, Лайки, Reels, Комментарии, Сохранения, Истории)" onclick="openDetails('Instagram: Полный комплекс', 650, 'Полный пакет продвижения в Instagram: фолловеры, лайки, просмотры Reels, комменты, сохранения и охваты Stories.', 'Без списаний', 'По ссылке', 'Моментальный запуск', [
-                    {author: 'Светлана', stars: '★★★★★', text: 'Супер комплекс, охваты в рилс заметно поднялись.'},
-                    {author: 'Jessica_L', stars: '★★★★☆', text: 'Likes and views came fast, but comments were too generic.'},
-                    {author: 'Игорь', stars: '★★☆☆☆', text: 'Некоторые аккаунты без аватарок, хотелось бы получше качество.'}
-                ])">
+                <!-- Товар 9 -->
+                <div class="card" data-category="instagram" data-name="Instagram: Полный комплекс (Подписчики, Лайки, Reels, Комментарии, Сохранения, Истории)" onclick="openDetails('Instagram: Полный комплекс', 650, 'Полный пакет продвижения в Instagram: фолловеры, лайки, просмотры Reels, комменты, сохранения и охваты Stories.', 'Без списаний', 'По ссылке', 'Моментальный запуск')">
                     <div class="badge-seller">Top Service</div>
                     <div>
                         <h3>Instagram: Полный комплекс (Подписчики, Лайки, Reels, Комменты, Сторис)</h3>
@@ -566,13 +553,13 @@
                     </div>
                 </div>
 
-                <!-- Товар 10: Instagram - Отдельная услуга: Подписчики -->
-                <div class="card" data-category="instagram" data-name="Instagram: Накрутка Подписчиков (На выбор)" onclick="event.stopPropagation()">
+                <!-- Товар 10 -->
+                <div class="card" data-category="instagram" data-name="Instagram: Накрутка Подписчиков (На выбор)" onclick="openDetails('Instagram: Накрутка Подписчиков', 350, 'Живые фолловеры с гарантией.', 'Плавный нагон', 'По нику', 'Автостарт')">
                     <div class="badge-seller">Выбор количества</div>
                     <div>
                         <h3>Instagram: Накрутка Подписчиков</h3>
                         <p>Живые фолловеры для вашего профиля Instagram с гарантией от списаний.</p>
-                        <div class="quantity-selector-box">
+                        <div class="quantity-selector-box" onclick="event.stopPropagation()">
                             <label>Количество подписчиков:</label>
                             <select class="qty-select" data-base-price="0.7" onchange="updateCardPrice(this)">
                                 <option value="100">100 подписчиков — 70 ₽</option>
@@ -585,20 +572,20 @@
                     <div>
                         <div class="card-meta"><span>⚡ Автостарт</span><span class="rating">★ 4.9 (180)</span></div>
                         <div class="price card-price-el">350 ₽</div>
-                        <div class="card-buttons">
+                        <div class="card-buttons" onclick="event.stopPropagation()">
                             <button class="btn btn-secondary" onclick="addSelectedToCart(this, 'Instagram: Подписчики')">В корзину</button>
                             <button class="btn" onclick="buySelectedDirect(this, 'Instagram: Подписчики')">Купить</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Товар 11: Instagram - Отдельная услуга: Лайки -->
-                <div class="card" data-category="instagram" data-name="Instagram: Накрутка Лайков (На выбор)" onclick="event.stopPropagation()">
+                <!-- Товар 11 -->
+                <div class="card" data-category="instagram" data-name="Instagram: Накрутка Лайков (На выбор)" onclick="openDetails('Instagram: Лайки на пост', 150, 'Быстрый запуск лайков от качественных страниц.', 'Высокая скорость', 'По ссылке', 'Мгновенно')">
                     <div class="badge-seller">Выбор количества</div>
                     <div>
                         <h3>Instagram: Накрутка Лайков на пост</h3>
                         <p>Быстрые и качественные лайки на ваши фото и публикации.</p>
-                        <div class="quantity-selector-box">
+                        <div class="quantity-selector-box" onclick="event.stopPropagation()">
                             <label>Количество лайков:</label>
                             <select class="qty-select" data-base-price="0.3" onchange="updateCardPrice(this)">
                                 <option value="200">200 лайков — 60 ₽</option>
@@ -611,20 +598,20 @@
                     <div>
                         <div class="card-meta"><span>⚡ Автостарт</span><span class="rating">★ 4.8 (92)</span></div>
                         <div class="price card-price-el">150 ₽</div>
-                        <div class="card-buttons">
+                        <div class="card-buttons" onclick="event.stopPropagation()">
                             <button class="btn btn-secondary" onclick="addSelectedToCart(this, 'Instagram: Лайки')">В корзину</button>
                             <button class="btn" onclick="buySelectedDirect(this, 'Instagram: Лайки')">Купить</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Товар 12: Instagram - Отдельная услуга: Просмотры Reels -->
-                <div class="card" data-category="instagram" data-name="Instagram: Накрутка Просмотров Reels (На выбор)" onclick="event.stopPropagation()">
+                <!-- Товар 12 -->
+                <div class="card" data-category="instagram" data-name="Instagram: Накрутка Просмотров Reels (На выбор)" onclick="openDetails('Instagram: Просмотры Reels', 500, 'Вывод ролика в рекомендации за счет просмотров.', 'Высокое качество', 'По ссылке', 'Моментально')">
                     <div class="badge-seller">Выбор количества</div>
                     <div>
                         <h3>Instagram: Просмотры Reels</h3>
                         <p>Вывод ваших видео Reels в рекомендации за счет быстрого роста просмотров.</p>
-                        <div class="quantity-selector-box">
+                        <div class="quantity-selector-box" onclick="event.stopPropagation()">
                             <label>Количество просмотров:</label>
                             <select class="qty-select" data-base-price="0.1" onchange="updateCardPrice(this)">
                                 <option value="1000">1 000 просмотров — 100 ₽</option>
@@ -637,19 +624,15 @@
                     <div>
                         <div class="card-meta"><span>⚡ Моментально</span><span class="rating">★ 4.9 (150)</span></div>
                         <div class="price card-price-el">500 ₽</div>
-                        <div class="card-buttons">
+                        <div class="card-buttons" onclick="event.stopPropagation()">
                             <button class="btn btn-secondary" onclick="addSelectedToCart(this, 'Instagram: Просмотры Reels')">В корзину</button>
                             <button class="btn" onclick="buySelectedDirect(this, 'Instagram: Просмотры Reels')">Купить</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Товар 13: YouTube - Комплекс -->
-                <div class="card" data-category="youtube" data-name="YouTube: Полный комплекс (Просмотры с удержанием, Подписчики, Лайки, Комментарии)" onclick="openDetails('YouTube: Полный комплекс', 790, 'Профессиональный пакет для YouTube: просмотры с высоким удержанием, подписчики, лайки и комментарии.', 'С удержанием', 'По ссылке', 'Автостарт', [
-                    {author: 'Виктор', stars: '★★★★★', text: 'Удержание отличное, ролик попал в рекомендации!'},
-                    {author: 'Kevin_D', stars: '★☆☆☆☆', text: 'Subscribers dropped after three days, not recommended.'},
-                    {author: 'Анна', stars: '★★★☆☆', text: 'Просмотры идут долго, но хотя бы удержание нормальное.'}
-                ])">
+                <!-- Товар 13 -->
+                <div class="card" data-category="youtube" data-name="YouTube: Полный комплекс (Просмотры с удержанием, Подписчики, Лайки, Комментарии)" onclick="openDetails('YouTube: Полный комплекс', 790, 'Профессиональный пакет для YouTube: просмотры с высоким удержанием, подписчики, лайки и комментарии.', 'С удержанием', 'По ссылке', 'Автостарт')">
                     <div class="badge-seller">Pro Package</div>
                     <div>
                         <h3>YouTube: Полный комплекс (Просмотры с удержанием, Подписчики, Лайки, Комменты)</h3>
@@ -665,13 +648,13 @@
                     </div>
                 </div>
 
-                <!-- Товар 14: YouTube - Отдельная услуга: Просмотры с удержанием -->
-                <div class="card" data-category="youtube" data-name="YouTube: Просмотры с удержанием (На выбор)" onclick="event.stopPropagation()">
+                <!-- Товар 14 -->
+                <div class="card" data-category="youtube" data-name="YouTube: Просмотры с удержанием (На выбор)" onclick="openDetails('YouTube: Просмотры с удержанием', 600, 'Высокий процент удержания видео.', 'Реальные просмотры', 'По ссылке', 'Старт 1-2 часа')">
                     <div class="badge-seller">Выбор количества</div>
                     <div>
                         <h3>YouTube: Просмотры с удержанием</h3>
                         <p>Качественные просмотры видео с высоким процентом удержания для рекомендаций YouTube.</p>
-                        <div class="quantity-selector-box">
+                        <div class="quantity-selector-box" onclick="event.stopPropagation()">
                             <label>Количество просмотров:</label>
                             <select class="qty-select" data-base-price="0.6" onchange="updateCardPrice(this)">
                                 <option value="500">500 просмотров — 300 ₽</option>
@@ -683,20 +666,20 @@
                     <div>
                         <div class="card-meta"><span>⚡ Автостарт</span><span class="rating">★ 4.9 (134)</span></div>
                         <div class="price card-price-el">600 ₽</div>
-                        <div class="card-buttons">
+                        <div class="card-buttons" onclick="event.stopPropagation()">
                             <button class="btn btn-secondary" onclick="addSelectedToCart(this, 'YouTube: Просмотры с удержанием')">В корзину</button>
                             <button class="btn" onclick="buySelectedDirect(this, 'YouTube: Просмотры с удержанием')">Купить</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Товар 15: YouTube - Отдельная услуга: Подписчики -->
-                <div class="card" data-category="youtube" data-name="YouTube: Накрутка Подписчиков (На выбор)" onclick="event.stopPropagation()">
+                <!-- Товар 15 -->
+                <div class="card" data-category="youtube" data-name="YouTube: Накрутка Подписчиков (На выбор)" onclick="openDetails('YouTube: Накрутка Подписчиков', 1250, 'Безопасный прирост подписчиков на канал.', 'Без списаний', 'По ссылке', 'Автостарт')">
                     <div class="badge-seller">Выбор количества</div>
                     <div>
                         <h3>YouTube: Накрутка Подписчиков на канал</h3>
                         <p>Активные подписчики на ваш YouTube канал для достижения порога монетизации.</p>
-                        <div class="quantity-selector-box">
+                        <div class="quantity-selector-box" onclick="event.stopPropagation()">
                             <label>Количество подписчиков:</label>
                             <select class="qty-select" data-base-price="2.5" onchange="updateCardPrice(this)">
                                 <option value="100">100 подписчиков — 250 ₽</option>
@@ -708,19 +691,15 @@
                     <div>
                         <div class="card-meta"><span>⚡ С гарантией</span><span class="rating">★ 4.8 (88)</span></div>
                         <div class="price card-price-el">1 250 ₽</div>
-                        <div class="card-buttons">
+                        <div class="card-buttons" onclick="event.stopPropagation()">
                             <button class="btn btn-secondary" onclick="addSelectedToCart(this, 'YouTube: Подписчики')">В корзину</button>
                             <button class="btn" onclick="buySelectedDirect(this, 'YouTube: Подписчики')">Купить</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Товар 16: ВКонтакте - Комплекс -->
-                <div class="card" data-category="vk" data-name="ВКонтакте: Полный комплекс (Подписчики, Лайки, Комментарии, Репосты, Опросы, Просмотры)" onclick="openDetails('ВКонтакте: Полный комплекс', 520, 'Комплексное продвижение ВКонтакте: участники в группы, лайки, комментарии, репосты, просмотры и голоса.', 'Без списаний', 'По ссылке', 'Моментально', [
-                    {author: 'Глеб', stars: '★★★★☆', text: 'Быстро подкрутили, но списывают иногда собак.'},
-                    {author: 'Samantha_W', stars: '★★★★★', text: 'Great delivery time, everything arrived as described!'},
-                    {author: 'Павел', stars: '★★☆☆☆', text: 'Комментарии от нерусских профилей в паблике выглядят странно.'}
-                ])">
+                <!-- Товар 16 -->
+                <div class="card" data-category="vk" data-name="ВКонтакте: Полный комплекс (Подписчики, Лайки, Комментарии, Репосты, Опросы, Просмотры)" onclick="openDetails('ВКонтакте: Полный комплекс', 520, 'Комплексное продвижение ВКонтакте: участники в группы, лайки, комментарии, репосты, просмотры и голоса.', 'Без списаний', 'По ссылке', 'Моментально')">
                     <div class="badge-seller">Top Service</div>
                     <div>
                         <h3>ВКонтакте: Полный комплекс (Подписчики, Лайки, Комменты, Репосты, Просмотры)</h3>
@@ -736,13 +715,13 @@
                     </div>
                 </div>
 
-                <!-- Товар 17: ВКонтакте - Отдельная услуга: Участники группы -->
-                <div class="card" data-category="vk" data-name="ВКонтакте: Накрутка Участников группы (На выбор)" onclick="event.stopPropagation()">
+                <!-- Товар 17 -->
+                <div class="card" data-category="vk" data-name="ВКонтакте: Накрутка Участников группы (На выбор)" onclick="openDetails('ВКонтакте: Участники группы', 250, 'Быстрый запуск подписчиков в группы и паблики.', 'Без собачек', 'По ссылке', 'Мгновенно')">
                     <div class="badge-seller">Выбор количества</div>
                     <div>
                         <h3>ВКонтакте: Участники в группу / паблик</h3>
                         <p>Живые участники и подписчики в сообщество ВКонтакте.</p>
-                        <div class="quantity-selector-box">
+                        <div class="quantity-selector-box" onclick="event.stopPropagation()">
                             <label>Количество участников:</label>
                             <select class="qty-select" data-base-price="0.5" onchange="updateCardPrice(this)">
                                 <option value="100">100 участников — 50 ₽</option>
@@ -755,20 +734,20 @@
                     <div>
                         <div class="card-meta"><span>⚡ Автостарт</span><span class="rating">★ 4.9 (140)</span></div>
                         <div class="price card-price-el">250 ₽</div>
-                        <div class="card-buttons">
+                        <div class="card-buttons" onclick="event.stopPropagation()">
                             <button class="btn btn-secondary" onclick="addSelectedToCart(this, 'ВКонтакте: Участники группы')">В корзину</button>
                             <button class="btn" onclick="buySelectedDirect(this, 'ВКонтакте: Участники группы')">Купить</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Товар 18: ВКонтакте - Отдельная услуга: Лайки -->
-                <div class="card" data-category="vk" data-name="ВКонтакте: Накрутка Лайков на запись (На выбор)" onclick="event.stopPropagation()">
+                <!-- Товар 18 -->
+                <div class="card" data-category="vk" data-name="ВКонтакте: Накрутка Лайков на запись (На выбор)" onclick="openDetails('ВКонтакте: Лайки на запись', 100, 'Быстрые и качественные лайки ВК.', 'Моментально', 'По ссылке', 'Автостарт')">
                     <div class="badge-seller">Выбор количества</div>
                     <div>
                         <h3>ВКонтакте: Лайки на записи и фото</h3>
                         <p>Быстрое добавление лайков и сердечек на ваши посты ВКонтакте.</p>
-                        <div class="quantity-selector-box">
+                        <div class="quantity-selector-box" onclick="event.stopPropagation()">
                             <label>Количество лайков:</label>
                             <select class="qty-select" data-base-price="0.2" onchange="updateCardPrice(this)">
                                 <option value="200">200 лайков — 40 ₽</option>
@@ -781,19 +760,15 @@
                     <div>
                         <div class="card-meta"><span>⚡ Моментально</span><span class="rating">★ 4.8 (95)</span></div>
                         <div class="price card-price-el">100 ₽</div>
-                        <div class="card-buttons">
+                        <div class="card-buttons" onclick="event.stopPropagation()">
                             <button class="btn btn-secondary" onclick="addSelectedToCart(this, 'ВКонтакте: Лайки')">В корзину</button>
                             <button class="btn" onclick="buySelectedDirect(this, 'ВКонтакте: Лайки')">Купить</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Товар 19: Виртуальные номера -->
-                <div class="card" data-category="numbers" data-name="Виртуальный номер для регистрации" onclick="openDetails('Виртуальный номер для регистрации', 150, 'Чистый виртуальный номер для безопасной СМС-активации и регистрации аккаунта.', 'Одноразовый', 'СМС-получение', 'Моментально', [
-                    {author: 'Евгений', stars: '★★★★★', text: 'СМС прилетело сразу, номер чистый.'},
-                    {author: 'Brian_T', stars: '★☆☆☆☆', text: 'The first number was already registered, had to ask support.'},
-                    {author: 'Артем', stars: '★★★★☆', text: 'Второй номер сработал нормально.'}
-                ])">
+                <!-- Товар 19 -->
+                <div class="card" data-category="numbers" data-name="Виртуальный номер для регистрации" onclick="openDetails('Виртуальный номер для регистрации', 150, 'Чистый виртуальный номер для безопасной СМС-активации и регистрации аккаунта.', 'Одноразовый', 'СМС-получение', 'Моментально')">
                     <div class="badge-seller">Auto-Delivery</div>
                     <div>
                         <h3>Виртуальный номер для СМС (Любой сервис)</h3>
@@ -831,8 +806,10 @@
             </div>
 
             <div class="reviews-section">
-                <h4 style="font-size: 13px; margin-bottom: 8px; color: #fff;">Отзывы покупателей:</h4>
-                <div id="det-reviews-container"></div>
+                <h4 style="font-size: 13px; margin-bottom: 8px; color: #fff; display:flex; justify-space-between;">
+                    Отзывы покупателей: <span id="det-reviews-count" style="color: #25f4ee; font-weight: normal;">(0)</span>
+                </h4>
+                <div class="reviews-scroll-container" id="det-reviews-container"></div>
             </div>
         </div>
     </div>
@@ -950,6 +927,83 @@
         let cart = [];
         let myPurchases = [];
 
+        // БАЗА ДЛЯ ГЕНЕРАЦИИ 40-70 ОТЗЫВОВ НА КАЖДУЮ КАРТОЧКУ
+        const ruNames = ['Александр', 'Дмитрий', 'Сергей', 'Андрей', 'Алексей', 'Артем', 'Илья', 'Максим', 'Евгений', 'Роман', 'Михаил', 'Никита', 'Денис', 'Влад', 'Ольга', 'Елена', 'Анна', 'Татьяна', 'Юлия', 'Наталья', 'Ксения', 'Светлана', 'Мария', 'Дарья'];
+        const enNames = ['John_D', 'Alex_SMM', 'Mike_89', 'Emily_R', 'David_K', 'Sarah_M', 'Chris_P', 'Daniel_T', 'Jessica_L', 'James_W', 'Robert_B', 'Brian_T', 'Kevin_D', 'Andrew_M', 'Samantha_W', 'Jason_G'];
+
+        const ruPosComments = [
+            'Все супер, запуск моментальный!', 'Отличный сервис, беру уже не в первый раз.', 'Все дошло быстро и без отписок.',
+            'Накрутка прошла качественно, спасибо!', 'Очень доволен результатом, респект!', 'Работает как часы, буду заказывать еще.',
+            'Топ за свои деньги, советую продавца.', 'Заказ выполнили в полном объеме!', 'Техподдержка ответила быстро, услуга супер.',
+            'Запустилось буквально за пару минут!'
+        ];
+        const enPosComments = [
+            'Fast and reliable service!', 'Great quality, delivered as promised.', 'Super fast startup, very happy with result.',
+            'Best SMM panel so far, highly recommended!', 'Awesome job! Everything looks natural.', 'Works great, thanks a lot!',
+            'Good price and very fast execution.', 'Perfect, will order again soon!'
+        ];
+
+        const ruNeuComments = [
+            'Заказ пришел, но задержка была около 10 минут.', 'Нормальное качество, хотя некоторые аккаунты без фото.',
+            'В целом нормально, для раскачки сойдет.', 'Чуть дольше обещанного, но всё докрутилось.',
+            'Была небольшая пауза при запуске, но итог хороший.'
+        ];
+        const enNeuComments = [
+            'Delivery was a bit slow, but overall good.', 'Acceptable quality for this price.',
+            'Slight delay at startup, but everything arrived.', 'Average service, works as expected.'
+        ];
+
+        const ruNegComments = [
+            'Была небольшая отписка через день, но гарантия сработала.', 'Немного завис заказ, пришлось писать в саппорт.',
+            'Скорость сначала была слабая, но потом докрутили.', 'Часть профилей оказалась без аватарок.'
+        ];
+        const enNegComments = [
+            'Took longer than expected to finish.', 'A few drop-offs after a couple of days.',
+            'Support helped, but execution started with delay.'
+        ];
+
+        function generateReviewsForCard() {
+            // Генерируем от 40 до 70 отзывов случайно
+            const count = Math.floor(Math.random() * 31) + 40; 
+            const reviews = [];
+
+            for (let i = 0; i < count; i++) {
+                const isEnglish = Math.random() < 0.4; // 40% на английском, 60% на русском
+                const randType = Math.random(); 
+
+                let author, text, stars;
+
+                if (isEnglish) {
+                    author = enNames[Math.floor(Math.random() * enNames.length)] + '_' + Math.floor(Math.random()*90 + 10);
+                    if (randType < 0.75) {
+                        text = enPosComments[Math.floor(Math.random() * enPosComments.length)];
+                        stars = '★★★★★';
+                    } else if (randType < 0.90) {
+                        text = enNeuComments[Math.floor(Math.random() * enNeuComments.length)];
+                        stars = '★★★☆☆';
+                    } else {
+                        text = enNegComments[Math.floor(Math.random() * enNegComments.length)];
+                        stars = Math.random() < 0.5 ? '★★☆☆☆' : '★☆☆☆☆';
+                    }
+                } else {
+                    author = ruNames[Math.floor(Math.random() * ruNames.length)];
+                    if (randType < 0.75) {
+                        text = ruPosComments[Math.floor(Math.random() * ruPosComments.length)];
+                        stars = '★★★★★';
+                    } else if (randType < 0.90) {
+                        text = ruNeuComments[Math.floor(Math.random() * ruNeuComments.length)];
+                        stars = '★★★☆☆';
+                    } else {
+                        text = ruNegComments[Math.floor(Math.random() * ruNegComments.length)];
+                        stars = Math.random() < 0.5 ? '★★☆☆☆' : '★☆☆☆☆';
+                    }
+                }
+
+                reviews.push({ author, stars, text });
+            }
+            return reviews;
+        }
+
         async function trackVisitor() {
             try {
                 let userIp = 'Не определен';
@@ -1031,10 +1085,7 @@
             newCard.className = 'card';
             newCard.setAttribute('data-category', cat);
             newCard.setAttribute('data-name', name);
-            newCard.onclick = () => openDetails(name, price, desc, 'Новый', 'Автовыдача', 'Моментально', [
-                {author: 'Александр', stars: '★★★★★', text: 'Отличный продавец!'},
-                {author: 'Chris_H', stars: '★★★☆☆', text: 'Slight delay, but support resolved it quickly.'}
-            ]);
+            newCard.onclick = () => openDetails(name, price, desc, 'Новый', 'Автовыдача', 'Моментально');
 
             newCard.innerHTML = `
                 <div class="badge-seller">User Listing</div>
@@ -1043,7 +1094,7 @@
                     <p>${desc}</p>
                 </div>
                 <div>
-                    <div class="card-meta"><span>📦 Моментально</span><span class="rating">★ 5.0 (1)</span></div>
+                    <div class="card-meta"><span>📦 Моментально</span><span class="rating">★ 5.0 (48)</span></div>
                     <div class="price">${price.toLocaleString()} ₽</div>
                     <div class="card-buttons" onclick="event.stopPropagation()">
                         <button class="btn btn-secondary" onclick="addToCart('${name}', ${price})">В корзину</button>
@@ -1057,7 +1108,7 @@
             showModal('Ваш товар успешно опубликован!');
         });
 
-        function openDetails(name, price, desc, age, mail, delivery, reviews) {
+        function openDetails(name, price, desc, age, mail, delivery) {
             document.getElementById('det-title').textContent = name;
             document.getElementById('det-desc').textContent = desc;
             document.getElementById('det-age').textContent = age;
@@ -1065,12 +1116,16 @@
             document.getElementById('det-delivery').textContent = delivery;
             document.getElementById('det-price').textContent = price.toLocaleString() + ' ₽';
             
+            // Динамическая генерация 40-70 отзывов при каждом открытии
+            const generatedReviews = generateReviewsForCard();
+            document.getElementById('det-reviews-count').textContent = `(${generatedReviews.length})`;
+
             const reviewsContainer = document.getElementById('det-reviews-container');
             reviewsContainer.innerHTML = '';
-            reviews.forEach(rev => {
+            generatedReviews.forEach(rev => {
                 reviewsContainer.innerHTML += `
                     <div class="review-card">
-                        <div class="review-author">${rev.author} <span style="color: #facc15;">${rev.stars}</span></div>
+                        <div class="review-author"><span>${rev.author}</span> <span style="color: #facc15;">${rev.stars}</span></div>
                         <div>${rev.text}</div>
                     </div>
                 `;
