@@ -12,7 +12,7 @@
         
         header { background: #1e293b; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; flex-wrap: wrap; gap: 10px; position: sticky; top: 0; z-index: 100; }
         
-        /* Стили для логотипа */
+        /* Стили для маленького логотипа в шапке */
         .logo { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: bold; color: #fff; white-space: nowrap; cursor: pointer; }
         .logo-img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; flex-shrink: 0; display: block; }
         .logo span { background: linear-gradient(90deg, #fe2c55, #229ed9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -33,23 +33,98 @@
             white-space: nowrap;
         }
 
-        /* --- Глитч-эффект --- */
+        /* --- Обновленные стили увеличенного логотипа и жесткого глитча --- */
         .hero-title-container {
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-bottom: 10px;
+            gap: 18px;
+            margin-bottom: 15px;
         }
 
-        .glitch-logo {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
+        .glitch-logo-wrapper {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            border-radius: 22px;
+            display: inline-block;
+            background: #0f172a;
+            box-shadow: 0 0 30px rgba(37, 244, 238, 0.5), 0 0 50px rgba(254, 44, 85, 0.3);
+        }
+
+        .glitch-logo-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 22px;
             object-fit: cover;
-            box-shadow: 0 0 15px rgba(37, 244, 238, 0.4);
-            animation: glitch-img 3s infinite;
+            display: block;
+            position: relative;
+            z-index: 1;
+            animation: hard-glitch-main 2.2s infinite steps(1);
+        }
+
+        /* Слои для хроматического разрыва (RGB Split / Slice Glitch) */
+        .glitch-logo-wrapper::before,
+        .glitch-logo-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border-radius: 22px;
+            background: url('photo_2026-08-12_08-06-33_3.jpg') no-repeat center/cover;
+            opacity: 0.85;
+            pointer-events: none;
+        }
+
+        .glitch-logo-wrapper::before {
+            left: 4px;
+            filter: drop-shadow(-5px 0 #fe2c55);
+            animation: hard-glitch-top 1.6s infinite linear alternate-reverse;
+            z-index: 2;
+        }
+
+        .glitch-logo-wrapper::after {
+            left: -4px;
+            filter: drop-shadow(5px 0 #25f4ee);
+            animation: hard-glitch-bottom 2.1s infinite linear alternate-reverse;
+            z-index: 2;
+        }
+
+        /* Кадры жестких встрясок и помех */
+        @keyframes hard-glitch-main {
+            0%, 82%, 100% { transform: translate(0, 0) skew(0deg); filter: none; }
+            83% { transform: translate(-6px, 3px) skew(4deg); filter: hue-rotate(90deg) contrast(170%); }
+            84% { transform: translate(6px, -4px) skew(-6deg); filter: brightness(200%); }
+            85% { transform: translate(-4px, -3px) skew(3deg); filter: invert(25%); }
+            86% { transform: translate(5px, 3px) skew(0deg); }
+            87% { transform: translate(0, 0); }
+            94% { transform: translate(-8px, 2px) skew(-10deg); }
+            95% { transform: translate(8px, -3px) skew(7deg); }
+        }
+
+        @keyframes hard-glitch-top {
+            0% { clip-path: inset(0 0 100% 0); }
+            8% { clip-path: inset(12% 0 60% 0); transform: translate(-10px, -3px); }
+            16% { clip-path: inset(75% 0 8% 0); transform: translate(8px, 3px); }
+            24% { clip-path: inset(35% 0 45% 0); transform: translate(-6px, 1px); }
+            32% { clip-path: inset(0 0 100% 0); }
+            80% { clip-path: inset(0 0 100% 0); }
+            86% { clip-path: inset(20% 0 52% 0); transform: translate(12px, -5px); filter: saturate(300%); }
+            92% { clip-path: inset(68% 0 12% 0); transform: translate(-12px, 4px); }
+            98% { clip-path: inset(8% 0 78% 0); transform: translate(6px, -2px); }
+            100% { clip-path: inset(0 0 100% 0); }
+        }
+
+        @keyframes hard-glitch-bottom {
+            0% { clip-path: inset(100% 0 0 0); }
+            12% { clip-path: inset(48% 0 22% 0); transform: translate(10px, 4px); }
+            22% { clip-path: inset(18% 0 72% 0); transform: translate(-9px, -4px); }
+            30% { clip-path: inset(100% 0 0 0); }
+            81% { clip-path: inset(58% 0 18% 0); transform: translate(-14px, 3px); }
+            87% { clip-path: inset(12% 0 68% 0); transform: translate(14px, -4px); }
+            93% { clip-path: inset(32% 0 42% 0); transform: translate(-5px, 5px); }
+            100% { clip-path: inset(100% 0 0 0); }
         }
 
         .glitch-text {
@@ -67,14 +142,6 @@
             0%, 20%, 23%, 80%, 83%, 100% { text-shadow: 2px 0 #fe2c55, -2px 0 #25f4ee; transform: skew(0deg); }
             21% { text-shadow: 4px 0 #fe2c55, -4px 0 #25f4ee; transform: skew(2deg); }
             81% { text-shadow: -3px 0 #fe2c55, 3px 0 #25f4ee; transform: skew(-2deg); }
-        }
-
-        @keyframes glitch-img {
-            0%, 100% { transform: translate(0); filter: drop-shadow(0 0 5px #25f4ee); }
-            92% { transform: translate(0); }
-            93% { transform: translate(-2px, 1px); filter: drop-shadow(2px 0 #fe2c55); }
-            95% { transform: translate(2px, -1px); filter: drop-shadow(-2px 0 #25f4ee); }
-            97% { transform: translate(0); }
         }
 
         .nav-btn:hover { border-color: #fe2c55; color: #fff; }
@@ -135,6 +202,7 @@
             position: relative; overflow: hidden; border-bottom: 1px solid #334155;
         }
         .hero-content { position: relative; z-index: 3; }
+        .hero h1 { font-size: 22px; font-weight: 900; margin-bottom: 10px; color: #fff; text-shadow: -2px -2px 0 #25f4ee, 2px 2px 0 #fe2c55; }
         .hero p { font-size: 13px; color: #f1f5f9; max-width: 650px; margin: 0 auto; font-weight: 600; }
 
         .bg-icons-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; overflow: hidden; }
@@ -247,7 +315,10 @@
         </div>
         <div class="hero-content">
             <div class="hero-title-container">
-                <img src="photo_2026-08-12_08-06-33_3.jpg" alt="Logo" class="glitch-logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/48?text=TT';">
+                <div class="glitch-logo-wrapper">
+                    <img src="photo_2026-08-12_08-06-33_3.jpg" alt="Logo" class="glitch-logo-img" onerror="this.onerror=null; this.src='https://via.placeholder.com/130?text=TT';">
+                </div>
+                <h1 class="glitch-text">ПРЕМИУМ МАРКЕТПЛЕЙС DIGITAL-АКТИВОВ И SMM УСЛУГ</h1>
             </div>
             <p>Выбирайте комплексные пакеты или настраивайте любые отдельные услуги (подписчики, лайки, комментарии, просмотры, репосты, реакции) с выбором количества.</p>
         </div>
