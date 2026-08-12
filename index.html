@@ -217,6 +217,7 @@
 
         .card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 16px; transition: transform 0.2s, border-color 0.2s; display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; position: relative; }
         .card:hover { border-color: #fe2c55; transform: translateY(-2px); }
+        .card.promo-card { border: 2px solid #fe2c55; background: linear-gradient(145deg, #1e293b, #2a1b2e); box-shadow: 0 0 15px rgba(254,44,85,0.2); }
         .card h3 { font-size: 15px; margin-bottom: 6px; color: #fff; }
         .card p { color: #94a3b8; font-size: 12px; margin-bottom: 10px; flex-grow: 1; }
         
@@ -228,6 +229,7 @@
         .card-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 11px; color: #64748b; }
         .rating { color: #facc15; font-weight: bold; }
         .price { font-size: 16px; font-weight: bold; color: #22c55e; margin-bottom: 12px; }
+        .price-old { text-decoration: line-through; color: #ef4444; font-size: 12px; margin-right: 6px; }
         .card-buttons { display: flex; gap: 8px; }
         
         .btn { display: block; width: 100%; background: linear-gradient(90deg, #fe2c55, #25f4ee); color: white; text-align: center; padding: 9px; border-radius: 8px; border: none; font-weight: bold; font-size: 13px; cursor: pointer; transition: opacity 0.2s; }
@@ -236,6 +238,8 @@
         .btn-secondary:hover { background: #475569; }
 
         .badge-seller { position: absolute; top: 12px; right: 16px; font-size: 10px; background: rgba(34, 158, 217, 0.2); color: #229ed9; padding: 2px 6px; border-radius: 4px; font-weight: bold; border: 1px solid rgba(34, 158, 217, 0.4); }
+        .badge-promo { position: absolute; top: 12px; right: 16px; font-size: 10px; background: rgba(254, 44, 85, 0.25); color: #fe2c55; padding: 2px 6px; border-radius: 4px; font-weight: bold; border: 1px solid rgba(254, 44, 85, 0.5); animation: pulse-badge 1.5s infinite; }
+        @keyframes pulse-badge { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
 
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(5px); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 12px; }
         .modal-box { background: #1e293b; border: 1px solid #334155; border-radius: 16px; padding: 20px; width: 100%; max-width: 480px; position: relative; box-shadow: 0 20px 25px rgba(0,0,0,0.5); max-height: 90vh; overflow-y: auto; color: #fff; }
@@ -316,7 +320,7 @@
                 </div>
                 <h1 class="glitch-text">ПРЕМИУМ МАРКЕТПЛЕЙС DIGITAL-АКТИВОВ И SMM УСЛУГ</h1>
             </div>
-            <p>Безопасная сделка: данные аккаунта (логин/пароль + почта) отправляются на ваш email, а деньги списываются продавцу только после вашего подтверждения!</p>
+            <p>Безопасная сделка: данные аккаунта (логин/пароль + почта) отправляются на ваш email, а деньги спишутся продавцу только после вашего подтверждения!</p>
         </div>
     </div>
 
@@ -341,6 +345,23 @@
             <h2 class="section-title">Каталог аккаунтов и SMM услуг</h2>
             <div class="products-grid" id="products-grid">
                 
+                <!-- Товар: Акционная акция TikTok 130k (Франция) -->
+                <div class="card promo-card" data-category="accounts tiktok" data-name="TikTok Аккаунт 130k подписчиков (Франция)" onclick="openDetails('TikTok Аккаунт 130k подписчиков (Франция)', 2500, 'Специальная акция! Прокачанный французский TikTok аккаунт на 130 000 подписчиков с живой европейской аудиторией. Универсальная тематика (Lifestyle / Тренды), чистая история, отсутствие теневых банов и возможность подключения монетизации. После покупки на ваш email придут логин и пароль от аккаунта, а также пароль от родной почты. Деньги поступят продавцу только после вашего подтверждения в личном кабинете!', 'Регион: Франция | 130k фолловеров | Отлежка: 8 мес.', 'Родная почта + полный контроль', 'Безопасная сделка (Эскроу)')">
+                    <div class="badge-promo">🔥 СУПЕР АКЦИЯ -40%</div>
+                    <div>
+                        <h3>TikTok Аккаунт 130k подписчиков (Франция)</h3>
+                        <p>Готовый европейский аккаунт по спеццене! Логин, пароль и почта отправляются на email, оплата — после вашего подтверждения.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta"><span>🛒 Акция дня</span><span class="rating">★ 5.0 (64)</span></div>
+                        <div class="price"><span class="price-old">4 200 ₽</span> 2 500 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('TikTok Аккаунт 130k (Франция)', 2500)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('TikTok Аккаунт 130k (Франция)', 2500)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Товар: Аккаунт TikTok -->
                 <div class="card" data-category="accounts tiktok" data-name="TikTok Аккаунт с монетизацией (50k подписчиков)" onclick="openDetails('TikTok Аккаунт с монетизацией (50k подписчиков)', 3490, 'Прокачанный TikTok аккаунт с живой аудиторией, подключенной Creator Rewards Program и отсутствием теневых банов. После оплаты на ваш email придут логин/пароль от аккаунта и пароль от родной почты. Деньги продавцу поступят только после вашего подтверждения о доставке.', 'США | Отлежка: 1 год | Без блокировок', 'Родная почта + полный доступ', 'Безопасная сделка (Эскроу)')">
                     <div class="badge-seller">🔥 Топ аккаунт</div>
