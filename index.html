@@ -2,89 +2,299 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Маркетплейс цифровых товаров</title>
+    <title>TTBuy — Премиум маркетплейс digital-активов и SMM продвижения</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --text-color: #f8fafc;
-            --text-secondary: #94a3b8;
-            --accent-color: #3b82f6;
-            --accent-hover: #2563eb;
-            --success-color: #22c55e;
-            --danger-color: #ef4444;
-            --border-color: #334155;
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: #0b0f19; color: #f8fafc; line-height: 1.6; overflow-x: hidden; }
+        
+        header { background: #1e293b; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; flex-wrap: wrap; gap: 10px; position: sticky; top: 0; z-index: 100; }
+        
+        .logo { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: bold; color: #fff; white-space: nowrap; cursor: pointer; }
+        .logo-img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; flex-shrink: 0; display: block; }
+        .logo span { background: linear-gradient(90deg, #fe2c55, #229ed9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .header-right { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+        .header-auth { display: flex; align-items: center; gap: 6px; }
+        
+        .nav-btn { 
+            background: transparent; 
+            border: 1px solid #25f4ee; 
+            color: #f8fafc; 
+            padding: 5px 10px; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-weight: 700; 
+            font-size: 12px; 
+            transition: all 0.2s; 
+            white-space: nowrap;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-        body { background-color: var(--bg-color); color: var(--text-color); min-height: 100vh; display: flex; flex-direction: column; }
-        header { background: var(--card-bg); border-bottom: 1px solid var(--border-color); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
-        .logo { font-size: 20px; font-weight: bold; color: var(--accent-color); cursor: pointer; }
-        .search-bar { flex: 1; max-width: 400px; display: flex; }
-        .search-bar input { width: 100%; padding: 8px 12px; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-color); outline: none; }
-        .header-actions { display: flex; align-items: center; gap: 10px; }
-        .btn { background: var(--accent-color); color: #fff; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 500; font-size: 14px; transition: background 0.2s; }
-        .btn:hover { background: var(--accent-hover); }
-        .btn-secondary { background: transparent; border: 1px solid var(--border-color); color: var(--text-color); }
-        .btn-secondary:hover { background: var(--border-color); }
-        .nav-btn { background: none; border: none; color: var(--text-color); cursor: pointer; font-size: 14px; padding: 6px 10px; }
-        .nav-btn.register { background: var(--success-color); border-radius: 4px; }
-        
-        .container { max-width: 1200px; margin: 20px auto; padding: 0 20px; width: 100%; flex: 1; }
-        .categories { display: flex; gap: 10px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 5px; }
-        .cat-chip { background: var(--card-bg); border: 1px solid var(--border-color); padding: 6px 14px; border-radius: 20px; cursor: pointer; font-size: 13px; white-space: nowrap; color: var(--text-secondary); }
-        .cat-chip.active { background: var(--accent-color); color: #fff; border-color: var(--accent-color); }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-        .card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 10px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; transition: transform 0.2s; position: relative; }
-        .card:hover { transform: translateY(-3px); }
-        .badge-seller { position: absolute; top: 15px; right: 15px; background: rgba(59, 130, 246, 0.2); color: var(--accent-color); font-size: 11px; padding: 3px 8px; border-radius: 4px; }
-        .card h3 { font-size: 18px; margin-bottom: 10px; }
-        .card p { font-size: 13px; color: var(--text-secondary); margin-bottom: 15px; line-height: 1.4; }
-        .card-meta { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-secondary); margin-bottom: 15px; }
-        .rating { color: #facc15; }
-        .price { font-size: 20px; font-weight: bold; color: var(--success-color); margin-bottom: 15px; }
-        .card-buttons { display: flex; gap: 10px; }
-        .card-buttons button { flex: 1; }
+        .hero-title-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            margin-bottom: 15px;
+        }
 
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); justify-content: center; align-items: center; z-index: 1000; padding: 20px; }
-        .modal-content { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; width: 100%; max-width: 500px; padding: 25px; position: relative; max-height: 90vh; overflow-y: auto; }
-        .modal-close { position: absolute; top: 15px; right: 15px; background: none; border: none; color: var(--text-secondary); font-size: 20px; cursor: pointer; }
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; font-size: 13px; color: var(--text-secondary); margin-bottom: 5px; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-color); font-size: 14px; outline: none; }
-        .form-group textarea { resize: vertical; height: 80px; }
+        .glitch-logo-wrapper {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            border-radius: 22px;
+            display: inline-block;
+            background: #0f172a;
+            box-shadow: 0 0 30px rgba(37, 244, 238, 0.5), 0 0 50px rgba(254, 44, 85, 0.3);
+        }
 
-        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border-color); }
-        .pay-methods { display: flex; gap: 10px; margin-bottom: 15px; }
-        .pay-method { flex: 1; padding: 10px; border: 1px solid var(--border-color); border-radius: 6px; text-align: center; cursor: pointer; font-size: 13px; }
-        .pay-method.active { border-color: var(--accent-color); background: rgba(59, 130, 246, 0.1); }
+        .glitch-logo-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 22px;
+            object-fit: cover;
+            display: block;
+            position: relative;
+            z-index: 1;
+            animation: hard-glitch-main 2.2s infinite steps(1);
+        }
 
-        .review-card { background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; margin-bottom: 10px; font-size: 13px; }
-        .review-author { display: flex; justify-content: space-between; margin-bottom: 5px; font-weight: bold; }
+        .glitch-logo-wrapper::before,
+        .glitch-logo-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border-radius: 22px;
+            background: url('photo_2026-08-12_08-06-33_3.jpg') no-repeat center/cover;
+            opacity: 0.85;
+            pointer-events: none;
+        }
+
+        .glitch-logo-wrapper::before {
+            left: 4px;
+            filter: drop-shadow(-5px 0 #fe2c55);
+            animation: hard-glitch-top 1.6s infinite linear alternate-reverse;
+            z-index: 2;
+        }
+
+        .glitch-logo-wrapper::after {
+            left: -4px;
+            filter: drop-shadow(5px 0 #25f4ee);
+            animation: hard-glitch-bottom 2.1s infinite linear alternate-reverse;
+            z-index: 2;
+        }
+
+        @keyframes hard-glitch-main {
+            0%, 82%, 100% { transform: translate(0, 0) skew(0deg); filter: none; }
+            83% { transform: translate(-6px, 3px) skew(4deg); filter: hue-rotate(90deg) contrast(170%); }
+            84% { transform: translate(6px, -4px) skew(-6deg); filter: brightness(200%); }
+            85% { transform: translate(-4px, -3px) skew(3deg); filter: invert(25%); }
+            86% { transform: translate(5px, 3px) skew(0deg); }
+            87% { transform: translate(0, 0); }
+            94% { transform: translate(-8px, 2px) skew(-10deg); }
+            95% { transform: translate(8px, -3px) skew(7deg); }
+        }
+
+        @keyframes hard-glitch-top {
+            0% { clip-path: inset(0 0 100% 0); }
+            8% { clip-path: inset(12% 0 60% 0); transform: translate(-10px, -3px); }
+            16% { clip-path: inset(75% 0 8% 0); transform: translate(8px, 3px); }
+            24% { clip-path: inset(35% 0 45% 0); transform: translate(-6px, 1px); }
+            32% { clip-path: inset(0 0 100% 0); }
+            80% { clip-path: inset(0 0 100% 0); }
+            86% { clip-path: inset(20% 0 52% 0); transform: translate(12px, -5px); filter: saturate(300%); }
+            92% { clip-path: inset(68% 0 12% 0); transform: translate(-12px, 4px); }
+            98% { clip-path: inset(8% 0 78% 0); transform: translate(6px, -2px); }
+            100% { clip-path: inset(0 0 100% 0); }
+        }
+
+        @keyframes hard-glitch-bottom {
+            0% { clip-path: inset(100% 0 0 0); }
+            12% { clip-path: inset(48% 0 22% 0); transform: translate(10px, 4px); }
+            22% { clip-path: inset(18% 0 72% 0); transform: translate(-9px, -4px); }
+            30% { clip-path: inset(100% 0 0 0); }
+            81% { clip-path: inset(58% 0 18% 0); transform: translate(-14px, 3px); }
+            87% { clip-path: inset(12% 0 68% 0); transform: translate(14px, -4px); }
+            93% { clip-path: inset(32% 0 42% 0); transform: translate(-5px, 5px); }
+            100% { clip-path: inset(100% 0 0 0); }
+        }
+
+        .glitch-text {
+            font-size: 26px;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: #fff;
+            letter-spacing: 1px;
+            position: relative;
+            text-shadow: 2px 0 #fe2c55, -2px 0 #25f4ee;
+            animation: glitch-skew 2s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-skew {
+            0%, 20%, 23%, 80%, 83%, 100% { text-shadow: 2px 0 #fe2c55, -2px 0 #25f4ee; transform: skew(0deg); }
+            21% { text-shadow: 4px 0 #fe2c55, -4px 0 #25f4ee; transform: skew(2deg); }
+            81% { text-shadow: -3px 0 #fe2c55, 3px 0 #25f4ee; transform: skew(-2deg); }
+        }
+
+        .nav-btn:hover { border-color: #fe2c55; color: #fff; }
+        .nav-btn.register { 
+            background: linear-gradient(90deg, #fe2c55, #25f4ee); 
+            border: 1px solid #fe2c55; 
+            color: white; 
+        }
+
+        .cart-btn, .cabinet-btn, .seller-btn {
+            background: #0f172a;
+            border: 1px solid #fe2c55;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .cart-btn:hover, .cabinet-btn:hover, .seller-btn:hover { background: #fe2c55; }
+        .seller-btn { border-color: #229ed9; }
+        .seller-btn:hover { background: #229ed9; }
+        .cart-badge { background: #25f4ee; color: #0f172a; padding: 1px 5px; border-radius: 10px; font-size: 10px; font-weight: 900; }
+
+        .user-info { display: flex; align-items: center; gap: 8px; color: #94a3b8; font-size: 12px; }
+        .logout-btn { background: transparent; border: 1px solid #ef4444; color: #ef4444; padding: 4px 8px; border-radius: 6px; cursor: pointer; font-weight: 600; }
+        .logout-btn:hover { background: #ef4444; color: white; }
+
+        .search-bar-container { max-width: 600px; margin: 20px auto 10px auto; padding: 0 15px; position: relative; z-index: 2; }
+        .search-input { width: 100%; padding: 12px 16px; background: rgba(30, 41, 59, 0.9); border: 2px solid #334155; border-radius: 12px; color: #fff; font-size: 14px; outline: none; }
+        .search-input:focus { border-color: #25f4ee; }
+
+        .categories-scroll { display: flex; gap: 8px; overflow-x: auto; max-width: 1100px; margin: 15px auto; padding: 0 15px; scrollbar-width: none; }
+        .categories-scroll::-webkit-scrollbar { display: none; }
+        .cat-chip { background: #1e293b; border: 1px solid #334155; color: #94a3b8; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
+        .cat-chip:hover, .cat-chip.active { background: linear-gradient(90deg, #fe2c55, #25f4ee); color: #fff; border-color: transparent; }
+
+        .support-float {
+            position: fixed; bottom: 20px; right: 20px;
+            background: linear-gradient(135deg, #229ed9, #1b8ec2);
+            color: white; padding: 10px 16px; border-radius: 30px;
+            display: flex; align-items: center; gap: 8px; text-decoration: none;
+            font-weight: 700; font-size: 13px; box-shadow: 0 4px 20px rgba(34, 158, 217, 0.5);
+            z-index: 99; transition: transform 0.2s; border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .support-float:hover { transform: scale(1.05); }
+        .support-float svg { width: 18px; height: 18px; fill: white; }
+
+        .hero { 
+            text-align: center; padding: 45px 15px; 
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(30, 41, 59, 0.92)); 
+            position: relative; overflow: hidden; border-bottom: 1px solid #334155;
+        }
+        .hero-content { position: relative; z-index: 3; }
+        .hero h1 { font-size: 22px; font-weight: 900; margin-bottom: 10px; color: #fff; text-shadow: -2px -2px 0 #25f4ee, 2px 2px 0 #fe2c55; }
+        .hero p { font-size: 13px; color: #f1f5f9; max-width: 650px; margin: 0 auto; font-weight: 600; }
+
+        .bg-icons-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; overflow: hidden; }
+        .floating-icon { position: absolute; opacity: 0.3; animation: floatAndZoom 8s infinite ease-in-out alternate; }
+        .floating-icon svg { width: 100%; height: 100%; }
+        @keyframes floatAndZoom {
+            0% { transform: translateY(0px) scale(0.8); }
+            100% { transform: translateY(-25px) scale(1.2) rotate(10deg); }
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 15px 12px; position: relative; z-index: 2; }
+        .section-title { font-size: 17px; margin: 25px 0 12px 0; color: #fff; border-bottom: 2px solid #334155; padding-bottom: 6px; }
+
+        .products-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
+        @media(min-width: 640px) { .products-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media(min-width: 1024px) { .products-grid { grid-template-columns: repeat(3, 1fr); } }
+
+        .card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 16px; transition: transform 0.2s, border-color 0.2s; display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; position: relative; }
+        .card:hover { border-color: #fe2c55; transform: translateY(-2px); }
+        .card.promo-card { border: 2px solid #fe2c55; background: linear-gradient(145deg, #1e293b, #2a1b2e); box-shadow: 0 0 15px rgba(254,44,85,0.2); }
+        .card h3 { font-size: 15px; margin-bottom: 6px; color: #fff; }
+        .card p { color: #94a3b8; font-size: 12px; margin-bottom: 10px; flex-grow: 1; }
         
-        .purchase-item { background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 8px; padding: 15px; margin-bottom: 10px; font-size: 13px; }
-        .purchase-data { background: var(--card-bg); padding: 8px; border-radius: 4px; font-family: monospace; margin-top: 8px; color: #facc15; word-break: break-all; }
+        .quantity-selector-box { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 8px; margin-bottom: 10px; }
+        .quantity-selector-box label { display: block; font-size: 11px; color: #94a3b8; margin-bottom: 4px; font-weight: 600; }
+        .quantity-selector-box select { width: 100%; background: #1e293b; color: #fff; border: 1px solid #334155; padding: 6px; border-radius: 6px; font-size: 12px; outline: none; }
+        .quantity-selector-box select:focus { border-color: #25f4ee; }
+
+        .card-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 11px; color: #64748b; }
+        .rating { color: #facc15; font-weight: bold; }
+        .price { font-size: 16px; font-weight: bold; color: #22c55e; margin-bottom: 12px; }
+        .price-old { text-decoration: line-through; color: #ef4444; font-size: 12px; margin-right: 6px; }
+        .card-buttons { display: flex; gap: 8px; }
         
-        .cab-tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
-        .cab-tab { background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 14px; padding-bottom: 5px; }
-        .cab-tab.active { color: var(--text-color); border-bottom: 2px solid var(--accent-color); font-weight: bold; }
+        .btn { display: block; width: 100%; background: linear-gradient(90deg, #fe2c55, #25f4ee); color: white; text-align: center; padding: 9px; border-radius: 8px; border: none; font-weight: bold; font-size: 13px; cursor: pointer; transition: opacity 0.2s; }
+        .btn:hover { opacity: 0.9; }
+        .btn-secondary { background: #334155; color: #fff; }
+        .btn-secondary:hover { background: #475569; }
+
+        .badge-seller { position: absolute; top: 12px; right: 16px; font-size: 10px; background: rgba(34, 158, 217, 0.2); color: #229ed9; padding: 2px 6px; border-radius: 4px; font-weight: bold; border: 1px solid rgba(34, 158, 217, 0.4); }
+
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(5px); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 12px; }
+        .modal-box { background: #1e293b; border: 1px solid #334155; border-radius: 16px; padding: 20px; width: 100%; max-width: 480px; position: relative; box-shadow: 0 20px 25px rgba(0,0,0,0.5); max-height: 90vh; overflow-y: auto; color: #fff; }
+        .close-modal { position: absolute; top: 12px; right: 15px; background: none; border: none; color: #94a3b8; font-size: 22px; cursor: pointer; }
+        .close-modal:hover { color: #fff; }
         
-        .user-info { display: flex; align-items: center; gap: 10px; font-size: 13px; }
-        .logout-btn { background: none; border: none; color: var(--danger-color); cursor: pointer; font-size: 12px; }
+        .modal-box h2 { font-size: 18px; margin-bottom: 12px; }
+        .modal-details-prop { font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: flex; justify-content: space-between; border-bottom: 1px solid #334155; padding-bottom: 4px; }
+        .modal-details-prop span:last-child { font-weight: bold; color: #fff; text-align: right; }
+
+        .pay-methods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 12px 0; }
+        .pay-method { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 8px; text-align: center; font-size: 11px; cursor: pointer; color: #94a3b8; }
+        .pay-method.active { border-color: #25f4ee; color: #fff; background: rgba(37,244,238,0.1); }
+
+        .cabinet-tabs { display: flex; gap: 10px; margin-bottom: 15px; border-bottom: 1px solid #334155; padding-bottom: 8px; }
+        .cab-tab { background: none; border: none; color: #94a3b8; font-weight: bold; font-size: 13px; cursor: pointer; }
+        .cab-tab.active { color: #25f4ee; }
+        .purchase-item { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 10px; margin-bottom: 8px; font-size: 12px; }
+        .purchase-data { background: #1e293b; padding: 6px; border-radius: 6px; margin-top: 6px; font-family: monospace; color: #22c55e; word-break: break-all; }
+
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; margin-bottom: 4px; color: #94a3b8; font-size: 12px; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #fff; font-size: 14px; outline: none; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #25f4ee; }
+        
+        .cart-items-list { max-height: 180px; overflow-y: auto; margin-bottom: 12px; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; background: #0f172a; padding: 8px 12px; border-radius: 8px; margin-bottom: 6px; border: 1px solid #334155; }
+        .cart-total { display: flex; justify-content: space-between; font-size: 15px; font-weight: bold; margin-bottom: 12px; border-top: 1px solid #334155; padding-top: 10px; }
+
+        .reviews-section { margin-top: 15px; border-top: 1px solid #334155; padding-top: 10px; }
+        .reviews-scroll-container { max-height: 250px; overflow-y: auto; padding-right: 5px; }
+        .reviews-scroll-container::-webkit-scrollbar { width: 5px; }
+        .reviews-scroll-container::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        .review-card { background: #0f172a; padding: 8px 10px; border-radius: 6px; margin-bottom: 6px; font-size: 12px; border: 1px solid #1e293b; }
+        .review-author { font-weight: bold; color: #25f4ee; margin-bottom: 2px; display: flex; justify-content: space-between; }
+
+        footer { text-align: center; padding: 20px; background: #1e293b; color: #64748b; margin-top: 40px; border-top: 1px solid #334155; font-size: 13px; }
     </style>
 </head>
 <body>
+
+    <a href="https://t.me/TTBuySupportBot" target="_blank" class="support-float">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.25.38-.51 1.08-.78 4.22-1.84 7.03-3.05 8.43-3.62 4.01-1.66 4.84-1.95 5.38-1.96.12 0 .39.03.56.17.14.12.18.28.2.45-.02.07-.02.13-.04.2z"/></svg>
+        Техподдержка
+    </a>
+
     <header>
-        <div class="logo" onclick="filterCategory('all')">DigitalMarket</div>
-        <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Поиск товаров..." oninput="filterProducts()">
+        <div class="logo" onclick="filterCategory('all')">
+            <img src="photo_2026-08-12_08-06-33_3.jpg" class="logo-img" alt="TTBuy" onerror="this.onerror=null; this.src='https://via.placeholder.com/36?text=TT';">
+            <span>TTBuy</span>
         </div>
-        <div class="header-actions">
-            <button class="btn btn-secondary" onclick="openCreateProductModal()">Продать товар</button>
-            <button class="btn btn-secondary" id="cabinet-nav-btn" onclick="openCabinetModal()" style="display: none;">Кабинет</button>
-            <button class="btn btn-secondary" onclick="openCartModal()">Корзина (<span id="cart-badge">0</span>)</button>
+        <div class="header-right">
+            <button class="seller-btn" onclick="openCreateProductModal()">➕ Продать товар</button>
+            <button class="cabinet-btn" id="cabinet-nav-btn" style="display:none;" onclick="openCabinetModal()">👤 Кабинет</button>
+            <button class="cart-btn" onclick="openCartModal()">
+                🛒 Корзина <span class="cart-badge" id="cart-badge">0</span>
+            </button>
             <div id="user-header">
                 <div class="header-auth">
                     <button class="nav-btn" onclick="openAuth('login')">Войти</button>
@@ -94,169 +304,398 @@
         </div>
     </header>
 
+    <div class="hero">
+        <div class="bg-icons-container">
+            <div class="floating-icon" style="top: 15%; left: 8%; width: 45px; height: 45px;"><svg viewBox="0 0 24 24" fill="#fe2c55"><path d="M19.589 6.686a4.793 4.793 0 01-3.7-1.542V13.8a6.857 6.857 0 11-6.857-6.857c.328 0 .65.03.964.088v3.655a3.171 3.171 0 102.214 3.028V1h3.643a8.471 8.471 0 003.743 3.128v2.558z"/></svg></div>
+            <div class="floating-icon" style="top: 20%; right: 12%; width: 40px; height: 40px;"><svg viewBox="0 0 24 24" fill="#229ed9"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.25.38-.51 1.08-.78 4.22-1.84 7.03-3.05 8.43-3.62 4.01-1.66 4.84-1.95 5.38-1.96.12 0 .39.03.56.17.14.12.18.28.2.45-.02.07-.02.13-.04.2z"/></svg></div>
+            <div class="floating-icon" style="bottom: 20%; left: 15%; width: 42px; height: 42px;"><svg viewBox="0 0 24 24" fill="#e1306c"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div>
+            <div class="floating-icon" style="bottom: 15%; right: 18%; width: 48px; height: 48px;"><svg viewBox="0 0 24 24" fill="#ff0000"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-title-container">
+                <div class="glitch-logo-wrapper">
+                    <img src="photo_2026-08-12_08-06-33_3.jpg" alt="Logo" class="glitch-logo-img" onerror="this.onerror=null; this.src='https://via.placeholder.com/130?text=TT';">
+                </div>
+                <h1 class="glitch-text">ПРЕМИУМ МАРКЕТПЛЕЙС DIGITAL-АКТИВОВ И SMM УСЛУГ</h1>
+            </div>
+            <p>Безопасная сделка: данные аккаунта (логин/пароль + почта) отправляются на ваш email, а деньги спишутся продавцу только после вашего подтверждения!</p>
+        </div>
+    </div>
+
+    <div class="search-bar-container">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Поиск: аккаунты, подписчики, лайки, просмотры..." oninput="filterProducts()">
+    </div>
+
+    <!-- Фильтры категорий -->
+    <div class="categories-scroll">
+        <button class="cat-chip active" onclick="filterCategory('all', this)">🔥 Все услуги и товары</button>
+        <button class="cat-chip" onclick="filterCategory('accounts', this)">🛒 Готовые Аккаунты</button>
+        <button class="cat-chip" onclick="filterCategory('tiktok', this)">🎵 TikTok</button>
+        <button class="cat-chip" onclick="filterCategory('telegram', this)">📢 Telegram</button>
+        <button class="cat-chip" onclick="filterCategory('instagram', this)">📸 Instagram</button>
+        <button class="cat-chip" onclick="filterCategory('youtube', this)">▶️ YouTube</button>
+        <button class="cat-chip" onclick="filterCategory('vk', this)">💬 ВКонтакте</button>
+        <button class="cat-chip" onclick="filterCategory('numbers', this)">📱 Номера СМС</button>
+    </div>
+
     <div class="container">
-        <div class="categories">
-            <div class="cat-chip active" onclick="filterCategory('all', this)">Все товары</div>
-            <div class="cat-chip" onclick="filterCategory('steam', this)">Steam</div>
-            <div class="cat-chip" onclick="filterCategory('discord', this)">Discord</div>
-            <div class="cat-chip" onclick="filterCategory('telegram', this)">Telegram</div>
-            <div class="cat-chip" onclick="filterCategory('vpn', this)">VPN</div>
-        </div>
-
-        <div class="grid" id="products-grid">
-            <div class="card" data-category="steam" data-name="Steam Аккаунт CS2 Prime" onclick="openDetails('Steam Аккаунт CS2 Prime', 750, 'Прайм статус, без блокировок, родная почта в комплекте.', 'Отлежка: 30 дней', 'Полный доступ', 'Безопасная сделка')">
-                <div class="badge-seller">Verified</div>
-                <div>
-                    <h3>Steam Аккаунт CS2 Prime</h3>
-                    <p>Прайм статус, без блокировок, родная почта в комплекте.</p>
-                </div>
-                <div>
-                    <div class="card-meta"><span>📦 Безопасная сделка</span><span class="rating">★ 4.9 (42)</span></div>
-                    <div class="price">750 ₽</div>
-                    <div class="card-buttons" onclick="event.stopPropagation()">
-                        <button class="btn btn-secondary" onclick="addToCart('Steam Аккаунт CS2 Prime', 750)">В корзину</button>
-                        <button class="btn" onclick="buyDirect('Steam Аккаунт CS2 Prime', 750)">Купить</button>
+        <div id="catalog-container">
+            <h2 class="section-title">🔥 Акционные предложения (Все соцсети)</h2>
+            <div class="products-grid" id="products-grid">
+                
+                <!-- Акционные предложения для всех соцсетей на самом видном месте -->
+                <div class="card promo-card" data-category="accounts tiktok" data-name="TikTok Аккаунт 130k подписчиков (Франция)" onclick="openDetails('TikTok Аккаунт 130k подписчиков (Франция)', 2500, 'Прокачанный французский TikTok аккаунт на 130 000 подписчиков с живой европейской аудиторией. Универсальная тематика (Lifestyle / Тренды), чистая история, отсутствие теневых банов и возможность подключения монетизации.', 'Регион: Франция | 130k фолловеров | Отлежка: 8 мес.', 'Родная почта + полный контроль', 'Безопасная сделка (Эскроу)')">
+                    <div class="badge-seller">🔥 Акция TikTok</div>
+                    <div>
+                        <h3>TikTok Аккаунт 130k подписчиков (Франция)</h3>
+                        <p>Готовый европейский аккаунт по спеццене. Полный доступ и родная почта в комплекте.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta"><span>🛒 Спецпредложение</span><span class="rating">★ 5.0 (64)</span></div>
+                        <div class="price"><span class="price-old">4 200 ₽</span> 2 500 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('TikTok Аккаунт 130k (Франция)', 2500)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('TikTok Аккаунт 130k (Франция)', 2500)">Купить</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card" data-category="discord" data-name="Discord Nitro Full (1 месяц)" onclick="openDetails('Discord Nitro Full (1 месяц)', 290, 'Официальная подписка на 1 месяц по подарочной ссылке.', 'Новый товар', 'Моментальная доставка', 'Безопасная сделка')">
-                <div class="badge-seller">Verified</div>
-                <div>
-                    <h3>Discord Nitro Full (1 месяц)</h3>
-                    <p>Официальная подписка на 1 месяц по подарочной ссылке.</p>
-                </div>
-                <div>
-                    <div class="card-meta"><span>📦 Безопасная сделка</span><span class="rating">★ 5.0 (18)</span></div>
-                    <div class="price">290 ₽</div>
-                    <div class="card-buttons" onclick="event.stopPropagation()">
-                        <button class="btn btn-secondary" onclick="addToCart('Discord Nitro Full (1 месяц)', 290)">В корзину</button>
-                        <button class="btn" onclick="buyDirect('Discord Nitro Full (1 месяц)', 290)">Купить</button>
+                <div class="card promo-card" data-category="accounts telegram" data-name="Telegram Канал 25 000 подписчиков (Крипто / Финансы)" onclick="openDetails('Telegram Канал 25 000 подписчиков (Крипто / Финансы)', 1800, 'Готовый премиальный Telegram канал в финансовой тематике с активной аудиторией. Передача прав владельца и полная выгрузка данных на ваш email.', 'Регион: Глобальный | 25k участников | Отлежка: 1.5 года', 'Полные права администратора', 'Безопасная сделка (Эскроу)')">
+                    <div class="badge-seller" style="background:rgba(34,158,217,0.2); color:#229ed9; border-color:rgba(34,158,217,0.4);">🔥 Акция Telegram</div>
+                    <div>
+                        <h3>Telegram Канал 25 000 подписчиков (Крипто / Финансы)</h3>
+                        <p>Раскрученный канал с живыми подписчиками. Полный перенос прав и доступов.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta"><span>🛒 Спецпредложение</span><span class="rating">★ 4.9 (41)</span></div>
+                        <div class="price"><span class="price-old">3 000 ₽</span> 1 800 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('Telegram Канал 25k (Крипто)', 1800)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Telegram Канал 25k (Крипто)', 1800)">Купить</button>
+                        </div>
                     </div>
                 </div>
+
+                <div class="card promo-card" data-category="accounts instagram" data-name="Instagram Профиль 85 000 подписчиков (Lifestyle / Путешествия)" onclick="openDetails('Instagram Профиль 85 000 подписчиков (Lifestyle / Путешествия)', 3200, 'Популярный аккаунт в сфере путешествий и лайфстайла с охватной аудиторией из США. Родная почта и все данные для смены привязок отправляются на ваш email.', 'Регион: США | 85k фолловеров | Отлежка: 1 год', 'Родная почта + полный доступ', 'Безопасная сделка (Эскроу)')">
+                    <div class="badge-seller" style="background:rgba(225,48,108,0.2); color:#e1306c; border-color:rgba(225,48,108,0.4);">🔥 Акция Instagram</div>
+                    <div>
+                        <h3>Instagram Профиль 85 000 подписчиков (Lifestyle / Путешествия)</h3>
+                        <p>Американский инстаграм-профиль с лояльной аудиторией и чистой историей.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta"><span>🛒 Спецпредложение</span><span class="rating">★ 4.9 (53)</span></div>
+                        <div class="price"><span class="price-old">5 500 ₽</span> 3 200 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('Instagram Профиль 85k', 3200)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Instagram Профиль 85k', 3200)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card promo-card" data-category="accounts youtube" data-name="YouTube Канал 40 000 подписчиков (Гейминг / Стримы)" onclick="openDetails('YouTube Канал 40 000 подписчиков (Гейминг / Стримы)', 4500, 'Канал с активной игровой аудиторией, полностью готовый к стримам и подключению монетизации. Передача через Brand Account на ваш email.', 'Регион: СНГ | 40k подписчиков | Без страйков', 'Полный доступ владельца', 'Безопасная сделка (Эскроу)')">
+                    <div class="badge-seller" style="background:rgba(255,0,0,0.2); color:#ff4444; border-color:rgba(255,0,0,0.4);">🔥 Акция YouTube</div>
+                    <div>
+                        <h3>YouTube Канал 40 000 подписчиков (Гейминг / Стримы)</h3>
+                        <p>Игровой канал с живыми зрителями. Безопасная передача прав через бренд-аккаунт.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta"><span>🛒 Спецпредложение</span><span class="rating">★ 5.0 (29)</span></div>
+                        <div class="price"><span class="price-old">7 500 ₽</span> 4 500 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('YouTube Канал 40k', 4500)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('YouTube Канал 40k', 4500)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card promo-card" data-category="accounts vk" data-name="VK Сообщество 50 000 подписчиков (Юмор / Развлечения)" onclick="openDetails('VK Сообщество 50 000 подписчиков (Юмор / Развлечения)', 1200, 'Раскрученная группа ВКонтакте развлекательной тематики с высокой активностью и живыми комментариями. Передача прав главного администратора.', 'Регион: Россия | 50k участников | Отлежка: 2 года', 'Полные права администратора', 'Безопасная сделка (Эскроу)')">
+                    <div class="badge-seller" style="background:rgba(0,119,255,0.2); color:#0077ff; border-color:rgba(0,119,255,0.4);">🔥 Акция ВКонтакте</div>
+                    <div>
+                        <h3>VK Сообщество 50 000 подписчиков (Юмор / Развлечения)</h3>
+                        <p>Активная группа ВКонтакте с устоявшейся базой участников.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta"><span>🛒 Спецпредложение</span><span class="rating">★ 4.8 (37)</span></div>
+                        <div class="price"><span class="price-old">2 200 ₽</span> 1 200 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('VK Сообщество 50k', 1200)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('VK Сообщество 50k', 1200)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Остальные товары каталога -->
+                <div class="card" data-category="accounts tiktok" data-name="TikTok Аккаунт с монетизацией (50k подписчиков)" onclick="openDetails('TikTok Аккаунт с монетизацией (50k подписчиков)', 3490, 'Прокачанный TikTok аккаунт с живой аудиторией, подключенной Creator Rewards Program и отсутствием теневых банов.', 'США | Отлежка: 1 год | Без блокировок', 'Родная почта + полный доступ', 'Безопасная сделка (Эскроу)')">
+                    <div class="badge-seller">Топ аккаунт</div>
+                    <div>
+                        <h3>TikTok Аккаунт с монетизацией (50k подписчиков)</h3>
+                        <p>Готовый аккаунт с активными фоловерами. Данные придут на email.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta"><span>🛒 Готовый аккаунт</span><span class="rating">★ 5.0 (38)</span></div>
+                        <div class="price">3 490 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('TikTok Аккаунт (50k + Монетизация)', 3490)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('TikTok Аккаунт (50k + Монетизация)', 3490)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-category="accounts telegram" data-name="Telegram Аккаунт с отлежкой 3+ года (Трастовый)" onclick="openDetails('Telegram Аккаунт с отлежкой 3+ года', 450, 'Возрастной аккаунт Telegram с высокой трастовостью, идеально подходит под создание каналов или чатов.', 'Европа | Отлежка: 3 года | 2FA настроен', 'Файл сессии + Данные входа на email', 'Безопасная сделка (Эскроу)')">
+                    <div class="badge-seller">Secure 🔒</div>
+                    <div>
+                        <h3>Telegram Аккаунт с отлежкой 3+ года (Трастовый)</h3>
+                        <p>Возрастной аккаунт с историей. Данные отправляются на email.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta"><span>🛒 Готовый аккаунт</span><span class="rating">★ 4.9 (82)</span></div>
+                        <div class="price">450 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('Telegram Аккаунт 3+ года', 450)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Telegram Аккаунт 3+ года', 450)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-category="accounts instagram" data-name="Instagram Бизнес Аккаунт (12k подписчиков)" onclick="openDetails('Instagram Бизнес Аккаунт (12k подписчиков)', 1890, 'Оформленный аккаунт под интернет-магазин или блог. На ваш email придет логин и пароль.', 'СНГ | Отлежка: 8 месяцев | Бизнес-профиль', 'Родная почта (Gmail) с письмом', 'Безопасная сделка (Эскроу)')">
+                    <div class="badge-seller">Business</div>
+                    <div>
+                        <h3>Instagram Бизнес Аккаунт (12k подписчиков)</h3>
+                        <p>Готовая страница для вашего бренда. Данные высылаются на email.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta"><span>🛒 Готовый аккаунт</span><span class="rating">★ 4.8 (45)</span></div>
+                        <div class="price">1 890 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('Instagram Бизнес Аккаунт (12k)', 1890)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Instagram Бизнес Аккаунт (12k)', 1890)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-category="tiktok" data-name="TikTok: Полный комплекс (Подписчики, Лайки, Комментарии, Просмотры, Репосты)" onclick="openDetails('TikTok: Полный комплекс', 490, 'Всё включено: живые подписчики, лайки, кастомные комментарии, просмотры роликов и репосты в TikTok.', 'Без списаний', 'По ссылке', 'Автозапуск')">
+                    <div class="badge-seller">Top SMM 🚀</div>
+                    <div>
+                        <h3>TikTok: Полный комплекс (Подписчики, Лайки, Комменты, Просмотры, Репосты)</h3>
+                        <p>Максимальная раскрутка видео и профиля в TikTok.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 4.9 (94)</span></div>
+                        <div class="price">490 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('TikTok: Полный комплекс', 490)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('TikTok: Полный комплекс', 490)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-category="tiktok" data-name="TikTok: Накрутка Подписчиков (На выбор)" onclick="openDetails('TikTok: Накрутка Подписчиков', 250, 'Качественные фолловеры с гарантией.', 'Плавный нагон', 'По нику', 'Автостарт')">
+                    <div class="badge-seller">Выбор количества</div>
+                    <div>
+                        <h3>TikTok: Накрутка Подписчиков</h3>
+                        <p>Выберите желаемое количество живых подписчиков для вашего TikTok профиля.</p>
+                        <div class="quantity-selector-box" onclick="event.stopPropagation()">
+                            <label>Количество подписчиков:</label>
+                            <select class="qty-select" data-base-price="0.5" onchange="updateCardPrice(this)">
+                                <option value="100">100 подписчиков — 50 ₽</option>
+                                <option value="500" selected>500 подписчиков — 250 ₽</option>
+                                <option value="1000">1 000 подписчиков — 480 ₽</option>
+                                <option value="5000">5 000 подписчиков — 2 200 ₽</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="card-meta"><span>⚡ Автостарт</span><span class="rating">★ 4.9 (120)</span></div>
+                        <div class="price card-price-el">250 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addSelectedToCart(this, 'TikTok: Подписчики')">В корзину</button>
+                            <button class="btn" onclick="buySelectedDirect(this, 'TikTok: Подписчики')">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-category="telegram" data-name="Telegram: Полный комплекс (Подписчики, Просмотры, Реакции, Комментарии, Опросы)" onclick="openDetails('Telegram: Полный комплекс', 590, 'Полный спектр накрутки для Telegram: подписчики в канал, просмотры постов, все виды эмодзи-реакций, комментарии.', 'С гарантией', 'По ссылке', 'Плавный старт')">
+                    <div class="badge-seller">Hit Sales 🔥</div>
+                    <div>
+                        <h3>Telegram: Полный комплекс (Подписчики, Просмотры, Реакции, Комменты, Опросы)</h3>
+                        <p>Всё для канала: фолловеры, автопросмотры, любые реакции и комменты.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 4.9 (142)</span></div>
+                        <div class="price">590 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('Telegram: Полный комплекс', 590)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Telegram: Полный комплекс', 590)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-category="instagram" data-name="Instagram: Полный комплекс (Подписчики, Лайки, Reels, Комментарии, Сохранения, Истории)" onclick="openDetails('Instagram: Полный комплекс', 650, 'Полный пакет продвижения в Instagram: фолловеры, лайки, просмотры Reels, комменты, сохранения и охваты Stories.', 'Без списаний', 'По ссылке', 'Моментальный запуск')">
+                    <div class="badge-seller">Top Service</div>
+                    <div>
+                        <h3>Instagram: Полный комплекс (Подписчики, Лайки, Reels, Комменты, Сторис)</h3>
+                        <p>Всё для аккаунта Instagram: от подписчиков до охватов историй.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 4.9 (118)</span></div>
+                        <div class="price">650 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('Instagram: Полный комплекс', 650)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Instagram: Полный комплекс', 650)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-category="numbers" data-name="Виртуальный номер для регистрации" onclick="openDetails('Виртуальный номер для регистрации', 150, 'Чистый виртуальный номер для безопасной СМС-активации и регистрации аккаунта.', 'Одноразовый', 'СМС-получение', 'Моментально')">
+                    <div class="badge-seller">Auto-Delivery</div>
+                    <div>
+                        <h3>Виртуальный номер для СМС (Любой сервис)</h3>
+                        <p>Чистый виртуальный номер для безопасной регистрации и получения кода верификации.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta"><span>📱 СМС активация</span><span class="rating">★ 4.9 (125)</span></div>
+                        <div class="price">150 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('Виртуальный номер для регистрации', 150)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Виртуальный номер для регистрации', 150)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
 
-    <!-- Модальные окна -->
-    <div class="modal" id="custom-alert">
-        <div class="modal-content" style="max-width: 350px; text-align: center;">
-            <p id="custom-modal-text" style="margin-bottom: 20px; font-size: 14px;"></p>
-            <button class="btn" id="custom-modal-ok" style="width: 100%;">ОК</button>
+    <!-- Модальное окно деталей товара -->
+    <div class="modal-overlay" id="detailsModal">
+        <div class="modal-box">
+            <button class="close-modal" onclick="closeDetailsModal()">&times;</button>
+            <h2 id="det-title">Название товара</h2>
+            <p id="det-desc" style="color: #94a3b8; font-size: 13px; margin-bottom: 15px;"></p>
+            
+            <div class="modal-details-prop"><span>Характеристики / Отлежка:</span> <span id="det-age">-</span></div>
+            <div class="modal-details-prop"><span>Доступ / Почта:</span> <span id="det-mail">-</span></div>
+            <div class="modal-details-prop"><span>Безопасная сделка:</span> <span style="color: #25f4ee;">Оплата после подтверждения</span></div>
+            <div class="modal-details-prop" style="margin-top: 10px; border:none; font-size: 16px;"><span>Цена:</span> <span id="det-price" style="color:#22c55e;">-</span></div>
+
+            <div class="card-buttons" style="margin-top: 15px;">
+                <button class="btn btn-secondary" id="det-add-cart">В корзину</button>
+                <button class="btn" id="det-buy">Купить сразу</button>
+            </div>
+
+            <div class="reviews-section">
+                <h4 style="font-size: 13px; margin-bottom: 8px; color: #fff; display:flex; justify-space-between;">
+                    Отзывы покупателей: <span id="det-reviews-count" style="color: #25f4ee; font-weight: normal;">(0)</span>
+                </h4>
+                <div class="reviews-scroll-container" id="det-reviews-container"></div>
+            </div>
         </div>
     </div>
 
-    <div class="modal" id="createProductModal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeCreateProductModal()">&times;</button>
-            <h2 style="margin-bottom: 15px; font-size: 18px;">Продать цифровой товар</h2>
+    <!-- Модальное окно Создания товара -->
+    <div class="modal-overlay" id="createProductModal">
+        <div class="modal-box">
+            <button class="close-modal" onclick="closeCreateProductModal()">&times;</button>
+            <h2>➕ Разместить свой товар / услугу</h2>
+            <p style="color: #94a3b8; font-size: 12px; margin-bottom: 15px;">Заполните данные для публикации на маркетплейсе.</p>
             <form id="create-product-form">
                 <div class="form-group">
-                    <label>Название товара</label>
-                    <input type="text" id="new-prod-name" required placeholder="Например: Steam Аккаунт GTA V">
+                    <label>Название услуги / аккаунта</label>
+                    <input type="text" id="new-prod-name" placeholder="Например: TikTok Аккаунт 10k" required>
                 </div>
                 <div class="form-group">
                     <label>Категория</label>
                     <select id="new-prod-cat">
-                        <option value="steam">Steam</option>
-                        <option value="discord">Discord</option>
+                        <option value="accounts">Готовые Аккаунты</option>
+                        <option value="tiktok">TikTok</option>
                         <option value="telegram">Telegram</option>
-                        <option value="vpn">VPN</option>
+                        <option value="instagram">Instagram</option>
+                        <option value="youtube">YouTube</option>
+                        <option value="vk">ВКонтакте</option>
+                        <option value="numbers">Номера для СМС</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Цена (₽)</label>
-                    <input type="number" id="new-prod-price" required placeholder="500">
+                    <label>Цена (в рублях)</label>
+                    <input type="number" id="new-prod-price" placeholder="500" required>
                 </div>
                 <div class="form-group">
-                    <label>Описание товара</label>
-                    <textarea id="new-prod-desc" required placeholder="Укажите характеристики, отлежку и тип доступа..."></textarea>
+                    <label>Описание и характеристики</label>
+                    <textarea id="new-prod-desc" rows="3" placeholder="Укажите регион, отлежку, наличие почты..." required></textarea>
                 </div>
-                <button type="submit" class="btn" style="width: 100%;">Опубликовать товар</button>
+                <button type="submit" class="btn">Опубликовать товар</button>
             </form>
         </div>
     </div>
 
-    <div class="modal" id="detailsModal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeDetailsModal()">&times;</button>
-            <h2 id="det-title" style="margin-bottom: 10px; font-size: 18px;"></h2>
-            <p id="det-desc" style="color: var(--text-secondary); font-size: 13px; margin-bottom: 15px;"></p>
-            <div style="background: var(--bg-color); padding: 12px; border-radius: 8px; margin-bottom: 15px; font-size: 13px;">
-                <div>Регион/Отлежка: <span id="det-age" style="color: #fff;"></span></div>
-                <div>Тип доступа: <span id="det-mail" style="color: #fff;"></span></div>
+    <!-- Модальное окно Корзины -->
+    <div class="modal-overlay" id="cartModal">
+        <div class="modal-box">
+            <button class="close-modal" onclick="closeCartModal()">&times;</button>
+            <h2>Корзина товаров</h2>
+            <div class="cart-items-list" id="cart-items-list"></div>
+            
+            <label style="font-size: 12px; color: #94a3b8; display:block; margin-bottom: 6px;">Выберите способ оплаты:</label>
+            <div class="pay-methods">
+                <div class="pay-method active" onclick="selectPay(this)">СБП / Карты</div>
+                <div class="pay-method" onclick="selectPay(this)">ЮMoney</div>
+                <div class="pay-method" onclick="selectPay(this)">USDT (Crypto)</div>
             </div>
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <div id="det-price" style="font-size: 22px; font-weight: bold; color: var(--success-color);"></div>
+
+            <div class="cart-total">
+                <span>Итого к оплате:</span>
+                <span id="cart-total-price">0 ₽</span>
             </div>
-            <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-                <button class="btn btn-secondary" id="det-add-cart" style="flex: 1;">В корзину</button>
-                <button class="btn" id="det-buy" style="flex: 1;">Купить сейчас</button>
-            </div>
-            <h3 style="font-size: 15px; margin-bottom: 10px;">Отклики покупателей <span id="det-reviews-count" style="color: var(--text-secondary); font-size: 13px;"></span></h3>
-            <div id="det-reviews-container" style="max-height: 200px; overflow-y: auto;"></div>
+            <button class="btn" onclick="checkoutCart()">Оформить и оплатить заказ</button>
         </div>
     </div>
 
-    <div class="modal" id="cartModal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeCartModal()">&times;</button>
-            <h2 style="margin-bottom: 15px; font-size: 18px;">Корзина</h2>
-            <div id="cart-items-list" style="max-height: 200px; overflow-y: auto; margin-bottom: 15px;"></div>
-            <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 16px; margin-bottom: 15px;">
-                <span>Итого:</span>
-                <span id="cart-total-price" style="color: var(--success-color);">0 ₽</span>
-            </div>
-            <div style="margin-bottom: 15px;">
-                <label style="display: block; font-size: 13px; color: var(--text-secondary); margin-bottom: 8px;">Способ оплаты</label>
-                <div class="pay-methods">
-                    <div class="pay-method active" onclick="selectPay(this)">Банковская карта</div>
-                    <div class="pay-method" onclick="selectPay(this)">СБП</div>
-                    <div class="pay-method" onclick="selectPay(this)">Криптовалюта</div>
-                </div>
-            </div>
-            <button class="btn" onclick="checkoutCart()" style="width: 100%;">Оформить заказ</button>
-        </div>
-    </div>
-
-    <div class="modal" id="cabinetModal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeCabinetModal()">&times;</button>
-            <h2 style="margin-bottom: 15px; font-size: 18px;">Личный кабинет</h2>
-            <div class="cab-tabs">
-                <button class="cab-tab active" onclick="switchCabTab('purchases', this)">Мои покупки</button>
-                <button class="cab-tab" onclick="switchCabTab('settings', this)">Настройки</button>
+    <!-- Модальное окно Личного кабинета -->
+    <div class="modal-overlay" id="cabinetModal">
+        <div class="modal-box">
+            <button class="close-modal" onclick="closeCabinetModal()">&times;</button>
+            <h2>Личный кабинет</h2>
+            <div class="cabinet-tabs">
+                <button class="cab-tab active" onclick="switchCabTab('purchases', this)">📦 Мои покупки</button>
+                <button class="cab-tab" onclick="switchCabTab('settings', this)">⚙️ Настройки</button>
             </div>
             <div id="cab-content-purchases">
+                <p style="font-size: 12px; color: #94a3b8; margin-bottom: 10px;">Купленные аккаунты (нажмите «Подтвердить доставку», чтобы завершить сделку):</p>
                 <div id="purchases-list"></div>
             </div>
             <div id="cab-content-settings" style="display: none;">
-                <div class="form-group">
-                    <label>Email аккаунта</label>
-                    <input type="text" id="cab-email" readonly>
-                </div>
+                <div class="form-group"><label>Связанный Email</label><input type="text" id="cab-email" disabled style="background:#111827;"></div>
+                <button class="btn" onclick="showModal('Настройки сохранены!')">Сохранить</button>
             </div>
         </div>
     </div>
 
-    <div class="modal" id="authModal">
-        <div class="modal-content" style="max-width: 400px;">
-            <button class="modal-close" onclick="closeAuth()">&times;</button>
-            <h2 id="auth-title" style="margin-bottom: 15px; font-size: 18px;">Вход</h2>
+    <!-- Модальное окно Авторизации -->
+    <div class="modal-overlay" id="authModal">
+        <div class="modal-box">
+            <button class="close-modal" onclick="closeAuth()">&times;</button>
+            <h2 id="auth-title">Регистрация покупателя</h2>
             <form id="auth-form">
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" id="email" required placeholder="user@domain.com">
-                </div>
-                <div class="form-group">
-                    <label>Пароль</label>
-                    <input type="password" id="password" required placeholder="••••••••">
-                </div>
-                <button type="submit" class="btn" id="auth-btn" style="width: 100%; margin-bottom: 10px;">Войти</button>
-                <button type="button" class="nav-btn" id="toggle-text" onclick="toggleMode()" style="width: 100%; text-align: center; color: var(--accent-color);">Нет аккаунта? Зарегистрироваться</button>
+                <div class="form-group"><label for="email">Электронная почта</label><input type="email" id="email" placeholder="example@mail.com" required></div>
+                <div class="form-group"><label for="password">Пароль</label><input type="password" id="password" placeholder="••••••••" required></div>
+                <button type="submit" class="btn" id="auth-btn">Зарегистрироваться</button>
             </form>
+            <div style="text-align: center; margin-top: 12px; font-size: 12px; cursor: pointer; color: #94a3b8;" onclick="toggleMode()">
+                <span id="toggle-text" style="color: #fe2c55; font-weight: bold;">Уже есть аккаунт? Войти</span>
+            </div>
         </div>
     </div>
+
+    <!-- Системное уведомление -->
+    <div class="modal-overlay" id="custom-alert" style="z-index: 10000;">
+        <div class="modal-box" style="max-width: 320px; text-align: center;">
+            <div style="font-size: 15px; font-weight: 900; margin-bottom: 10px;">Уведомление</div>
+            <div id="custom-modal-text" style="font-size: 13px; color: #9ca3af; margin-bottom: 15px;">Текст</div>
+            <button class="btn" id="custom-modal-ok">OK</button>
+        </div>
+    </div>
+
+    <footer><p>&copy; 2026 TTBuy. Все права защищены.</p></footer>
 
     <script>
         const SUPABASE_URL = 'https://xwrhswfmuotvqupnavmx.supabase.co';
@@ -321,6 +760,15 @@
             document.getElementById('custom-alert').style.display = 'none';
         });
 
+        function updateCardPrice(selectEl) {
+            const card = selectEl.closest('.card');
+            const basePrice = parseFloat(selectEl.getAttribute('data-base-price'));
+            const qty = parseInt(selectEl.value);
+            const calculatedPrice = Math.round(qty * basePrice);
+            const priceEl = card.querySelector('.card-price-el');
+            priceEl.textContent = calculatedPrice.toLocaleString() + ' ₽';
+        }
+
         function filterCategory(cat, element) {
             if(element) {
                 document.querySelectorAll('.cat-chip').forEach(el => el.classList.remove('active'));
@@ -356,18 +804,7 @@
             });
         }
 
-        async function openCreateProductModal() {
-            const { data: { session } } = await supabaseClient.auth.getSession();
-            
-            if (!session) {
-                showModal('Пожалуйста, пройдите регистрацию или войдите в систему, чтобы продавать товары.');
-                openAuth('register');
-                return;
-            }
-            
-            document.getElementById('createProductModal').style.display = 'flex';
-        }
-
+        function openCreateProductModal() { document.getElementById('createProductModal').style.display = 'flex'; }
         function closeCreateProductModal() { document.getElementById('createProductModal').style.display = 'none'; }
 
         const createProductForm = document.getElementById('create-product-form');
@@ -432,6 +869,43 @@
             document.getElementById('detailsModal').style.display = 'flex';
         }
         function closeDetailsModal() { document.getElementById('detailsModal').style.display = 'none'; }
+
+        function addSelectedToCart(btnEl, serviceName) {
+            const card = btnEl.closest('.card');
+            const selectEl = card.querySelector('.qty-select');
+            const qty = selectEl.value;
+            const basePrice = parseFloat(selectEl.getAttribute('data-base-price'));
+            const price = Math.round(parseInt(qty) * basePrice);
+            const fullName = `${serviceName} (${qty} шт.)`;
+
+            cart.push({ name: fullName, price: price });
+            updateCartUI();
+            showModal(`Товар "${fullName}" добавлен в корзину!`);
+        }
+
+        async function buySelectedDirect(btnEl, serviceName) {
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            if (!session) {
+                showModal('Для покупки необходимо войти в систему.');
+                openAuth('login');
+                return;
+            }
+            const card = btnEl.closest('.card');
+            const selectEl = card.querySelector('.qty-select');
+            const qty = selectEl.value;
+            const basePrice = parseFloat(selectEl.getAttribute('data-base-price'));
+            const price = Math.round(parseInt(qty) * basePrice);
+            const fullName = `${serviceName} (${qty} шт.)`;
+
+            myPurchases.push({
+                name: fullName,
+                date: new Date().toLocaleDateString(),
+                data: 'LINK/API: ' + Math.random().toString(36).substring(7) + ' | СТАТУС: Выполнено (' + qty + ' шт.)',
+                confirmed: false
+            });
+            updatePurchasesUI();
+            showModal(`Заказ создан! Данные отправлены на ваш email. Деньги спишутся продавцу после вашего подтверждения в кабинете.`);
+        }
 
         function addToCart(name, price) {
             cart.push({ name, price });
