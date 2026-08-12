@@ -804,44 +804,55 @@
             });
         }
 
-        function openCreateProductModal() { document.getElementById('createProductModal').style.display = 'flex'; }
+        async function openCreateProductModal() {
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            if (!session) {
+                showModal('Для размещения товара необходимо войти в систему.');
+                openAuth('login');
+                return;
+            }
+            document.getElementById('createProductModal').style.display = 'flex';
+        }
+
         function closeCreateProductModal() { document.getElementById('createProductModal').style.display = 'none'; }
 
         const createProductForm = document.getElementById('create-product-form');
-        createProductForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('new-prod-name').value;
-            const cat = document.getElementById('new-prod-cat').value;
-            const price = Number(document.getElementById('new-prod-price').value);
-            const desc = document.getElementById('new-prod-desc').value + ' | Данные приходят на email, оплата — после подтверждения.';
+        if (createProductForm) {
+            createProductForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('new-prod-name').value;
+                const cat = document.getElementById('new-prod-cat').value;
+                const price = Number(document.getElementById('new-prod-price').value);
+                const desc = document.getElementById('new-prod-desc').value + ' | Данные приходят на email, оплата — после подтверждения.';
 
-            const grid = document.getElementById('products-grid');
-            const newCard = document.createElement('div');
-            newCard.className = 'card';
-            newCard.setAttribute('data-category', cat);
-            newCard.setAttribute('data-name', name);
-            newCard.onclick = () => openDetails(name, price, desc, 'Регион: Авто | Отлежка: Новая', 'Полный доступ на email', 'Безопасная сделка');
+                const grid = document.getElementById('products-grid');
+                const newCard = document.createElement('div');
+                newCard.className = 'card';
+                newCard.setAttribute('data-category', cat);
+                newCard.setAttribute('data-name', name);
+                newCard.onclick = () => openDetails(name, price, desc, 'Регион: Авто | Отлежка: Новая', 'Полный доступ на email', 'Безопасная сделка');
 
-            newCard.innerHTML = `
-                <div class="badge-seller">User Listing</div>
-                <div>
-                    <h3>${name}</h3>
-                    <p>${desc}</p>
-                </div>
-                <div>
-                    <div class="card-meta"><span>📦 Безопасная сделка</span><span class="rating">★ 5.0 (12)</span></div>
-                    <div class="price">${price.toLocaleString()} ₽</div>
-                    <div class="card-buttons" onclick="event.stopPropagation()">
-                        <button class="btn btn-secondary" onclick="addToCart('${name}', ${price})">В корзину</button>
-                        <button class="btn" onclick="buyDirect('${name}', ${price})">Купить</button>
+                newCard.innerHTML = `
+                    <div class="badge-seller">User Listing</div>
+                    <div>
+                        <h3>${name}</h3>
+                        <p>${desc}</p>
                     </div>
-                </div>
-            `;
-            grid.prepend(newCard);
-            closeCreateProductModal();
-            createProductForm.reset();
-            showModal('Ваш товар успешно опубликован!');
-        });
+                    <div>
+                        <div class="card-meta"><span>📦 Безопасная сделка</span><span class="rating">★ 5.0 (12)</span></div>
+                        <div class="price">${price.toLocaleString()} ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('${name}', ${price})">В корзину</button>
+                            <button class="btn" onclick="buyDirect('${name}', ${price})">Купить</button>
+                        </div>
+                    </div>
+                `;
+                grid.prepend(newCard);
+                closeCreateProductModal();
+                createProductForm.reset();
+                showModal('Ваш товар успешно опубликован!');
+            });
+        }
 
         function openDetails(name, price, desc, age, mail, delivery) {
             document.getElementById('det-title').textContent = name;
@@ -1052,20 +1063,22 @@
         }
 
         const authForm = document.getElementById('auth-form');
-        authForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            if (isLoginMode) {
-                const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
-                if (error) showModal('Ошибка входа: ' + error.message);
-                else { closeAuth(); checkUser(); showModal('Успешный вход в систему!'); }
-            } else {
-                const { error } = await supabaseClient.auth.signUp({ email, password });
-                if (error) showModal('Ошибка регистрации: ' + error.message);
-                else { showModal('Регистрация успешна! Теперь войдите.'); isLoginMode = true; updateAuthModalUI(); }
-            }
-        });
+        if (authForm) {
+            authForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                if (isLoginMode) {
+                    const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+                    if (error) showModal('Ошибка входа: ' + error.message);
+                    else { closeAuth(); checkUser(); showModal('Успешный вход в систему!'); }
+                } else {
+                    const { error } = await supabaseClient.auth.signUp({ email, password });
+                    if (error) showModal('Ошибка регистрации: ' + error.message);
+                    else { showModal('Регистрация успешна! Теперь войдите.'); isLoginMode = true; updateAuthModalUI(); }
+                }
+            });
+        }
 
         async function checkUser() {
             const { data: { session } } = await supabaseClient.auth.getSession();
@@ -1073,22 +1086,27 @@
             const cabinetNavBtn = document.getElementById('cabinet-nav-btn');
             
             if (session) {
-                cabinetNavBtn.style.display = 'flex';
-                document.getElementById('cab-email').value = session.user.email;
-                userHeader.innerHTML = `
-                    <div class="user-info">
-                        <span style="max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${session.user.email}</span>
-                        <button class="logout-btn" onclick="logout()">Выйти</button>
-                    </div>
-                `;
+                if (cabinetNavBtn) cabinetNavBtn.style.display = 'flex';
+                const cabEmail = document.getElementById('cab-email');
+                if (cabEmail) cabEmail.value = session.user.email;
+                if (userHeader) {
+                    userHeader.innerHTML = `
+                        <div class="user-info">
+                            <span style="max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${session.user.email}</span>
+                            <button class="logout-btn" onclick="logout()">Выйти</button>
+                        </div>
+                    `;
+                }
             } else {
-                cabinetNavBtn.style.display = 'none';
-                userHeader.innerHTML = `
-                    <div class="header-auth">
-                        <button class="nav-btn" onclick="openAuth('login')">Войти</button>
-                        <button class="nav-btn register" onclick="openAuth('register')">Регистрация</button>
-                    </div>
-                `;
+                if (cabinetNavBtn) cabinetNavBtn.style.display = 'none';
+                if (userHeader) {
+                    userHeader.innerHTML = `
+                        <div class="header-auth">
+                            <button class="nav-btn" onclick="openAuth('login')">Войти</button>
+                            <button class="nav-btn register" onclick="openAuth('register')">Регистрация</button>
+                        </div>
+                    `;
+                }
             }
         }
 
