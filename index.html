@@ -75,12 +75,10 @@
         .logout-btn { background: transparent; border: 1px solid #ef4444; color: #ef4444; padding: 4px 8px; border-radius: 6px; cursor: pointer; font-weight: 600; transition: background 0.2s, color 0.2s; }
         .logout-btn:hover { background: #ef4444; color: white; }
 
-        /* Поиск маркетплейса */
         .search-bar-container { max-width: 600px; margin: 20px auto 10px auto; padding: 0 15px; position: relative; z-index: 2; }
         .search-input { width: 100%; padding: 12px 16px; background: rgba(30, 41, 59, 0.9); border: 2px solid #334155; border-radius: 12px; color: #fff; font-size: 14px; outline: none; transition: border-color 0.2s, box-shadow 0.2s; box-shadow: 0 4px 12px rgba(0,0,0,0.3); backdrop-filter: blur(5px); }
         .search-input:focus { border-color: #25f4ee; box-shadow: 0 0 15px rgba(37, 244, 238, 0.3); }
 
-        /* Плавающая кнопка техподдержки Telegram */
         .support-float {
             position: fixed;
             bottom: 20px;
@@ -103,7 +101,6 @@
         .support-float:hover { transform: scale(1.05); box-shadow: 0 6px 25px rgba(34, 158, 217, 0.7); }
         .support-float svg { width: 18px; height: 18px; fill: white; flex-shrink: 0; }
 
-        /* Hero секция с анимированным фоном социальных иконок */
         .hero { 
             text-align: center; 
             padding: 50px 15px; 
@@ -118,10 +115,9 @@
             z-index: 3;
         }
 
-        .hero h1 { font-size: 26px; font-weight: 900; margin-bottom: 12px; color: #fff; text-shadow: -2px -2px 0 #25f4ee, 2px 2px 0 #fe2c55; word-break: break-word; }
+        .hero h1 { font-size: 24px; font-weight: 900; margin-bottom: 12px; color: #fff; text-shadow: -2px -2px 0 #25f4ee, 2px 2px 0 #fe2c55; word-break: break-word; letter-spacing: 0.5px; }
         .hero p { font-size: 14px; color: #f1f5f9; max-width: 650px; margin: 0 auto; font-weight: 600; text-shadow: 0 0 8px rgba(37, 244, 238, 0.4); }
 
-        /* Плавающие иконки на заднем плане */
         .bg-icons-container {
             position: absolute;
             top: 0;
@@ -172,7 +168,6 @@
 
         .section-title { font-size: 17px; margin: 25px 0 12px 0; color: #fff; border-bottom: 2px solid #334155; padding-bottom: 6px; }
 
-        /* Модальные окна */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(5px); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 12px; }
         .auth-container, .cart-modal-container { background: #1e293b; border: 1px solid #334155; border-radius: 16px; padding: 20px; width: 100%; max-width: 400px; position: relative; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5); max-height: 90vh; overflow-y: auto; }
         .close-modal { position: absolute; top: 12px; right: 15px; background: none; border: none; color: #94a3b8; font-size: 22px; cursor: pointer; }
@@ -184,7 +179,6 @@
         .form-group input { width: 100%; padding: 10px; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #fff; font-size: 14px; }
         .form-group input:focus { outline: none; border-color: #fe2c55; }
 
-        /* Стили корзины */
         .cart-items-list { max-height: 220px; overflow-y: auto; margin-bottom: 12px; padding-right: 4px; }
         .cart-item { display: flex; justify-content: space-between; align-items: center; background: #0f172a; padding: 8px 12px; border-radius: 8px; margin-bottom: 6px; border: 1px solid #334155; }
         .cart-item-info span { display: block; }
@@ -250,24 +244,29 @@
     </header>
 
     <div class="hero">
+        <!-- Анимированные иконки соцсетей на заднем фоне (TikTok, Telegram, Instagram, YouTube) -->
         <div class="bg-icons-container">
-            <div class="floating-icon" style="top: 15%; left: 10%; width: 45px; height: 45px; animation-duration: 7s; animation-delay: 0s;">
+            <!-- TikTok -->
+            <div class="floating-icon" style="top: 15%; left: 8%; width: 45px; height: 45px; animation-duration: 7s; animation-delay: 0s;">
                 <svg viewBox="0 0 24 24" fill="#fe2c55"><path d="M19.589 6.686a4.793 4.793 0 01-3.7-1.542V13.8a6.857 6.857 0 11-6.857-6.857c.328 0 .65.03.964.088v3.655a3.171 3.171 0 102.214 3.028V1h3.643a8.471 8.471 0 003.743 3.128v2.558z"/></svg>
             </div>
-            <div class="floating-icon" style="top: 20%; right: 15%; width: 40px; height: 40px; animation-duration: 9s; animation-delay: 1s;">
+            <!-- Telegram -->
+            <div class="floating-icon" style="top: 20%; right: 12%; width: 40px; height: 40px; animation-duration: 9s; animation-delay: 1s;">
                 <svg viewBox="0 0 24 24" fill="#229ed9"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.25.38-.51 1.08-.78 4.22-1.84 7.03-3.05 8.43-3.62 4.01-1.66 4.84-1.95 5.38-1.96.12 0 .39.03.56.17.14.12.18.28.2.45-.02.07-.02.13-.04.2z"/></svg>
             </div>
-            <div class="floating-icon" style="bottom: 15%; left: 20%; width: 50px; height: 50px; animation-duration: 8s; animation-delay: 2s;">
-                <svg viewBox="0 0 24 24" fill="#25f4ee"><path d="M19.589 6.686a4.793 4.793 0 01-3.7-1.542V13.8a6.857 6.857 0 11-6.857-6.857c.328 0 .65.03.964.088v3.655a3.171 3.171 0 102.214 3.028V1h3.643a8.471 8.471 0 003.743 3.128v2.558z"/></svg>
+            <!-- Instagram -->
+            <div class="floating-icon" style="bottom: 20%; left: 15%; width: 42px; height: 42px; animation-duration: 8.5s; animation-delay: 0.5s;">
+                <svg viewBox="0 0 24 24" fill="#e1306c"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
             </div>
-            <div class="floating-icon" style="bottom: 25%; right: 25%; width: 35px; height: 35px; animation-duration: 10s; animation-delay: 1.5s;">
-                <svg viewBox="0 0 24 24" fill="#229ed9"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.25.38-.51 1.08-.78 4.22-1.84 7.03-3.05 8.43-3.62 4.01-1.66 4.84-1.95 5.38-1.96.12 0 .39.03.56.17.14.12.18.28.2.45-.02.07-.02.13-.04.2z"/></svg>
+            <!-- YouTube -->
+            <div class="floating-icon" style="bottom: 15%; right: 18%; width: 48px; height: 48px; animation-duration: 9.5s; animation-delay: 1.5s;">
+                <svg viewBox="0 0 24 24" fill="#ff0000"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
             </div>
         </div>
 
         <div class="hero-content">
-            <h1>ПРЕМИУМ МАРКЕТПЛЕЙС DIGITAL-АКТИВОВ</h1>
-            <p>Эксклюзивные TikTok-аккаунты с отлежкой, монетизированные Telegram-каналы, анонимные виртуальные номера и безопасное продвижение топ-уровня.</p>
+            <h1>TIKTOK YOUTUBE TELEGRAM INSTAGRAM ПРОДВИЖЕНИЕ</h1>
+            <p>Эксклюзивные аккаунты, монетизированные каналы, анонимные виртуальные номера и безопасное продвижение топ-уровня.</p>
         </div>
     </div>
 
