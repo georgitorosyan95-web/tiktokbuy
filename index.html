@@ -323,7 +323,7 @@
     </div>
 
     <div class="search-bar-container">
-        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Поиск: аккаунты, подписчики, лайки, просмотры..." oninput="filterProducts()">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Поиск: аккаунты, подписчики, номера СМС..." oninput="filterProducts()">
     </div>
 
     <!-- Фильтры категорий -->
@@ -335,7 +335,7 @@
         <button class="cat-chip" onclick="filterCategory('instagram', this)">📸 Instagram</button>
         <button class="cat-chip" onclick="filterCategory('youtube', this)">▶️ YouTube</button>
         <button class="cat-chip" onclick="filterCategory('vk', this)">💬 ВКонтакте</button>
-        <button class="cat-chip" onclick="filterCategory('numbers', this)">📱 Номера СМС</button>
+        <button class="cat-chip" onclick="filterCategory('numbers', this)">📱 Виртуальные Номера (24ч)</button>
     </div>
 
     <div class="container">
@@ -343,7 +343,7 @@
             <h2 class="section-title">Каталог аккаунтов и SMM услуг</h2>
             <div class="products-grid" id="products-grid">
                 
-                <!-- Акционные предложения (без лишних текстовых комментариев в карточках) -->
+                <!-- Акционные предложения -->
                 <div class="card promo-card" data-category="accounts tiktok" data-name="TikTok Аккаунт 130k подписчиков (Франция)" onclick="openDetails('TikTok Аккаунт 130k подписчиков (Франция)', 2500, 'Прокачанный французский TikTok аккаунт на 130 000 подписчиков с живой европейской аудиторией. Универсальная тематика (Lifestyle / Тренды), чистая история, отсутствие теневых банов и возможность подключения монетизации. После покупки на ваш email придут логин и пароль от аккаунта, а также пароль от родной почты. Деньги поступят продавцу только после вашего подтверждения в личном кабинете!', 'Регион: Франция | 130k фолловеров | Отлежка: 8 мес.', 'Родная почта + полный контроль', 'Безопасная сделка (Эскроу)')">
                     <div>
                         <h3>TikTok Аккаунт 130k подписчиков (Франция)</h3>
@@ -374,98 +374,104 @@
                     </div>
                 </div>
 
-                <div class="card promo-card" data-category="accounts instagram" data-name="Instagram Профиль 85 000 подписчиков (Lifestyle / Путешествия)" onclick="openDetails('Instagram Профиль 85 000 подписчиков (Lifestyle / Путешествия)', 3200, 'Популярный аккаунт в сфере путешествий и лайфстайла с охватной аудиторией из США. Родная почта и все данные для смены привязок отправляются на ваш email.', 'Регион: США | 85k фолловеров | Отлежка: 1 год', 'Родная почта + полный доступ', 'Безопасная сделка (Эскроу)')">
+                <!-- ВИРТУАЛЬНЫЕ НОМЕРА (Аренда на 24 часа по 60 рублей) -->
+                <div class="card" data-category="numbers" data-name="Виртуальный номер для TikTok" onclick="openDetails('Виртуальный номер для TikTok (24 часа)', 60, 'Чистый виртуальный номер для регистрации и активации аккаунта TikTok на 24 часа. Мгновенная выдача SMS.', 'Срок: 24 часа', 'SMS-получение', 'Моментально')">
+                    <div class="badge-seller">📱 СМС 60 ₽</div>
                     <div>
-                        <h3>Instagram Профиль 85 000 подписчиков (Lifestyle / Путешествия)</h3>
-                        <p>Американский инстаграм-профиль с лояльной аудиторией. Чистая история, данные высылаются на email.</p>
+                        <h3>Виртуальный номер для TikTok</h3>
+                        <p>Аренда номера на 24 часа для быстрой и безопасной регистрации аккаунта в TikTok.</p>
                     </div>
                     <div>
-                        <div class="card-meta"><span>🛒 Акция дня</span><span class="rating">★ 4.9 (53)</span></div>
-                        <div class="price"><span class="price-old">5 500 ₽</span> 3 200 ₽</div>
+                        <div class="card-meta"><span>📱 Аренда 24ч</span><span class="rating">★ 4.9 (140)</span></div>
+                        <div class="price">60 ₽</div>
                         <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('Instagram Профиль 85k', 3200)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('Instagram Профиль 85k', 3200)">Купить</button>
+                            <button class="btn btn-secondary" onclick="addToCart('Виртуальный номер для TikTok (24ч)', 60)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Виртуальный номер для TikTok (24ч)', 60)">Купить</button>
                         </div>
                     </div>
                 </div>
 
-                <div class="card promo-card" data-category="accounts youtube" data-name="YouTube Канал 40 000 подписчиков (Гейминг / Стримы)" onclick="openDetails('YouTube Канал 40 000 подписчиков (Гейминг / Стримы)', 4500, 'Канал с активной игровой аудиторией, полностью готовый к стримам и подключению монетизации. Передача через Brand Account на ваш email.', 'Регион: СНГ | 40k подписчиков | Без страйков', 'Полный доступ владельца', 'Безопасная сделка (Эскроу)')">
+                <div class="card" data-category="numbers" data-name="Виртуальный номер для Telegram" onclick="openDetails('Виртуальный номер для Telegram (24 часа)', 60, 'Виртуальный номер под аренду на 24 часа для создания и активации профиля в Telegram.', 'Срок: 24 часа', 'SMS-получение', 'Моментально')">
+                    <div class="badge-seller">📱 СМС 60 ₽</div>
                     <div>
-                        <h3>YouTube Канал 40 000 подписчиков (Гейминг / Стримы)</h3>
-                        <p>Игровой канал с историей и живыми зрителями. Безопасная передача прав через бренд-аккаунт.</p>
+                        <h3>Виртуальный номер для Telegram</h3>
+                        <p>Надежный номер на 24 часа для получения кода верификации и создания аккаунта Telegram.</p>
                     </div>
                     <div>
-                        <div class="card-meta"><span>🛒 Акция дня</span><span class="rating">★ 5.0 (29)</span></div>
-                        <div class="price"><span class="price-old">7 500 ₽</span> 4 500 ₽</div>
+                        <div class="card-meta"><span>📱 Аренда 24ч</span><span class="rating">★ 5.0 (210)</span></div>
+                        <div class="price">60 ₽</div>
                         <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('YouTube Канал 40k', 4500)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('YouTube Канал 40k', 4500)">Купить</button>
+                            <button class="btn btn-secondary" onclick="addToCart('Виртуальный номер для Telegram (24ч)', 60)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Виртуальный номер для Telegram (24ч)', 60)">Купить</button>
                         </div>
                     </div>
                 </div>
 
-                <div class="card promo-card" data-category="accounts vk" data-name="VK Сообщество 50 000 подписчиков (Юмор / Развлечения)" onclick="openDetails('VK Сообщество 50 000 подписчиков (Юмор / Развлечения)', 1200, 'Раскрученная группа ВКонтакте развлекательной тематики с высокой активностью и живыми комментариями. Передача прав главного администратора.', 'Регион: Россия | 50k участников | Отлежка: 2 года', 'Полные права администратора', 'Безопасная сделка (Эскроу)')">
+                <div class="card" data-category="numbers" data-name="Виртуальный номер для Instagram" onclick="openDetails('Виртуальный номер для Instagram (24 часа)', 60, 'Аренда номера на 24 часа для регистрации и подтверждения учетной записи Instagram.', 'Срок: 24 часа', 'SMS-получение', 'Моментально')">
+                    <div class="badge-seller">📱 СМС 60 ₽</div>
                     <div>
-                        <h3>VK Сообщество 50 000 подписчиков (Юмор / Развлечения)</h3>
-                        <p>Активная группа ВКонтакте с устоявшейся базой участников. Мгновенная передача административных прав.</p>
+                        <h3>Виртуальный номер для Instagram</h3>
+                        <p>Чистый номер на 24 часа для успешной регистрации и привязки вашего Instagram профиля.</p>
                     </div>
                     <div>
-                        <div class="card-meta"><span>🛒 Акция дня</span><span class="rating">★ 4.8 (37)</span></div>
-                        <div class="price"><span class="price-old">2 200 ₽</span> 1 200 ₽</div>
+                        <div class="card-meta"><span>📱 Аренда 24ч</span><span class="rating">★ 4.9 (95)</span></div>
+                        <div class="price">60 ₽</div>
                         <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('VK Сообщество 50k', 1200)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('VK Сообщество 50k', 1200)">Купить</button>
+                            <button class="btn btn-secondary" onclick="addToCart('Виртуальный номер для Instagram (24ч)', 60)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Виртуальный номер для Instagram (24ч)', 60)">Купить</button>
                         </div>
                     </div>
                 </div>
 
-                <div class="card promo-card" data-category="accounts tiktok" data-name="TikTok Аккаунт 75 000 подписчиков (Танцы / Тренды)" onclick="openDetails('TikTok Аккаунт 75 000 подписчиков (Танцы / Тренды)', 1900, 'Немецкий TikTok аккаунт с высокой вовлеченностью в трендовых направлениях. Полный доступ к профилю и родной почте.', 'Регион: Германия | 75k фолловеров | Отлежка: 6 мес.', 'Родная почта + полный доступ', 'Безопасная сделка (Эскроу)')">
+                <div class="card" data-category="numbers" data-name="Виртуальный номер для YouTube / Google" onclick="openDetails('Виртуальный номер для YouTube / Google (24 часа)', 60, 'Виртуальный номер на 24 часа для регистрации аккаунтов Google и YouTube.', 'Срок: 24 часа', 'SMS-получение', 'Моментально')">
+                    <div class="badge-seller">📱 СМС 60 ₽</div>
                     <div>
-                        <h3>TikTok Аккаунт 75 000 подписчиков (Танцы / Тренды)</h3>
-                        <p>Европейский молодежный аккаунт по сниженной цене. Данные отправляются на ваш email.</p>
+                        <h3>Виртуальный номер для YouTube / Google</h3>
+                        <p>Аренда номера на 24 часа для прохождения SMS-верификации в сервисах Google и YouTube.</p>
                     </div>
                     <div>
-                        <div class="card-meta"><span>🛒 Акция дня</span><span class="rating">★ 4.9 (45)</span></div>
-                        <div class="price"><span class="price-old">3 500 ₽</span> 1 900 ₽</div>
+                        <div class="card-meta"><span>📱 Аренда 24ч</span><span class="rating">★ 4.8 (88)</span></div>
+                        <div class="price">60 ₽</div>
                         <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('TikTok Аккаунт 75k (Германия)', 1900)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('TikTok Аккаунт 75k (Германия)', 1900)">Купить</button>
+                            <button class="btn btn-secondary" onclick="addToCart('Виртуальный номер для YouTube / Google (24ч)', 60)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Виртуальный номер для YouTube / Google (24ч)', 60)">Купить</button>
                         </div>
                     </div>
                 </div>
 
-                <div class="card promo-card" data-category="accounts telegram" data-name="Telegram Чат 35 000 участников (Инвестиции / Трейдинг)" onclick="openDetails('Telegram Чат 35 000 участников (Инвестиции / Трейдинг)', 2100, 'Живой инвестиционный чат с высокой активностью пользователей и готовой модерацией. Передача прав владельца.', 'Регион: СНГ | 35k участников | Отлежка: 1 год', 'Права владельца чата', 'Безопасная сделка (Эскроу)')">
+                <div class="card" data-category="numbers" data-name="Виртуальный номер для WhatsApp" onclick="openDetails('Виртуальный номер для WhatsApp (24 часа)', 60, 'Номер для активации мессенджера WhatsApp на период 24 часа.', 'Срок: 24 часа', 'SMS-получение', 'Моментально')">
+                    <div class="badge-seller">📱 СМС 60 ₽</div>
                     <div>
-                        <h3>Telegram Чат 35 000 участников (Инвестиции / Трейдинг)</h3>
-                        <p>Прокачанный чат для обсуждения финансов и инвестиций. Полная передача прав владения.</p>
+                        <h3>Виртуальный номер для WhatsApp</h3>
+                        <p>Аренда номера на 24 часа для регистрации рабочего или личного мессенджера WhatsApp.</p>
                     </div>
                     <div>
-                        <div class="card-meta"><span>🛒 Акция дня</span><span class="rating">★ 5.0 (58)</span></div>
-                        <div class="price"><span class="price-old">3 800 ₽</span> 2 100 ₽</div>
+                        <div class="card-meta"><span>📱 Аренда 24ч</span><span class="rating">★ 4.9 (115)</span></div>
+                        <div class="price">60 ₽</div>
                         <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('Telegram Чат 35k', 2100)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('Telegram Чат 35k', 2100)">Купить</button>
+                            <button class="btn btn-secondary" onclick="addToCart('Виртуальный номер для WhatsApp (24ч)', 60)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Виртуальный номер для WhatsApp (24ч)', 60)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-category="numbers" data-name="Виртуальный номер для других сервисов (Любая платформа)" onclick="openDetails('Виртуальный номер для других сервисов (24 часа)', 60, 'Универсальный виртуальный номер на 24 часа для создания аккаунтов в любых других приложениях и сайтах.', 'Срок: 24 часа', 'SMS-получение', 'Моментально')">
+                    <div class="badge-seller">📱 СМС 60 ₽</div>
+                    <div>
+                        <h3>Виртуальный номер для других сервисов</h3>
+                        <p>Универсальный номер на 24 часа под любые иные платформы, социальные сети и маркетплейсы.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta"><span>📱 Аренда 24ч</span><span class="rating">★ 4.9 (76)</span></div>
+                        <div class="price">60 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('Виртуальный номер (Универсальный, 24ч)', 60)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Виртуальный номер (Универсальный, 24ч)', 60)">Купить</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Остальные товары каталога -->
-                <div class="card" data-category="accounts tiktok" data-name="TikTok Аккаунт с монетизацией (50k подписчиков)" onclick="openDetails('TikTok Аккаунт с монетизацией (50k подписчиков)', 3490, 'Прокачанный TikTok аккаунт с живой аудиторией, подключенной Creator Rewards Program и отсутствием теневых банов. После оплаты на ваш email придут логин/пароль от аккаунта и пароль от родной почты. Деньги продавцу поступят только после вашего подтверждения о доставке.', 'США | Отлежка: 1 год | Без блокировок', 'Родная почта + полный доступ', 'Безопасная сделка (Эскроу)')">
-                    <div class="badge-seller">🔥 Топ аккаунт</div>
-                    <div>
-                        <h3>TikTok Аккаунт с монетизацией (50k подписчиков)</h3>
-                        <p>Готовый аккаунт с активными фоловерами. Данные придут на email, оплата зачислится продавцу после подтверждения.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>🛒 Готовый аккаунт</span><span class="rating">★ 5.0 (38)</span></div>
-                        <div class="price">3 490 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('TikTok Аккаунт (50k + Монетизация)', 3490)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('TikTok Аккаунт (50k + Монетизация)', 3490)">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="card" data-category="accounts telegram" data-name="Telegram Аккаунт с отлежкой 3+ года (Трастовый)" onclick="openDetails('Telegram Аккаунт с отлежкой 3+ года', 450, 'Возрастной аккаунт Telegram с высокой трастовостью, идеально подходит под создание каналов или чатов. На email придет логин, пароль и файл сессии. Деньги спишутся со счета только после вашего подтверждения.', 'Европа | Отлежка: 3 года | 2FA настроен', 'Файл сессии + Данные входа на email', 'Безопасная сделка (Эскроу)')">
                     <div class="badge-seller">Secure 🔒</div>
                     <div>
@@ -478,38 +484,6 @@
                         <div class="card-buttons" onclick="event.stopPropagation()">
                             <button class="btn btn-secondary" onclick="addToCart('Telegram Аккаунт 3+ года', 450)">В корзину</button>
                             <button class="btn" onclick="buyDirect('Telegram Аккаунт 3+ года', 450)">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card" data-category="accounts instagram" data-name="Instagram Бизнес Аккаунт (12k подписчиков)" onclick="openDetails('Instagram Бизнес Аккаунт (12k подписчиков)', 1890, 'Оформленный аккаунт под интернет-магазин или блог. На ваш email придет логин, пароль от аккаунта и пароль от родной почты. Деньги переведутся продавцу только после подтверждения доставки.', 'СНГ | Отлежка: 8 месяцев | Бизнес-профиль', 'Родная почта (Gmail) с письмом', 'Безопасная сделка (Эскроу)')">
-                    <div class="badge-seller">Business</div>
-                    <div>
-                        <h3>Instagram Бизнес Аккаунт (12k подписчиков)</h3>
-                        <p>Готовая страница для вашего бренда. Данные высылаются на email, деньги заморожены до подтверждения.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>🛒 Готовый аккаунт</span><span class="rating">★ 4.8 (45)</span></div>
-                        <div class="price">1 890 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('Instagram Бизнес Аккаунт (12k)', 1890)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('Instagram Бизнес Аккаунт (12k)', 1890)">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card" data-category="tiktok" data-name="TikTok: Полный комплекс (Подписчики, Лайки, Комментарии, Просмотры, Репосты)" onclick="openDetails('TikTok: Полный комплекс', 490, 'Всё включено: живые подписчики, лайки, кастомные комментарии, просмотры роликов и репосты в TikTok.', 'Без списаний', 'По ссылке', 'Автозапуск')">
-                    <div class="badge-seller">Top SMM 🚀</div>
-                    <div>
-                        <h3>TikTok: Полный комплекс (Подписчики, Лайки, Комменты, Просмотры, Репосты)</h3>
-                        <p>Максимальная раскрутка видео и профиля: от подписчиков до реакций и комментариев.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 4.9 (94)</span></div>
-                        <div class="price">490 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('TikTok: Полный комплекс', 490)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('TikTok: Полный комплекс', 490)">Купить</button>
                         </div>
                     </div>
                 </div>
@@ -539,54 +513,6 @@
                     </div>
                 </div>
 
-                <div class="card" data-category="telegram" data-name="Telegram: Полный комплекс (Подписчики, Просмотры, Реакции, Комментарии, Опросы)" onclick="openDetails('Telegram: Полный комплекс', 590, 'Полный спектр накрутки для Telegram: подписчики в канал, просмотры постов, все виды эмодзи-реакций, комментарии.', 'С гарантией', 'По ссылке', 'Плавный старт')">
-                    <div class="badge-seller">Hit Sales 🔥</div>
-                    <div>
-                        <h3>Telegram: Полный комплекс (Подписчики, Просмотры, Реакции, Комменты, Опросы)</h3>
-                        <p>Всё для канала: фолловеры, автопросмотры, любые реакции, комменты и голоса в опросах.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 4.9 (142)</span></div>
-                        <div class="price">590 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('Telegram: Полный комплекс', 590)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('Telegram: Полный комплекс', 590)">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card" data-category="instagram" data-name="Instagram: Полный комплекс (Подписчики, Лайки, Reels, Комментарии, Сохранения, Истории)" onclick="openDetails('Instagram: Полный комплекс', 650, 'Полный пакет продвижения в Instagram: фолловеры, лайки, просмотры Reels, комменты, сохранения и охваты Stories.', 'Без списаний', 'По ссылке', 'Моментальный запуск')">
-                    <div class="badge-seller">Top Service</div>
-                    <div>
-                        <h3>Instagram: Полный комплекс (Подписчики, Лайки, Reels, Комменты, Сторис)</h3>
-                        <p>Всё для аккаунта Instagram: от подписчиков и просмотров Reels до сохранений и охватов историй.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 4.9 (118)</span></div>
-                        <div class="price">650 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('Instagram: Полный комплекс', 650)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('Instagram: Полный комплекс', 650)">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card" data-category="numbers" data-name="Виртуальный номер для регистрации" onclick="openDetails('Виртуальный номер для регистрации', 150, 'Чистый виртуальный номер для безопасной СМС-активации и регистрации аккаунта.', 'Одноразовый', 'СМС-получение', 'Моментально')">
-                    <div class="badge-seller">Auto-Delivery</div>
-                    <div>
-                        <h3>Виртуальный номер для СМС (Любой сервис)</h3>
-                        <p>Чистый виртуальный номер для безопасной регистрации и получения кода верификации.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>📱 СМС активация</span><span class="rating">★ 4.9 (125)</span></div>
-                        <div class="price">150 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('Виртуальный номер для регистрации', 150)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('Виртуальный номер для регистрации', 150)">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
@@ -598,8 +524,8 @@
             <h2 id="det-title">Название товара</h2>
             <p id="det-desc" style="color: #94a3b8; font-size: 13px; margin-bottom: 15px;"></p>
             
-            <div class="modal-details-prop"><span>Характеристики / Отлежка:</span> <span id="det-age">-</span></div>
-            <div class="modal-details-prop"><span>Доступ / Почта:</span> <span id="det-mail">-</span></div>
+            <div class="modal-details-prop"><span>Характеристики / Срок:</span> <span id="det-age">-</span></div>
+            <div class="modal-details-prop"><span>Доступ / Получение:</span> <span id="det-mail">-</span></div>
             <div class="modal-details-prop"><span>Безопасная сделка:</span> <span style="color: #25f4ee;">Оплата после подтверждения</span></div>
             <div class="modal-details-prop" style="margin-top: 10px; border:none; font-size: 16px;"><span>Цена:</span> <span id="det-price" style="color:#22c55e;">-</span></div>
 
@@ -637,7 +563,7 @@
                         <option value="instagram">Instagram</option>
                         <option value="youtube">YouTube</option>
                         <option value="vk">ВКонтакте</option>
-                        <option value="numbers">Номера для СМС</option>
+                        <option value="numbers">Виртуальные Номера (24ч)</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -685,7 +611,7 @@
                 <button class="cab-tab" onclick="switchCabTab('settings', this)">⚙️ Настройки</button>
             </div>
             <div id="cab-content-purchases">
-                <p style="font-size: 12px; color: #94a3b8; margin-bottom: 10px;">Купленные аккаунты (нажмите «Подтвердить доставку», чтобы завершить сделку):</p>
+                <p style="font-size: 12px; color: #94a3b8; margin-bottom: 10px;">Купленные аккаунты / номера (нажмите «Подтвердить доставку», чтобы завершить сделку):</p>
                 <div id="purchases-list"></div>
             </div>
             <div id="cab-content-settings" style="display: none;">
@@ -734,12 +660,12 @@
         const enNames = ['John_D', 'Alex_SMM', 'Mike_89', 'Emily_R', 'David_K', 'Sarah_M', 'Chris_P', 'Daniel_T', 'Jessica_L', 'James_W', 'Robert_B', 'Brian_T', 'Kevin_D', 'Andrew_M', 'Samantha_W', 'Jason_G'];
 
         const ruPosComments = [
-            'Все супер, данные аккаунта пришли на почту сразу, подтвердил — продавец получил деньги!', 'Отличный гарант, проверил аккаунт тик ток, всё совпало.', 'Все дошло быстро, отлежка соответствует описанию.',
-            'Вход прошел без проблем, родная почта рабочая.', 'Очень доволен покупкой, респект!', 'Работает как часы, подтвердил сделку.',
-            'Топ за свои деньги, безопасная сделка работает четко.', 'Аккаунт полностью соответствует характеристикам!'
+            'Все супер, данные номера пришли сразу, подтвердил — продавец получил деньги!', 'Отличный сервис, проверил СМС для TikTok, код пришел мгновенно.', 'Все дошло быстро, аренда на 24 часа работает отлично.',
+            'Вход прошел без проблем, номер чистый.', 'Очень доволен покупкой, респект!', 'Работает как часы, подтвердил сделку.',
+            'Топ за свои деньги, аренда номера за 60 рублей — супер.', 'Номер подошел идеально для регистрации!'
         ];
         const enPosComments = [
-            'Fast delivery to email and working account!', 'Great quality, confirmed delivery successfully.', 'Super fast startup, very happy with result.',
+            'Fast SMS delivery and working number!', 'Great quality, confirmed delivery successfully.', 'Super fast startup, very happy with result.',
             'Best escrow marketplace, highly recommended!', 'Awesome job! Everything as described.'
         ];
 
@@ -845,7 +771,7 @@
             newCard.className = 'card';
             newCard.setAttribute('data-category', cat);
             newCard.setAttribute('data-name', name);
-            newCard.onclick = () => openDetails(name, price, desc, 'Регион: Авто | Отлежка: Новая', 'Полный доступ на email', 'Безопасная сделка');
+            newCard.onclick = () => openDetails(name, price, desc, 'Регион: Авто | Срок: 24 часа', 'Моментальная выдача', 'Безопасная сделка');
 
             newCard.innerHTML = `
                 <div class="badge-seller">User Listing</div>
@@ -988,7 +914,7 @@
                 myPurchases.push({
                     name: item.name,
                     date: new Date().toLocaleDateString(),
-                    data: 'LOGIN:USER_' + Math.random().toString(36).substring(7) + ':PASS' + Math.floor(Math.random()*8999+1000) + ' | EMAIL:mail@domain.com:emailpass',
+                    data: 'NUMBER: +7 (9' + Math.floor(Math.random()*899+100) + ') ' + Math.floor(Math.random()*899+100) + '-' + Math.floor(Math.random()*89+10) + '-' + Math.floor(Math.random()*89+10) + ' | CODE: ' + Math.floor(Math.random()*8999+1000),
                     confirmed: false
                 });
             });
@@ -1010,11 +936,11 @@
             myPurchases.push({
                 name: itemName,
                 date: new Date().toLocaleDateString(),
-                data: 'LOGIN:USER_' + Math.random().toString(36).substring(7) + ':PASS' + Math.floor(Math.random()*8999+1000) + ' | EMAIL:mail@domain.com:emailpass',
+                data: 'NUMBER: +7 (9' + Math.floor(Math.random()*899+100) + ') ' + Math.floor(Math.random()*899+100) + '-' + Math.floor(Math.random()*89+10) + '-' + Math.floor(Math.random()*89+10) + ' | CODE: ' + Math.floor(Math.random()*8999+1000),
                 confirmed: false
             });
             updatePurchasesUI();
-            showModal(`Заказ создан! Данные аккаунта отправлены на ваш email. Деньги спишутся продавцу после подтверждения в Личном кабинете.`);
+            showModal(`Заказ создан! Данные отправлены на ваш email. Деньги спишутся продавцу после подтверждения в Личном кабинете.`);
         }
 
         function confirmDelivery(index) {
@@ -1054,7 +980,7 @@
                 list.innerHTML += `
                     <div class="purchase-item">
                         <div style="font-weight:bold; color:#fff;">${p.name} <span style="font-weight:normal; color:#64748b; float:right;">${p.date}</span></div>
-                        <div class="purchase-data">Данные с email (Аккаунт + Почта): ${p.data}</div>
+                        <div class="purchase-data">Данные номера: ${p.data}</div>
                         ${statusHtml}
                     </div>
                 `;
