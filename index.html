@@ -11,9 +11,11 @@
         body { background: #0b0f19; color: #f8fafc; line-height: 1.6; overflow-x: hidden; }
         
         header { background: #1e293b; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; flex-wrap: wrap; gap: 10px; position: sticky; top: 0; z-index: 100; }
-        .logo { display: flex; align-items: center; gap: 6px; font-size: 18px; font-weight: bold; color: #fff; white-space: nowrap; cursor: pointer; }
-        .logo-icon { width: 18px; height: 18px; flex-shrink: 0; }
-        .logo span { background: linear-gradient(90deg, #fe2c55, #229ed9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-left: 2px; }
+        
+        /* Стили для логотипа */
+        .logo { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: bold; color: #fff; white-space: nowrap; cursor: pointer; }
+        .logo-img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; flex-shrink: 0; display: block; }
+        .logo span { background: linear-gradient(90deg, #fe2c55, #229ed9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
         .header-right { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
         .header-auth { display: flex; align-items: center; gap: 6px; }
@@ -112,7 +114,6 @@
         .card h3 { font-size: 15px; margin-bottom: 6px; color: #fff; }
         .card p { color: #94a3b8; font-size: 12px; margin-bottom: 10px; flex-grow: 1; }
         
-        /* Стили для выбора количества и динамической цены на карточке */
         .quantity-selector-box { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 8px; margin-bottom: 10px; }
         .quantity-selector-box label { display: block; font-size: 11px; color: #94a3b8; margin-bottom: 4px; font-weight: 600; }
         .quantity-selector-box select { width: 100%; background: #1e293b; color: #fff; border: 1px solid #334155; padding: 6px; border-radius: 6px; font-size: 12px; outline: none; }
@@ -128,7 +129,6 @@
         .btn-secondary { background: #334155; color: #fff; }
         .btn-secondary:hover { background: #475569; }
 
-        /* Бейдж продавца / гаранта */
         .badge-seller { position: absolute; top: 12px; right: 16px; font-size: 10px; background: rgba(34, 158, 217, 0.2); color: #229ed9; padding: 2px 6px; border-radius: 4px; font-weight: bold; border: 1px solid rgba(34, 158, 217, 0.4); }
 
         /* Модальные окна */
@@ -141,12 +141,10 @@
         .modal-details-prop { font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: flex; justify-content: space-between; border-bottom: 1px solid #334155; padding-bottom: 4px; }
         .modal-details-prop span:last-child { font-weight: bold; color: #fff; }
 
-        /* Оплата в корзине */
         .pay-methods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 12px 0; }
         .pay-method { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 8px; text-align: center; font-size: 11px; cursor: pointer; color: #94a3b8; }
         .pay-method.active { border-color: #25f4ee; color: #fff; background: rgba(37,244,238,0.1); }
 
-        /* Личный кабинет и модалка создания товара */
         .cabinet-tabs { display: flex; gap: 10px; margin-bottom: 15px; border-bottom: 1px solid #334155; padding-bottom: 8px; }
         .cab-tab { background: none; border: none; color: #94a3b8; font-weight: bold; font-size: 13px; cursor: pointer; }
         .cab-tab.active { color: #25f4ee; }
@@ -162,7 +160,6 @@
         .cart-item { display: flex; justify-content: space-between; align-items: center; background: #0f172a; padding: 8px 12px; border-radius: 8px; margin-bottom: 6px; border: 1px solid #334155; }
         .cart-total { display: flex; justify-content: space-between; font-size: 15px; font-weight: bold; margin-bottom: 12px; border-top: 1px solid #334155; padding-top: 10px; }
 
-        /* Отзывы */
         .reviews-section { margin-top: 15px; border-top: 1px solid #334155; padding-top: 10px; }
         .review-card { background: #0f172a; padding: 8px; border-radius: 6px; margin-bottom: 6px; font-size: 12px; }
         .review-author { font-weight: bold; color: #25f4ee; margin-bottom: 2px; }
@@ -179,7 +176,7 @@
 
     <header>
         <div class="logo" onclick="filterCategory('all')">
-            <svg class="logo-icon" viewBox="0 0 24 24" fill="none"><path d="M19.589 6.686a4.793 4.793 0 01-3.7-1.542V13.8a6.857 6.857 0 11-6.857-6.857c.328 0 .65.03.964.088v3.655a3.171 3.171 0 102.214 3.028V1h3.643a8.471 8.471 0 003.743 3.128v2.558z" fill="#fe2c55"/></svg>
+            <img src="photo_2026-08-12_08-06-33_3.jpg" class="logo-img" alt="TTBuy">
             <span>TTBuy</span>
         </div>
         <div class="header-right">
@@ -842,7 +839,6 @@
             document.getElementById('custom-alert').style.display = 'none';
         });
 
-        // Функция динамического пересчета цены на карточке при выборе количества
         function updateCardPrice(selectEl) {
             const card = selectEl.closest('.card');
             const basePrice = parseFloat(selectEl.getAttribute('data-base-price'));
@@ -948,7 +944,6 @@
         }
         function closeDetailsModal() { document.getElementById('detailsModal').style.display = 'none'; }
 
-        // Добавление в корзину для товаров с выбором количества
         function addSelectedToCart(btnEl, serviceName) {
             const card = btnEl.closest('.card');
             const selectEl = card.querySelector('.qty-select');
@@ -962,7 +957,6 @@
             showModal(`Товар "${fullName}" добавлен в корзину!`);
         }
 
-        // Покупка напрямую для товаров с выбором количества
         async function buySelectedDirect(btnEl, serviceName) {
             const { data: { session } } = await supabaseClient.auth.getSession();
             if (!session) {
