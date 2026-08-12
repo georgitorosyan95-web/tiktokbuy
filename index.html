@@ -361,7 +361,7 @@
     <div id="custom-alert" class="custom-modal-overlay" style="display: none;">
         <div class="custom-modal-box">
             <div class="custom-modal-header">
-                <span class="custom-modal-title">Требуется РЕГИСТРАЦИЯ</span>
+                <span class="custom-modal-title">Системное уведомление</span>
             </div>
             <div class="custom-modal-body" id="custom-modal-text">
                 Сообщение
@@ -436,27 +436,46 @@
             if (isLoginMode) {
                 const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
                 if (error) showModal('Ошибка входа: ' + error.message);
-                else { closeAuth(); showSuccessBanner(); checkUser(); }
+                else { 
+                    closeAuth(); 
+                    showSuccessBanner(); 
+                    checkUser(); 
+                }
             } else {
                 const { error } = await supabaseClient.auth.signUp({ email, password });
                 if (error) showModal('Ошибка регистрации: ' + error.message);
-                else { showModal('Регистрация успешна! Подтвердите почту или войдите.'); isLoginMode = true; updateAuthModalUI(); }
+                else { 
+                    showModal('Регистрация успешна! Подтвердите почту или войдите.'); 
+                    isLoginMode = true; 
+                    updateAuthModalUI(); 
+                }
             }
         });
 
         async function checkUser() {
             const { data: { session } } = await supabaseClient.auth.getSession();
-            const headerDiv = document.getElementById('user-header');
+            const userHeader = document.getElementById('user-header');
             if (session) {
-                headerDiv.innerHTML = `<div class="user-info"><span>👤 ${session.user.email}</span><button class="logout-btn" onclick="logout()">Выйти</button></div>`;
+                userHeader.innerHTML = `
+                    <div class="user-info">
+                        <span>${session.user.email}</span>
+                        <button class="logout-btn" onclick="logout()">Выйти</button>
+                    </div>
+                `;
             } else {
-                headerDiv.innerHTML = `
+                userHeader.innerHTML = `
                     <div class="header-auth">
                         <button class="nav-btn" onclick="openAuth('login')">Войти</button>
                         <button class="nav-btn register" onclick="openAuth('register')">Регистрация</button>
                     </div>
                 `;
             }
+        }
+
+        async function logout() {
+            await supabaseClient.auth.signOut();
+            document.getElementById('success-banner').style.display = 'none';
+            checkUser();
         }
 
         function showSuccessBanner() {
@@ -468,42 +487,33 @@
         function createFireworks() {
             const container = document.getElementById('fireworks');
             container.innerHTML = '';
-            const colors = ['#fe2c55', '#25f4ee', '#ffffff'];
             for (let i = 0; i < 30; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'firework-particle';
                 const angle = Math.random() * Math.PI * 2;
-                const distance = 50 + Math.random() * 100;
-                particle.style.setProperty('--dx', `${Math.cos(angle) * distance}px`);
-                particle.style.setProperty('--dy', `${Math.sin(angle) * distance}px`);
-                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                particle.style.left = '50%'; particle.style.top = '50%';
+                const distance = Math.random() * 100 + 50;
+                const dx = Math.cos(angle) * distance + 'px';
+                const dy = Math.sin(angle) * distance + 'px';
+                particle.style.setProperty('--dx', dx);
+                particle.style.setProperty('--dy', dy);
+                particle.style.background = ['#fe2c55', '#25f4ee', '#22c55e', '#e1306c'][Math.floor(Math.random() * 4)];
+                particle.style.left = '50%';
+                particle.style.top = '50%';
                 container.appendChild(particle);
             }
         }
 
-        async function logout() {
-            await supabaseClient.auth.signOut();
-            document.getElementById('success-banner').style.display = 'none';
-            showModal('Вы вышли из системы');
-            checkUser();
+        async function buyItem(itemName) {
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            if (!session) {
+                showModal('Для оформления заказа необходимо войти в систему.');
+                openAuth('login');
+                return;
+            }
+            showModal(`Запрос на покупку "${itemName}" успешно создан! Менеджер свяжется с Вами.`);
         }
 
-        function buyItem(itemName) {
-            supabaseClient.auth.getSession().then(({ data: { session } }) => {
-                if (!session) {
-                    showModal('Пожалуйста, войдите в систему или зарегистрируйтесь для оформления заказа!');
-                    openAuth('login');
-                } else {
-                    showModal(`Заказ/услуга "${itemName}" успешно оформлена! Менеджер свяжется с вами.`);
-                }
-            });
-        }
-
-        supabaseClient.auth.onAuthStateChange((event, session) => {
-            if (event === 'SIGNED_IN' || session) { checkUser(); }
-        });
-
+        // Проверяем статус пользователя при загрузке страницы
         checkUser();
     </script>
 </body>
