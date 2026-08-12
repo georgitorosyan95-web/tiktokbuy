@@ -187,7 +187,6 @@
         .cat-chip { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(8px); border: 1px solid #334155; color: #94a3b8; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.3s; }
         .cat-chip:hover, .cat-chip.active { background: linear-gradient(90deg, #fe2c55, #25f4ee); color: #fff; border-color: transparent; box-shadow: 0 0 15px rgba(37, 244, 238, 0.4); transform: translateY(-1px); }
 
-        /* Блок доверия и преимуществ («Почему выбирают нас») */
         .trust-section {
             max-width: 1200px;
             margin: 25px auto 10px auto;
@@ -220,33 +219,16 @@
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
             transition: 0.5s;
         }
-        .trust-card:hover::before {
-            left: 100%;
-        }
+        .trust-card:hover::before { left: 100%; }
         .trust-card:hover {
             border-color: #25f4ee;
             transform: translateY(-4px);
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 25px rgba(37, 244, 238, 0.3), 0 0 10px rgba(254, 44, 85, 0.2);
         }
-        .trust-icon {
-            font-size: 28px;
-            margin-bottom: 8px;
-            display: inline-block;
-            filter: drop-shadow(0 0 8px rgba(37, 244, 238, 0.5));
-        }
-        .trust-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 4px;
-        }
-        .trust-desc {
-            font-size: 11px;
-            color: #94a3b8;
-            line-height: 1.4;
-        }
+        .trust-icon { font-size: 28px; margin-bottom: 8px; display: inline-block; filter: drop-shadow(0 0 8px rgba(37, 244, 238, 0.5)); }
+        .trust-title { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+        .trust-desc { font-size: 11px; color: #94a3b8; line-height: 1.4; }
 
-        /* Динамическая сортировка товаров */
         .catalog-controls {
             display: flex;
             justify-content: space-between;
@@ -257,13 +239,7 @@
             flex-wrap: wrap;
             gap: 10px;
         }
-        .sort-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 12px;
-            color: #94a3b8;
-        }
+        .sort-wrapper { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #94a3b8; }
         .sort-select {
             background: rgba(30, 41, 59, 0.9);
             border: 1px solid #334155;
@@ -276,10 +252,7 @@
             transition: all 0.2s;
             box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
-        .sort-select:focus {
-            border-color: #25f4ee;
-            box-shadow: 0 0 12px rgba(37, 244, 238, 0.3);
-        }
+        .sort-select:focus { border-color: #25f4ee; box-shadow: 0 0 12px rgba(37, 244, 238, 0.3); }
 
         .support-float {
             position: fixed; bottom: 20px; right: 20px;
@@ -451,7 +424,6 @@
         </div>
     </div>
 
-    <!-- Блок доверия и преимуществ («Почему выбирают нас») -->
     <div class="trust-section">
         <div class="trust-card">
             <div class="trust-icon">🛡️</div>
@@ -474,7 +446,6 @@
         <input type="text" id="searchInput" class="search-input" placeholder="🔍 Поиск: аккаунты, подписчики, лайки, просмотры..." oninput="filterProducts()">
     </div>
 
-    <!-- Фильтры категорий -->
     <div class="categories-scroll">
         <button class="cat-chip active" onclick="filterCategory('all', this)">🔥 Все услуги и товары</button>
         <button class="cat-chip" onclick="filterCategory('accounts', this)">🛒 Готовые Аккаунты</button>
@@ -487,7 +458,6 @@
     </div>
 
     <div class="container">
-        <!-- Блок управления каталогом и динамической сортировкой -->
         <div class="catalog-controls">
             <h2 class="section-title">🔥 Акционные предложения (Все соцсети)</h2>
             <div class="sort-wrapper">
@@ -504,13 +474,12 @@
         <div id="catalog-container">
             <div class="products-grid" id="products-grid">
                 
-                <!-- Акционные предложения для всех соцсетей на самом видном месте -->
-                <div class="card promo-card" data-category="accounts tiktok" data-name="TikTok Аккаунт 130k подписчиков (Франция)" onclick="openDetails('TikTok Аккаунт 130k подписчиков (Франция)', 2500, 'Прокачанный французский TikTok аккаунт на 130 000 подписчиков с живой европейской аудиторией. Универсальная тематика (Lifestyle / Тренды), чистая история, отсутствие теневых банов и возможность подключения монетизации.', 'Регион: Франция | 130k фолловеров | Отлежка: 8 мес.', 'Родная почта + полный контроль', 'Безопасная сделка (Эскроу)')">
+                <!-- 90+ 🔥 Акционных предложений для всех соцсетей -->
+                
+                <!-- TikTok промо -->
+                <div class="card promo-card" data-category="accounts tiktok" data-name="TikTok Аккаунт 130k подписчиков (Франция)" onclick="openDetails('TikTok Аккаунт 130k подписчиков (Франция)', 2500, 'Прокачанный французский TikTok аккаунт на 130 000 подписчиков с живой европейской аудиторией.', 'Регион: Франция | 130k фолловеров', 'Родная почта + полный контроль', 'Эскроу')">
                     <div class="badge-seller">🔥 Акция TikTok</div>
-                    <div>
-                        <h3>TikTok Аккаунт 130k подписчиков (Франция)</h3>
-                        <p>Готовый европейский аккаунт по спеццене. Полный доступ и родная почта в комплекте.</p>
-                    </div>
+                    <div><h3>TikTok Аккаунт 130k подписчиков (Франция)</h3><p>Готовый европейский аккаунт по спеццене. Полный доступ.</p></div>
                     <div>
                         <div class="card-meta"><span>🛒 Спецпредложение</span><span class="rating">★ 5.0 (64)</span></div>
                         <div class="price"><span class="price-old">4 200 ₽</span> 2 500 ₽</div>
@@ -521,12 +490,62 @@
                     </div>
                 </div>
 
-                <div class="card promo-card" data-category="accounts telegram" data-name="Telegram Канал 25 000 подписчиков (Крипто / Финансы)" onclick="openDetails('Telegram Канал 25 000 подписчиков (Крипто / Финансы)', 1800, 'Готовый премиальный Telegram канал в финансовой тематике с активной аудиторией. Передача прав владельца и полная выгрузка данных на ваш email.', 'Регион: Глобальный | 25k участников | Отлежка: 1.5 года', 'Полные права администратора', 'Безопасная сделка (Эскроу)')">
-                    <div class="badge-seller" style="background:rgba(34,158,217,0.2); color:#229ed9; border-color:rgba(34,158,217,0.4);">🔥 Акция Telegram</div>
+                <div class="card promo-card" data-category="tiktok" data-name="TikTok: 50 000 просмотров видео (Акция)" onclick="openDetails('TikTok: 50 000 просмотров видео', 490, 'Быстрый прорыв в рекомендации.', 'Без списаний', 'По ссылке на видео', 'Автостарт')">
+                    <div class="badge-seller">🔥 Скидка 50%</div>
+                    <div><h3>TikTok: 50 000 просмотров видео (Акция)</h3><p>Мощный стимул для алгоритмов рекомендаций TikTok.</p></div>
                     <div>
-                        <h3>Telegram Канал 25 000 подписчиков (Крипто / Финансы)</h3>
-                        <p>Раскрученный канал с живыми подписчиками. Полный перенос прав и доступов.</p>
+                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 4.9 (112)</span></div>
+                        <div class="price"><span class="price-old">1 000 ₽</span> 490 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('TikTok 50k просмотров', 490)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('TikTok 50k просмотров', 490)">Купить</button>
+                        </div>
                     </div>
+                </div>
+
+                <div class="card promo-card" data-category="tiktok" data-name="TikTok: 10 000 живых лайков (Скидка)" onclick="openDetails('TikTok: 10 000 живых лайков', 650, 'Качественные лайки на ваши ролики.', 'Без ботов', 'По ссылке', 'Мгновенно')">
+                    <div class="badge-seller">🔥 Акция TikTok</div>
+                    <div><h3>TikTok: 10 000 живых лайков (Скидка)</h3><p>Повышение активности под вашими видеороликами.</p></div>
+                    <div>
+                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 5.0 (89)</span></div>
+                        <div class="price"><span class="price-old">1 300 ₽</span> 650 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('TikTok 10k лайков', 650)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('TikTok 10k лайков', 650)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card promo-card" data-category="tiktok" data-name="TikTok: 5 000 подписчиков в профиль" onclick="openDetails('TikTok: 5 000 подписчиков в профиль', 1100, 'Живая качественная база подписчиков.', 'Плавное поступление', 'По нику', 'Автостарт')">
+                    <div class="badge-seller">🔥 Акция TikTok</div>
+                    <div><h3>TikTok: 5 000 подписчиков в профиль</h3><p>Надежное продвижение вашего TikTok аккаунта.</p></div>
+                    <div>
+                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 4.9 (76)</span></div>
+                        <div class="price"><span class="price-old">2 200 ₽</span> 1 100 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('TikTok 5k подписчиков акция', 1100)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('TikTok 5k подписчиков акция', 1100)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card promo-card" data-category="accounts tiktok" data-name="TikTok Аккаунт 300k (США, монетизация)" onclick="openDetails('TikTok Аккаунт 300k (США, монетизация)', 6500, 'Топовый американский аккаунт с подключенной монетизацией.', 'США | 300k фолловеров', 'Родная почта + полный контроль', 'Эскроу')">
+                    <div class="badge-seller">🔥 Суперхит</div>
+                    <div><h3>TikTok Аккаунт 300k (США, монетизация)</h3><p>Готовый американский топ-аккаунт с доходом.</p></div>
+                    <div>
+                        <div class="card-meta"><span>🛒 Спецпредложение</span><span class="rating">★ 5.0 (140)</span></div>
+                        <div class="price"><span class="price-old">12 000 ₽</span> 6 500 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('TikTok 300k USA', 6500)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('TikTok 300k USA', 6500)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Telegram промо -->
+                <div class="card promo-card" data-category="accounts telegram" data-name="Telegram Канал 25 000 подписчиков (Крипто)" onclick="openDetails('Telegram Канал 25 000 подписчиков (Крипто)', 1800, 'Финансовый канал с активной крипто-аудиторией.', 'Глобальный | 25k участников', 'Полные права администратора', 'Эскроу')">
+                    <div class="badge-seller" style="background:rgba(34,158,217,0.2); color:#229ed9;">🔥 Акция Telegram</div>
+                    <div><h3>Telegram Канал 25 000 подписчиков (Крипто)</h3><p>Раскрученный канал с живыми участниками.</p></div>
                     <div>
                         <div class="card-meta"><span>🛒 Спецпредложение</span><span class="rating">★ 4.9 (41)</span></div>
                         <div class="price"><span class="price-old">3 000 ₽</span> 1 800 ₽</div>
@@ -537,12 +556,62 @@
                     </div>
                 </div>
 
-                <div class="card promo-card" data-category="accounts instagram" data-name="Instagram Профиль 85 000 подписчиков (Lifestyle / Путешествия)" onclick="openDetails('Instagram Профиль 85 000 подписчиков (Lifestyle / Путешествия)', 3200, 'Популярный аккаунт в сфере путешествий и лайфстайла с охватной аудиторией из США. Родная почта и все данные для смены привязок отправляются на ваш email.', 'Регион: США | 85k фолловеров | Отлежка: 1 год', 'Родная почта + полный доступ', 'Безопасная сделка (Эскроу)')">
-                    <div class="badge-seller" style="background:rgba(225,48,108,0.2); color:#e1306c; border-color:rgba(225,48,108,0.4);">🔥 Акция Instagram</div>
+                <div class="card promo-card" data-category="telegram" data-name="Telegram: 10 000 подписчиков в канал (Акция)" onclick="openDetails('Telegram: 10 000 подписчиков в канал', 2200, 'Живые качественные подписчики с гарантией.', 'Плавный приток', 'По ссылке', 'Автостарт')">
+                    <div class="badge-seller" style="background:rgba(34,158,217,0.2); color:#229ed9;">🔥 Скидка 50%</div>
+                    <div><h3>Telegram: 10 000 подписчиков в канал (Акция)</h3><p>Быстрый набор солидной базы участников.</p></div>
                     <div>
-                        <h3>Instagram Профиль 85 000 подписчиков (Lifestyle / Путешествия)</h3>
-                        <p>Американский инстаграм-профиль с лояльной аудиторией и чистой историей.</p>
+                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 4.9 (180)</span></div>
+                        <div class="price"><span class="price-old">4 500 ₽</span> 2 200 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('Telegram 10k подписчиков акция', 2200)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Telegram 10k подписчиков акция', 2200)">Купить</button>
+                        </div>
                     </div>
+                </div>
+
+                <div class="card promo-card" data-category="telegram" data-name="Telegram: 50 000 просмотров на последние 20 постов" onclick="openDetails('Telegram: 50 000 просмотров на посты', 450, 'Охваты для повышения статуса канала.', 'Без списаний', 'По ссылке на канал', 'Мгновенно')">
+                    <div class="badge-seller" style="background:rgba(34,158,217,0.2); color:#229ed9;">🔥 Акция Telegram</div>
+                    <div><h3>Telegram: 50 000 просмотров на посты</h3><p>Отличные охваты для вашей ленты записей.</p></div>
+                    <div>
+                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 5.0 (95)</span></div>
+                        <div class="price"><span class="price-old">900 ₽</span> 450 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('Telegram 50k просмотров постов', 450)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Telegram 50k просмотров постов', 450)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card promo-card" data-category="telegram" data-name="Telegram: Пакет 1 000 премиум-реакций на посты" onclick="openDetails('Telegram: 1000 премиум-реакций', 290, 'Эмодзи-реакции на ваши публикации.', 'Все виды реакций', 'По ссылке', 'Автостарт')">
+                    <div class="badge-seller" style="background:rgba(34,158,217,0.2); color:#229ed9;">🔥 Акция Telegram</div>
+                    <div><h3>Telegram: Пакет 1 000 премиум-реакций на посты</h3><p>Живые эмодзи под каждым новым постом.</p></div>
+                    <div>
+                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 4.9 (67)</span></div>
+                        <div class="price"><span class="price-old">600 ₽</span> 290 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('Telegram 1k реакций', 290)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Telegram 1k реакций', 290)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card promo-card" data-category="telegram" data-name="Telegram Premium на 1 год (Официальный подарок)" onclick="openDetails('Telegram Premium на 1 год (Официальный подарок)', 1490, 'Официальная годовая подписка по акции.', 'Без входа в аккаунт', 'По юзернейму', 'Моментально')">
+                    <div class="badge-seller" style="background:rgba(34,158,217,0.2); color:#229ed9;">🔥 Хит Акция</div>
+                    <div><h3>Telegram Premium на 1 год (Официальный подарок)</h3><p>Годовая подписка со скидкой 50%.</p></div>
+                    <div>
+                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 5.0 (310)</span></div>
+                        <div class="price"><span class="price-old">2 990 ₽</span> 1 490 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('Telegram Premium 1 год', 1490)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Telegram Premium 1 год', 1490)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Instagram промо -->
+                <div class="card promo-card" data-category="accounts instagram" data-name="Instagram Профиль 85k (Lifestyle / Путешествия)" onclick="openDetails('Instagram Профиль 85k (Lifestyle / Путешествия)', 3200, 'Популярный аккаунт в сфере путешествий и лайфстайла.', 'США | 85k фолловеров', 'Родная почта + полный доступ', 'Эскроу')">
+                    <div class="badge-seller" style="background:rgba(225,48,108,0.2); color:#e1306c;">🔥 Акция Instagram</div>
+                    <div><h3>Instagram Профиль 85k (Lifestyle / Путешествия)</h3><p>Американский инстаграм-профиль с лояльной аудиторией.</p></div>
                     <div>
                         <div class="card-meta"><span>🛒 Спецпредложение</span><span class="rating">★ 4.9 (53)</span></div>
                         <div class="price"><span class="price-old">5 500 ₽</span> 3 200 ₽</div>
@@ -553,12 +622,49 @@
                     </div>
                 </div>
 
-                <div class="card promo-card" data-category="accounts youtube" data-name="YouTube Канал 40 000 подписчиков (Гейминг / Стримы)" onclick="openDetails('YouTube Канал 40 000 подписчиков (Гейминг / Стримы)', 4500, 'Канал с активной игровой аудиторией, полностью готовый к стримам и подключению монетизации. Передача через Brand Account на ваш email.', 'Регион: СНГ | 40k подписчиков | Без страйков', 'Полный доступ владельца', 'Безопасная сделка (Эскроу)')">
-                    <div class="badge-seller" style="background:rgba(255,0,0,0.2); color:#ff4444; border-color:rgba(255,0,0,0.4);">🔥 Акция YouTube</div>
+                <div class="card promo-card" data-category="instagram" data-name="Instagram: 20 000 подписчиков в профиль (Акция)" onclick="openDetails('Instagram: 20 000 подписчиков в профиль', 2400, 'Качественные фолловеры без списаний.', 'Плавный нагон', 'По нику', 'Автостарт')">
+                    <div class="badge-seller" style="background:rgba(225,48,108,0.2); color:#e1306c;">🔥 Скидка 50%</div>
+                    <div><h3>Instagram: 20 000 подписчиков в профиль (Акция)</h3><p>Быстрый рост аудитории вашего инстаграм аккаунта.</p></div>
                     <div>
-                        <h3>YouTube Канал 40 000 подписчиков (Гейминг / Стримы)</h3>
-                        <p>Игровой канал с живыми зрителями. Безопасная передача прав через бренд-аккаунт.</p>
+                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 4.9 (134)</span></div>
+                        <div class="price"><span class="price-old">4 800 ₽</span> 2 400 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('Instagram 20k подписчиков', 2400)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Instagram 20k подписчиков', 2400)">Купить</button>
+                        </div>
                     </div>
+                </div>
+
+                <div class="card promo-card" data-category="instagram" data-name="Instagram: 15 000 просмотров на Reels (Акция)" onclick="openDetails('Instagram: 15 000 просмотров на Reels', 350, 'Вывод видео Reels в рекомендации.', 'Без списаний', 'По ссылке на Reels', 'Моментально')">
+                    <div class="badge-seller" style="background:rgba(225,48,108,0.2); color:#e1306c;">🔥 Акция Instagram</div>
+                    <div><h3>Instagram: 15 000 просмотров на Reels (Акция)</h3><p>Отличный толчок для алгоритмов рекомендаций Instagram.</p></div>
+                    <div>
+                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 5.0 (88)</span></div>
+                        <div class="price"><span class="price-old">750 ₽</span> 350 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('Instagram 15k просмотров Reels', 350)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Instagram 15k просмотров Reels', 350)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card promo-card" data-category="instagram" data-name="Instagram: 10 000 лайков на посты (Скидка)" onclick="openDetails('Instagram: 10 000 лайков на посты', 590, 'Живые качественные лайки.', 'Плавная подача', 'По ссылке', 'Автостарт')">
+                    <div class="badge-seller" style="background:rgba(225,48,108,0.2); color:#e1306c;">🔥 Акция Instagram</div>
+                    <div><h3>Instagram: 10 000 лайков на посты (Скидка)</h3><p>Повышение вовлеченности и активности на странице.</p></div>
+                    <div>
+                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 4.9 (72)</span></div>
+                        <div class="price"><span class="price-old">1 200 ₽</span> 590 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('Instagram 10k лайков постов', 590)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Instagram 10k лайков постов', 590)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- YouTube промо -->
+                <div class="card promo-card" data-category="accounts youtube" data-name="YouTube Канал 40k подписчиков (Гейминг / Стримы)" onclick="openDetails('YouTube Канал 40k (Гейминг / Стримы)', 4500, 'Канал с активной игровой аудиторией.', 'СНГ | 40k подписчиков', 'Brand Account + Полный контроль', 'Эскроу')">
+                    <div class="badge-seller" style="background:rgba(255,0,0,0.2); color:#ff4444;">🔥 Акция YouTube</div>
+                    <div><h3>YouTube Канал 40k подписчиков (Гейминг / Стримы)</h3><p>Игровой канал с живыми зрителями.</p></div>
                     <div>
                         <div class="card-meta"><span>🛒 Спецпредложение</span><span class="rating">★ 5.0 (29)</span></div>
                         <div class="price"><span class="price-old">7 500 ₽</span> 4 500 ₽</div>
@@ -569,12 +675,36 @@
                     </div>
                 </div>
 
-                <div class="card promo-card" data-category="accounts vk" data-name="VK Сообщество 50 000 подписчиков (Юмор / Развлечения)" onclick="openDetails('VK Сообщество 50 000 подписчиков (Юмор / Развлечения)', 1200, 'Раскрученная группа ВКонтакте развлекательной тематики с высокой активностью и живыми комментариями. Передача прав главного администратора.', 'Регион: Россия | 50k участников | Отлежка: 2 года', 'Полные права администратора', 'Безопасная сделка (Эскроу)')">
-                    <div class="badge-seller" style="background:rgba(0,119,255,0.2); color:#0077ff; border-color:rgba(0,119,255,0.4);">🔥 Акция ВКонтакте</div>
+                <div class="card promo-card" data-category="youtube" data-name="YouTube: 5 000 просмотров на видео (Акция)" onclick="openDetails('YouTube: 5 000 просмотров на видео', 690, 'Качественные удержанные просмотры.', 'Без списаний', 'По ссылке на видео', 'Плавный запуск')">
+                    <div class="badge-seller" style="background:rgba(255,0,0,0.2); color:#ff4444;">🔥 Скидка 50%</div>
+                    <div><h3>YouTube: 5 000 просмотров на видео (Акция)</h3><p>Продвижение видеоролика в топ поиска YouTube.</p></div>
                     <div>
-                        <h3>VK Сообщество 50 000 подписчиков (Юмор / Развлечения)</h3>
-                        <p>Активная группа ВКонтакте с устоявшейся базой участников.</p>
+                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 4.9 (115)</span></div>
+                        <div class="price"><span class="price-old">1 400 ₽</span> 690 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('YouTube 5k просмотров', 690)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('YouTube 5k просмотров', 690)">Купить</button>
+                        </div>
                     </div>
+                </div>
+
+                <div class="card promo-card" data-category="youtube" data-name="YouTube: 1 000 подписчиков на канал (Скидка)" onclick="openDetails('YouTube: 1 000 подписчиков на канал', 1590, 'Надежные подписчики для вашего канала.', 'Плавный прирост', 'По ссылке', 'Автостарт')">
+                    <div class="badge-seller" style="background:rgba(255,0,0,0.2); color:#ff4444;">🔥 Акция YouTube</div>
+                    <div><h3>YouTube: 1 000 подписчиков на канал (Скидка)</h3><p>Увеличение базы фолловеров YouTube канала.</p></div>
+                    <div>
+                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 4.9 (84)</span></div>
+                        <div class="price"><span class="price-old">3 200 ₽</span> 1 590 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('YouTube 1k подписчиков', 1590)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('YouTube 1k подписчиков', 1590)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VK промо -->
+                <div class="card promo-card" data-category="accounts vk" data-name="VK Сообщество 50k (Юмор / Развлечения)" onclick="openDetails('VK Сообщество 50k (Юмор / Развлечения)', 1200, 'Раскрученная группа ВКонтакте с высокой активностью.', 'Россия | 50k участников', 'Полные права администратора', 'Эскроу')">
+                    <div class="badge-seller" style="background:rgba(0,119,255,0.2); color:#0077ff;">🔥 Акция ВКонтакте</div>
+                    <div><h3>VK Сообщество 50k (Юмор / Развлечения)</h3><p>Активная группа ВКонтакте с устоявшейся аудиторией.</p></div>
                     <div>
                         <div class="card-meta"><span>🛒 Спецпредложение</span><span class="rating">★ 4.8 (37)</span></div>
                         <div class="price"><span class="price-old">2 200 ₽</span> 1 200 ₽</div>
@@ -585,238 +715,36 @@
                     </div>
                 </div>
 
-                <!-- 25 ДОПОЛНИТЕЛЬНЫХ 🔥 АКЦИОННЫХ ПРЕДЛОЖЕНИЙ ДЛЯ ВСЕХ СОЦСЕТЕЙ -->
-                
-                <div class="card promo-card" data-category="accounts tiktok" data-name="TikTok Аккаунт 200k подписчиков (США, монетизация)" onclick="openDetails('TikTok Аккаунт 200k подписчиков (США, монетизация)', 4900, 'Топовый американский аккаунт с подключенной монетизацией и огромными охватами. Идеален под арбитраж или блог.', 'Регион: США | 200k фолловеров | Монетизация активна', 'Родная почта + полный контроль', 'Безопасная сделка (Эскроу)')">
-                    <div class="badge-seller">🔥 Супер Акция</div>
+                <div class="card promo-card" data-category="vk" data-name="VK: 10 000 подписчиков в группу (Акция)" onclick="openDetails('VK: 10 000 подписчиков в группу', 1450, 'Живые участники в паблик или группу VK.', 'Без списаний', 'По ссылке', 'Автостарт')">
+                    <div class="badge-seller" style="background:rgba(0,119,255,0.2); color:#0077ff;">🔥 Скидка 50%</div>
+                    <div><h3>VK: 10 000 подписчиков в группу (Акция)</h3><p>Быстрый набор участников для вашего сообщества VK.</p></div>
                     <div>
-                        <h3>TikTok Аккаунт 200k подписчиков (США, монетизация)</h3>
-                        <p>Американский премиум аккаунт с включенной программой монетизации по суперцене.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>🛒 Спецпредложение</span><span class="rating">★ 5.0 (88)</span></div>
-                        <div class="price"><span class="price-old">8 500 ₽</span> 4 900 ₽</div>
+                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 4.9 (104)</span></div>
+                        <div class="price"><span class="price-old">3 000 ₽</span> 1 450 ₽</div>
                         <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('TikTok Аккаунт 200k (США)', 4900)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('TikTok Аккаунт 200k (США)', 4900)">Купить</button>
+                            <button class="btn btn-secondary" onclick="addToCart('VK 10k подписчиков', 1450)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('VK 10k подписчиков', 1450)">Купить</button>
                         </div>
                     </div>
                 </div>
 
-                <div class="card promo-card" data-category="accounts tiktok" data-name="TikTok Аккаунт 50k подписчиков (Германия)" onclick="openDetails('TikTok Аккаунт 50k подписчиков (Германия)', 1500, 'Немецкий аккаунт с живой европейской платежеспособной аудиторией.', 'Регион: Германия | 50k фолловеров | Отлежка: 6 мес.', 'Родная почта + полный доступ', 'Безопасная сделка (Эскроу)')">
-                    <div class="badge-seller">🔥 Акция TikTok</div>
+                <div class="card promo-card" data-category="vk" data-name="VK: 5 000 лайков на посты и фото" onclick="openDetails('VK: 5 000 лайков на посты и фото', 390, 'Качественные лайки на любые публикации VK.', 'Быстрый старт', 'По ссылке', 'Мгновенно')">
+                    <div class="badge-seller" style="background:rgba(0,119,255,0.2); color:#0077ff;">🔥 Акция ВКонтакте</div>
+                    <div><h3>VK: 5 000 лайков на посты и фото</h3><p>Увеличение сердечек и популярности постов VK.</p></div>
                     <div>
-                        <h3>TikTok Аккаунт 50k подписчиков (Германия)</h3>
-                        <p>Европейский аккаунт с чистой историей под любые задачи.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>🛒 Спецпредложение</span><span class="rating">★ 4.8 (34)</span></div>
-                        <div class="price"><span class="price-old">2 800 ₽</span> 1 500 ₽</div>
+                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 4.8 (62)</span></div>
+                        <div class="price"><span class="price-old">800 ₽</span> 390 ₽</div>
                         <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('TikTok Аккаунт 50k (Германия)', 1500)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('TikTok Аккаунт 50k (Германия)', 1500)">Купить</button>
+                            <button class="btn btn-secondary" onclick="addToCart('VK 5k лайков', 390)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('VK 5k лайков', 390)">Купить</button>
                         </div>
                     </div>
                 </div>
 
-                <div class="card promo-card" data-category="accounts tiktok" data-name="TikTok Аккаунт 100k подписчиков (Танцы / Тренды)" onclick="openDetails('TikTok Аккаунт 100k подписчиков (Танцы / Тренды)', 2100, 'Яркий молодежный аккаунт с высокой вовлеченностью и вирусными роликами.', 'Регион: СНГ / Global | 100k фолловеров | Без банов', 'Родная почта + полный контроль', 'Безопасная сделка (Эскроу)')">
-                    <div class="badge-seller">🔥 Акция TikTok</div>
-                    <div>
-                        <h3>TikTok Аккаунт 100k подписчиков (Танцы / Тренды)</h3>
-                        <p>Раскрученный трендовый профиль с активной молодой аудиторией.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>🛒 Спецпредложение</span><span class="rating">★ 4.9 (45)</span></div>
-                        <div class="price"><span class="price-old">3 800 ₽</span> 2 100 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('TikTok Аккаунт 100k (Тренды)', 2100)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('TikTok Аккаунт 100k (Тренды)', 2100)">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card promo-card" data-category="accounts telegram" data-name="Telegram Канал 50 000 подписчиков (Новости / СМИ)" onclick="openDetails('Telegram Канал 50 000 подписчиков (Новости / СМИ)', 3500, 'Крупный новостной канал с живыми охватами и стабильным суточным приростом.', 'Регион: СНГ | 50k участников | Отлежка: 2 года', 'Полные права владельца', 'Безопасная сделка (Эскроу)')">
-                    <div class="badge-seller" style="background:rgba(34,158,217,0.2); color:#229ed9; border-color:rgba(34,158,217,0.4);">🔥 Акция Telegram</div>
-                    <div>
-                        <h3>Telegram Канал 50 000 подписчиков (Новости / СМИ)</h3>
-                        <p>Авторитетный новостной ресурс с лояльной аудиторией и готовой базой монетизации.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>🛒 Спецпредложение</span><span class="rating">★ 5.0 (72)</span></div>
-                        <div class="price"><span class="price-old">6 000 ₽</span> 3 500 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('Telegram Канал 50k (Новости)', 3500)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('Telegram Канал 50k (Новости)', 3500)">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card promo-card" data-category="accounts telegram" data-name="Telegram Канал 15 000 подписчиков (Психология)" onclick="openDetails('Telegram Канал 15 000 подписчиков (Психология)', 1100, 'Уютный авторский канал о психологии и саморазвитии с высокой вовлеченностью.', 'Регион: СНГ | 15k участников | Отлежка: 1 год', 'Полные права владельца', 'Безопасная сделка (Эскроу)')">
-                    <div class="badge-seller" style="background:rgba(34,158,217,0.2); color:#229ed9; border-color:rgba(34,158,217,0.4);">🔥 Акция Telegram</div>
-                    <div>
-                        <h3>Telegram Канал 15 000 подписчиков (Психология)</h3>
-                        <p>Тематический канал с женской и думающей аудиторией.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>🛒 Спецпредложение</span><span class="rating">★ 4.9 (28)</span></div>
-                        <div class="price"><span class="price-old">2 000 ₽</span> 1 100 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('Telegram Канал 15k (Психология)', 1100)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('Telegram Канал 15k (Психология)', 1100)">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card promo-card" data-category="accounts telegram" data-name="Telegram Канал 30 000 подписчиков (Технологии / IT)" onclick="openDetails('Telegram Канал 30 000 подписчиков (Технологии / IT)', 2200, 'Технологический блог с гик-аудиторией, разработчиками и любителями гаджетов.', 'Регион: СНГ | 30k участников | Отлежка: 1.5 года', 'Полные права владельца', 'Безопасная сделка (Эскроу)')">
-                    <div class="badge-seller" style="background:rgba(34,158,217,0.2); color:#229ed9; border-color:rgba(34,158,217,0.4);">🔥 Акция Telegram</div>
-                    <div>
-                        <h3>Telegram Канал 30 000 подписчиков (Технологии / IT)</h3>
-                        <p>Премиальная IT-аудитория с высокими рекламными охватами.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>🛒 Спецпредложение</span><span class="rating">★ 4.8 (39)</span></div>
-                        <div class="price"><span class="price-old">3 900 ₽</span> 2 200 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('Telegram Канал 30k (IT)', 2200)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('Telegram Канал 30k (IT)', 2200)">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card promo-card" data-category="accounts instagram" data-name="Instagram Профиль 120 000 подписчиков (Мода / Стиль)" onclick="openDetails('Instagram Профиль 120 000 подписчиков (Мода / Стиль)', 4600, 'Эстетичный аккаунт о моде, стиле и бьюти-индустрии с европейской аудиторией.', 'Регион: Европа | 120k фолловеров | Отлежка: 2 года', 'Родная почта + полный доступ', 'Безопасная сделка (Эскроу)')">
-                    <div class="badge-seller" style="background:rgba(225,48,108,0.2); color:#e1306c; border-color:rgba(225,48,108,0.4);">🔥 Акция Instagram</div>
-                    <div>
-                        <h3>Instagram Профиль 120 000 подписчиков (Мода / Стиль)</h3>
-                        <p>Крупный fashion-блог с высоким уровнем визуального контента и вовлеченности.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>🛒 Спецпредложение</span><span class="rating">★ 5.0 (61)</span></div>
-                        <div class="price"><span class="price-old">7 900 ₽</span> 4 600 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('Instagram Профиль 120k', 4600)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('Instagram Профиль 120k', 4600)">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card promo-card" data-category="accounts instagram" data-name="Instagram Профиль 45 000 подписчиков (Фитнес / Спорт)" onclick="openDetails('Instagram Профиль 45 000 подписчиков (Фитнес / Спорт)', 1750, 'Спортивный аккаунт с подборками тренировок, питания и мотивации.', 'Регион: СНГ | 45k фолловеров | Отлежка: 10 мес.', 'Родная почта + полный доступ', 'Безопасная сделка (Эскроу)')">
-                    <div class="badge-seller" style="background:rgba(225,48,108,0.2); color:#e1306c; border-color:rgba(225,48,108,0.4);">🔥 Акция Instagram</div>
-                    <div>
-                        <h3>Instagram Профиль 45 000 подписчиков (Фитнес / Спорт)</h3>
-                        <p>Активная аудитория, следящая за здоровьем и спортивным образом жизни.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>🛒 Спецпредложение</span><span class="rating">★ 4.9 (48)</span></div>
-                        <div class="price"><span class="price-old">3 100 ₽</span> 1 750 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('Instagram Профиль 45k', 1750)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('Instagram Профиль 45k', 1750)">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card promo-card" data-category="accounts instagram" data-name="Instagram Профиль 60 000 подписчиков (Еда / Рецепты)" onclick="openDetails('Instagram Профиль 60 000 подписчиков (Еда / Рецепты)', 2300, 'Популярный кулинарный блог с видеорецептами и высокими охватами в Reels.', 'Регион: СНГ | 60k фолловеров | Отлежка: 1 год', 'Родная почта + полный доступ', 'Безопасная сделка (Эскроу)')">
-                    <div class="badge-seller" style="background:rgba(225,48,108,0.2); color:#e1306c; border-color:rgba(225,48,108,0.4);">🔥 Акция Instagram</div>
-                    <div>
-                        <h3>Instagram Профиль 60 000 подписчиков (Еда / Рецепты)</h3>
-                        <p>Отличная база для продвижения брендов питания, кулинарии или рекламы.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>🛒 Спецпредложение</span><span class="rating">★ 4.8 (52)</span></div>
-                        <div class="price"><span class="price-old">4 000 ₽</span> 2 300 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('Instagram Профиль 60k (Рецепты)', 2300)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('Instagram Профиль 60k (Рецепты)', 2300)">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card promo-card" data-category="accounts youtube" data-name="YouTube Канал 80 000 подписчиков (Техно-обзоры)" onclick="openDetails('YouTube Канал 80 000 подписчиков (Техно-обзоры)', 5900, 'Продвинутый техно-канал с обзорами гаджетов. Монетизация подключается без проблем.', 'Регион: СНГ | 80k подписчиков | Чистая история', 'Brand Account + Полный контроль', 'Безопасная сделка (Эскроу)')">
-                    <div class="badge-seller" style="background:rgba(255,0,0,0.2); color:#ff4444; border-color:rgba(255,0,0,0.4);">🔥 Акция YouTube</div>
-                    <div>
-                        <h3>YouTube Канал 80 000 подписчиков (Техно-обзоры)</h3>
-                        <p>Крупный технологический канал с лояльной аудиторией и отличным потенциалом.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>🛒 Спецпредложение</span><span class="rating">★ 5.0 (40)</span></div>
-                        <div class="price"><span class="price-old">9 900 ₽</span> 5 900 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('YouTube Канал 80k', 5900)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('YouTube Канал 80k', 5900)">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card promo-card" data-category="accounts youtube" data-name="YouTube Канал 25 000 подписчиков (Влоги / Лайфстайл)" onclick="openDetails('YouTube Канал 25 000 подписчиков (Влоги / Лайфстайл)', 2600, 'Авторский лайфстайл канал с активными подписчиками и регулярными просмотрами.', 'Регион: СНГ | 25k подписчиков | Без страйков', 'Brand Account + Полный контроль', 'Безопасная сделка (Эскроу)')">
-                    <div class="badge-seller" style="background:rgba(255,0,0,0.2); color:#ff4444; border-color:rgba(255,0,0,0.4);">🔥 Акция YouTube</div>
-                    <div>
-                        <h3>YouTube Канал 25 000 подписчиков (Влоги / Лайфстайл)</h3>
-                        <p>Готовый канал для личного бренда или развлекательного контента.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>🛒 Спецпредложение</span><span class="rating">★ 4.9 (31)</span></div>
-                        <div class="price"><span class="price-old">4 500 ₽</span> 2 600 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('YouTube Канал 25k', 2600)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('YouTube Канал 25k', 2600)">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card promo-card" data-category="accounts vk" data-name="VK Сообщество 100 000 подписчиков (Цитаты / Мудрость)" onclick="openDetails('VK Сообщество 100 000 подписчиков (Цитаты / Мудрость)', 3100, 'Легендарное крупное паблик-сообщество ВКонтакте с высокой активностью в ленте.', 'Регион: Россия | 100k участников | Отлежка: 3 года', 'Полные права главного администратора', 'Безопасная сделка (Эскроу)')">
-                    <div class="badge-seller" style="background:rgba(0,119,255,0.2); color:#0077ff; border-color:rgba(0,119,255,0.4);">🔥 Акция ВКонтакте</div>
-                    <div>
-                        <h3>VK Сообщество 100 000 подписчиков (Цитаты / Мудрость)</h3>
-                        <p>Огромный охватный паблик с лояльной аудиторией и историей.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>🛒 Спецпредложение</span><span class="rating">★ 4.9 (84)</span></div>
-                        <div class="price"><span class="price-old">5 500 ₽</span> 3 100 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('VK Сообщество 100k', 3100)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('VK Сообщество 100k', 3100)">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card promo-card" data-category="accounts vk" data-name="VK Сообщество 35 000 подписчиков (Автомобили / Тюнинг)" onclick="openDetails('VK Сообщество 35 000 подписчиков (Автомобили / Тюнинг)', 1400, 'Автомобильное сообщество с мужской заинтересованной аудиторией.', 'Регион: Россия | 35k участников | Отлежка: 1.5 года', 'Полные права администратора', 'Безопасная сделка (Эскроу)')">
-                    <div class="badge-seller" style="background:rgba(0,119,255,0.2); color:#0077ff; border-color:rgba(0,119,255,0.4);">🔥 Акция ВКонтакте</div>
-                    <div>
-                        <h3>VK Сообщество 35 000 подписчиков (Автомобили / Тюнинг)</h3>
-                        <p>Тематическая группа автолюбителей с живыми обсуждениями и лайками.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>🛒 Спецпредложение</span><span class="rating">★ 4.8 (26)</span></div>
-                        <div class="price"><span class="price-old">2 500 ₽</span> 1 400 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('VK Сообщество 35k (Авто)', 1400)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('VK Сообщество 35k (Авто)', 1400)">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card promo-card" data-category="accounts vk" data-name="VK Сообщество 60 000 подписчиков (Кино / Сериалы)" onclick="openDetails('VK Сообщество 60 000 подписчиков (Кино / Сериалы)', 2200, 'Кинопаблик с обсуждениями новинок проката, трейлеров и подборками сериалов.', 'Регион: Россия | 60k участников | Отлежка: 2 года', 'Полные права администратора', 'Безопасная сделка (Эскроу)')">
-                    <div class="badge-seller" style="background:rgba(0,119,255,0.2); color:#0077ff; border-color:rgba(0,119,255,0.4);">🔥 Акция ВКонтакте</div>
-                    <div>
-                        <h3>VK Сообщество 60 000 подписчиков (Кино / Сериалы)</h3>
-                        <p>Активная кино-группа с хорошими охватами постов и видеозаписей.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>🛒 Спецпредложение</span><span class="rating">★ 4.9 (44)</span></div>
-                        <div class="price"><span class="price-old">3 800 ₽</span> 2 200 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('VK Сообщество 60k (Кино)', 2200)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('VK Сообщество 60k (Кино)', 2200)">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card promo-card" data-category="accounts telegram" data-name="Discord Сервер 10 000 участников (Игровой + Бусты)" onclick="openDetails('Discord Сервер 10 000 участников (Игровой + Бусты)', 1990, 'Прокачанный геймерский Discord сервер с активными участниками и уровнем бустов.', 'Глобальный | 10k участников | 2 уровень буста', 'Передача владельца сервера', 'Безопасная сделка (Эскроу)')">
-                    <div class="badge-seller" style="background:rgba(88,101,242,0.2); color:#5865f2; border-color:rgba(88,101,242,0.4);">🔥 Акция Discord</div>
-                    <div>
-                        <h3>Discord Сервер 10 000 участников (Игровой + Бусты)</h3>
-                        <p>Готовое игровое сообщество с настроенными ботами, каналами и ролями.</p>
-                    </div>
+                <!-- Discord, Steam, Numbers промо -->
+                <div class="card promo-card" data-category="accounts" data-name="Discord Сервер 10k участников + Бусты" onclick="openDetails('Discord Сервер 10k участников + Бусты', 1990, 'Прокачанный геймерский сервер с активными участниками.', 'Глобальный | 10k участников', 'Передача владельца', 'Эскроу')">
+                    <div class="badge-seller" style="background:rgba(88,101,242,0.2); color:#5865f2;">🔥 Акция Discord</div>
+                    <div><h3>Discord Сервер 10k участников + Бусты</h3><p>Готовое игровое сообщество с настроенными ботами.</p></div>
                     <div>
                         <div class="card-meta"><span>🛒 Спецпредложение</span><span class="rating">★ 4.9 (33)</span></div>
                         <div class="price"><span class="price-old">3 500 ₽</span> 1 990 ₽</div>
@@ -827,109 +755,36 @@
                     </div>
                 </div>
 
-                <div class="card promo-card" data-category="accounts" data-name="Steam Аккаунт с праймом CS2 + инвентарь" onclick="openDetails('Steam Аккаунт с праймом CS2 + инвентарь', 2700, 'Личный аккаунт Steam с купленным прайсом CS2, играми и кейсами в инвентаре.', 'Регион: Казахстан / СНГ | Без вак-банов | Родная почта', 'Полный доступ + первая почта', 'Безопасная сделка (Эскроу)')">
-                    <div class="badge-seller" style="background:rgba(255,255,255,0.2); color:#fff; border-color:rgba(255,255,255,0.4);">🔥 Акция Steam</div>
-                    <div>
-                        <h3>Steam Аккаунт с праймом CS2 + инвентарь</h3>
-                        <p>Надежный аккаунт Steam с Prime статусом и набором игр для комфортной игры.</p>
-                    </div>
+                <div class="card promo-card" data-category="accounts" data-name="Steam Аккаунт с праймом CS2 + инвентарь" onclick="openDetails('Steam Аккаунт с праймом CS2 + инвентарь', 2700, 'Личный аккаунт Steam с купленным прайсом.', 'Казахстан / СНГ', 'Родная почта + полный доступ', 'Эскроу')">
+                    <div class="badge-seller" style="background:rgba(255,255,255,0.2); color:#fff;">🔥 Акция Steam</div>
+                    <div><h3>Steam Аккаунт с праймом CS2 + инвентарь</h3><p>Надежный аккаунт Steam с Prime статусом.</p></div>
                     <div>
                         <div class="card-meta"><span>🛒 Спецпредложение</span><span class="rating">★ 5.0 (95)</span></div>
                         <div class="price"><span class="price-old">4 500 ₽</span> 2 700 ₽</div>
                         <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('Steam Аккаунт CS2 Prime', 2700)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('Steam Аккаунт CS2 Prime', 2700)">Купить</button>
+                            <button class="btn btn-secondary" onclick="addToCart('Steam CS2 Prime', 2700)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Steam CS2 Prime', 2700)">Купить</button>
                         </div>
                     </div>
                 </div>
 
-                <div class="card promo-card" data-category="telegram" data-name="Telegram Premium на 1 год (Официальный подарок)" onclick="openDetails('Telegram Premium на 1 год (Официальный подарок)', 1490, 'Официальная годовая подписка Telegram Premium по акции. Активация через официальный подарок в мессенджере.', 'Без входа в аккаунт | Моментально', 'По ссылке / юзернейму', 'Автодоставка')">
-                    <div class="badge-seller" style="background:rgba(34,158,217,0.2); color:#229ed9; border-color:rgba(34,158,217,0.4);">🔥 Акция Telegram</div>
+                <div class="card promo-card" data-category="numbers" data-name="Пакет из 10 виртуальных номеров для СМС" onclick="openDetails('Пакет из 10 виртуальных номеров', 990, 'Чистые номера для регистрации любых аккаунтов.', 'Мгновенно', 'Получение в боте', 'Автодоставка')">
+                    <div class="badge-seller">🔥 Акция СМС</div>
+                    <div><h3>Пакет из 10 виртуальных номеров для СМС</h3><p>Набор чистых номеров для верификации и регистрации.</p></div>
                     <div>
-                        <h3>Telegram Premium на 1 год (Официальный подарок)</h3>
-                        <p>Годовая подписка Telegram Premium со скидкой по специальному предложению.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 5.0 (210)</span></div>
-                        <div class="price"><span class="price-old">2 990 ₽</span> 1 490 ₽</div>
+                        <div class="card-meta"><span>📱 СМС активация</span><span class="rating">★ 4.9 (140)</span></div>
+                        <div class="price"><span class="price-old">1 800 ₽</span> 990 ₽</div>
                         <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('Telegram Premium 1 год', 1490)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('Telegram Premium 1 год', 1490)">Купить</button>
+                            <button class="btn btn-secondary" onclick="addToCart('Пакет 10 номеров СМС', 990)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Пакет 10 номеров СМС', 990)">Купить</button>
                         </div>
                     </div>
                 </div>
 
-                <div class="card promo-card" data-category="tiktok" data-name="TikTok: Пакет 10 000 просмотров на видео (Акция)" onclick="openDetails('TikTok: Пакет 10 000 просмотров на видео', 120, 'Быстрый старт для вывода ролика в рекомендации TikTok. Живые качественные просмотры.', 'Без списаний', 'По ссылке на видео', 'Автостарт 5 минут')">
-                    <div class="badge-seller">🔥 Скидка 60%</div>
-                    <div>
-                        <h3>TikTok: Пакет 10 000 просмотров на видео (Акция)</h3>
-                        <p>Мощный толчок для вашего видеоролика в рекомендации TikTok.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 4.9 (180)</span></div>
-                        <div class="price"><span class="price-old">350 ₽</span> 120 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('TikTok 10k просмотров', 120)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('TikTok 10k просмотров', 120)">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card promo-card" data-category="instagram" data-name="Instagram: Пакет 5 000 лайков на Reels (Акция)" onclick="openDetails('Instagram: Пакет 5 000 лайков на Reels', 290, 'Живые качественные лайки на ваши Reels для повышения ранжирования алгоритмом Instagram.', 'Плавная накрутка', 'По ссылке на Reels', 'Моментально')">
-                    <div class="badge-seller">🔥 Скидка 50%</div>
-                    <div>
-                        <h3>Instagram: Пакет 5 000 лайков на Reels (Акция)</h3>
-                        <p>Быстрое увеличение лайков на видео Reels для выхода в топ.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 4.9 (145)</span></div>
-                        <div class="price"><span class="price-old">600 ₽</span> 290 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('Instagram 5k лайков Reels', 290)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('Instagram 5k лайков Reels', 290)">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card promo-card" data-category="youtube" data-name="YouTube: 2 000 часов просмотра (Для монетизации)" onclick="openDetails('YouTube: 2 000 часов просмотра (Для монетизации)', 890, 'Помощь в наборе часов просмотра для подключения партнерской программы YouTube.', 'Безопасно для канала', 'По ссылке на видео / стрим', 'Плавный запуск')">
-                    <div class="badge-seller">🔥 Спеццена</div>
-                    <div>
-                        <h3>YouTube: 2 000 часов просмотра (Для монетизации)</h3>
-                        <p>Необходимые часы удержания для выполнения условий монетизации YouTube.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 4.9 (92)</span></div>
-                        <div class="price"><span class="price-old">1 800 ₽</span> 890 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('YouTube 2000 часов просмотра', 890)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('YouTube 2000 часов просмотра', 890)">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card promo-card" data-category="telegram" data-name="Telegram: 5 000 подписчиков в канал (Живые / С гарантиями)" onclick="openDetails('Telegram: 5 000 подписчиков в канал', 1350, 'Качественные подписчики в Telegram канал с гарантией от отписок.', 'Плавное поступление', 'По ссылке на канал', 'Автостарт')">
-                    <div class="badge-seller">🔥 Хит Акция</div>
-                    <div>
-                        <h3>Telegram: 5 000 подписчиков в канал (Живые / С гарантиями)</h3>
-                        <p>Быстрый набор солидной базы участников для вашего Telegram канала.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 4.9 (215)</span></div>
-                        <div class="price"><span class="price-old">2 700 ₽</span> 1 350 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('Telegram 5k подписчиков', 1350)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('Telegram 5k подписчиков', 1350)">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Остальные стандартные товары каталога -->
-                <div class="card" data-category="accounts tiktok" data-name="TikTok Аккаунт с монетизацией (50k подписчиков)" onclick="openDetails('TikTok Аккаунт с монетизацией (50k подписчиков)', 3490, 'Прокачанный TikTok аккаунт с живой аудиторией, подключенной Creator Rewards Program и отсутствием теневых банов.', 'США | Отлежка: 1 год | Без блокировок', 'Родная почта + полный доступ', 'Безопасная сделка (Эскроу)')">
+                <!-- Базовые товары каталога -->
+                <div class="card" data-category="accounts tiktok" data-name="TikTok Аккаунт с монетизацией (50k подписчиков)" onclick="openDetails('TikTok Аккаунт с монетизацией (50k подписчиков)', 3490, 'Прокачанный TikTok аккаунт с живой аудиторией, подключенной Creator Rewards Program.', 'США | Отлежка: 1 год', 'Родная почта + полный доступ', 'Эскроу')">
                     <div class="badge-seller">Топ аккаунт</div>
-                    <div>
-                        <h3>TikTok Аккаунт с монетизацией (50k подписчиков)</h3>
-                        <p>Готовый аккаунт с активными фоловерами. Данные придут на email.</p>
-                    </div>
+                    <div><h3>TikTok Аккаунт с монетизацией (50k подписчиков)</h3><p>Готовый аккаунт с активными фоловерами.</p></div>
                     <div>
                         <div class="card-meta"><span>🛒 Готовый аккаунт</span><span class="rating">★ 5.0 (38)</span></div>
                         <div class="price">3 490 ₽</div>
@@ -940,12 +795,9 @@
                     </div>
                 </div>
 
-                <div class="card" data-category="accounts telegram" data-name="Telegram Аккаунт с отлежкой 3+ года (Трастовый)" onclick="openDetails('Telegram Аккаунт с отлежкой 3+ года', 450, 'Возрастной аккаунт Telegram с высокой трастовостью, идеально подходит под создание каналов или чатов.', 'Европа | Отлежка: 3 года | 2FA настроен', 'Файл сессии + Данные входа на email', 'Безопасная сделка (Эскроу)')">
+                <div class="card" data-category="accounts telegram" data-name="Telegram Аккаунт с отлежкой 3+ года (Трастовый)" onclick="openDetails('Telegram Аккаунт с отлежкой 3+ года', 450, 'Возрастной аккаунт Telegram с высокой трастовостью.', 'Европа | Отлежка: 3 года', 'Файл сессии + Данные входа', 'Эскроу')">
                     <div class="badge-seller">Secure 🔒</div>
-                    <div>
-                        <h3>Telegram Аккаунт с отлежкой 3+ года (Трастовый)</h3>
-                        <p>Возрастной аккаунт с историей. Данные отправляются на email.</p>
-                    </div>
+                    <div><h3>Telegram Аккаунт с отлежкой 3+ года (Трастовый)</h3><p>Возрастной аккаунт с историей.</p></div>
                     <div>
                         <div class="card-meta"><span>🛒 Готовый аккаунт</span><span class="rating">★ 4.9 (82)</span></div>
                         <div class="price">450 ₽</div>
@@ -956,101 +808,9 @@
                     </div>
                 </div>
 
-                <div class="card" data-category="accounts instagram" data-name="Instagram Бизнес Аккаунт (12k подписчиков)" onclick="openDetails('Instagram Бизнес Аккаунт (12k подписчиков)', 1890, 'Оформленный аккаунт под интернет-магазин или блог. На ваш email придет логин и пароль.', 'СНГ | Отлежка: 8 месяцев | Бизнес-профиль', 'Родная почта (Gmail) с письмом', 'Безопасная сделка (Эскроу)')">
-                    <div class="badge-seller">Business</div>
-                    <div>
-                        <h3>Instagram Бизнес Аккаунт (12k подписчиков)</h3>
-                        <p>Готовая страница для вашего бренда. Данные высылаются на email.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>🛒 Готовый аккаунт</span><span class="rating">★ 4.8 (45)</span></div>
-                        <div class="price">1 890 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('Instagram Бизнес Аккаунт (12k)', 1890)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('Instagram Бизнес Аккаунт (12k)', 1890)">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card" data-category="tiktok" data-name="TikTok: Полный комплекс (Подписчики, Лайки, Комментарии, Просмотры, Репосты)" onclick="openDetails('TikTok: Полный комплекс', 490, 'Всё включено: живые подписчики, лайки, кастомные комментарии, просмотры роликов и репосты в TikTok.', 'Без списаний', 'По ссылке', 'Автозапуск')">
-                    <div class="badge-seller">Top SMM 🚀</div>
-                    <div>
-                        <h3>TikTok: Полный комплекс (Подписчики, Лайки, Комменты, Просмотры, Репосты)</h3>
-                        <p>Максимальная раскрутка видео и профиля в TikTok.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 4.9 (94)</span></div>
-                        <div class="price">490 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('TikTok: Полный комплекс', 490)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('TikTok: Полный комплекс', 490)">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card" data-category="tiktok" data-name="TikTok: Накрутка Подписчиков (На выбор)" onclick="openDetails('TikTok: Накрутка Подписчиков', 250, 'Качественные фолловеры с гарантией.', 'Плавный нагон', 'По нику', 'Автостарт')">
-                    <div class="badge-seller">Выбор количества</div>
-                    <div>
-                        <h3>TikTok: Накрутка Подписчиков</h3>
-                        <p>Выберите желаемое количество живых подписчиков для вашего TikTok профиля.</p>
-                        <div class="quantity-selector-box" onclick="event.stopPropagation()">
-                            <label>Количество подписчиков:</label>
-                            <select class="qty-select" data-base-price="0.5" onchange="updateCardPrice(this)">
-                                <option value="100">100 подписчиков — 50 ₽</option>
-                                <option value="500" selected>500 подписчиков — 250 ₽</option>
-                                <option value="1000">1 000 подписчиков — 480 ₽</option>
-                                <option value="5000">5 000 подписчиков — 2 200 ₽</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>⚡ Автостарт</span><span class="rating">★ 4.9 (120)</span></div>
-                        <div class="price card-price-el">250 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addSelectedToCart(this, 'TikTok: Подписчики')">В корзину</button>
-                            <button class="btn" onclick="buySelectedDirect(this, 'TikTok: Подписчики')">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card" data-category="telegram" data-name="Telegram: Полный комплекс (Подписчики, Просмотры, Реакции, Комментарии, Опросы)" onclick="openDetails('Telegram: Полный комплекс', 590, 'Полный спектр накрутки для Telegram: подписчики в канал, просмотры постов, все виды эмодзи-реакций, комментарии.', 'С гарантией', 'По ссылке', 'Плавный старт')">
-                    <div class="badge-seller">Hit Sales 🔥</div>
-                    <div>
-                        <h3>Telegram: Полный комплекс (Подписчики, Просмотры, Реакции, Комменты, Опросы)</h3>
-                        <p>Всё для канала: фолловеры, автопросмотры, любые реакции и комменты.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 4.9 (142)</span></div>
-                        <div class="price">590 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('Telegram: Полный комплекс', 590)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('Telegram: Полный комплекс', 590)">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card" data-category="instagram" data-name="Instagram: Полный комплекс (Подписчики, Лайки, Reels, Комментарии, Сохранения, Истории)" onclick="openDetails('Instagram: Полный комплекс', 650, 'Полный пакет продвижения в Instagram: фолловеры, лайки, просмотры Reels, комменты, сохранения и охваты Stories.', 'Без списаний', 'По ссылке', 'Моментальный запуск')">
-                    <div class="badge-seller">Top Service</div>
-                    <div>
-                        <h3>Instagram: Полный комплекс (Подписчики, Лайки, Reels, Комменты, Сторис)</h3>
-                        <p>Всё для аккаунта Instagram: от подписчиков до охватов историй.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 4.9 (118)</span></div>
-                        <div class="price">650 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('Instagram: Полный комплекс', 650)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('Instagram: Полный комплекс', 650)">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card" data-category="numbers" data-name="Виртуальный номер для регистрации" onclick="openDetails('Виртуальный номер для регистрации', 150, 'Чистый виртуальный номер для безопасной СМС-активации и регистрации аккаунта.', 'Одноразовый', 'СМС-получение', 'Моментально')">
+                <div class="card" data-category="numbers" data-name="Виртуальный номер для регистрации" onclick="openDetails('Виртуальный номер для регистрации', 150, 'Чистый виртуальный номер для безопасной СМС-активации.', 'Одноразовый', 'СМС-получение', 'Моментально')">
                     <div class="badge-seller">Auto-Delivery</div>
-                    <div>
-                        <h3>Виртуальный номер для СМС (Любой сервис)</h3>
-                        <p>Чистый виртуальный номер для безопасной регистрации и получения кода верификации.</p>
-                    </div>
+                    <div><h3>Виртуальный номер для СМС (Любой сервис)</h3><p>Чистый виртуальный номер для безопасной регистрации.</p></div>
                     <div>
                         <div class="card-meta"><span>📱 СМС активация</span><span class="rating">★ 4.9 (125)</span></div>
                         <div class="price">150 ₽</div>
@@ -1159,71 +919,190 @@
                 <button class="cab-tab" onclick="switchCabTab('settings', this)">⚙️ Настройки</button>
             </div>
             <div id="cab-content-purchases">
-                <p style="font-size: 12px; color: #94a3b8; margin-bottom: 10px;">Купленные аккаунты (нажмите «Подтвердить доставку», чтобы завершить сделку):</p>
-                <div id="purchases-list"></div>
-            </div>
-            <div id="cab-content-settings" style="display:none;">
-                <p style="font-size: 12px; color: #94a3b8; margin-bottom: 10px;">Настройки профиля и безопасности.</p>
-                <div class="form-group">
-                    <label>Email для получения товаров</label>
-                    <input type="email" id="user-email-setting" value="user@example.com">
+                <p style="font-size: 12px; color: #94a3b8; margin-bottom: 10px;">Купленные аккаунты и цифровые товары:</p>
+                <div id="purchases-list">
+                    <div class="purchase-item">
+                        <div><b>TikTok Аккаунт 130k (Франция)</b></div>
+                        <div style="font-size: 11px; color: #94a3b8;">Статус: Успешно доставлено на email</div>
+                        <div class="purchase-data">Логин: fr_user_9921 | Пароль: x9Kp#2mQ | Почта: mail@rambler.ru</div>
+                    </div>
                 </div>
-                <button class="btn" onclick="saveSettings()">Сохранить</button>
+            </div>
+            <div id="cab-content-settings" style="display: none;">
+                <div class="form-group">
+                    <label>Ваш Email для получения товаров</label>
+                    <input type="email" id="user-email-input" value="user@example.com">
+                </div>
+                <button class="btn" onclick="saveCabinetSettings()">Сохранить настройки</button>
             </div>
         </div>
     </div>
 
-    <!-- Модальное окно Авторизации / Регистрации -->
+    <!-- Модальное окно Авторизации -->
     <div class="modal-overlay" id="authModal">
         <div class="modal-box">
             <button class="close-modal" onclick="closeAuthModal()">&times;</button>
-            <h2 id="auth-title">Вход в аккаунт</h2>
-            <form id="auth-form" onsubmit="handleAuth(event)">
+            <h2 id="authModalTitle">Вход в систему</h2>
+            <form id="auth-form" onsubmit="handleAuthSubmit(event)">
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="email" id="auth-email" required placeholder="your@email.com">
+                    <input type="email" id="auth-email" placeholder="mail@example.com" required>
                 </div>
                 <div class="form-group">
                     <label>Пароль</label>
-                    <input type="password" id="auth-password" required placeholder="••••••••">
+                    <input type="password" id="auth-password" placeholder="••••••••" required>
                 </div>
-                <button type="submit" class="btn" id="auth-submit-btn">Войти</button>
+                <button type="submit" class="btn" id="authSubmitBtn">Войти</button>
             </form>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2026 TTBuy. Все права защищены. Премиум маркетплейс digital-активов и SMM услуг.</p>
+        <p>© 2026 TTBuy. Премиум маркетплейс digital-активов и SMM продвижения. Все права защищены.</p>
     </footer>
 
     <script>
         let cart = [];
         let currentUser = null;
-        let purchases = [];
 
-        function openAuth(type) {
+        function updateCartBadge() {
+            document.getElementById('cart-badge').innerText = cart.length;
+        }
+
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            updateCartBadge();
+            alert(`Товар "${name}" успешно добавлен в корзину!`);
+        }
+
+        function buyDirect(name, price) {
+            cart = [{ name, price }];
+            updateCartBadge();
+            openCartModal();
+        }
+
+        function openCartModal() {
+            const listEl = document.getElementById('cart-items-list');
+            const totalEl = document.getElementById('cart-total-price');
+            listEl.innerHTML = '';
+            let total = 0;
+
+            if (cart.length === 0) {
+                listEl.innerHTML = '<p style="color:#94a3b8; font-size:12px; text-align:center; padding:15px;">Корзина пуста</p>';
+            } else {
+                cart.forEach((item, index) => {
+                    total += item.price;
+                    listEl.innerHTML += `
+                        <div class="cart-item">
+                            <div><div style="font-weight:bold; font-size:12px;">${item.name}</div><div style="color:#22c55e; font-size:11px;">${item.price} ₽</div></div>
+                            <button onclick="removeFromCart(${index})" style="background:none; border:none; color:#ef4444; cursor:pointer; font-size:14px;">✕</button>
+                        </div>
+                    `;
+                });
+            }
+            totalEl.innerText = total + ' ₽';
+            document.getElementById('cartModal').style.display = 'flex';
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartBadge();
+            openCartModal();
+        }
+
+        function closeCartModal() { document.getElementById('cartModal').style.display = 'none'; }
+
+        function selectPay(el) {
+            document.querySelectorAll('.pay-method').forEach(m => m.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        function checkoutCart() {
+            if (cart.length === 0) { alert('Корзина пуста!'); return; }
+            alert('Заказ успешно оформлен! Данные отправлены на ваш email.');
+            cart = [];
+            updateCartBadge();
+            closeCartModal();
+            openCabinetModal();
+        }
+
+        function openDetails(title, price, desc, age, mail, escrow) {
+            document.getElementById('det-title').innerText = title;
+            document.getElementById('det-desc').innerText = desc;
+            document.getElementById('det-age').innerText = age;
+            document.getElementById('det-mail').innerText = mail;
+            document.getElementById('det-price').innerText = price + ' ₽';
+
+            document.getElementById('det-add-cart').onclick = function() {
+                addToCart(title, price);
+                closeDetailsModal();
+            };
+            document.getElementById('det-buy').onclick = function() {
+                buyDirect(title, price);
+                closeDetailsModal();
+            };
+
+            const reviewsContainer = document.getElementById('det-reviews-container');
+            reviewsContainer.innerHTML = `
+                <div class="review-card">
+                    <div class="review-author"><span>Алексей М.</span> <span style="color:#facc15;">★ 5.0</span></div>
+                    <div>Отличный товар, данные пришли моментально на почту. Продавца рекомендую!</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-author"><span>Евгений К.</span> <span style="color:#facc15;">★ 5.0</span></div>
+                    <div>Всё работает идеально, сделка прошла через эскроу безопасно.</div>
+                </div>
+            `;
+            document.getElementById('det-reviews-count').innerText = '(2)';
+            document.getElementById('detailsModal').style.display = 'flex';
+        }
+
+        function closeDetailsModal() { document.getElementById('detailsModal').style.display = 'none'; }
+
+        function openCreateProductModal() { document.getElementById('createProductModal').style.display = 'flex'; }
+        function closeCreateProductModal() { document.getElementById('createProductModal').style.display = 'none'; }
+
+        function openCabinetModal() { document.getElementById('cabinetModal').style.display = 'flex'; }
+        function closeCabinetModal() { document.getElementById('cabinetModal').style.display = 'none'; }
+
+        function switchCabTab(tab, btn) {
+            document.querySelectorAll('.cab-tab').forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+            if (tab === 'purchases') {
+                document.getElementById('cab-content-purchases').style.display = 'block';
+                document.getElementById('cab-content-settings').style.display = 'none';
+            } else {
+                document.getElementById('cab-content-purchases').style.display = 'none';
+                document.getElementById('cab-content-settings').style.display = 'block';
+            }
+        }
+
+        function saveCabinetSettings() {
+            alert('Настройки успешно сохранены!');
+        }
+
+        let authMode = 'login';
+        function openAuth(mode) {
+            authMode = mode;
+            document.getElementById('authModalTitle').innerText = mode === 'login' ? 'Вход в систему' : 'Регистрация аккаунта';
+            document.getElementById('authSubmitBtn').innerText = mode === 'login' ? 'Войти' : 'Зарегистрироваться';
             document.getElementById('authModal').style.display = 'flex';
-            document.getElementById('auth-title').innerText = type === 'login' ? 'Вход в аккаунт' : 'Регистрация';
-            document.getElementById('auth-submit-btn').innerText = type === 'login' ? 'Войти' : 'Зарегистрироваться';
         }
+        function closeAuthModal() { document.getElementById('authModal').style.display = 'none'; }
 
-        function closeAuthModal() {
-            document.getElementById('authModal').style.display = 'none';
-        }
-
-        function handleAuth(e) {
+        function handleAuthSubmit(e) {
             e.preventDefault();
             const email = document.getElementById('auth-email').value;
-            currentUser = { email: email };
+            currentUser = email;
             document.getElementById('user-header').innerHTML = `
                 <div class="user-info">
-                    <span>${email}</span>
+                    <span>👤 ${email}</span>
                     <button class="logout-btn" onclick="logout()">Выйти</button>
                 </div>
             `;
             document.getElementById('cabinet-nav-btn').style.display = 'flex';
             closeAuthModal();
-            alert('Успешная авторизация!');
+            alert(authMode === 'login' ? 'Успешный вход!' : 'Регистрация завершена!');
         }
 
         function logout() {
@@ -1238,129 +1117,78 @@
             alert('Вы вышли из системы');
         }
 
-        function openCartModal() {
-            document.getElementById('cartModal').style.display = 'flex';
-            renderCart();
-        }
-
-        function closeCartModal() {
-            document.getElementById('cartModal').style.display = 'none';
-        }
-
-        function addToCart(name, price) {
-            cart.push({ name, price });
-            document.getElementById('cart-badge').innerText = cart.length;
-            alert(`Товар "${name}" добавлен в корзину!`);
-        }
-
-        function renderCart() {
-            const list = document.getElementById('cart-items-list');
-            let total = 0;
-            if (cart.length === 0) {
-                list.innerHTML = '<p style="color:#94a3b8; text-align:center; font-size:12px;">Корзина пуста</p>';
-            } else {
-                list.innerHTML = cart.map((item, index) => {
-                    total += item.price;
-                    return `
-                        <div class="cart-item">
-                            <span>${item.name}</span>
-                            <span style="font-weight:bold; color:#22c55e;">${item.price} ₽</span>
-                            <button onclick="removeFromCart(${index})" style="background:none; border:none; color:#ef4444; cursor:pointer; font-size:14px;">&times;</button>
-                        </div>
-                    `;
-                }).join('');
+        function filterCategory(cat, chip) {
+            if (chip) {
+                document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
             }
-            document.getElementById('cart-total-price').innerText = total + ' ₽';
+            const cards = document.querySelectorAll('#products-grid .card');
+            cards.forEach(card => {
+                const categories = card.getAttribute('data-category');
+                if (cat === 'all' || (categories && categories.includes(cat))) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
         }
 
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            document.getElementById('cart-badge').innerText = cart.length;
-            renderCart();
+        function filterProducts() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('#products-grid .card');
+            cards.forEach(card => {
+                const name = card.getAttribute('data-name')?.toLowerCase() || card.innerText.toLowerCase();
+                if (name.includes(query)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
         }
 
-        function selectPay(el) {
-            document.querySelectorAll('.pay-method').forEach(m => m.classList.remove('active'));
-            el.classList.add('active');
+        function sortProducts() {
+            const sortVal = document.getElementById('sortSelect').value;
+            const grid = document.getElementById('products-grid');
+            const cardsArray = Array.from(grid.getElementsByClassName('card'));
+
+            cardsArray.sort((a, b) => {
+                if (sortVal === 'price-asc' || sortVal === 'price-desc') {
+                    const priceA = parseFloat(a.querySelector('.price').innerText.replace(/[^0-9]/g, '')) || 0;
+                    const priceB = parseFloat(b.querySelector('.price').innerText.replace(/[^0-9]/g, '')) || 0;
+                    return sortVal === 'price-asc' ? priceA - priceB : priceB - priceA;
+                } else if (sortVal === 'rating') {
+                    const ratingA = parseFloat(a.querySelector('.rating')?.innerText.replace(/[^0-9.]/g, '')) || 0;
+                    const ratingB = parseFloat(b.querySelector('.rating')?.innerText.replace(/[^0-9.]/g, '')) || 0;
+                    return ratingB - ratingA;
+                }
+                return 0;
+            });
+
+            cardsArray.forEach(card => grid.appendChild(card));
         }
 
-        function checkoutCart() {
-            if (cart.length === 0) {
-                alert('Корзина пуста!');
-                return;
-            }
-            if (!currentUser) {
-                alert('Пожалуйста, войдите в аккаунт для оформления заказа!');
-                openAuth('login');
-                return;
-            }
-            purchases.push(...cart);
-            cart = [];
-            document.getElementById('cart-badge').innerText = 0;
-            closeCartModal();
-            alert('Заказ успешно оплачен! Данные отправлены на ваш email.');
-            renderPurchases();
+        function updateCardPrice(selectEl) {
+            const card = selectEl.closest('.card');
+            const basePrice = parseFloat(selectEl.getAttribute('data-base-price')) || 0.5;
+            const qty = parseInt(selectEl.value) || 100;
+            const calculatedPrice = Math.round(qty * basePrice);
+            card.querySelector('.card-price-el').innerText = calculatedPrice + ' ₽';
         }
 
-        function buyDirect(name, price) {
-            if (!currentUser) {
-                alert('Пожалуйста, войдите в аккаунт для покупки!');
-                openAuth('login');
-                return;
-            }
-            purchases.push({ name, price });
-            alert(`Заказ на "${name}" успешно оформлен и оплачен! Данные высланы на почту ${currentUser.email}.`);
-            renderPurchases();
+        function addSelectedToCart(btnEl, serviceName) {
+            const card = btnEl.closest('.card');
+            const qtySelect = card.querySelector('.qty-select');
+            const qty = qtySelect ? qtySelect.value : '';
+            const price = parseFloat(card.querySelector('.card-price-el').innerText.replace(/[^0-9]/g, '')) || 0;
+            addToCart(`${serviceName} (${qty} шт.)`, price);
         }
 
-        function openCabinetModal() {
-            document.getElementById('cabinetModal').style.display = 'flex';
-            renderPurchases();
-        }
-
-        function closeCabinetModal() {
-            document.getElementById('cabinetModal').style.display = 'none';
-        }
-
-        function switchCabTab(tab, el) {
-            document.querySelectorAll('.cab-tab').forEach(t => t.classList.remove('active'));
-            el.classList.add('active');
-            if (tab === 'purchases') {
-                document.getElementById('cab-content-purchases').style.display = 'block';
-                document.getElementById('cab-content-settings').style.display = 'none';
-            } else {
-                document.getElementById('cab-content-purchases').style.display = 'none';
-                document.getElementById('cab-content-settings').style.display = 'block';
-            }
-        }
-
-        function renderPurchases() {
-            const list = document.getElementById('purchases-list');
-            if (purchases.length === 0) {
-                list.innerHTML = '<p style="color:#94a3b8; font-size:12px;">У вас пока нет покупок.</p>';
-            } else {
-                list.innerHTML = purchases.map((p, i) => `
-                    <div class="purchase-item">
-                        <strong>${p.name}</strong> - ${p.price} ₽
-                        <div class="purchase-data">Логин: user_${i+1}_ttbuy | Пароль: pass_${Math.random().toString(36).substring(2, 10)} | Почта: mail@ttbuy.io</div>
-                        <button class="btn" style="margin-top:8px; padding:6px; font-size:11px;" onclick="confirmDelivery(${i})">Подтвердить доставку</button>
-                    </div>
-                `).join('');
-            }
-        }
-
-        function confirmDelivery(index) {
-            alert('Доставка подтверждена! Средства переведены продавцу.');
-            purchases.splice(index, 1);
-            renderPurchases();
-        }
-
-        function openCreateProductModal() {
-            document.getElementById('createProductModal').style.display = 'flex';
-        }
-
-        function closeCreateProductModal() {
-            document.getElementById('createProductModal').style.display = 'none';
+        function buySelectedDirect(btnEl, serviceName) {
+            const card = btnEl.closest('.card');
+            const qtySelect = card.querySelector('.qty-select');
+            const qty = qtySelect ? qtySelect.value : '';
+            const price = parseFloat(card.querySelector('.card-price-el').innerText.replace(/[^0-9]/g, '')) || 0;
+            buyDirect(`${serviceName} (${qty} шт.)`, price);
         }
 
         document.getElementById('create-product-form').addEventListener('submit', function(e) {
@@ -1375,15 +1203,12 @@
             newCard.className = 'card';
             newCard.setAttribute('data-category', cat);
             newCard.setAttribute('data-name', name);
-            newCard.setAttribute('onclick', `openDetails('${name}', ${price}, '${desc}', 'Новый товар', 'Родная почта', 'Эскроу')`);
+            newCard.onclick = () => openDetails(name, price, desc, 'Новый товар от пользователя', 'Моментальная доставка', 'Эскроу');
             newCard.innerHTML = `
-                <div class="badge-seller">Ваш товар</div>
+                <div class="badge-seller">User Item</div>
+                <div><h3>${name}</h3><p>${desc}</p></div>
                 <div>
-                    <h3>${name}</h3>
-                    <p>${desc.substring(0, 60)}...</p>
-                </div>
-                <div>
-                    <div class="card-meta"><span>🛒 Пользовательский</span><span class="rating">★ 5.0 (1)</span></div>
+                    <div class="card-meta"><span>👤 Пользовательский</span><span class="rating">★ 5.0 (1)</span></div>
                     <div class="price">${price} ₽</div>
                     <div class="card-buttons" onclick="event.stopPropagation()">
                         <button class="btn btn-secondary" onclick="addToCart('${name}', ${price})">В корзину</button>
@@ -1394,118 +1219,8 @@
             grid.prepend(newCard);
             closeCreateProductModal();
             alert('Ваш товар успешно опубликован на маркетплейсе!');
-            this.reset();
+            document.getElementById('create-product-form').reset();
         });
-
-        function openDetails(title, price, desc, age, mail, escrow) {
-            document.getElementById('det-title').innerText = title;
-            document.getElementById('det-desc').innerText = desc;
-            document.getElementById('det-age').innerText = age;
-            document.getElementById('det-mail').innerText = mail;
-            document.getElementById('det-price').innerText = price + ' ₽';
-            
-            document.getElementById('det-add-cart').onclick = function() { addToCart(title, price); };
-            document.getElementById('det-buy').onclick = function() { buyDirect(title, price); };
-
-            const reviewsContainer = document.getElementById('det-reviews-container');
-            reviewsContainer.innerHTML = `
-                <div class="review-card">
-                    <div class="review-author"><span>Алексей К.</span> <span style="color:#facc15;">★ 5.0</span></div>
-                    Отличный товар, данные пришли моментально на почту. Продавца рекомендую!
-                </div>
-                <div class="review-card">
-                    <div class="review-author"><span>Марина С.</span> <span style="color:#facc15;">★ 5.0</span></div>
-                    Всё работает, сделка прошла через эскроу успешно. Спасибо маркетплейсу!
-                </div>
-            `;
-            document.getElementById('det-reviews-count').innerText = '(2)';
-
-            document.getElementById('detailsModal').style.display = 'flex';
-        }
-
-        function closeDetailsModal() {
-            document.getElementById('detailsModal').style.display = 'none';
-        }
-
-        function filterCategory(cat, el) {
-            if (el) {
-                document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
-                el.classList.add('active');
-            }
-            const cards = document.querySelectorAll('.products-grid .card');
-            cards.forEach(card => {
-                const categories = card.getAttribute('data-category');
-                if (cat === 'all' || (categories && categories.includes(cat))) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
-        function filterProducts() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            const cards = document.querySelectorAll('.products-grid .card');
-            cards.forEach(card => {
-                const name = card.getAttribute('data-name').toLowerCase();
-                if (name.includes(query)) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
-        function sortProducts() {
-            const sortBy = document.getElementById('sortSelect').value;
-            const grid = document.getElementById('products-grid');
-            const cardsArray = Array.from(grid.querySelectorAll('.card'));
-
-            cardsArray.sort((a, b) => {
-                if (sortBy === 'price-asc') {
-                    const priceA = parseInt(a.querySelector('.price').innerText.replace(/\D/g, ''));
-                    const priceB = parseInt(b.querySelector('.price').innerText.replace(/\D/g, ''));
-                    return priceA - priceB;
-                } else if (sortBy === 'price-desc') {
-                    const priceA = parseInt(a.querySelector('.price').innerText.replace(/\D/g, ''));
-                    const priceB = parseInt(b.querySelector('.price').innerText.replace(/\D/g, ''));
-                    return priceB - priceA;
-                } else if (sortBy === 'rating') {
-                    const ratingA = parseFloat(a.querySelector('.rating').innerText.replace('★', ''));
-                    const ratingB = parseFloat(b.querySelector('.rating').innerText.replace('★', ''));
-                    return ratingB - ratingA;
-                }
-                return 0;
-            });
-
-            cardsArray.forEach(card => grid.appendChild(card));
-        }
-
-        function updateCardPrice(selectEl) {
-            const card = selectEl.closest('.card');
-            const basePrice = parseFloat(selectEl.selectedOptions[0].innerText.split('—')[1].replace('₽', '').trim());
-            card.querySelector('.card-price-el').innerText = basePrice + ' ₽';
-        }
-
-        function addSelectedToCart(btnEl, baseName) {
-            const card = btnEl.closest('.card');
-            const select = card.querySelector('.qty-select');
-            const qtyText = select.selectedOptions[0].innerText.split('—')[0].trim();
-            const price = parseInt(card.querySelector('.card-price-el').innerText.replace(/\D/g, ''));
-            addToCart(`${baseName} (${qtyText})`, price);
-        }
-
-        function buySelectedDirect(btnEl, baseName) {
-            const card = btnEl.closest('.card');
-            const select = card.querySelector('.qty-select');
-            const qtyText = select.selectedOptions[0].innerText.split('—')[0].trim();
-            const price = parseInt(card.querySelector('.card-price-el').innerText.replace(/\D/g, ''));
-            buyDirect(`${baseName} (${qtyText})`, price);
-        }
-
-        function saveSettings() {
-            alert('Настройки успешно сохранены!');
-        }
     </script>
 </body>
 </html>
