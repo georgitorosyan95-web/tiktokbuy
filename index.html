@@ -2,46 +2,1104 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Шапка сайта</title>
-    <link rel="stylesheet" href="style.css">
+    <title>TTBuy — Премиум маркетплейс digital-активов и SMM продвижения</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: #0b0f19; color: #f8fafc; line-height: 1.6; overflow-x: hidden; }
+        
+        header { background: #1e293b; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; flex-wrap: wrap; gap: 10px; position: sticky; top: 0; z-index: 100; }
+        
+        .logo { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: bold; color: #fff; white-space: nowrap; cursor: pointer; }
+        .logo-img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; flex-shrink: 0; display: block; }
+        .logo span { background: linear-gradient(90deg, #fe2c55, #229ed9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .header-right { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+        .header-auth { display: flex; align-items: center; gap: 6px; }
+        
+        .nav-btn { 
+            background: transparent; 
+            border: 1px solid #25f4ee; 
+            color: #f8fafc; 
+            padding: 5px 10px; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-weight: 700; 
+            font-size: 12px; 
+            transition: all 0.2s; 
+            white-space: nowrap;
+        }
+
+        .hero-title-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            margin-bottom: 15px;
+        }
+
+        .glitch-logo-wrapper {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            border-radius: 22px;
+            display: inline-block;
+            background: #0f172a;
+            box-shadow: 0 0 30px rgba(37, 244, 238, 0.5), 0 0 50px rgba(254, 44, 85, 0.3);
+        }
+
+        .glitch-logo-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 22px;
+            object-fit: cover;
+            display: block;
+            position: relative;
+            z-index: 1;
+            animation: hard-glitch-main 2.2s infinite steps(1);
+        }
+
+        .glitch-logo-wrapper::before,
+        .glitch-logo-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border-radius: 22px;
+            background: url('photo_2026-08-12_08-06-33_3.jpg') no-repeat center/cover;
+            opacity: 0.85;
+            pointer-events: none;
+        }
+
+        .glitch-logo-wrapper::before {
+            left: 4px;
+            filter: drop-shadow(-5px 0 #fe2c55);
+            animation: hard-glitch-top 1.6s infinite linear alternate-reverse;
+            z-index: 2;
+        }
+
+        .glitch-logo-wrapper::after {
+            left: -4px;
+            filter: drop-shadow(5px 0 #25f4ee);
+            animation: hard-glitch-bottom 2.1s infinite linear alternate-reverse;
+            z-index: 2;
+        }
+
+        @keyframes hard-glitch-main {
+            0%, 82%, 100% { transform: translate(0, 0) skew(0deg); filter: none; }
+            83% { transform: translate(-6px, 3px) skew(4deg); filter: hue-rotate(90deg) contrast(170%); }
+            84% { transform: translate(6px, -4px) skew(-6deg); filter: brightness(200%); }
+            85% { transform: translate(-4px, -3px) skew(3deg); filter: invert(25%); }
+            86% { transform: translate(5px, 3px) skew(0deg); }
+            87% { transform: translate(0, 0); }
+            94% { transform: translate(-8px, 2px) skew(-10deg); }
+            95% { transform: translate(8px, -3px) skew(7deg); }
+        }
+
+        @keyframes hard-glitch-top {
+            0% { clip-path: inset(0 0 100% 0); }
+            8% { clip-path: inset(12% 0 60% 0); transform: translate(-10px, -3px); }
+            16% { clip-path: inset(75% 0 8% 0); transform: translate(8px, 3px); }
+            24% { clip-path: inset(35% 0 45% 0); transform: translate(-6px, 1px); }
+            32% { clip-path: inset(0 0 100% 0); }
+            80% { clip-path: inset(0 0 100% 0); }
+            86% { clip-path: inset(20% 0 52% 0); transform: translate(12px, -5px); filter: saturate(300%); }
+            92% { clip-path: inset(68% 0 12% 0); transform: translate(-12px, 4px); }
+            98% { clip-path: inset(8% 0 78% 0); transform: translate(6px, -2px); }
+            100% { clip-path: inset(0 0 100% 0); }
+        }
+
+        @keyframes hard-glitch-bottom {
+            0% { clip-path: inset(100% 0 0 0); }
+            12% { clip-path: inset(48% 0 22% 0); transform: translate(10px, 4px); }
+            22% { clip-path: inset(18% 0 72% 0); transform: translate(-9px, -4px); }
+            30% { clip-path: inset(100% 0 0 0); }
+            81% { clip-path: inset(58% 0 18% 0); transform: translate(-14px, 3px); }
+            87% { clip-path: inset(12% 0 68% 0); transform: translate(14px, -4px); }
+            93% { clip-path: inset(32% 0 42% 0); transform: translate(-5px, 5px); }
+            100% { clip-path: inset(100% 0 0 0); }
+        }
+
+        .glitch-text {
+            font-size: 26px;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: #fff;
+            letter-spacing: 1px;
+            position: relative;
+            text-shadow: 2px 0 #fe2c55, -2px 0 #25f4ee;
+            animation: glitch-skew 2s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-skew {
+            0%, 20%, 23%, 80%, 83%, 100% { text-shadow: 2px 0 #fe2c55, -2px 0 #25f4ee; transform: skew(0deg); }
+            21% { text-shadow: 4px 0 #fe2c55, -4px 0 #25f4ee; transform: skew(2deg); }
+            81% { text-shadow: -3px 0 #fe2c55, 3px 0 #25f4ee; transform: skew(-2deg); }
+        }
+
+        .nav-btn:hover { border-color: #fe2c55; color: #fff; }
+        .nav-btn.register { 
+            background: linear-gradient(90deg, #fe2c55, #25f4ee); 
+            border: 1px solid #fe2c55; 
+            color: white; 
+        }
+
+        .cart-btn, .cabinet-btn, .seller-btn {
+            background: #0f172a;
+            border: 1px solid #fe2c55;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .cart-btn:hover, .cabinet-btn:hover, .seller-btn:hover { background: #fe2c55; }
+        .seller-btn { border-color: #229ed9; }
+        .seller-btn:hover { background: #229ed9; }
+        .cart-badge { background: #25f4ee; color: #0f172a; padding: 1px 5px; border-radius: 10px; font-size: 10px; font-weight: 900; }
+
+        .user-info { display: flex; align-items: center; gap: 8px; color: #94a3b8; font-size: 12px; }
+        .logout-btn { background: transparent; border: 1px solid #ef4444; color: #ef4444; padding: 4px 8px; border-radius: 6px; cursor: pointer; font-weight: 600; }
+        .logout-btn:hover { background: #ef4444; color: white; }
+
+        .search-bar-container { max-width: 600px; margin: 20px auto 10px auto; padding: 0 15px; position: relative; z-index: 2; }
+        .search-input { width: 100%; padding: 12px 16px; background: rgba(30, 41, 59, 0.9); border: 2px solid #334155; border-radius: 12px; color: #fff; font-size: 14px; outline: none; }
+        .search-input:focus { border-color: #25f4ee; }
+
+        .categories-scroll { display: flex; gap: 8px; overflow-x: auto; max-width: 1100px; margin: 15px auto; padding: 0 15px; scrollbar-width: none; }
+        .categories-scroll::-webkit-scrollbar { display: none; }
+        .cat-chip { background: #1e293b; border: 1px solid #334155; color: #94a3b8; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
+        .cat-chip:hover, .cat-chip.active { background: linear-gradient(90deg, #fe2c55, #25f4ee); color: #fff; border-color: transparent; }
+
+        .support-float {
+            position: fixed; bottom: 20px; right: 20px;
+            background: linear-gradient(135deg, #229ed9, #1b8ec2);
+            color: white; padding: 10px 16px; border-radius: 30px;
+            display: flex; align-items: center; gap: 8px; text-decoration: none;
+            font-weight: 700; font-size: 13px; box-shadow: 0 4px 20px rgba(34, 158, 217, 0.5);
+            z-index: 99; transition: transform 0.2s; border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .support-float:hover { transform: scale(1.05); }
+        .support-float svg { width: 18px; height: 18px; fill: white; }
+
+        .hero { 
+            text-align: center; padding: 45px 15px; 
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(30, 41, 59, 0.92)); 
+            position: relative; overflow: hidden; border-bottom: 1px solid #334155;
+        }
+        .hero-content { position: relative; z-index: 3; }
+        .hero h1 { font-size: 22px; font-weight: 900; margin-bottom: 10px; color: #fff; text-shadow: -2px -2px 0 #25f4ee, 2px 2px 0 #fe2c55; }
+        .hero p { font-size: 13px; color: #f1f5f9; max-width: 650px; margin: 0 auto; font-weight: 600; }
+
+        .bg-icons-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; overflow: hidden; }
+        .floating-icon { position: absolute; opacity: 0.3; animation: floatAndZoom 8s infinite ease-in-out alternate; }
+        .floating-icon svg { width: 100%; height: 100%; }
+        @keyframes floatAndZoom {
+            0% { transform: translateY(0px) scale(0.8); }
+            100% { transform: translateY(-25px) scale(1.2) rotate(10deg); }
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 15px 12px; position: relative; z-index: 2; }
+        .section-title { font-size: 17px; margin: 25px 0 12px 0; color: #fff; border-bottom: 2px solid #334155; padding-bottom: 6px; }
+
+        .products-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
+        @media(min-width: 640px) { .products-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media(min-width: 1024px) { .products-grid { grid-template-columns: repeat(3, 1fr); } }
+
+        .card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 16px; transition: transform 0.2s, border-color 0.2s; display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; position: relative; }
+        .card:hover { border-color: #fe2c55; transform: translateY(-2px); }
+        .card.promo-card { border: 2px solid #fe2c55; background: linear-gradient(145deg, #1e293b, #2a1b2e); box-shadow: 0 0 15px rgba(254,44,85,0.2); }
+        .card h3 { font-size: 15px; margin-bottom: 6px; color: #fff; }
+        .card p { color: #94a3b8; font-size: 12px; margin-bottom: 10px; flex-grow: 1; }
+        
+        .quantity-selector-box { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 8px; margin-bottom: 10px; }
+        .quantity-selector-box label { display: block; font-size: 11px; color: #94a3b8; margin-bottom: 4px; font-weight: 600; }
+        .quantity-selector-box select { width: 100%; background: #1e293b; color: #fff; border: 1px solid #334155; padding: 6px; border-radius: 6px; font-size: 12px; outline: none; }
+        .quantity-selector-box select:focus { border-color: #25f4ee; }
+
+        .card-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 11px; color: #64748b; }
+        .rating { color: #facc15; font-weight: bold; }
+        .price { font-size: 16px; font-weight: bold; color: #22c55e; margin-bottom: 12px; }
+        .price-old { text-decoration: line-through; color: #ef4444; font-size: 12px; margin-right: 6px; }
+        .card-buttons { display: flex; gap: 8px; }
+        
+        .btn { display: block; width: 100%; background: linear-gradient(90deg, #fe2c55, #25f4ee); color: white; text-align: center; padding: 9px; border-radius: 8px; border: none; font-weight: bold; font-size: 13px; cursor: pointer; transition: opacity 0.2s; }
+        .btn:hover { opacity: 0.9; }
+        .btn-secondary { background: #334155; color: #fff; }
+        .btn-secondary:hover { background: #475569; }
+
+        .badge-seller { position: absolute; top: 12px; right: 16px; font-size: 10px; background: rgba(34, 158, 217, 0.2); color: #229ed9; padding: 2px 6px; border-radius: 4px; font-weight: bold; border: 1px solid rgba(34, 158, 217, 0.4); }
+
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(5px); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 12px; }
+        .modal-box { background: #1e293b; border: 1px solid #334155; border-radius: 16px; padding: 20px; width: 100%; max-width: 480px; position: relative; box-shadow: 0 20px 25px rgba(0,0,0,0.5); max-height: 90vh; overflow-y: auto; color: #fff; }
+        .close-modal { position: absolute; top: 12px; right: 15px; background: none; border: none; color: #94a3b8; font-size: 22px; cursor: pointer; }
+        .close-modal:hover { color: #fff; }
+        
+        .modal-box h2 { font-size: 18px; margin-bottom: 12px; }
+        .modal-details-prop { font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: flex; justify-content: space-between; border-bottom: 1px solid #334155; padding-bottom: 4px; }
+        .modal-details-prop span:last-child { font-weight: bold; color: #fff; text-align: right; }
+
+        .pay-methods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 12px 0; }
+        .pay-method { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 8px; text-align: center; font-size: 11px; cursor: pointer; color: #94a3b8; }
+        .pay-method.active { border-color: #25f4ee; color: #fff; background: rgba(37,244,238,0.1); }
+
+        .cabinet-tabs { display: flex; gap: 10px; margin-bottom: 15px; border-bottom: 1px solid #334155; padding-bottom: 8px; }
+        .cab-tab { background: none; border: none; color: #94a3b8; font-weight: bold; font-size: 13px; cursor: pointer; }
+        .cab-tab.active { color: #25f4ee; }
+        .purchase-item { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 10px; margin-bottom: 8px; font-size: 12px; }
+        .purchase-data { background: #1e293b; padding: 6px; border-radius: 6px; margin-top: 6px; font-family: monospace; color: #22c55e; word-break: break-all; }
+
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; margin-bottom: 4px; color: #94a3b8; font-size: 12px; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #fff; font-size: 14px; outline: none; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #25f4ee; }
+        
+        .cart-items-list { max-height: 180px; overflow-y: auto; margin-bottom: 12px; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; background: #0f172a; padding: 8px 12px; border-radius: 8px; margin-bottom: 6px; border: 1px solid #334155; }
+        .cart-total { display: flex; justify-content: space-between; font-size: 15px; font-weight: bold; margin-bottom: 12px; border-top: 1px solid #334155; padding-top: 10px; }
+
+        .reviews-section { margin-top: 15px; border-top: 1px solid #334155; padding-top: 10px; }
+        .reviews-scroll-container { max-height: 250px; overflow-y: auto; padding-right: 5px; }
+        .reviews-scroll-container::-webkit-scrollbar { width: 5px; }
+        .reviews-scroll-container::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        .review-card { background: #0f172a; padding: 8px 10px; border-radius: 6px; margin-bottom: 6px; font-size: 12px; border: 1px solid #1e293b; }
+        .review-author { font-weight: bold; color: #25f4ee; margin-bottom: 2px; display: flex; justify-content: space-between; }
+
+        footer { text-align: center; padding: 20px; background: #1e293b; color: #64748b; margin-top: 40px; border-top: 1px solid #334155; font-size: 13px; }
+    </style>
 </head>
 <body>
-    <header class="site-header">
-        <div class="container header-container">
-            <!-- Логотип -->
-            <div class="logo">
-                <a href="/">Логотип</a>
-            </div>
 
-            <!-- Основная навигация -->
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="/">Главная</a></li>
-                    <li><a href="/catalog">Каталог</a></li>
-                    <li><a href="/delivery">Доставка</a></li>
-                    <li><a href="/contacts">Контакты</a></li>
-                </ul>
-            </nav>
+    <a href="https://t.me/TTBuySupportBot" target="_blank" class="support-float">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.25.38-.51 1.08-.78 4.22-1.84 7.03-3.05 8.43-3.62 4.01-1.66 4.84-1.95 5.38-1.96.12 0 .39.03.56.17.14.12.18.28.2.45-.02.07-.02.13-.04.2z"/></svg>
+        Техподдержка
+    </a>
 
-            <!-- Пользовательский блок -->
-            <div class="user-zone">
-                <?php if (is_user_logged_in()): ?>
-                    <!-- Видно только авторизованным пользователям -->
-                    <div class="header-wallet">
-                        <span class="wallet-label">Баланс:</span>
-                        <span id="user-balance" class="wallet-sum"><?php echo htmlspecialchars($user_balance); ?> ₽</span>
-                        <a href="/wallet" class="wallet-link">Кошелек</a>
-                    </div>
-                    <a href="/profile" class="profile-link">Личный кабинет</a>
-                    <a href="/logout" class="btn-auth btn-logout">Выйти</a>
-                <?php else: ?>
-                    <!-- Видно только гостям -->
-                    <a href="/login" class="btn-auth btn-login">Войти</a>
-                    <a href="/register" class="btn-auth btn-register">Регистрация</a>
-                <?php endif; ?>
+    <header>
+        <div class="logo" onclick="filterCategory('all')">
+            <img src="photo_2026-08-12_08-06-33_3.jpg" class="logo-img" alt="TTBuy" onerror="this.onerror=null; this.src='https://via.placeholder.com/36?text=TT';">
+            <span>TTBuy</span>
+        </div>
+        <div class="header-right">
+            <button class="seller-btn" onclick="openCreateProductModal()">➕ Продать товар</button>
+            <button class="cabinet-btn" id="cabinet-nav-btn" style="display:none;" onclick="openCabinetModal()">👤 Кабинет</button>
+            <button class="cart-btn" onclick="openCartModal()">
+                🛒 Корзина <span class="cart-badge" id="cart-badge">0</span>
+            </button>
+            <div id="user-header">
+                <div class="header-auth">
+                    <button class="nav-btn" onclick="openAuth('login')">Войти</button>
+                    <button class="nav-btn register" onclick="openAuth('register')">Регистрация</button>
+                </div>
             </div>
         </div>
     </header>
+
+    <div class="hero">
+        <div class="bg-icons-container">
+            <div class="floating-icon" style="top: 15%; left: 8%; width: 45px; height: 45px;"><svg viewBox="0 0 24 24" fill="#fe2c55"><path d="M19.589 6.686a4.793 4.793 0 01-3.7-1.542V13.8a6.857 6.857 0 11-6.857-6.857c.328 0 .65.03.964.088v3.655a3.171 3.171 0 102.214 3.028V1h3.643a8.471 8.471 0 003.743 3.128v2.558z"/></svg></div>
+            <div class="floating-icon" style="top: 20%; right: 12%; width: 40px; height: 40px;"><svg viewBox="0 0 24 24" fill="#229ed9"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.25.38-.51 1.08-.78 4.22-1.84 7.03-3.05 8.43-3.62 4.01-1.66 4.84-1.95 5.38-1.96.12 0 .39.03.56.17.14.12.18.28.2.45-.02.07-.02.13-.04.2z"/></svg></div>
+            <div class="floating-icon" style="bottom: 20%; left: 15%; width: 42px; height: 42px;"><svg viewBox="0 0 24 24" fill="#e1306c"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div>
+            <div class="floating-icon" style="bottom: 15%; right: 18%; width: 48px; height: 48px;"><svg viewBox="0 0 24 24" fill="#ff0000"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-title-container">
+                <div class="glitch-logo-wrapper">
+                    <img src="photo_2026-08-12_08-06-33_3.jpg" alt="Logo" class="glitch-logo-img" onerror="this.onerror=null; this.src='https://via.placeholder.com/130?text=TT';">
+                </div>
+                <h1 class="glitch-text">ПРЕМИУМ МАРКЕТПЛЕЙС DIGITAL-АКТИВОВ И SMM УСЛУГ</h1>
+            </div>
+            <p>Безопасная сделка: данные аккаунта (логин/пароль + почта) отправляются на ваш email, а деньги спишутся продавцу только после вашего подтверждения!</p>
+        </div>
+    </div>
+
+    <div class="search-bar-container">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Поиск: аккаунты, подписчики, лайки, просмотры..." oninput="filterProducts()">
+    </div>
+
+    <!-- Фильтры категорий -->
+    <div class="categories-scroll">
+        <button class="cat-chip active" onclick="filterCategory('all', this)">🔥 Все услуги и товары</button>
+        <button class="cat-chip" onclick="filterCategory('accounts', this)">🛒 Готовые Аккаунты</button>
+        <button class="cat-chip" onclick="filterCategory('tiktok', this)">🎵 TikTok</button>
+        <button class="cat-chip" onclick="filterCategory('telegram', this)">📢 Telegram</button>
+        <button class="cat-chip" onclick="filterCategory('instagram', this)">📸 Instagram</button>
+        <button class="cat-chip" onclick="filterCategory('youtube', this)">▶️ YouTube</button>
+        <button class="cat-chip" onclick="filterCategory('vk', this)">💬 ВКонтакте</button>
+        <button class="cat-chip" onclick="filterCategory('numbers', this)">📱 Номера СМС</button>
+    </div>
+
+    <div class="container">
+        <div id="catalog-container">
+            <h2 class="section-title">🔥 Акционные предложения (Все соцсети)</h2>
+            <div class="products-grid" id="products-grid">
+                
+                <!-- Акционные предложения для всех соцсетей на самом видном месте -->
+                <div class="card promo-card" data-category="accounts tiktok" data-name="TikTok Аккаунт 130k подписчиков (Франция)" onclick="openDetails('TikTok Аккаунт 130k подписчиков (Франция)', 2500, 'Прокачанный французский TikTok аккаунт на 130 000 подписчиков с живой европейской аудиторией. Универсальная тематика (Lifestyle / Тренды), чистая история, отсутствие теневых банов и возможность подключения монетизации.', 'Регион: Франция | 130k фолловеров | Отлежка: 8 мес.', 'Родная почта + полный контроль', 'Безопасная сделка (Эскроу)')">
+                    <div class="badge-seller">🔥 Акция TikTok</div>
+                    <div>
+                        <h3>TikTok Аккаунт 130k подписчиков (Франция)</h3>
+                        <p>Готовый европейский аккаунт по спеццене. Полный доступ и родная почта в комплекте.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta"><span>🛒 Спецпредложение</span><span class="rating">★ 5.0 (64)</span></div>
+                        <div class="price"><span class="price-old">4 200 ₽</span> 2 500 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('TikTok Аккаунт 130k (Франция)', 2500)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('TikTok Аккаунт 130k (Франция)', 2500)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card promo-card" data-category="accounts telegram" data-name="Telegram Канал 25 000 подписчиков (Крипто / Финансы)" onclick="openDetails('Telegram Канал 25 000 подписчиков (Крипто / Финансы)', 1800, 'Готовый премиальный Telegram канал в финансовой тематике с активной аудиторией. Передача прав владельца и полная выгрузка данных на ваш email.', 'Регион: Глобальный | 25k участников | Отлежка: 1.5 года', 'Полные права администратора', 'Безопасная сделка (Эскроу)')">
+                    <div class="badge-seller" style="background:rgba(34,158,217,0.2); color:#229ed9; border-color:rgba(34,158,217,0.4);">🔥 Акция Telegram</div>
+                    <div>
+                        <h3>Telegram Канал 25 000 подписчиков (Крипто / Финансы)</h3>
+                        <p>Раскрученный канал с живыми подписчиками. Полный перенос прав и доступов.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta"><span>🛒 Спецпредложение</span><span class="rating">★ 4.9 (41)</span></div>
+                        <div class="price"><span class="price-old">3 000 ₽</span> 1 800 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('Telegram Канал 25k (Крипто)', 1800)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Telegram Канал 25k (Крипто)', 1800)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card promo-card" data-category="accounts instagram" data-name="Instagram Профиль 85 000 подписчиков (Lifestyle / Путешествия)" onclick="openDetails('Instagram Профиль 85 000 подписчиков (Lifestyle / Путешествия)', 3200, 'Популярный аккаунт в сфере путешествий и лайфстайла с охватной аудиторией из США. Родная почта и все данные для смены привязок отправляются на ваш email.', 'Регион: США | 85k фолловеров | Отлежка: 1 год', 'Родная почта + полный доступ', 'Безопасная сделка (Эскроу)')">
+                    <div class="badge-seller" style="background:rgba(225,48,108,0.2); color:#e1306c; border-color:rgba(225,48,108,0.4);">🔥 Акция Instagram</div>
+                    <div>
+                        <h3>Instagram Профиль 85 000 подписчиков (Lifestyle / Путешествия)</h3>
+                        <p>Американский инстаграм-профиль с лояльной аудиторией и чистой историей.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta"><span>🛒 Спецпредложение</span><span class="rating">★ 4.9 (53)</span></div>
+                        <div class="price"><span class="price-old">5 500 ₽</span> 3 200 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('Instagram Профиль 85k', 3200)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Instagram Профиль 85k', 3200)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card promo-card" data-category="accounts youtube" data-name="YouTube Канал 40 000 подписчиков (Гейминг / Стримы)" onclick="openDetails('YouTube Канал 40 000 подписчиков (Гейминг / Стримы)', 4500, 'Канал с активной игровой аудиторией, полностью готовый к стримам и подключению монетизации. Передача через Brand Account на ваш email.', 'Регион: СНГ | 40k подписчиков | Без страйков', 'Полный доступ владельца', 'Безопасная сделка (Эскроу)')">
+                    <div class="badge-seller" style="background:rgba(255,0,0,0.2); color:#ff4444; border-color:rgba(255,0,0,0.4);">🔥 Акция YouTube</div>
+                    <div>
+                        <h3>YouTube Канал 40 000 подписчиков (Гейминг / Стримы)</h3>
+                        <p>Игровой канал с живыми зрителями. Безопасная передача прав через бренд-аккаунт.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta"><span>🛒 Спецпредложение</span><span class="rating">★ 5.0 (29)</span></div>
+                        <div class="price"><span class="price-old">7 500 ₽</span> 4 500 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('YouTube Канал 40k', 4500)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('YouTube Канал 40k', 4500)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card promo-card" data-category="accounts vk" data-name="VK Сообщество 50 000 подписчиков (Юмор / Развлечения)" onclick="openDetails('VK Сообщество 50 000 подписчиков (Юмор / Развлечения)', 1200, 'Раскрученная группа ВКонтакте развлекательной тематики с высокой активностью и живыми комментариями. Передача прав главного администратора.', 'Регион: Россия | 50k участников | Отлежка: 2 года', 'Полные права администратора', 'Безопасная сделка (Эскроу)')">
+                    <div class="badge-seller" style="background:rgba(0,119,255,0.2); color:#0077ff; border-color:rgba(0,119,255,0.4);">🔥 Акция ВКонтакте</div>
+                    <div>
+                        <h3>VK Сообщество 50 000 подписчиков (Юмор / Развлечения)</h3>
+                        <p>Активная группа ВКонтакте с устоявшейся базой участников.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta"><span>🛒 Спецпредложение</span><span class="rating">★ 4.8 (37)</span></div>
+                        <div class="price"><span class="price-old">2 200 ₽</span> 1 200 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('VK Сообщество 50k', 1200)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('VK Сообщество 50k', 1200)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Остальные товары каталога -->
+                <div class="card" data-category="accounts tiktok" data-name="TikTok Аккаунт с монетизацией (50k подписчиков)" onclick="openDetails('TikTok Аккаунт с монетизацией (50k подписчиков)', 3490, 'Прокачанный TikTok аккаунт с живой аудиторией, подключенной Creator Rewards Program и отсутствием теневых банов.', 'США | Отлежка: 1 год | Без блокировок', 'Родная почта + полный доступ', 'Безопасная сделка (Эскроу)')">
+                    <div class="badge-seller">Топ аккаунт</div>
+                    <div>
+                        <h3>TikTok Аккаунт с монетизацией (50k подписчиков)</h3>
+                        <p>Готовый аккаунт с активными фоловерами. Данные придут на email.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta"><span>🛒 Готовый аккаунт</span><span class="rating">★ 5.0 (38)</span></div>
+                        <div class="price">3 490 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('TikTok Аккаунт (50k + Монетизация)', 3490)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('TikTok Аккаунт (50k + Монетизация)', 3490)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-category="accounts telegram" data-name="Telegram Аккаунт с отлежкой 3+ года (Трастовый)" onclick="openDetails('Telegram Аккаунт с отлежкой 3+ года', 450, 'Возрастной аккаунт Telegram с высокой трастовостью, идеально подходит под создание каналов или чатов.', 'Европа | Отлежка: 3 года | 2FA настроен', 'Файл сессии + Данные входа на email', 'Безопасная сделка (Эскроу)')">
+                    <div class="badge-seller">Secure 🔒</div>
+                    <div>
+                        <h3>Telegram Аккаунт с отлежкой 3+ года (Трастовый)</h3>
+                        <p>Возрастной аккаунт с историей. Данные отправляются на email.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta"><span>🛒 Готовый аккаунт</span><span class="rating">★ 4.9 (82)</span></div>
+                        <div class="price">450 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('Telegram Аккаунт 3+ года', 450)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Telegram Аккаунт 3+ года', 450)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-category="accounts instagram" data-name="Instagram Бизнес Аккаунт (12k подписчиков)" onclick="openDetails('Instagram Бизнес Аккаунт (12k подписчиков)', 1890, 'Оформленный аккаунт под интернет-магазин или блог. На ваш email придет логин и пароль.', 'СНГ | Отлежка: 8 месяцев | Бизнес-профиль', 'Родная почта (Gmail) с письмом', 'Безопасная сделка (Эскроу)')">
+                    <div class="badge-seller">Business</div>
+                    <div>
+                        <h3>Instagram Бизнес Аккаунт (12k подписчиков)</h3>
+                        <p>Готовая страница для вашего бренда. Данные высылаются на email.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta"><span>🛒 Готовый аккаунт</span><span class="rating">★ 4.8 (45)</span></div>
+                        <div class="price">1 890 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('Instagram Бизнес Аккаунт (12k)', 1890)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Instagram Бизнес Аккаунт (12k)', 1890)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-category="tiktok" data-name="TikTok: Полный комплекс (Подписчики, Лайки, Комментарии, Просмотры, Репосты)" onclick="openDetails('TikTok: Полный комплекс', 490, 'Всё включено: живые подписчики, лайки, кастомные комментарии, просмотры роликов и репосты в TikTok.', 'Без списаний', 'По ссылке', 'Автозапуск')">
+                    <div class="badge-seller">Top SMM 🚀</div>
+                    <div>
+                        <h3>TikTok: Полный комплекс (Подписчики, Лайки, Комменты, Просмотры, Репосты)</h3>
+                        <p>Максимальная раскрутка видео и профиля в TikTok.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 4.9 (94)</span></div>
+                        <div class="price">490 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('TikTok: Полный комплекс', 490)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('TikTok: Полный комплекс', 490)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-category="tiktok" data-name="TikTok: Накрутка Подписчиков (На выбор)" onclick="openDetails('TikTok: Накрутка Подписчиков', 250, 'Качественные фолловеры с гарантией.', 'Плавный нагон', 'По нику', 'Автостарт')">
+                    <div class="badge-seller">Выбор количества</div>
+                    <div>
+                        <h3>TikTok: Накрутка Подписчиков</h3>
+                        <p>Выберите желаемое количество живых подписчиков для вашего TikTok профиля.</p>
+                        <div class="quantity-selector-box" onclick="event.stopPropagation()">
+                            <label>Количество подписчиков:</label>
+                            <select class="qty-select" data-base-price="0.5" onchange="updateCardPrice(this)">
+                                <option value="100">100 подписчиков — 50 ₽</option>
+                                <option value="500" selected>500 подписчиков — 250 ₽</option>
+                                <option value="1000">1 000 подписчиков — 480 ₽</option>
+                                <option value="5000">5 000 подписчиков — 2 200 ₽</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="card-meta"><span>⚡ Автостарт</span><span class="rating">★ 4.9 (120)</span></div>
+                        <div class="price card-price-el">250 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addSelectedToCart(this, 'TikTok: Подписчики')">В корзину</button>
+                            <button class="btn" onclick="buySelectedDirect(this, 'TikTok: Подписчики')">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-category="telegram" data-name="Telegram: Полный комплекс (Подписчики, Просмотры, Реакции, Комментарии, Опросы)" onclick="openDetails('Telegram: Полный комплекс', 590, 'Полный спектр накрутки для Telegram: подписчики в канал, просмотры постов, все виды эмодзи-реакций, комментарии.', 'С гарантией', 'По ссылке', 'Плавный старт')">
+                    <div class="badge-seller">Hit Sales 🔥</div>
+                    <div>
+                        <h3>Telegram: Полный комплекс (Подписчики, Просмотры, Реакции, Комменты, Опросы)</h3>
+                        <p>Всё для канала: фолловеры, автопросмотры, любые реакции и комменты.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 4.9 (142)</span></div>
+                        <div class="price">590 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('Telegram: Полный комплекс', 590)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Telegram: Полный комплекс', 590)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-category="instagram" data-name="Instagram: Полный комплекс (Подписчики, Лайки, Reels, Комментарии, Сохранения, Истории)" onclick="openDetails('Instagram: Полный комплекс', 650, 'Полный пакет продвижения в Instagram: фолловеры, лайки, просмотры Reels, комменты, сохранения и охваты Stories.', 'Без списаний', 'По ссылке', 'Моментальный запуск')">
+                    <div class="badge-seller">Top Service</div>
+                    <div>
+                        <h3>Instagram: Полный комплекс (Подписчики, Лайки, Reels, Комменты, Сторис)</h3>
+                        <p>Всё для аккаунта Instagram: от подписчиков до охватов историй.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta"><span>⚡ Автоуслуга</span><span class="rating">★ 4.9 (118)</span></div>
+                        <div class="price">650 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('Instagram: Полный комплекс', 650)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Instagram: Полный комплекс', 650)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-category="numbers" data-name="Виртуальный номер для регистрации" onclick="openDetails('Виртуальный номер для регистрации', 150, 'Чистый виртуальный номер для безопасной СМС-активации и регистрации аккаунта.', 'Одноразовый', 'СМС-получение', 'Моментально')">
+                    <div class="badge-seller">Auto-Delivery</div>
+                    <div>
+                        <h3>Виртуальный номер для СМС (Любой сервис)</h3>
+                        <p>Чистый виртуальный номер для безопасной регистрации и получения кода верификации.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta"><span>📱 СМС активация</span><span class="rating">★ 4.9 (125)</span></div>
+                        <div class="price">150 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('Виртуальный номер для регистрации', 150)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Виртуальный номер для регистрации', 150)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно деталей товара -->
+    <div class="modal-overlay" id="detailsModal">
+        <div class="modal-box">
+            <button class="close-modal" onclick="closeDetailsModal()">&times;</button>
+            <h2 id="det-title">Название товара</h2>
+            <p id="det-desc" style="color: #94a3b8; font-size: 13px; margin-bottom: 15px;"></p>
+            
+            <div class="modal-details-prop"><span>Характеристики / Отлежка:</span> <span id="det-age">-</span></div>
+            <div class="modal-details-prop"><span>Доступ / Почта:</span> <span id="det-mail">-</span></div>
+            <div class="modal-details-prop"><span>Безопасная сделка:</span> <span style="color: #25f4ee;">Оплата после подтверждения</span></div>
+            <div class="modal-details-prop" style="margin-top: 10px; border:none; font-size: 16px;"><span>Цена:</span> <span id="det-price" style="color:#22c55e;">-</span></div>
+
+            <div class="card-buttons" style="margin-top: 15px;">
+                <button class="btn btn-secondary" id="det-add-cart">В корзину</button>
+                <button class="btn" id="det-buy">Купить сразу</button>
+            </div>
+
+            <div class="reviews-section">
+                <h4 style="font-size: 13px; margin-bottom: 8px; color: #fff; display:flex; justify-space-between;">
+                    Отзывы покупателей: <span id="det-reviews-count" style="color: #25f4ee; font-weight: normal;">(0)</span>
+                </h4>
+                <div class="reviews-scroll-container" id="det-reviews-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно Создания товара -->
+    <div class="modal-overlay" id="createProductModal">
+        <div class="modal-box">
+            <button class="close-modal" onclick="closeCreateProductModal()">&times;</button>
+            <h2>➕ Разместить свой товар / услугу</h2>
+            <p style="color: #94a3b8; font-size: 12px; margin-bottom: 15px;">Заполните данные для публикации на маркетплейсе.</p>
+            <form id="create-product-form">
+                <div class="form-group">
+                    <label>Название услуги / аккаунта</label>
+                    <input type="text" id="new-prod-name" placeholder="Например: TikTok Аккаунт 10k" required>
+                </div>
+                <div class="form-group">
+                    <label>Категория</label>
+                    <select id="new-prod-cat">
+                        <option value="accounts">Готовые Аккаунты</option>
+                        <option value="tiktok">TikTok</option>
+                        <option value="telegram">Telegram</option>
+                        <option value="instagram">Instagram</option>
+                        <option value="youtube">YouTube</option>
+                        <option value="vk">ВКонтакте</option>
+                        <option value="numbers">Номера для СМС</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Цена (в рублях)</label>
+                    <input type="number" id="new-prod-price" placeholder="500" required>
+                </div>
+                <div class="form-group">
+                    <label>Описание и характеристики</label>
+                    <textarea id="new-prod-desc" rows="3" placeholder="Укажите регион, отлежку, наличие почты..." required></textarea>
+                </div>
+                <button type="submit" class="btn">Опубликовать товар</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модальное окно Корзины -->
+    <div class="modal-overlay" id="cartModal">
+        <div class="modal-box">
+            <button class="close-modal" onclick="closeCartModal()">&times;</button>
+            <h2>Корзина товаров</h2>
+            <div class="cart-items-list" id="cart-items-list"></div>
+            
+            <label style="font-size: 12px; color: #94a3b8; display:block; margin-bottom: 6px;">Выберите способ оплаты:</label>
+            <div class="pay-methods">
+                <div class="pay-method active" onclick="selectPay(this)">СБП / Карты</div>
+                <div class="pay-method" onclick="selectPay(this)">ЮMoney</div>
+                <div class="pay-method" onclick="selectPay(this)">USDT (Crypto)</div>
+            </div>
+
+            <div class="cart-total">
+                <span>Итого к оплате:</span>
+                <span id="cart-total-price">0 ₽</span>
+            </div>
+            <button class="btn" onclick="checkoutCart()">Оформить и оплатить заказ</button>
+        </div>
+    </div>
+
+    <!-- Модальное окно Личного кабинета -->
+    <div class="modal-overlay" id="cabinetModal">
+        <div class="modal-box">
+            <button class="close-modal" onclick="closeCabinetModal()">&times;</button>
+            <h2>Личный кабинет</h2>
+            <div class="cabinet-tabs">
+                <button class="cab-tab active" onclick="switchCabTab('purchases', this)">📦 Мои покупки</button>
+                <button class="cab-tab" onclick="switchCabTab('settings', this)">⚙️ Настройки</button>
+            </div>
+            <div id="cab-content-purchases">
+                <p style="font-size: 12px; color: #94a3b8; margin-bottom: 10px;">Купленные аккаунты (нажмите «Подтвердить доставку», чтобы завершить сделку):</p>
+                <div id="purchases-list"></div>
+            </div>
+            <div id="cab-content-settings" style="display: none;">
+                <div class="form-group"><label>Связанный Email</label><input type="text" id="cab-email" disabled style="background:#111827;"></div>
+                <button class="btn" onclick="showModal('Настройки сохранены!')">Сохранить</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно Авторизации -->
+    <div class="modal-overlay" id="authModal">
+        <div class="modal-box">
+            <button class="close-modal" onclick="closeAuth()">&times;</button>
+            <h2 id="auth-title">Регистрация покупателя</h2>
+            <form id="auth-form">
+                <div class="form-group"><label for="email">Электронная почта</label><input type="email" id="email" placeholder="example@mail.com" required></div>
+                <div class="form-group"><label for="password">Пароль</label><input type="password" id="password" placeholder="••••••••" required></div>
+                <button type="submit" class="btn" id="auth-btn">Зарегистрироваться</button>
+            </form>
+            <div style="text-align: center; margin-top: 12px; font-size: 12px; cursor: pointer; color: #94a3b8;" onclick="toggleMode()">
+                <span id="toggle-text" style="color: #fe2c55; font-weight: bold;">Уже есть аккаунт? Войти</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Системное уведомление -->
+    <div class="modal-overlay" id="custom-alert" style="z-index: 10000;">
+        <div class="modal-box" style="max-width: 320px; text-align: center;">
+            <div style="font-size: 15px; font-weight: 900; margin-bottom: 10px;">Уведомление</div>
+            <div id="custom-modal-text" style="font-size: 13px; color: #9ca3af; margin-bottom: 15px;">Текст</div>
+            <button class="btn" id="custom-modal-ok">OK</button>
+        </div>
+    </div>
+
+    <footer><p>&copy; 2026 TTBuy. Все права защищены.</p></footer>
+
+    <script>
+        const SUPABASE_URL = 'https://xwrhswfmuotvqupnavmx.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_Zqf1YNo4kRt6aBGtouWjEQ_Wokiy4mE'; 
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        let cart = [];
+        let myPurchases = [];
+
+        const ruNames = ['Александр', 'Дмитрий', 'Сергей', 'Андрей', 'Алексей', 'Артем', 'Илья', 'Максим', 'Евгений', 'Роман', 'Михаил', 'Никита', 'Денис', 'Влад', 'Ольга', 'Елена', 'Анна', 'Татьяна', 'Юлия', 'Наталья', 'Ксения', 'Светлана', 'Мария', 'Дарья'];
+        const enNames = ['John_D', 'Alex_SMM', 'Mike_89', 'Emily_R', 'David_K', 'Sarah_M', 'Chris_P', 'Daniel_T', 'Jessica_L', 'James_W', 'Robert_B', 'Brian_T', 'Kevin_D', 'Andrew_M', 'Samantha_W', 'Jason_G'];
+
+        const ruPosComments = [
+            'Все супер, данные аккаунта пришли на почту сразу, подтвердил — продавец получил деньги!', 'Отличный гарант, проверил аккаунт, всё совпало.', 'Все дошло быстро, отлежка соответствует описанию.',
+            'Вход прошел без проблем, родная почта рабочая.', 'Очень доволен покупкой, респект!', 'Работает как часы, подтвердил сделку.',
+            'Топ за свои деньги, безопасная сделка работает четко.', 'Аккаунт полностью соответствует характеристикам!'
+        ];
+        const enPosComments = [
+            'Fast delivery to email and working account!', 'Great quality, confirmed delivery successfully.', 'Super fast startup, very happy with result.',
+            'Best escrow marketplace, highly recommended!', 'Awesome job! Everything as described.'
+        ];
+
+        function generateReviewsForCard() {
+            const count = Math.floor(Math.random() * 21) + 25; 
+            const reviews = [];
+
+            for (let i = 0; i < count; i++) {
+                const isEnglish = Math.random() < 0.3;
+                let author, text;
+
+                if (isEnglish) {
+                    author = enNames[Math.floor(Math.random() * enNames.length)] + '_' + Math.floor(Math.random()*90 + 10);
+                    text = enPosComments[Math.floor(Math.random() * enPosComments.length)];
+                } else {
+                    author = ruNames[Math.floor(Math.random() * ruNames.length)];
+                    text = ruPosComments[Math.floor(Math.random() * ruPosComments.length)];
+                }
+
+                reviews.push({ author, stars: '★★★★★', text });
+            }
+            return reviews;
+        }
+
+        async function trackVisitor() {
+            try {
+                let userIp = 'Не определен';
+                const response = await fetch('https://api.ipify.org?format=json');
+                if (response.ok) {
+                    const data = await response.json();
+                    userIp = data.ip;
+                }
+                await supabaseClient.from('visitors').insert([{ ip: userIp, device: navigator.userAgent }]);
+            } catch (err) { console.error('Трекинг:', err); }
+        }
+        trackVisitor();
+
+        function showModal(message) {
+            document.getElementById('custom-modal-text').textContent = message;
+            document.getElementById('custom-alert').style.display = 'flex';
+        }
+        document.getElementById('custom-modal-ok').addEventListener('click', () => {
+            document.getElementById('custom-alert').style.display = 'none';
+        });
+
+        function updateCardPrice(selectEl) {
+            const card = selectEl.closest('.card');
+            const basePrice = parseFloat(selectEl.getAttribute('data-base-price'));
+            const qty = parseInt(selectEl.value);
+            const calculatedPrice = Math.round(qty * basePrice);
+            const priceEl = card.querySelector('.card-price-el');
+            priceEl.textContent = calculatedPrice.toLocaleString() + ' ₽';
+        }
+
+        function filterCategory(cat, element) {
+            if(element) {
+                document.querySelectorAll('.cat-chip').forEach(el => el.classList.remove('active'));
+                element.classList.add('active');
+            } else if (cat === 'all') {
+                document.querySelectorAll('.cat-chip').forEach(el => el.classList.remove('active'));
+                const firstChip = document.querySelector('.cat-chip');
+                if(firstChip) firstChip.classList.add('active');
+            }
+
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                const cardCat = card.getAttribute('data-category');
+                if (cat === 'all' || cardCat.includes(cat)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function filterProducts() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                const name = card.getAttribute('data-name').toLowerCase();
+                const text = card.innerText.toLowerCase();
+                if (name.includes(query) || text.includes(query)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function openCreateProductModal() { document.getElementById('createProductModal').style.display = 'flex'; }
+        function closeCreateProductModal() { document.getElementById('createProductModal').style.display = 'none'; }
+
+        const createProductForm = document.getElementById('create-product-form');
+        createProductForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('new-prod-name').value;
+            const cat = document.getElementById('new-prod-cat').value;
+            const price = Number(document.getElementById('new-prod-price').value);
+            const desc = document.getElementById('new-prod-desc').value + ' | Данные приходят на email, оплата — после подтверждения.';
+
+            const grid = document.getElementById('products-grid');
+            const newCard = document.createElement('div');
+            newCard.className = 'card';
+            newCard.setAttribute('data-category', cat);
+            newCard.setAttribute('data-name', name);
+            newCard.onclick = () => openDetails(name, price, desc, 'Регион: Авто | Отлежка: Новая', 'Полный доступ на email', 'Безопасная сделка');
+
+            newCard.innerHTML = `
+                <div class="badge-seller">User Listing</div>
+                <div>
+                    <h3>${name}</h3>
+                    <p>${desc}</p>
+                </div>
+                <div>
+                    <div class="card-meta"><span>📦 Безопасная сделка</span><span class="rating">★ 5.0 (12)</span></div>
+                    <div class="price">${price.toLocaleString()} ₽</div>
+                    <div class="card-buttons" onclick="event.stopPropagation()">
+                        <button class="btn btn-secondary" onclick="addToCart('${name}', ${price})">В корзину</button>
+                        <button class="btn" onclick="buyDirect('${name}', ${price})">Купить</button>
+                    </div>
+                </div>
+            `;
+            grid.prepend(newCard);
+            closeCreateProductModal();
+            createProductForm.reset();
+            showModal('Ваш товар успешно опубликован!');
+        });
+
+        function openDetails(name, price, desc, age, mail, delivery) {
+            document.getElementById('det-title').textContent = name;
+            document.getElementById('det-desc').textContent = desc;
+            document.getElementById('det-age').textContent = age;
+            document.getElementById('det-mail').textContent = mail;
+            document.getElementById('det-price').textContent = price.toLocaleString() + ' ₽';
+            
+            const generatedReviews = generateReviewsForCard();
+            document.getElementById('det-reviews-count').textContent = `(${generatedReviews.length})`;
+
+            const reviewsContainer = document.getElementById('det-reviews-container');
+            reviewsContainer.innerHTML = '';
+            generatedReviews.forEach(rev => {
+                reviewsContainer.innerHTML += `
+                    <div class="review-card">
+                        <div class="review-author"><span>${rev.author}</span> <span style="color: #facc15;">${rev.stars}</span></div>
+                        <div>${rev.text}</div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('det-add-cart').onclick = () => { addToCart(name, price); closeDetailsModal(); };
+            document.getElementById('det-buy').onclick = () => { buyDirect(name, price); closeDetailsModal(); };
+            document.getElementById('detailsModal').style.display = 'flex';
+        }
+        function closeDetailsModal() { document.getElementById('detailsModal').style.display = 'none'; }
+
+        function addSelectedToCart(btnEl, serviceName) {
+            const card = btnEl.closest('.card');
+            const selectEl = card.querySelector('.qty-select');
+            const qty = selectEl.value;
+            const basePrice = parseFloat(selectEl.getAttribute('data-base-price'));
+            const price = Math.round(parseInt(qty) * basePrice);
+            const fullName = `${serviceName} (${qty} шт.)`;
+
+            cart.push({ name: fullName, price: price });
+            updateCartUI();
+            showModal(`Товар "${fullName}" добавлен в корзину!`);
+        }
+
+        async function buySelectedDirect(btnEl, serviceName) {
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            if (!session) {
+                showModal('Для покупки необходимо войти в систему.');
+                openAuth('login');
+                return;
+            }
+            const card = btnEl.closest('.card');
+            const selectEl = card.querySelector('.qty-select');
+            const qty = selectEl.value;
+            const basePrice = parseFloat(selectEl.getAttribute('data-base-price'));
+            const price = Math.round(parseInt(qty) * basePrice);
+            const fullName = `${serviceName} (${qty} шт.)`;
+
+            myPurchases.push({
+                name: fullName,
+                date: new Date().toLocaleDateString(),
+                data: 'LINK/API: ' + Math.random().toString(36).substring(7) + ' | СТАТУС: Выполнено (' + qty + ' шт.)',
+                confirmed: false
+            });
+            updatePurchasesUI();
+            showModal(`Заказ создан! Данные отправлены на ваш email. Деньги спишутся продавцу после вашего подтверждения в кабинете.`);
+        }
+
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            updateCartUI();
+            showModal(`Товар "${name}" добавлен в корзину!`);
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            document.getElementById('cart-badge').textContent = cart.length;
+            const listEl = document.getElementById('cart-items-list');
+            const totalEl = document.getElementById('cart-total-price');
+            listEl.innerHTML = '';
+            let total = 0;
+
+            if (cart.length === 0) {
+                listEl.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 15px; font-size: 13px;">Корзина пуста</p>';
+            } else {
+                cart.forEach((item, index) => {
+                    total += item.price;
+                    listEl.innerHTML += `
+                        <div class="cart-item">
+                            <div><div style="font-weight:bold; font-size:12px;">${item.name}</div><div style="font-size:11px; color:#22c55e;">${item.price.toLocaleString()} ₽</div></div>
+                            <button style="background:none; border:none; color:#ef4444; cursor:pointer; font-size:16px;" onclick="removeFromCart(${index})">&times;</button>
+                        </div>
+                    `;
+                });
+            }
+            totalEl.textContent = total.toLocaleString() + ' ₽';
+        }
+
+        function selectPay(el) {
+            document.querySelectorAll('.pay-method').forEach(m => m.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        function openCartModal() { document.getElementById('cartModal').style.display = 'flex'; }
+        function closeCartModal() { document.getElementById('cartModal').style.display = 'none'; }
+
+        async function checkoutCart() {
+            if (cart.length === 0) { showModal('Корзина пуста!'); return; }
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            if (!session) {
+                showModal('Для оформления заказа необходимо войти в систему.');
+                closeCartModal();
+                openAuth('login');
+                return;
+            }
+            
+            cart.forEach(item => {
+                myPurchases.push({
+                    name: item.name,
+                    date: new Date().toLocaleDateString(),
+                    data: 'LOGIN:USER_' + Math.random().toString(36).substring(7) + ':PASS' + Math.floor(Math.random()*8999+1000) + ' | EMAIL:mail@domain.com:emailpass',
+                    confirmed: false
+                });
+            });
+
+            showModal(`Заказ успешно оформлен! Данные отправлены на ваш email. Средства будут переведены продавцу только после подтверждения получения в Личном кабинете.`);
+            cart = [];
+            updateCartUI();
+            closeCartModal();
+            updatePurchasesUI();
+        }
+
+        async function buyDirect(itemName, price) {
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            if (!session) {
+                showModal('Для покупки необходимо войти в систему.');
+                openAuth('login');
+                return;
+            }
+            myPurchases.push({
+                name: itemName,
+                date: new Date().toLocaleDateString(),
+                data: 'LOGIN:USER_' + Math.random().toString(36).substring(7) + ':PASS' + Math.floor(Math.random()*8999+1000) + ' | EMAIL:mail@domain.com:emailpass',
+                confirmed: false
+            });
+            updatePurchasesUI();
+            showModal(`Заказ создан! Данные аккаунта отправлены на ваш email. Деньги спишутся продавцу после подтверждения в Личном кабинете.`);
+        }
+
+        function confirmDelivery(index) {
+            myPurchases[index].confirmed = true;
+            updatePurchasesUI();
+            showModal('Доставка успешно подтверждена! Средства переведены продавцу.');
+        }
+
+        function openCabinetModal() { document.getElementById('cabinetModal').style.display = 'flex'; }
+        function closeCabinetModal() { document.getElementById('cabinetModal').style.display = 'none'; }
+
+        function switchCabTab(tab, element) {
+            document.querySelectorAll('.cab-tab').forEach(t => t.classList.remove('active'));
+            if (element) element.classList.add('active');
+
+            if(tab === 'purchases') {
+                document.getElementById('cab-content-purchases').style.display = 'block';
+                document.getElementById('cab-content-settings').style.display = 'none';
+            } else {
+                document.getElementById('cab-content-purchases').style.display = 'none';
+                document.getElementById('cab-content-settings').style.display = 'block';
+            }
+        }
+
+        function updatePurchasesUI() {
+            const list = document.getElementById('purchases-list');
+            if(myPurchases.length === 0) {
+                list.innerHTML = '<p style="color:#64748b; font-size:12px;">У вас пока нет купленных товаров.</p>';
+                return;
+            }
+            list.innerHTML = '';
+            myPurchases.forEach((p, index) => {
+                let statusHtml = p.confirmed 
+                    ? '<div style="color: #22c55e; font-weight: bold; margin-top: 6px; font-size: 11px;">✅ Сделка завершена, средства переведены продавцу</div>'
+                    : `<div style="margin-top: 8px;"><button class="btn" style="padding: 5px 10px; font-size: 11px;" onclick="confirmDelivery(${index})">Подтвердить получение и доставку</button></div>`;
+
+                list.innerHTML += `
+                    <div class="purchase-item">
+                        <div style="font-weight:bold; color:#fff;">${p.name} <span style="font-weight:normal; color:#64748b; float:right;">${p.date}</span></div>
+                        <div class="purchase-data">Данные с email (Аккаунт + Почта): ${p.data}</div>
+                        ${statusHtml}
+                    </div>
+                `;
+            });
+        }
+
+        let isLoginMode = false;
+        function openAuth(mode) {
+            isLoginMode = (mode === 'login');
+            updateAuthModalUI();
+            document.getElementById('authModal').style.display = 'flex';
+        }
+        function closeAuth() { document.getElementById('authModal').style.display = 'none'; }
+        function toggleMode() { isLoginMode = !isLoginMode; updateAuthModalUI(); }
+
+        function updateAuthModalUI() {
+            document.getElementById('auth-title').innerText = isLoginMode ? 'Вход в аккаунт' : 'Регистрация покупателя';
+            document.getElementById('auth-btn').innerText = isLoginMode ? 'Войти' : 'Зарегистрироваться';
+            document.getElementById('toggle-text').innerText = isLoginMode ? 'Нет аккаунта? Зарегистрироваться' : 'Уже есть аккаунт? Войти';
+        }
+
+        const authForm = document.getElementById('auth-form');
+        authForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            if (isLoginMode) {
+                const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+                if (error) showModal('Ошибка входа: ' + error.message);
+                else { closeAuth(); checkUser(); showModal('Успешный вход в систему!'); }
+            } else {
+                const { error } = await supabaseClient.auth.signUp({ email, password });
+                if (error) showModal('Ошибка регистрации: ' + error.message);
+                else { showModal('Регистрация успешна! Теперь войдите.'); isLoginMode = true; updateAuthModalUI(); }
+            }
+        });
+
+        async function checkUser() {
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            const userHeader = document.getElementById('user-header');
+            const cabinetNavBtn = document.getElementById('cabinet-nav-btn');
+            
+            if (session) {
+                cabinetNavBtn.style.display = 'flex';
+                document.getElementById('cab-email').value = session.user.email;
+                userHeader.innerHTML = `
+                    <div class="user-info">
+                        <span style="max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${session.user.email}</span>
+                        <button class="logout-btn" onclick="logout()">Выйти</button>
+                    </div>
+                `;
+            } else {
+                cabinetNavBtn.style.display = 'none';
+                userHeader.innerHTML = `
+                    <div class="header-auth">
+                        <button class="nav-btn" onclick="openAuth('login')">Войти</button>
+                        <button class="nav-btn register" onclick="openAuth('register')">Регистрация</button>
+                    </div>
+                `;
+            }
+        }
+
+        async function logout() {
+            await supabaseClient.auth.signOut();
+            checkUser();
+            showModal('Вы вышли из аккаунта.');
+        }
+
+        checkUser();
+        updatePurchasesUI();
+    </script>
 </body>
 </html>
