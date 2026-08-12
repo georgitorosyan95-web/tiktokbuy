@@ -12,7 +12,6 @@
         
         header { background: #1e293b; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; flex-wrap: wrap; gap: 10px; position: sticky; top: 0; z-index: 100; }
         
-        /* Стили для логотипа в шапке */
         .logo { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: bold; color: #fff; white-space: nowrap; cursor: pointer; }
         .logo-img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; flex-shrink: 0; display: block; }
         .logo span { background: linear-gradient(90deg, #fe2c55, #229ed9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -33,7 +32,6 @@
             white-space: nowrap;
         }
 
-        /* Увеличенный логотип и глитч */
         .hero-title-container {
             display: flex;
             flex-direction: column;
@@ -173,7 +171,6 @@
         .logout-btn { background: transparent; border: 1px solid #ef4444; color: #ef4444; padding: 4px 8px; border-radius: 6px; cursor: pointer; font-weight: 600; }
         .logout-btn:hover { background: #ef4444; color: white; }
 
-        /* Поиск и категории */
         .search-bar-container { max-width: 600px; margin: 20px auto 10px auto; padding: 0 15px; position: relative; z-index: 2; }
         .search-input { width: 100%; padding: 12px 16px; background: rgba(30, 41, 59, 0.9); border: 2px solid #334155; border-radius: 12px; color: #fff; font-size: 14px; outline: none; }
         .search-input:focus { border-color: #25f4ee; }
@@ -214,7 +211,6 @@
         .container { max-width: 1200px; margin: 0 auto; padding: 15px 12px; position: relative; z-index: 2; }
         .section-title { font-size: 17px; margin: 25px 0 12px 0; color: #fff; border-bottom: 2px solid #334155; padding-bottom: 6px; }
 
-        /* Карточки товаров */
         .products-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
         @media(min-width: 640px) { .products-grid { grid-template-columns: repeat(2, 1fr); } }
         @media(min-width: 1024px) { .products-grid { grid-template-columns: repeat(3, 1fr); } }
@@ -241,7 +237,6 @@
 
         .badge-seller { position: absolute; top: 12px; right: 16px; font-size: 10px; background: rgba(34, 158, 217, 0.2); color: #229ed9; padding: 2px 6px; border-radius: 4px; font-weight: bold; border: 1px solid rgba(34, 158, 217, 0.4); }
 
-        /* Модальные окна */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(5px); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 12px; }
         .modal-box { background: #1e293b; border: 1px solid #334155; border-radius: 16px; padding: 20px; width: 100%; max-width: 480px; position: relative; box-shadow: 0 20px 25px rgba(0,0,0,0.5); max-height: 90vh; overflow-y: auto; color: #fff; }
         .close-modal { position: absolute; top: 12px; right: 15px; background: none; border: none; color: #94a3b8; font-size: 22px; cursor: pointer; }
@@ -321,7 +316,7 @@
                 </div>
                 <h1 class="glitch-text">ПРЕМИУМ МАРКЕТПЛЕЙС DIGITAL-АКТИВОВ И SMM УСЛУГ</h1>
             </div>
-            <p>Выбирайте готовые аккаунты с характеристиками, пакеты или настраивайте отдельные SMM услуги на свой выбор.</p>
+            <p>Безопасная сделка: данные аккаунта (логин/пароль + почта) отправляются на ваш email, а деньги списываются продавцу только после вашего подтверждения!</p>
         </div>
     </div>
 
@@ -347,11 +342,11 @@
             <div class="products-grid" id="products-grid">
                 
                 <!-- Товар: Аккаунт TikTok -->
-                <div class="card" data-category="accounts tiktok" data-name="TikTok Аккаунт с монетизацией (50k подписчиков)" onclick="openDetails('TikTok Аккаунт с монетизацией (50k подписчиков)', 3490, 'Прокачанный TikTok аккаунт с живой аудиторией, подключенной Creator Rewards Program и отсутствием теневых банов.', 'США | Отлежка: 1 год | Без блокировок', 'Родная почта + полный доступ', 'Автовыдача (Логин:Пароль)')">
+                <div class="card" data-category="accounts tiktok" data-name="TikTok Аккаунт с монетизацией (50k подписчиков)" onclick="openDetails('TikTok Аккаунт с монетизацией (50k подписчиков)', 3490, 'Прокачанный TikTok аккаунт с живой аудиторией, подключенной Creator Rewards Program и отсутствием теневых банов. После оплаты на ваш email придут логин/пароль от аккаунта и пароль от родной почты. Деньги продавцу поступят только после вашего подтверждения о доставке.', 'США | Отлежка: 1 год | Без блокировок', 'Родная почта + полный доступ', 'Безопасная сделка (Эскроу)')">
                     <div class="badge-seller">🔥 Топ аккаунт</div>
                     <div>
                         <h3>TikTok Аккаунт с монетизацией (50k подписчиков)</h3>
-                        <p>Готовый аккаунт с активными фоловерами и возможностью вывода средств. Полная передача прав.</p>
+                        <p>Готовый аккаунт с активными фоловерами. Данные придут на email, оплата зачислится продавцу после подтверждения.</p>
                     </div>
                     <div>
                         <div class="card-meta"><span>🛒 Готовый аккаунт</span><span class="rating">★ 5.0 (38)</span></div>
@@ -364,11 +359,11 @@
                 </div>
 
                 <!-- Товар: Аккаунт Telegram -->
-                <div class="card" data-category="accounts telegram" data-name="Telegram Аккаунт с отлежкой 3+ года (Трастовый)" onclick="openDetails('Telegram Аккаунт с отлежкой 3+ года', 450, 'Возрастной аккаунт Telegram с высокой трастовостью, идеально подходит под создание каналов, чатов или спам-рассылок.', 'Европа | Отлежка: 3 года | 2FA настроен', 'Файл сессии (.session + .json) + Tdata', 'Мгновенная автовыдача')">
+                <div class="card" data-category="accounts telegram" data-name="Telegram Аккаунт с отлежкой 3+ года (Трастовый)" onclick="openDetails('Telegram Аккаунт с отлежкой 3+ года', 450, 'Возрастной аккаунт Telegram с высокой трастовостью, идеально подходит под создание каналов или чатов. На email придет логин, пароль и файл сессии. Деньги спишутся со счета только после вашего подтверждения.', 'Европа | Отлежка: 3 года | 2FA настроен', 'Файл сессии + Данные входа на email', 'Безопасная сделка (Эскроу)')">
                     <div class="badge-seller">Secure 🔒</div>
                     <div>
                         <h3>Telegram Аккаунт с отлежкой 3+ года (Трастовый)</h3>
-                        <p>Надежный возрастной аккаунт с историей и максимальным уровнем доверия мессенджера.</p>
+                        <p>Возрастной аккаунт с историей. Данные отправляются на email, списание средств — после вашего подтверждения.</p>
                     </div>
                     <div>
                         <div class="card-meta"><span>🛒 Готовый аккаунт</span><span class="rating">★ 4.9 (82)</span></div>
@@ -381,11 +376,11 @@
                 </div>
 
                 <!-- Товар: Аккаунт Instagram -->
-                <div class="card" data-category="accounts instagram" data-name="Instagram Бизнес Аккаунт (12k подписчиков)" onclick="openDetails('Instagram Бизнес Аккаунт (12k подписчиков)', 1890, 'Оформленный аккаунт под интернет-магазин или блог с живыми подписчиками и историей публикаций.', 'СНГ | Отлежка: 8 месяцев | Бизнес-профиль', 'Родная почта (Gmail) с письмом подтверждения', 'Автовыдача данных')">
+                <div class="card" data-category="accounts instagram" data-name="Instagram Бизнес Аккаунт (12k подписчиков)" onclick="openDetails('Instagram Бизнес Аккаунт (12k подписчиков)', 1890, 'Оформленный аккаунт под интернет-магазин или блог. На ваш email придет логин, пароль от аккаунта и пароль от родной почты. Деньги переведутся продавцу только после подтверждения доставки.', 'СНГ | Отлежка: 8 месяцев | Бизнес-профиль', 'Родная почта (Gmail) с письмом', 'Безопасная сделка (Эскроу)')">
                     <div class="badge-seller">Business</div>
                     <div>
                         <h3>Instagram Бизнес Аккаунт (12k подписчиков)</h3>
-                        <p>Готовая страница с активностью для вашего бизнеса, бренда или личного бренда.</p>
+                        <p>Готовая страница для вашего бренда. Данные высылаются на email, деньги заморожены до подтверждения.</p>
                     </div>
                     <div>
                         <div class="card-meta"><span>🛒 Готовый аккаунт</span><span class="rating">★ 4.8 (45)</span></div>
@@ -504,7 +499,7 @@
             
             <div class="modal-details-prop"><span>Характеристики / Отлежка:</span> <span id="det-age">-</span></div>
             <div class="modal-details-prop"><span>Доступ / Почта:</span> <span id="det-mail">-</span></div>
-            <div class="modal-details-prop"><span>Тип выдачи / Старт:</span> <span id="det-delivery">-</span></div>
+            <div class="modal-details-prop"><span>Безопасная сделка:</span> <span style="color: #25f4ee;">Оплата после подтверждения</span></div>
             <div class="modal-details-prop" style="margin-top: 10px; border:none; font-size: 16px;"><span>Цена:</span> <span id="det-price" style="color:#22c55e;">-</span></div>
 
             <div class="card-buttons" style="margin-top: 15px;">
@@ -589,7 +584,7 @@
                 <button class="cab-tab" onclick="switchCabTab('settings', this)">⚙️ Настройки</button>
             </div>
             <div id="cab-content-purchases">
-                <p style="font-size: 12px; color: #94a3b8; margin-bottom: 10px;">Купленные цифровые аккаунты и услуги:</p>
+                <p style="font-size: 12px; color: #94a3b8; margin-bottom: 10px;">Купленные аккаунты (нажмите «Подтвердить доставку», чтобы завершить сделку):</p>
                 <div id="purchases-list"></div>
             </div>
             <div id="cab-content-settings" style="display: none;">
@@ -634,18 +629,17 @@
         let cart = [];
         let myPurchases = [];
 
-        // БАЗА ДЛЯ ГЕНЕРАЦИИ ОТЗЫВОВ НА КАРТОЧКИ
         const ruNames = ['Александр', 'Дмитрий', 'Сергей', 'Андрей', 'Алексей', 'Артем', 'Илья', 'Максим', 'Евгений', 'Роман', 'Михаил', 'Никита', 'Денис', 'Влад', 'Ольга', 'Елена', 'Анна', 'Татьяна', 'Юлия', 'Наталья', 'Ксения', 'Светлана', 'Мария', 'Дарья'];
         const enNames = ['John_D', 'Alex_SMM', 'Mike_89', 'Emily_R', 'David_K', 'Sarah_M', 'Chris_P', 'Daniel_T', 'Jessica_L', 'James_W', 'Robert_B', 'Brian_T', 'Kevin_D', 'Andrew_M', 'Samantha_W', 'Jason_G'];
 
         const ruPosComments = [
-            'Все супер, аккаунт рабочий, данные пришли моментально!', 'Отличный продавец, беру аккаунт уже не в первый раз.', 'Все дошло быстро, отлежка соответствует описанию.',
-            'Вход прошел без проблем, почта родная.', 'Очень доволен покупкой, респект!', 'Работает как часы, буду брать еще.',
-            'Топ за свои деньги, советую маркетплейс.', 'Аккаунт полностью соответствует характеристикам!'
+            'Все супер, данные аккаунта пришли на почту сразу, подтвердил — продавец получил деньги!', 'Отличный гарант, проверил аккаунт тик ток, всё совпало.', 'Все дошло быстро, отлежка соответствует описанию.',
+            'Вход прошел без проблем, родная почта рабочая.', 'Очень доволен покупкой, респект!', 'Работает как часы, подтвердил сделку.',
+            'Топ за свои деньги, безопасная сделка работает четко.', 'Аккаунт полностью соответствует характеристикам!'
         ];
         const enPosComments = [
-            'Fast delivery and working account!', 'Great quality, login success on first try.', 'Super fast startup, very happy with result.',
-            'Best marketplace so far, highly recommended!', 'Awesome job! Everything as described.'
+            'Fast delivery to email and working account!', 'Great quality, confirmed delivery successfully.', 'Super fast startup, very happy with result.',
+            'Best escrow marketplace, highly recommended!', 'Awesome job! Everything as described.'
         ];
 
         function generateReviewsForCard() {
@@ -743,14 +737,14 @@
             const name = document.getElementById('new-prod-name').value;
             const cat = document.getElementById('new-prod-cat').value;
             const price = Number(document.getElementById('new-prod-price').value);
-            const desc = document.getElementById('new-prod-desc').value;
+            const desc = document.getElementById('new-prod-desc').value + ' | Данные приходят на email, оплата — после подтверждения.';
 
             const grid = document.getElementById('products-grid');
             const newCard = document.createElement('div');
             newCard.className = 'card';
             newCard.setAttribute('data-category', cat);
             newCard.setAttribute('data-name', name);
-            newCard.onclick = () => openDetails(name, price, desc, 'Регион: Авто | Отлежка: Новая', 'Полный доступ', 'Моментальная автовыдача');
+            newCard.onclick = () => openDetails(name, price, desc, 'Регион: Авто | Отлежка: Новая', 'Полный доступ на email', 'Безопасная сделка');
 
             newCard.innerHTML = `
                 <div class="badge-seller">User Listing</div>
@@ -759,7 +753,7 @@
                     <p>${desc}</p>
                 </div>
                 <div>
-                    <div class="card-meta"><span>📦 Моментально</span><span class="rating">★ 5.0 (12)</span></div>
+                    <div class="card-meta"><span>📦 Безопасная сделка</span><span class="rating">★ 5.0 (12)</span></div>
                     <div class="price">${price.toLocaleString()} ₽</div>
                     <div class="card-buttons" onclick="event.stopPropagation()">
                         <button class="btn btn-secondary" onclick="addToCart('${name}', ${price})">В корзину</button>
@@ -778,7 +772,6 @@
             document.getElementById('det-desc').textContent = desc;
             document.getElementById('det-age').textContent = age;
             document.getElementById('det-mail').textContent = mail;
-            document.getElementById('det-delivery').textContent = delivery;
             document.getElementById('det-price').textContent = price.toLocaleString() + ' ₽';
             
             const generatedReviews = generateReviewsForCard();
@@ -831,10 +824,11 @@
             myPurchases.push({
                 name: fullName,
                 date: new Date().toLocaleDateString(),
-                data: 'LINK/API: ' + Math.random().toString(36).substring(7) + ' | СТАТУС: Выполнено (' + qty + ' шт.)'
+                data: 'LINK/API: ' + Math.random().toString(36).substring(7) + ' | СТАТУС: Выполнено (' + qty + ' шт.)',
+                confirmed: false
             });
             updatePurchasesUI();
-            showModal(`Покупка "${fullName}" успешно завершена! Детали в Личном кабинете.`);
+            showModal(`Заказ создан! Данные отправлены на ваш email. Деньги спишутся продавцу после вашего подтверждения в кабинете.`);
         }
 
         function addToCart(name, price) {
@@ -893,11 +887,12 @@
                 myPurchases.push({
                     name: item.name,
                     date: new Date().toLocaleDateString(),
-                    data: 'LOGIN:USER_' + Math.random().toString(36).substring(7) + ':PASS' + Math.floor(Math.random()*8999+1000)
+                    data: 'LOGIN:USER_' + Math.random().toString(36).substring(7) + ':PASS' + Math.floor(Math.random()*8999+1000) + ' | EMAIL:mail@domain.com:emailpass',
+                    confirmed: false
                 });
             });
 
-            showModal(`Заказ успешно оплачен! Данные выданы в Личном кабинете.`);
+            showModal(`Заказ успешно оформлен! Данные отправлены на ваш email. Средства будут переведены продавцу только после подтверждения получения в Личном кабинете.`);
             cart = [];
             updateCartUI();
             closeCartModal();
@@ -914,10 +909,17 @@
             myPurchases.push({
                 name: itemName,
                 date: new Date().toLocaleDateString(),
-                data: 'LOGIN:USER_' + Math.random().toString(36).substring(7) + ':PASS' + Math.floor(Math.random()*8999+1000)
+                data: 'LOGIN:USER_' + Math.random().toString(36).substring(7) + ':PASS' + Math.floor(Math.random()*8999+1000) + ' | EMAIL:mail@domain.com:emailpass',
+                confirmed: false
             });
             updatePurchasesUI();
-            showModal(`Покупка "${itemName}" успешно завершена! Данные доступны в Личном кабинете.`);
+            showModal(`Заказ создан! Данные аккаунта отправлены на ваш email. Деньги спишутся продавцу после подтверждения в Личном кабинете.`);
+        }
+
+        function confirmDelivery(index) {
+            myPurchases[index].confirmed = true;
+            updatePurchasesUI();
+            showModal('Доставка успешно подтверждена! Средства переведены продавцу.');
         }
 
         function openCabinetModal() { document.getElementById('cabinetModal').style.display = 'flex'; }
@@ -943,11 +945,16 @@
                 return;
             }
             list.innerHTML = '';
-            myPurchases.forEach(p => {
+            myPurchases.forEach((p, index) => {
+                let statusHtml = p.confirmed 
+                    ? '<div style="color: #22c55e; font-weight: bold; margin-top: 6px; font-size: 11px;">✅ Сделка завершена, средства переведены продавцу</div>'
+                    : `<div style="margin-top: 8px;"><button class="btn" style="padding: 5px 10px; font-size: 11px;" onclick="confirmDelivery(${index})">Подтвердить получение и доставку</button></div>`;
+
                 list.innerHTML += `
                     <div class="purchase-item">
                         <div style="font-weight:bold; color:#fff;">${p.name} <span style="font-weight:normal; color:#64748b; float:right;">${p.date}</span></div>
-                        <div class="purchase-data">Данные аккаунта: ${p.data}</div>
+                        <div class="purchase-data">Данные с email (Аккаунт + Почта): ${p.data}</div>
+                        ${statusHtml}
                     </div>
                 `;
             });
