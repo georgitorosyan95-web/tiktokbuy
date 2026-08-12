@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TTBuy — Магазин TikTok аккаунтов</title>
-    <!-- Подключаем библиотеку Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         * {
@@ -73,6 +72,79 @@
             margin: 0 auto;
             padding: 40px 20px;
         }
+
+        /* Стильный блок успешной регистрации с салютом и цветами TikTok */
+        .success-banner {
+            position: relative;
+            background: linear-gradient(135deg, rgba(254, 44, 85, 0.15), rgba(37, 244, 238, 0.15));
+            border: 2px solid #fe2c55;
+            color: #ffffff;
+            padding: 40px 20px;
+            border-radius: 16px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 0 30px rgba(254, 44, 85, 0.3), 0 0 30px rgba(37, 244, 238, 0.2);
+            display: none;
+            overflow: hidden;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+        .success-banner svg.tt-bg-logo {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 10px #fe2c55) drop-shadow(0 0 15px #25f4ee);
+            animation: pulseLogo 2s infinite ease-in-out;
+        }
+        .success-banner h2 {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #fe2c55, #25f4ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .success-banner p {
+            color: #cbd5e1;
+            font-size: 16px;
+        }
+
+        @keyframes pulseLogo {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Контейнер для салюта (частиц) */
+        .fireworks-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .firework-particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: explode 1s forwards ease-out;
+        }
+        @keyframes explode {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--dx), var(--dy)) scale(0.2);
+                opacity: 0;
+            }
+        }
+
         .section-title {
             font-size: 24px;
             margin-bottom: 20px;
@@ -203,6 +275,23 @@
 
     <div class="container">
         
+        <!-- Красивое уведомление с логотипом TikTok и салютом -->
+        <div id="success-banner" class="success-banner">
+            <div class="fireworks-container" id="fireworks"></div>
+            <!-- SVG логотип TikTok с фирменным стилем -->
+            <svg class="tt-bg-logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19.589 6.686a4.793 4.793 0 01-3.7-1.542V13.8a6.857 6.857 0 11-6.857-6.857c.328 0 .65.03.964.088v3.655a3.171 3.171 0 102.214 3.028V1h3.643a8.471 8.471 0 003.743 3.128v2.558z" fill="url(#tt-gradient)"/>
+                <defs>
+                    <linearGradient id="tt-gradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#fe2c55"/>
+                        <stop offset="1" stop-color="#25f4ee"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <h2>Вы успешно зарегистрировались!</h2>
+            <p>Добро пожаловать в систему. Все функции магазина разблокированы.</p>
+        </div>
+
         <!-- Блок авторизации / регистрации -->
         <div class="auth-container" id="auth-card">
             <h2 id="auth-title">Регистрация покупателя</h2>
@@ -250,7 +339,6 @@
     </footer>
 
     <script>
-        // Инициализация Supabase
         const SUPABASE_URL = 'https://xwrhswfmuotvqupnavmx.supabase.co';
         const SUPABASE_ANON_KEY = 'sb_publishable_Zqf1YNo4kRt6aBGtouWjEQ_Wokiy4mE'; 
 
@@ -272,21 +360,19 @@
             const password = document.getElementById('password').value;
 
             if (isLoginMode) {
-                // Вход
                 const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
                 if (error) {
                     alert('Ошибка входа: ' + error.message);
                 } else {
-                    alert('Успешный вход!');
+                    showSuccessBanner();
                     checkUser();
                 }
             } else {
-                // Регистрация
                 const { data, error } = await supabaseClient.auth.signUp({ email, password });
                 if (error) {
                     alert('Ошибка регистрации: ' + error.message);
                 } else {
-                    alert('Регистрация успешна! Теперь вы можете войти.');
+                    alert('Регистрация успешна! Подтвердите почту по ссылке в письме или войдите.');
                     toggleMode();
                 }
             }
@@ -304,15 +390,47 @@
                         <button class="logout-btn" onclick="logout()">Выйти</button>
                     </div>
                 `;
-                authCard.style.display = 'none'; // Скрываем форму, если уже вошел
+                authCard.style.display = 'none';
             } else {
                 headerDiv.innerHTML = `<div style="color: #94a3b8; font-size: 14px;">Гость</div>`;
                 authCard.style.display = 'block';
             }
         }
 
+        function showSuccessBanner() {
+            const banner = document.getElementById('success-banner');
+            banner.style.display = 'block';
+            createFireworks();
+        }
+
+        // Функция генерации праздничного салюта в цветах TikTok (#fe2c55 и #25f4ee)
+        function createFireworks() {
+            const container = document.getElementById('fireworks');
+            container.innerHTML = '';
+            const colors = ['#fe2c55', '#25f4ee', '#ffffff'];
+
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'firework-particle';
+                
+                const angle = Math.random() * Math.PI * 2;
+                const distance = 50 + Math.random() * 100;
+                const dx = Math.cos(angle) * distance;
+                const dy = Math.sin(angle) * distance;
+
+                particle.style.setProperty('--dx', `${dx}px`);
+                particle.style.setProperty('--dy', `${dy}px`);
+                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.left = '50%';
+                particle.style.top = '50%';
+
+                container.appendChild(particle);
+            }
+        }
+
         async function logout() {
             await supabaseClient.auth.signOut();
+            document.getElementById('success-banner').style.display = 'none';
             alert('Вы вышли из системы');
             checkUser();
         }
@@ -327,7 +445,13 @@
             });
         }
 
-        // Проверяем статус при загрузке страницы
+        supabaseClient.auth.onAuthStateChange((event, session) => {
+            if (event === 'SIGNED_IN' || session) {
+                showSuccessBanner();
+                checkUser();
+            }
+        });
+
         checkUser();
     </script>
 </body>
