@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TTBuy — Премиум маркетплейс digital-активов</title>
+    <title>TTBuy — Премиум маркетплейс digital-активов и SMM продвижения</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
@@ -37,7 +37,7 @@
             color: white; 
         }
 
-        .cart-btn, .cabinet-btn {
+        .cart-btn, .cabinet-btn, .seller-btn {
             background: #0f172a;
             border: 1px solid #fe2c55;
             color: #fff;
@@ -52,7 +52,9 @@
             transition: all 0.2s;
             white-space: nowrap;
         }
-        .cart-btn:hover, .cabinet-btn:hover { background: #fe2c55; }
+        .cart-btn:hover, .cabinet-btn:hover, .seller-btn:hover { background: #fe2c55; }
+        .seller-btn { border-color: #229ed9; }
+        .seller-btn:hover { background: #229ed9; }
         .cart-badge { background: #25f4ee; color: #0f172a; padding: 1px 5px; border-radius: 10px; font-size: 10px; font-weight: 900; }
 
         .user-info { display: flex; align-items: center; gap: 8px; color: #94a3b8; font-size: 12px; }
@@ -64,7 +66,7 @@
         .search-input { width: 100%; padding: 12px 16px; background: rgba(30, 41, 59, 0.9); border: 2px solid #334155; border-radius: 12px; color: #fff; font-size: 14px; outline: none; }
         .search-input:focus { border-color: #25f4ee; }
 
-        .categories-scroll { display: flex; gap: 8px; overflow-x: auto; max-width: 800px; margin: 15px auto; padding: 0 15px; scrollbar-width: none; }
+        .categories-scroll { display: flex; gap: 8px; overflow-x: auto; max-width: 1100px; margin: 15px auto; padding: 0 15px; scrollbar-width: none; }
         .categories-scroll::-webkit-scrollbar { display: none; }
         .cat-chip { background: #1e293b; border: 1px solid #334155; color: #94a3b8; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
         .cat-chip:hover, .cat-chip.active { background: linear-gradient(90deg, #fe2c55, #25f4ee); color: #fff; border-color: transparent; }
@@ -105,7 +107,7 @@
         @media(min-width: 640px) { .products-grid { grid-template-columns: repeat(2, 1fr); } }
         @media(min-width: 1024px) { .products-grid { grid-template-columns: repeat(3, 1fr); } }
 
-        .card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 16px; transition: transform 0.2s, border-color 0.2s; display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; }
+        .card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 16px; transition: transform 0.2s, border-color 0.2s; display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; position: relative; }
         .card:hover { border-color: #fe2c55; transform: translateY(-2px); }
         .card h3 { font-size: 15px; margin-bottom: 6px; color: #fff; }
         .card p { color: #94a3b8; font-size: 12px; margin-bottom: 10px; flex-grow: 1; }
@@ -119,9 +121,12 @@
         .btn-secondary { background: #334155; color: #fff; }
         .btn-secondary:hover { background: #475569; }
 
+        /* Бейдж продавца / гаранта */
+        .badge-seller { position: absolute; top: 12px; right: 16px; font-size: 10px; background: rgba(34, 158, 217, 0.2); color: #229ed9; padding: 2px 6px; border-radius: 4px; font-weight: bold; border: 1px solid rgba(34, 158, 217, 0.4); }
+
         /* Модальные окна */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(5px); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 12px; }
-        .modal-box { background: #1e293b; border: 1px solid #334155; border-radius: 16px; padding: 20px; width: 100%; max-width: 450px; position: relative; box-shadow: 0 20px 25px rgba(0,0,0,0.5); max-height: 90vh; overflow-y: auto; color: #fff; }
+        .modal-box { background: #1e293b; border: 1px solid #334155; border-radius: 16px; padding: 20px; width: 100%; max-width: 480px; position: relative; box-shadow: 0 20px 25px rgba(0,0,0,0.5); max-height: 90vh; overflow-y: auto; color: #fff; }
         .close-modal { position: absolute; top: 12px; right: 15px; background: none; border: none; color: #94a3b8; font-size: 22px; cursor: pointer; }
         .close-modal:hover { color: #fff; }
         
@@ -134,7 +139,7 @@
         .pay-method { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 8px; text-align: center; font-size: 11px; cursor: pointer; color: #94a3b8; }
         .pay-method.active { border-color: #25f4ee; color: #fff; background: rgba(37,244,238,0.1); }
 
-        /* Личный кабинет */
+        /* Личный кабинет и модалка создания товара */
         .cabinet-tabs { display: flex; gap: 10px; margin-bottom: 15px; border-bottom: 1px solid #334155; padding-bottom: 8px; }
         .cab-tab { background: none; border: none; color: #94a3b8; font-weight: bold; font-size: 13px; cursor: pointer; }
         .cab-tab.active { color: #25f4ee; }
@@ -143,7 +148,8 @@
 
         .form-group { margin-bottom: 12px; }
         .form-group label { display: block; margin-bottom: 4px; color: #94a3b8; font-size: 12px; }
-        .form-group input { width: 100%; padding: 10px; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #fff; font-size: 14px; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #fff; font-size: 14px; outline: none; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #25f4ee; }
         
         .cart-items-list { max-height: 180px; overflow-y: auto; margin-bottom: 12px; }
         .cart-item { display: flex; justify-content: space-between; align-items: center; background: #0f172a; padding: 8px 12px; border-radius: 8px; margin-bottom: 6px; border: 1px solid #334155; }
@@ -170,6 +176,7 @@
             <span>TTBuy</span>
         </div>
         <div class="header-right">
+            <button class="seller-btn" onclick="openCreateProductModal()">➕ Продать товар</button>
             <button class="cabinet-btn" id="cabinet-nav-btn" style="display:none;" onclick="openCabinetModal()">👤 Кабинет</button>
             <button class="cart-btn" onclick="openCartModal()">
                 🛒 Корзина <span class="cart-badge" id="cart-badge">0</span>
@@ -191,31 +198,34 @@
             <div class="floating-icon" style="bottom: 15%; right: 18%; width: 48px; height: 48px;"><svg viewBox="0 0 24 24" fill="#ff0000"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></div>
         </div>
         <div class="hero-content">
-            <h1>TIKTOK YOUTUBE TELEGRAM INSTAGRAM ПРОДВИЖЕНИЕ</h1>
-            <p>Премиум маркетплейс аккаунтов, каналов и мгновенного продвижения топ-уровня.</p>
+            <h1>ПРЕМИУМ МАРКЕТПЛЕЙС DIGITAL-АКТИВОВ И SMM УСЛУГ</h1>
+            <p>Аккаунты, виртуальные номера, продвижение и накрутка для всех популярных соцсетей с автоматической выдачей и гарантией.</p>
         </div>
     </div>
 
     <div class="search-bar-container">
-        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Поиск по названию или услуге..." oninput="filterProducts()">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Поиск аккаунтов, подписчиков, лайков, просмотров..." oninput="filterProducts()">
     </div>
 
-    <!-- Фильтры категорий -->
+    <!-- Фильтры категорий (Все основные соцсети + Аккаунты + Услуги) -->
     <div class="categories-scroll">
         <button class="cat-chip active" onclick="filterCategory('all', this)">🔥 Все товары</button>
         <button class="cat-chip" onclick="filterCategory('tiktok', this)">🎵 TikTok</button>
         <button class="cat-chip" onclick="filterCategory('telegram', this)">📢 Telegram</button>
-        <button class="cat-chip" onclick="filterCategory('numbers', this)">📱 Номера</button>
-        <button class="cat-chip" onclick="filterCategory('boost', this)">⚡ Накрутка</button>
+        <button class="cat-chip" onclick="filterCategory('instagram', this)">📸 Instagram</button>
+        <button class="cat-chip" onclick="filterCategory('youtube', this)">▶️ YouTube</button>
+        <button class="cat-chip" onclick="filterCategory('vk', this)">💬 ВКонтакте</button>
+        <button class="cat-chip" onclick="filterCategory('numbers', this)">📱 Номера СМС</button>
+        <button class="cat-chip" onclick="filterCategory('accounts', this)">🛒 Готовые Аккаунты</button>
     </div>
 
     <div class="container">
         <div id="catalog-container">
-            <h2 class="section-title">Каталог цифровых активов и услуг</h2>
+            <h2 class="section-title">Каталог цифровых товаров и услуг продвижения</h2>
             <div class="products-grid" id="products-grid">
                 
-                <!-- Товар 1 -->
-                <div class="card" data-category="tiktok" data-name="Аккаунт с доступом к Live" onclick="openDetails('Аккаунт с доступом к Live', 1490, 'Чистый аккаунт с историей, полностью готов к стримам и продвижению.', '1 год', 'Родная почта (Outlook)', 'Мгновенная (в личный кабинет)', [
+                <!-- Товар 1: TikTok Live -->
+                <div class="card" data-category="tiktok accounts" data-name="Аккаунт с доступом к Live" onclick="openDetails('Аккаунт с доступом к Live (TikTok)', 1490, 'Чистый аккаунт с историей, полностью готов к стримам и продвижению.', '1 год', 'Родная почта (Outlook)', 'Мгновенная автовыдача', [
                     {author: 'Алексей', stars: '★★★★★', text: 'Всё пришло моментально, вошел на почту и в аккаунт без проблем!'},
                     {author: 'Дмитрий', stars: '★★★★★', text: 'Стрим запустил в тот же вечер, трансляция не лагает. Топ!'},
                     {author: 'John_Doe', stars: '★★★★★', text: 'Great account, working perfectly. Instant delivery!'},
@@ -231,8 +241,9 @@
                     {author: 'Виктория', stars: '★★★★★', text: 'Стрим идет, аудитория набирается.'},
                     {author: 'Chris_91', stars: '★★★★★', text: 'Super fast and secure. Highly recommended.'}
                 ])">
+                    <div class="badge-seller">Verified Seller</div>
                     <div>
-                        <h3>Аккаунт с доступом к Live (Трансляции)</h3>
+                        <h3>Аккаунт с доступом к Live (TikTok)</h3>
                         <p>Чистый аккаунт с историей, полностью готов к стримам и продвижению.</p>
                     </div>
                     <div>
@@ -242,48 +253,49 @@
                         </div>
                         <div class="price">1 490 ₽</div>
                         <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('Аккаунт с доступом к Live', 1490)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('Аккаунт с доступом к Live', 1490)">Купить</button>
+                            <button class="btn btn-secondary" onclick="addToCart('Аккаунт с доступом к Live (TikTok)', 1490)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Аккаунт с доступом к Live (TikTok)', 1490)">Купить</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Товар 2 -->
-                <div class="card" data-category="tiktok" data-name="Аккаунт 1,000+ подписчиков" onclick="openDetails('Аккаунт 1,000+ подписчиков', 2990, 'Живая аудитория, открыта монетизация и стримы, без нарушений.', '6 месяцев', 'Авторег + почта', 'Мгновенная', [
-                    {author: 'Марина', stars: '★★★★★', text: 'Отличный магазин, беру не первый раз. Поддержка помогла сменить пароль.'},
-                    {author: 'Иван', stars: '★★★★☆', text: 'Подписчики реальные, кнопка Live активна. Рекомендую продавца.'},
-                    {author: 'Sarah_T', stars: '★★★★★', text: 'Superb account! Monetization features are active as described.'},
-                    {author: 'Кирилл', stars: '★★★★★', text: 'Всё супер, аккаунт чистый, без банов.'},
-                    {author: 'Alex_88', stars: '★★★★★', text: 'Very fast transaction. Got login details instantly.'},
-                    {author: 'Татьяна', stars: '★★★★☆', text: 'Хороший аккаунт, аудитория активная.'},
-                    {author: 'Robert', stars: '★★★★★', text: 'Top tier quality, ready for streaming right away.'},
-                    {author: 'Павел', stars: '★★★★★', text: 'Покупкой доволен на все 100%.'},
-                    {author: 'Elena_V', stars: '★★★★☆', text: 'Всё работает, спасибо за оперативность.'},
-                    {author: 'Максим', stars: '★★★★★', text: 'Отличная отлежка, аккаунт в надежных руках.'},
-                    {author: 'Jessica', stars: '★★★★★', text: 'Amazing seller, great customer support!'},
-                    {author: 'Денис', stars: '★★★★☆', text: 'Все прошло гладко, данные верные.'},
-                    {author: 'Kevin', stars: '★★★★★', text: 'No shadowban, high views. Perfect.'},
-                    {author: 'Наталья', stars: '★★★★★', text: 'Рекомендую всем, кто ищет готовый профиль.'}
+                <!-- Товар 2: TikTok Накрутка подписчиков и лайков -->
+                <div class="card" data-category="tiktok" data-name="TikTok Подписчики и Лайки" onclick="openDetails('TikTok: Накрутка Подписчиков и Лайки (1000 шт)', 390, 'Качественные подписчики и живые лайки на видео для вывода в рекомендации.', 'Без списаний', 'По ссылке на профиль/видео', 'Автозапуск за 5 минут', [
+                    {author: 'Кирилл', stars: '★★★★☆', text: 'Накрутка пошла плавно, без списаний. Очень доволен.'},
+                    {author: 'Виктория', stars: '★★★★★', text: 'Заказ выполнили даже быстрее, чем указано. Рекомендую!'},
+                    {author: 'Liam', stars: '★★★★★', text: 'Fast delivery, smooth growth without drops.'},
+                    {author: 'Артем', stars: '★★★★★', text: 'Отличные подписчики, профиль ожил.'},
+                    {author: 'Mason', stars: '★★★★☆', text: 'Good quality followers, started quickly.'},
+                    {author: 'Екатерина', stars: '★★★★★', text: 'Всё супер, заказ выполнен вовремя.'},
+                    {author: 'Logan', stars: '★★★★★', text: 'Amazing boost service, will order more.'},
+                    {author: 'Илья', stars: '★★★★☆', text: 'Накрутка пошла через пару минут.'},
+                    {author: 'Harper', stars: '★★★★★', text: 'Reliable and fast! Great results.'},
+                    {author: 'Максим', stars: '★★★★★', text: 'Рекомендую для продвижения профиля.'},
+                    {author: 'Evelyn', stars: '★★★★☆', text: 'Nice service, steady delivery.'},
+                    {author: 'Никита', stars: '★★★★★', text: 'Всё работает отлично, без списаний.'},
+                    {author: 'James', stars: '★★★★★', text: 'Top quality service, very satisfied.'},
+                    {author: 'Алина', stars: '★★★★★', text: 'Спасибо, показатели выросли.'}
                 ])">
+                    <div class="badge-seller">Top Service</div>
                     <div>
-                        <h3>Аккаунт 1,000+ подписчиков</h3>
-                        <p>Живая аудитория, открыта монетизация и стримы, без нарушений.</p>
+                        <h3>TikTok: Накрутка Подписчиков + Лайки (1K)</h3>
+                        <p>Быстрое добавление подписчиков и лайков на ваши ролики в TikTok.</p>
                     </div>
                     <div>
                         <div class="card-meta">
-                            <span>📦 Авто-выдача</span>
-                            <span class="rating">★ 5.0 (18)</span>
+                            <span>⚡ Автоуслуга</span>
+                            <span class="rating">★ 4.7 (83)</span>
                         </div>
-                        <div class="price">2 990 ₽</div>
+                        <div class="price">390 ₽</div>
                         <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('Аккаунт 1,000+ подписчиков', 2990)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('Аккаунт 1,000+ подписчиков', 2990)">Купить</button>
+                            <button class="btn btn-secondary" onclick="addToCart('TikTok: Накрутка Подписчиков и Лайки (1000 шт)', 390)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('TikTok: Накрутка Подписчиков и Лайки (1000 шт)', 390)">Купить</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Товар 3 -->
-                <div class="card" data-category="telegram" data-name="Telegram канал с монетизацией" onclick="openDetails('Telegram канал с монетизацией', 12900, 'Готовый канал с живой аудиторией и подключенными источниками дохода.', '2 года', 'Передача владельца (Owner)', 'Ручная (до 15 минут)', [
+                <!-- Товар 3: Telegram Канал -->
+                <div class="card" data-category="telegram accounts" data-name="Telegram канал с монетизацией" onclick="openDetails('Telegram канал с монетизацией', 12900, 'Готовый канал с живой аудиторией и подключенными источниками дохода.', '2 года', 'Передача владельца (Owner)', 'Ручная (до 15 минут)', [
                     {author: 'Сергей', stars: '★★★★★', text: 'Передали права владельца через бота за 5 минут. Статистика чистая!'},
                     {author: 'Артур', stars: '★★★★★', text: 'Окупаемость отличная, рекламу уже продаю.'},
                     {author: 'Daniel', stars: '★★★★★', text: 'Clean stats, real audience. Smooth transfer process.'},
@@ -299,6 +311,7 @@
                     {author: 'George', stars: '★★★★☆', text: 'Good organic growth and daily views.'},
                     {author: 'Алексей', stars: '★★★★★', text: 'Спасибо за качественный актив!'}
                 ])">
+                    <div class="badge-seller">Verified Seller</div>
                     <div>
                         <h3>Telegram канал с монетизацией</h3>
                         <p>Готовый канал с живой аудиторией и подключенными источниками дохода.</p>
@@ -316,76 +329,8 @@
                     </div>
                 </div>
 
-                <!-- Товар 4 -->
-                <div class="card" data-category="numbers" data-name="Номер для регистрации TikTok" onclick="openDetails('Виртуальный номер TikTok', 150, 'Чистый виртуальный номер для безопасной регистрации и верификации.', 'Одноразовый', 'СМС-получение на сайте', 'Моментально', [
-                    {author: 'Евгений', stars: '★★★★★', text: 'СМС прилетело через 3 секунды. Аккаунт зарегистрировался с первого раза.'},
-                    {author: 'Ольга', stars: '★★★★★', text: 'Дешевле чем на других сайтах, спасибо сервису!'},
-                    {author: 'Mark_S', stars: '★★★★★', text: 'Instant SMS delivery, worked like a charm!'},
-                    {author: 'Александр', stars: '★★★★☆', text: 'Все номера рабочие, банов нет.'},
-                    {author: 'Lucas', stars: '★★★★★', text: 'Fast and cheap numbers for registration.'},
-                    {author: 'Светлана', stars: '★★★★★', text: 'Очень удобно, код пришел мгновенно.'},
-                    {author: 'Oliver', stars: '★★★★☆', text: 'Good service, no issues.'},
-                    {author: 'Роман', stars: '★★★★★', text: 'Пользуюсь постоянно, никогда не подводили.'},
-                    {author: 'Mia', stars: '★★★★★', text: 'Worked perfectly for TikTok signup!'},
-                    {author: 'Григорий', stars: '★★★★☆', text: 'Быстро и без лишних заморочек.'},
-                    {author: 'Ethan', stars: '★★★★★', text: 'Great virtual numbers provider.'},
-                    {author: 'Валерия', stars: '★★★★★', text: 'Супер сервис, сэкономил кучу времени.'},
-                    {author: 'Noah', stars: '★★★★★', text: 'Fast SMS, clean numbers.'},
-                    {author: 'Константин', stars: '★★★★☆', text: 'Отличная цена за рабочие номера.'}
-                ])">
-                    <div>
-                        <h3>Номер для регистрации TikTok</h3>
-                        <p>Чистый виртуальный номер для безопасной регистрации и верификации аккаунта.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta">
-                            <span>📱 СМС активация</span>
-                            <span class="rating">★ 4.9 (125)</span>
-                        </div>
-                        <div class="price">150 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('Виртуальный номер TikTok', 150)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('Виртуальный номер TikTok', 150)">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Товар 5 -->
-                <div class="card" data-category="boost" data-name="TikTok Подписчики" onclick="openDetails('Накрутка TikTok: Подписчики (1000)', 490, 'Быстрое добавление качественных подписчиков на ваш профиль.', 'Без списаний', 'По ссылке на профиль', 'Автозапуск за 5 мин', [
-                    {author: 'Кирилл', stars: '★★★★☆', text: 'Накрутка пошла плавно, без списаний. Очень доволен.'},
-                    {author: 'Виктория', stars: '★★★★★', text: 'Заказ выполнили даже быстрее, чем указано. Рекомендую!'},
-                    {author: 'Liam', stars: '★★★★★', text: 'Fast delivery, smooth growth without drops.'},
-                    {author: 'Артем', stars: '★★★★★', text: 'Отличные подписчики, профиль ожил.'},
-                    {author: 'Mason', stars: '★★★★☆', text: 'Good quality followers, started quickly.'},
-                    {author: 'Екатерина', stars: '★★★★★', text: 'Всё супер, заказ выполнен вовремя.'},
-                    {author: 'Logan', stars: '★★★★★', text: 'Amazing boost service, will order more.'},
-                    {author: 'Илья', stars: '★★★★☆', text: 'Накрутка пошла через пару минут.'},
-                    {author: 'Harper', stars: '★★★★★', text: 'Reliable and fast! Great results.'},
-                    {author: 'Максим', stars: '★★★★★', text: 'Рекомендую для продвижения профиля.'},
-                    {author: 'Evelyn', stars: '★★★★☆', text: 'Nice service, steady delivery.'},
-                    {author: 'Никита', stars: '★★★★★', text: 'Всё работает отлично, без списаний.'},
-                    {author: 'James', stars: '★★★★★', text: 'Top quality service, very satisfied.'},
-                    {author: 'Алина', stars: '★★★★★', text: 'Спасибо, показатели выросли.'}
-                ])">
-                    <div>
-                        <h3>TikTok: Подписчики (1 000 шт)</h3>
-                        <p>Быстрое добавление живых подписчиков на ваш TikTok профиль.</p>
-                    </div>
-                    <div>
-                        <div class="card-meta">
-                            <span>⚡ Автоуслуга</span>
-                            <span class="rating">★ 4.7 (83)</span>
-                        </div>
-                        <div class="price">490 ₽</div>
-                        <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('Накрутка TikTok: Подписчики', 490)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('Накрутка TikTok: Подписчики', 490)">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Товар 6 -->
-                <div class="card" data-category="boost" data-name="Telegram Подписчики на канал" onclick="openDetails('Накрутка Telegram: Подписчики (1000)', 590, 'Привлечение целевой аудитории и подписчиков в ваш Telegram канал.', 'С гарантией', 'По ссылке на канал', 'Плавный старт', [
+                <!-- Товар 4: Telegram Накрутка (Подписчики, Просмотры, Реакции, Премиум) -->
+                <div class="card" data-category="telegram" data-name="Telegram: Подписчики, Просмотры, Реакции" onclick="openDetails('Telegram: Комплекс (1000 подписчиков + просмотры постов)', 590, 'Комплексное продвижение Telegram канала: живые подписчики и автопросмотры на записи.', 'С гарантией', 'По ссылке на канал', 'Плавный старт', [
                     {author: 'Максим', stars: '★★★★★', text: 'Отличные подписчики, бот отработал четко.'},
                     {author: 'Павел', stars: '★★★★★', text: 'Качественная услуга, всё супер!'},
                     {author: 'Alexander', stars: '★★★★★', text: 'Great channel growth, smooth start.'},
@@ -401,9 +346,10 @@
                     {author: 'Ella', stars: '★★★★☆', text: 'Good quality subscribers.'},
                     {author: 'Игорь', stars: '★★★★★', text: 'Буду заказывать еще.'}
                 ])">
+                    <div class="badge-seller">Top Service</div>
                     <div>
-                        <h3>Telegram: Подписчики на канал (1 000 шт)</h3>
-                        <p>Привлечение целевой аудитории и подписчиков в ваш Telegram канал.</p>
+                        <h3>Telegram: Подписчики + Просмотры (1K)</h3>
+                        <p>Комплексное продвижение: целевые подписчики в канал и просмотры на посты.</p>
                     </div>
                     <div>
                         <div class="card-meta">
@@ -412,8 +358,148 @@
                         </div>
                         <div class="price">590 ₽</div>
                         <div class="card-buttons" onclick="event.stopPropagation()">
-                            <button class="btn btn-secondary" onclick="addToCart('Накрутка Telegram: Подписчики', 590)">В корзину</button>
-                            <button class="btn" onclick="buyDirect('Накрутка Telegram: Подписчики', 590)">Купить</button>
+                            <button class="btn btn-secondary" onclick="addToCart('Telegram: Комплекс (1000 подписчиков + просмотры постов)', 590)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Telegram: Комплекс (1000 подписчиков + просмотры постов)', 590)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Товар 5: Instagram Накрутка (Подписчики, Лайки, Reels, Охваты) -->
+                <div class="card" data-category="instagram" data-name="Instagram Накрутка: Подписчики, Лайки, Reels" onclick="openDetails('Instagram: Продвижение Reels и Подписчики (1000 шт)', 450, 'Накрутка живых подписчиков, лайков и просмотров на Reels для выхода в рекомендации.', 'Без списаний', 'По ссылке на аккаунт/Reels', 'Моментальный запуск', [
+                    {author: 'Светлана', stars: '★★★★★', text: 'Reels залетели в рекомендации сразу после накрутки просмотров!'},
+                    {author: 'Mark_R', stars: '★★★★★', text: 'Fast Instagram followers, high quality.'},
+                    {author: 'Катя', stars: '★★★★★', text: 'Отличный сервис, подписчики активные.'},
+                    {author: 'Chris', stars: '★★★★☆', text: 'Good results for my business page.'},
+                    {author: 'Руслан', stars: '★★★★★', text: 'Всё супер, лайки пришли быстро.'},
+                    {author: 'Anna', stars: '★★★★★', text: 'Super service! Will order more for Reels.'},
+                    {author: 'Денис', stars: '★★★★☆', text: 'Без списаний, держатся отлично.'},
+                    {author: 'David', stars: '★★★★★', text: 'Awesome delivery speed.'},
+                    {author: 'Юлия', stars: '★★★★★', text: 'Спасибо, охваты выросли в разы.'},
+                    {author: 'Max', stars: '★★★★★', text: 'Very reliable SMM panel feature.'},
+                    {author: 'Олег', stars: '★★★★☆', text: 'Все четко по инструкции.'},
+                    {author: 'Sophia', stars: '★★★★★', text: 'Top quality Instagram boost!'},
+                    {author: 'Иван', stars: '★★★★★', text: 'Рекомендую всем блогерам.'},
+                    {author: 'Daniela', stars: '★★★★★', text: 'Perfect service and support.'}
+                ])">
+                    <div class="badge-seller">Hit Sales</div>
+                    <div>
+                        <h3>Instagram: Подписчики + Reels Просмотры</h3>
+                        <p>Комплекс для Instagram: фолловеры, лайки и продвижение видео Reels.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta">
+                            <span>⚡ Автоуслуга</span>
+                            <span class="rating">★ 4.9 (112)</span>
+                        </div>
+                        <div class="price">450 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('Instagram: Продвижение Reels и Подписчики (1000 шт)', 450)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Instagram: Продвижение Reels и Подписчики (1000 шт)', 450)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Товар 6: YouTube Накрутка (Просмотры, Подписчики, Лайки, Часы просмотра) -->
+                <div class="card" data-category="youtube" data-name="YouTube Накрутка: Просмотры, Подписчики, Часы" onclick="openDetails('YouTube: Продвижение (1000 просмотров + 100 подписчиков)', 690, 'Качественные просмотры с удержанием и подписчики для продвижения канала в тренды YouTube.', 'С удержанием', 'По ссылке на видео/канал', 'Автостарт', [
+                    {author: 'Виктор', stars: '★★★★★', text: 'Отличные просмотры с высоким удержанием, видео пошло вверх!'},
+                    {author: 'Andrew', stars: '★★★★★', text: 'Great retention views, very safe for monetization.'},
+                    {author: 'Константин', stars: '★★★★★', text: 'Подписчики не списываются, спасибо!'},
+                    {author: 'Brandon', stars: '★★★★☆', text: 'Good quality service for YouTube creators.'},
+                    {author: 'Мария', stars: '★★★★★', text: 'Всё сделано качественно и в срок.'},
+                    {author: 'Kevin', stars: '★★★★★', text: 'Awesome growth, helpful support.'},
+                    {author: 'Павел', stars: '★★★★☆', text: 'Помогло продвинуть новое видео.'},
+                    {author: 'Jason', stars: '★★★★★', text: 'Reliable views and subscribers.'},
+                    {author: 'Артур', stars: '★★★★★', text: 'Лучшая панель для ютуберов.'},
+                    {author: 'Ryan', stars: '★★★★★', text: 'Super fast and stable!'},
+                    {author: 'Николай', stars: '★★★★☆', text: 'Всё работает, рекомендую.'},
+                    {author: 'Justin', stars: '★★★★★', text: 'Top tier YouTube promotion.'},
+                    {author: 'Алексей', stars: '★★★★★', text: 'Заказ выполнен на 100%.'},
+                    {author: 'Nathan', stars: '★★★★★', text: 'Very satisfied with the results.'}
+                ])">
+                    <div class="badge-seller">Top Service</div>
+                    <div>
+                        <h3>YouTube: Просмотры (с удержанием) + Подписчики</h3>
+                        <p>Профессиональное продвижение роликов и каналов на YouTube с удержанием.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta">
+                            <span>⚡ Автоуслуга</span>
+                            <span class="rating">★ 4.8 (64)</span>
+                        </div>
+                        <div class="price">690 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('YouTube: Продвижение (1000 просмотров + 100 подписчиков)', 690)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('YouTube: Продвижение (1000 просмотров + 100 подписчиков)', 690)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Товар 7: ВКонтакте (Подписчики, Лайки, Репосты, Охваты) -->
+                <div class="card" data-category="vk" data-name="ВКонтакте Накрутка: Подписчики, Лайки, Группы" onclick="openDetails('ВКонтакте: Продвижение группы / паблика (1000 подписчиков)', 490, 'Привлечение участников в группы, паблики и лайки на посты ВКонтакте.', 'Без списаний', 'По ссылке на сообщество', 'Моментальный старт', [
+                    {author: 'Глеб', stars: '★★★★★', text: 'Группа ожила, участники добавились быстро.'},
+                    {author: 'Илья', stars: '★★★★★', text: 'Отличная цена и качество, рекомендую.'},
+                    {author: 'Max_VK', stars: '★★★★★', text: 'Fast delivery for VK community!'},
+                    {author: 'Анна', stars: '★★★★☆', text: 'Всё четко, заказы выполняются вовремя.'},
+                    {author: 'Denis', stars: '★★★★★', text: 'Good organic looking followers.'},
+                    {author: 'Станислав', stars: '★★★★★', text: 'Спасибо за качественную раскрутку паблика.'},
+                    {author: 'Tim', stars: '★★★★☆', text: 'Reliable service.'},
+                    {author: 'Вадим', stars: '★★★★★', text: 'Отличный сервис, буду брать еще.'},
+                    {author: 'Alex', stars: '★★★★★', text: 'Superb results for VK group.'},
+                    {author: 'Елена', stars: '★★★★★', text: 'Все супер, спасибо разработчикам.'},
+                    {author: 'Sam', stars: '★★★★☆', text: 'Good quality and speed.'},
+                    {author: 'Роман', stars: '★★★★★', text: 'Лучший маркетплейс услуг.'},
+                    {author: 'Nick', stars: '★★★★★', text: 'Very professional.'},
+                    {author: 'Ольга', stars: '★★★★★', text: 'Довольна покупкой на все 100%.'}
+                ])">
+                    <div class="badge-seller">Verified Seller</div>
+                    <div>
+                        <h3>ВКонтакте: Участники группы + Лайки (1K)</h3>
+                        <p>Продвижение сообществ, групп и пабликов ВКонтакте живыми участниками.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta">
+                            <span>⚡ Автоуслуга</span>
+                            <span class="rating">★ 4.9 (38)</span>
+                        </div>
+                        <div class="price">490 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('ВКонтакте: Продвижение группы / паблика (1000 подписчиков)', 490)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('ВКонтакте: Продвижение группы / паблика (1000 подписчиков)', 490)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Товар 8: Виртуальные номера -->
+                <div class="card" data-category="numbers" data-name="Виртуальные номера для верификации" onclick="openDetails('Виртуальный номер для регистрации (Любая соцсеть)', 150, 'Чистый виртуальный номер для безопасной СМС-активации и регистрации аккаунта.', 'Одноразовый', 'СМС-получение на сайте', 'Моментально', [
+                    {author: 'Евгений', stars: '★★★★★', text: 'СМС прилетело через 3 секунды. Аккаунт зарегистрировался с первого раза.'},
+                    {author: 'Ольга', stars: '★★★★★', text: 'Дешевле чем на других сайтах, спасибо сервису!'},
+                    {author: 'Mark_S', stars: '★★★★★', text: 'Instant SMS delivery, worked like a charm!'},
+                    {author: 'Александр', stars: '★★★★☆', text: 'Все номера рабочие, банов нет.'},
+                    {author: 'Lucas', stars: '★★★★★', text: 'Fast and cheap numbers for registration.'},
+                    {author: 'Светлана', stars: '★★★★★', text: 'Очень удобно, код пришел мгновенно.'},
+                    {author: 'Oliver', stars: '★★★★☆', text: 'Good service, no issues.'},
+                    {author: 'Роман', stars: '★★★★★', text: 'Пользуюсь постоянно, никогда не подводили.'},
+                    {author: 'Mia', stars: '★★★★★', text: 'Worked perfectly for signup!'},
+                    {author: 'Григорий', stars: '★★★★☆', text: 'Быстро и без лишних заморочек.'},
+                    {author: 'Ethan', stars: '★★★★★', text: 'Great virtual numbers provider.'},
+                    {author: 'Валерия', stars: '★★★★★', text: 'Супер сервис, сэкономил кучу времени.'},
+                    {author: 'Noah', stars: '★★★★★', text: 'Fast SMS, clean numbers.'},
+                    {author: 'Константин', stars: '★★★★☆', text: 'Отличная цена за рабочие номера.'}
+                ])">
+                    <div class="badge-seller">Auto-Delivery</div>
+                    <div>
+                        <h3>Виртуальный номер для СМС (Любой сервис)</h3>
+                        <p>Чистый виртуальный номер для безопасной регистрации и получения кода верификации.</p>
+                    </div>
+                    <div>
+                        <div class="card-meta">
+                            <span>📱 СМС активация</span>
+                            <span class="rating">★ 4.9 (125)</span>
+                        </div>
+                        <div class="price">150 ₽</div>
+                        <div class="card-buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary" onclick="addToCart('Виртуальный номер для регистрации (Любая соцсеть)', 150)">В корзину</button>
+                            <button class="btn" onclick="buyDirect('Виртуальный номер для регистрации (Любая соцсеть)', 150)">Купить</button>
                         </div>
                     </div>
                 </div>
@@ -429,9 +515,9 @@
             <h2 id="det-title">Название товара</h2>
             <p id="det-desc" style="color: #94a3b8; font-size: 13px; margin-bottom: 15px;"></p>
             
-            <div class="modal-details-prop"><span>Отлежка / Возраст:</span> <span id="det-age">-</span></div>
-            <div class="modal-details-prop"><span>Тип почты / Доступа:</span> <span id="det-mail">-</span></div>
-            <div class="modal-details-prop"><span>Доставка товара:</span> <span id="det-delivery">-</span></div>
+            <div class="modal-details-prop"><span>Параметры / Отлежка:</span> <span id="det-age">-</span></div>
+            <div class="modal-details-prop"><span>Тип выдачи / Доступа:</span> <span id="det-mail">-</span></div>
+            <div class="modal-details-prop"><span>Скорость / Старт:</span> <span id="det-delivery">-</span></div>
             <div class="modal-details-prop" style="margin-top: 10px; border:none; font-size: 16px;"><span>Цена:</span> <span id="det-price" style="color:#22c55e;">-</span></div>
 
             <div class="card-buttons" style="margin-top: 15px;">
@@ -443,9 +529,44 @@
             <div class="reviews-section">
                 <h4 style="font-size: 13px; margin-bottom: 8px; color: #fff;">Отзывы покупателей:</h4>
                 <div id="det-reviews-container">
-                    <!-- Заполняется динамически уникальными отзывами товара -->
+                    <!-- Заполняется динамически -->
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно Создания товара (Маркетплейс для продавцов) -->
+    <div class="modal-overlay" id="createProductModal">
+        <div class="modal-box">
+            <button class="close-modal" onclick="closeCreateProductModal()">&times;</button>
+            <h2>➕ Разместить свой товар / услугу</h2>
+            <p style="color: #94a3b8; font-size: 12px; margin-bottom: 15px;">Заполните данные, чтобы выставить ваш цифровой актив или SMM услугу на продажу.</p>
+            <form id="create-product-form">
+                <div class="form-group">
+                    <label>Название товара / услуги</label>
+                    <input type="text" id="new-prod-name" placeholder="Например: Telegram канал 5000 подписчиков" required>
+                </div>
+                <div class="form-group">
+                    <label>Категория</label>
+                    <select id="new-prod-cat">
+                        <option value="tiktok">TikTok (Аккаунты / Накрутка)</option>
+                        <option value="telegram">Telegram (Каналы / Накрутка)</option>
+                        <option value="instagram">Instagram (Продвижение)</option>
+                        <option value="youtube">YouTube (Продвижение)</option>
+                        <option value="vk">ВКонтакте (Продвижение)</option>
+                        <option value="numbers">Номера для СМС</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Цена (в рублях)</label>
+                    <input type="number" id="new-prod-price" placeholder="990" required>
+                </div>
+                <div class="form-group">
+                    <label>Описание и характеристики</label>
+                    <textarea id="new-prod-desc" rows="3" placeholder="Укажите подробности, отлежку, тип доступа..." required></textarea>
+                </div>
+                <button type="submit" class="btn">Опубликовать товар</button>
+            </form>
         </div>
     </div>
 
@@ -559,7 +680,7 @@
             const cards = document.querySelectorAll('.card');
             cards.forEach(card => {
                 const cardCat = card.getAttribute('data-category');
-                if (cat === 'all' || cardCat === cat) {
+                if (cat === 'all' || cardCat.includes(cat)) {
                     card.style.display = 'flex';
                 } else {
                     card.style.display = 'none';
@@ -581,6 +702,70 @@
             });
         }
 
+        // Модальное окно добавления своего товара (как на маркетплейсах)
+        function openCreateProductModal() {
+            document.getElementById('createProductModal').style.display = 'flex';
+        }
+        function closeCreateProductModal() {
+            document.getElementById('createProductModal').style.display = 'none';
+        }
+
+        const createProductForm = document.getElementById('create-product-form');
+        createProductForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('new-prod-name').value;
+            const cat = document.getElementById('new-prod-cat').value;
+            const price = Number(document.getElementById('new-prod-price').value);
+            const desc = document.getElementById('new-prod-desc').value;
+
+            // Генерируем 10-15 дефолтных отзывов с русскими и английскими именами для нового товара
+            const sampleReviews = [
+                {author: 'Александр', stars: '★★★★★', text: 'Отличный продавец, всё выдали за пару минут!'},
+                {author: 'Jessica_99', stars: '★★★★★', text: 'Super fast delivery and working perfectly!'},
+                {author: 'Максим', stars: '★★★★★', text: 'Качество на высоте, рекомендую.'},
+                {author: 'Michael_B', stars: '★★★★☆', text: 'Good service, no issues at all.'},
+                {author: 'Ольга', stars: '★★★★★', text: 'Всё супер, спасибо за сделку!'},
+                {author: 'David_K', stars: '★★★★★', text: 'Awesome! Will buy again soon.'},
+                {author: 'Сергей', stars: '★★★★☆', text: 'Всё работает стабильно.'},
+                {author: 'Alice_W', stars: '★★★★★', text: 'Fast and secure transaction.'},
+                {author: 'Артем', stars: '★★★★★', text: 'Лучшая цена на рынке.'},
+                {author: 'Robert', stars: '★★★★★', text: 'Top tier quality service.'},
+                {author: 'Татьяна', stars: '★★★★★', text: 'Очень довольна покупкой.'},
+                {author: 'Chris', stars: '★★★★☆', text: 'Great experience overall.'}
+            ];
+
+            // Создаем карточку товара динамически на странице
+            const grid = document.getElementById('products-grid');
+            const newCard = document.createElement('div');
+            newCard.className = 'card';
+            newCard.setAttribute('data-category', cat + ' accounts');
+            newCard.setAttribute('data-name', name);
+            newCard.onclick = () => openDetails(name, price, desc, 'Новый', 'Автовыдача', 'Моментально', sampleReviews);
+
+            newCard.innerHTML = `
+                <div class="badge-seller">User Listing</div>
+                <div>
+                    <h3>${name}</h3>
+                    <p>${desc}</p>
+                </div>
+                <div>
+                    <div class="card-meta">
+                        <span>📦 Моментально</span>
+                        <span class="rating">★ 5.0 (1)</span>
+                    </div>
+                    <div class="price">${price.toLocaleString()} ₽</div>
+                    <div class="card-buttons" onclick="event.stopPropagation()">
+                        <button class="btn btn-secondary" onclick="addToCart('${name}', ${price})">В корзину</button>
+                        <button class="btn" onclick="buyDirect('${name}', ${price})">Купить</button>
+                    </div>
+                </div>
+            `;
+            grid.prepend(newCard);
+            closeCreateProductModal();
+            createProductForm.reset();
+            showModal('Ваш товар успешно опубликован на маркетплейсе!');
+        });
+
         // Детальное модальное окно товара с уникальными отзывами
         function openDetails(name, price, desc, age, mail, delivery, reviews) {
             document.getElementById('det-title').textContent = name;
@@ -588,9 +773,9 @@
             document.getElementById('det-age').textContent = age;
             document.getElementById('det-mail').textContent = mail;
             document.getElementById('det-delivery').textContent = delivery;
-            document.getElementById('det-price').textContent = price + ' ₽';
+            document.getElementById('det-price').textContent = price.toLocaleString() + ' ₽';
             
-            // Динамическая генерация отзывов для конкретного товара
+            // Динамическая генерация отзывов (10-20 штук с русскими и английскими именами)
             const reviewsContainer = document.getElementById('det-reviews-container');
             reviewsContainer.innerHTML = '';
             reviews.forEach(rev => {
@@ -635,13 +820,13 @@
                     total += item.price;
                     listEl.innerHTML += `
                         <div class="cart-item">
-                            <div><div style="font-weight:bold; font-size:12px;">${item.name}</div><div style="font-size:11px; color:#22c55e;">${item.price} ₽</div></div>
+                            <div><div style="font-weight:bold; font-size:12px;">${item.name}</div><div style="font-size:11px; color:#22c55e;">${item.price.toLocaleString()} ₽</div></div>
                             <button style="background:none; border:none; color:#ef4444; cursor:pointer; font-size:16px;" onclick="removeFromCart(${index})">&times;</button>
                         </div>
                     `;
                 });
             }
-            totalEl.textContent = total + ' ₽';
+            totalEl.textContent = total.toLocaleString() + ' ₽';
         }
 
         function selectPay(el) {
@@ -666,7 +851,7 @@
                 myPurchases.push({
                     name: item.name,
                     date: new Date().toLocaleDateString(),
-                    data: 'LOGIN: ' + Math.random().toString(36).substring(7) + ' | PASS: ' + Math.random().toString(36).substring(7)
+                    data: 'LOGIN/LINK: ' + Math.random().toString(36).substring(7) + ' | PASS/KEY: ' + Math.random().toString(36).substring(7)
                 });
             });
 
@@ -687,7 +872,7 @@
             myPurchases.push({
                 name: itemName,
                 date: new Date().toLocaleDateString(),
-                data: 'LOGIN: ' + Math.random().toString(36).substring(7) + ' | PASS: ' + Math.random().toString(36).substring(7)
+                data: 'LOGIN/LINK: ' + Math.random().toString(36).substring(7) + ' | PASS/KEY: ' + Math.random().toString(36).substring(7)
             });
             updatePurchasesUI();
             showModal(`Покупка "${itemName}" успешно завершена! Данные доступны в Личном кабинете.`);
