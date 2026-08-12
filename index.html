@@ -16,12 +16,43 @@
         .logo-icon { width: 20px; height: 20px; flex-shrink: 0; }
         .logo span { background: linear-gradient(90deg, #fe2c55, #229ed9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-left: 2px; }
         
-        /* Кнопки в шапке */
+        /* Киберпанк и глитч-эффект для кнопок в шапке */
         .header-auth { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
-        .nav-btn { background: transparent; border: 1px solid #334155; color: #cbd5e1; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 13px; transition: all 0.2s; white-space: nowrap; }
-        .nav-btn:hover { border-color: #fe2c55; color: #fff; }
-        .nav-btn.register { background: linear-gradient(90deg, #fe2c55, #25f4ee); border: none; color: white; }
-        .nav-btn.register:hover { opacity: 0.9; }
+        .nav-btn { 
+            background: transparent; 
+            border: 1px solid #25f4ee; 
+            color: #f8fafc; 
+            padding: 6px 14px; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-weight: 700; 
+            font-size: 13px; 
+            transition: all 0.2s; 
+            white-space: nowrap; 
+            text-shadow: 0 0 5px rgba(37, 244, 238, 0.5);
+            box-shadow: 0 0 10px rgba(37, 244, 238, 0.2), inset 0 0 10px rgba(37, 244, 238, 0.1);
+            position: relative;
+        }
+        .nav-btn:hover { 
+            border-color: #fe2c55; 
+            color: #fff; 
+            text-shadow: 0.03em 0 0 #25f4ee, -0.03em 0 0 #fe2c55, 0 0 8px rgba(254, 44, 85, 0.8);
+            box-shadow: 0 0 15px rgba(254, 44, 85, 0.4), inset 0 0 15px rgba(254, 44, 85, 0.2);
+        }
+        .nav-btn.register { 
+            background: linear-gradient(90deg, #fe2c55, #25f4ee); 
+            border: 1px solid #fe2c55; 
+            color: white; 
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 15px rgba(254, 44, 85, 0.4);
+        }
+        .nav-btn.register:hover { 
+            opacity: 0.95; 
+            border-color: #25f4ee;
+            text-shadow: 0.03em 0 0 #25f4ee, -0.03em 0 0 #fe2c55, 0 0 10px rgba(37, 244, 238, 0.8);
+            box-shadow: 0 0 20px rgba(37, 244, 238, 0.6);
+            animation: glitchText 0.5s infinite;
+        }
 
         .user-info { display: flex; align-items: center; gap: 10px; color: #94a3b8; font-size: 13px; }
         .logout-btn { background: transparent; border: 1px solid #ef4444; color: #ef4444; padding: 5px 10px; border-radius: 6px; cursor: pointer; font-weight: 600; transition: background 0.2s, color 0.2s; }
@@ -129,7 +160,7 @@
             0% { text-shadow: 0.05em 0 0 #fe2c55, -0.03em -0.04em 0 #25f4ee, 0.025em 0.04em 0 #e1306c; transform: translate(0); }
             15% { text-shadow: -0.05em -0.025em 0 #fe2c55, 0.025em 0.025em 0 #25f4ee, -0.05em -0.05em 0 #e1306c; transform: translate(-1px, 1px); }
             50% { text-shadow: 0.025em 0.05em 0 #fe2c55, 0.05em 0 0 #25f4ee, 0 -0.05em 0 #e1306c; transform: translate(1px, -1px); }
-            100% { text-shadow: -0.025em 0 0 #fe2c55, -0.025em -0.025em 0 #25f4ee, -0.025em -0.05em 0 #e1306c; transform: translate(0); }
+            100% { text-shadow: -0.025em 0 0 #fe2c55, -0.025em -0.025em 0 #fe2c55, -0.025em -0.05em 0 #e1306c; transform: translate(0); }
         }
 
         .custom-modal-body { font-size: 14px; color: #9ca3af; line-height: 1.5; margin-bottom: 24px; }
