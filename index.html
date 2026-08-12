@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TTBuy — Магазин TikTok аккаунтов</title>
+    <!-- Подключаем библиотеку Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         * {
             margin: 0;
@@ -29,18 +31,39 @@
             font-weight: bold;
             color: #ef4444;
         }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #94a3b8;
+            font-size: 14px;
+        }
+        .logout-btn {
+            background: transparent;
+            border: 1px solid #ef4444;
+            color: #ef4444;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s, color 0.2s;
+        }
+        .logout-btn:hover {
+            background: #ef4444;
+            color: white;
+        }
         .hero {
             text-align: center;
-            padding: 60px 20px;
+            padding: 50px 20px;
             background: linear-gradient(to bottom, #1e293b, #0f172a);
         }
         .hero h1 {
-            font-size: 40px;
+            font-size: 36px;
             margin-bottom: 15px;
             color: #fff;
         }
         .hero p {
-            font-size: 18px;
+            font-size: 16px;
             color: #94a3b8;
             max-width: 600px;
             margin: 0 auto;
@@ -49,6 +72,49 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 40px 20px;
+        }
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #fff;
+            border-bottom: 2px solid #334155;
+            padding-bottom: 10px;
+        }
+        .auth-container {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 500px;
+            margin: 0 auto 50px auto;
+        }
+        .auth-container h2 {
+            margin-bottom: 20px;
+            font-size: 22px;
+            color: #fff;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #94a3b8;
+            font-size: 14px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 16px;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #ef4444;
         }
         .products-grid {
             display: grid;
@@ -90,12 +156,26 @@
             text-align: center;
             padding: 12px;
             border-radius: 8px;
+            border: none;
             text-decoration: none;
             font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
             transition: background 0.2s;
         }
         .btn:hover {
             background: #dc2626;
+        }
+        .toggle-auth {
+            text-align: center;
+            margin-top: 15px;
+            color: #94a3b8;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .toggle-auth span {
+            color: #ef4444;
+            font-weight: bold;
         }
         footer {
             text-align: center;
@@ -111,33 +191,56 @@
 
     <header>
         <div class="logo">⚡ TTBuy</div>
-        <div style="color: #94a3b8; font-size: 14px;">Поддержка 24/7</div>
+        <div id="user-header">
+            <div style="color: #94a3b8; font-size: 14px;">Гость</div>
+        </div>
     </header>
 
     <div class="hero">
         <h1>Магазин проверенных TikTok аккаунтов</h1>
-        <p>Готовые аккаунты с отлежкой, подписчиками и возможностью запуска прямых трансляций. Моментальная выдача после оплаты!</p>
+        <p>Готовые аккаунты с отлежкой, подписчиками и возможностью запуска прямых трансляций. Зарегистрируйтесь, чтобы оформить заказ!</p>
     </div>
 
     <div class="container">
+        
+        <!-- Блок авторизации / регистрации -->
+        <div class="auth-container" id="auth-card">
+            <h2 id="auth-title">Регистрация покупателя</h2>
+            <form id="auth-form">
+                <div class="form-group">
+                    <label for="email">Электронная почта</label>
+                    <input type="email" id="email" placeholder="example@mail.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn" id="auth-btn">Зарегистрироваться</button>
+            </form>
+            <div class="toggle-auth" onclick="toggleMode()">
+                <span id="toggle-text">Уже есть аккаунт? Войти</span>
+            </div>
+        </div>
+
+        <h2 class="section-title">Доступные каталоги аккаунтов</h2>
         <div class="products-grid">
             <div class="card">
                 <h3>Аккаунт с доступом к Live (Трансляции)</h3>
                 <p>Чистый аккаунт с историей, полностью готов к стримам и продвижению.</p>
                 <div class="price">1 490 ₽</div>
-                <a href="#" class="btn">Купить аккаунт</a>
+                <button class="btn" onclick="buyItem('Аккаунт с доступом к Live')">Купить аккаунт</button>
             </div>
             <div class="card">
                 <h3>Аккаунт 1,000+ подписчиков</h3>
                 <p>Живая аудитория, открыта монетизация и стримы, без нарушений.</p>
                 <div class="price">2 990 ₽</div>
-                <a href="#" class="btn">Купить аккаунт</a>
+                <button class="btn" onclick="buyItem('Аккаунт 1,000+ подписчиков')">Купить аккаунт</button>
             </div>
             <div class="card">
                 <h3>Премиум набор (Сотка + Отлежка)</h3>
                 <p>Прокачанный аккаунт с 5,000 подписчиков и высокой активностью алгоритмов.</p>
                 <div class="price">6 490 ₽</div>
-                <a href="#" class="btn">Купить аккаунт</a>
+                <button class="btn" onclick="buyItem('Премиум набор')">Купить аккаунт</button>
             </div>
         </div>
     </div>
@@ -146,5 +249,86 @@
         <p>&copy; 2026 TTBuy. Все права защищены.</p>
     </footer>
 
+    <script>
+        // Инициализация Supabase
+        const SUPABASE_URL = 'https://xwrhswfmuotvqupnavmx.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_Zqf1YNo4kRt6aBGtouWjEQ_Wokiy4mE'; 
+
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        let isLoginMode = false;
+
+        function toggleMode() {
+            isLoginMode = !isLoginMode;
+            document.getElementById('auth-title').innerText = isLoginMode ? 'Вход в аккаунт' : 'Регистрация покупателя';
+            document.getElementById('auth-btn').innerText = isLoginMode ? 'Войти' : 'Зарегистрироваться';
+            document.getElementById('toggle-text').innerText = isLoginMode ? 'Нет аккаунта? Зарегистрироваться' : 'Уже есть аккаунт? Войти';
+        }
+
+        const authForm = document.getElementById('auth-form');
+        authForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            if (isLoginMode) {
+                // Вход
+                const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+                if (error) {
+                    alert('Ошибка входа: ' + error.message);
+                } else {
+                    alert('Успешный вход!');
+                    checkUser();
+                }
+            } else {
+                // Регистрация
+                const { data, error } = await supabaseClient.auth.signUp({ email, password });
+                if (error) {
+                    alert('Ошибка регистрации: ' + error.message);
+                } else {
+                    alert('Регистрация успешна! Теперь вы можете войти.');
+                    toggleMode();
+                }
+            }
+        });
+
+        async function checkUser() {
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            const headerDiv = document.getElementById('user-header');
+            const authCard = document.getElementById('auth-card');
+
+            if (session) {
+                headerDiv.innerHTML = `
+                    <div class="user-info">
+                        <span>👤 ${session.user.email}</span>
+                        <button class="logout-btn" onclick="logout()">Выйти</button>
+                    </div>
+                `;
+                authCard.style.display = 'none'; // Скрываем форму, если уже вошел
+            } else {
+                headerDiv.innerHTML = `<div style="color: #94a3b8; font-size: 14px;">Гость</div>`;
+                authCard.style.display = 'block';
+            }
+        }
+
+        async function logout() {
+            await supabaseClient.auth.signOut();
+            alert('Вы вышли из системы');
+            checkUser();
+        }
+
+        function buyItem(itemName) {
+            supabaseClient.auth.getSession().then(({ data: { session } }) => {
+                if (!session) {
+                    alert('Пожалуйста, войдите в систему или зарегистрируйтесь для покупки!');
+                } else {
+                    alert(`Заказ на "${itemName}" оформлен! С вами свяжется менеджер.`);
+                }
+            });
+        }
+
+        // Проверяем статус при загрузке страницы
+        checkUser();
+    </script>
 </body>
 </html>
