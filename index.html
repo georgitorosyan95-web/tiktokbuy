@@ -9,7 +9,9 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: linear-gradient(135deg, rgba(14, 22, 33, 0.92), rgba(15, 23, 42, 0.92)), url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1920&auto=format&fit=crop'); background-size: cover; background-position: center; background-attachment: fixed; color: #f8fafc; font-family: 'Inter', sans-serif; line-height: 1.6; }
-        .logo { font-size: 24px; font-weight: bold; color: #ef4444; }
+        header { background: #1e293b; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; }
+        .logo { display: flex; align-items: center; gap: 10px; font-size: 24px; font-weight: bold; color: #fff; }
+        .logo span { background: linear-gradient(90deg, #fe2c55, #229ed9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .user-info { display: flex; align-items: center; gap: 15px; color: #94a3b8; font-size: 14px; }
         .logout-btn { background: transparent; border: 1px solid #ef4444; color: #ef4444; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: 600; transition: background 0.2s, color 0.2s; }
         .logout-btn:hover { background: #ef4444; color: white; }
@@ -49,7 +51,17 @@
 <body>
 
     <header>
-        <div class="logo">⚡ TTBuy</div>
+        <div class="logo">
+            <!-- Иконка TikTok -->
+            <svg style="width: 26px; height: 26px;" viewBox="0 0 24 24" fill="none">
+                <path d="M19.589 6.686a4.793 4.793 0 01-3.7-1.542V13.8a6.857 6.857 0 11-6.857-6.857c.328 0 .65.03.964.088v3.655a3.171 3.171 0 102.214 3.028V1h3.643a8.471 8.471 0 003.743 3.128v2.558z" fill="#fe2c55"/>
+            </svg>
+            <!-- Иконка Telegram -->
+            <svg style="width: 26px; height: 26px;" viewBox="0 0 24 24" fill="#229ed9">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.25.38-.51 1.08-.78 4.22-1.84 7.03-3.05 8.43-3.62 4.01-1.66 4.84-1.95 5.38-1.96.12 0 .39.03.56.17.14.12.18.28.2.45-.02.07-.02.13-.04.2z"/>
+            </svg>
+            <span>TTBuy</span>
+        </div>
         <div id="user-header">
             <div style="color: #94a3b8; font-size: 14px;">Гость</div>
         </div>
