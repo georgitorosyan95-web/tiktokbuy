@@ -147,7 +147,7 @@
         
         .cart-items-list { max-height: 180px; overflow-y: auto; margin-bottom: 12px; }
         .cart-item { display: flex; justify-content: space-between; align-items: center; background: #0f172a; padding: 8px 12px; border-radius: 8px; margin-bottom: 6px; border: 1px solid #334155; }
-        .cart-total { display: flex; justify-content: space-between; font-size: 15px; font-weight: bold; margin-bottom: 12px; border-top: 1px solid #334155; paddingTop: 10px; }
+        .cart-total { display: flex; justify-content: space-between; font-size: 15px; font-weight: bold; margin-bottom: 12px; border-top: 1px solid #334155; padding-top: 10px; }
 
         /* Отзывы */
         .reviews-section { margin-top: 15px; border-top: 1px solid #334155; padding-top: 10px; }
@@ -215,7 +215,10 @@
             <div class="products-grid" id="products-grid">
                 
                 <!-- Товар 1 -->
-                <div class="card" data-category="tiktok" data-name="Аккаунт с доступом к Live" onclick="openDetails('Аккаунт с доступом к Live', 1490, 'Чистый аккаунт с историей, полностью готов к стримам и продвижению.', '1 год', 'Родная почта (Outlook)', 'Мгновенная (в личный кабинет)')">
+                <div class="card" data-category="tiktok" data-name="Аккаунт с доступом к Live" onclick="openDetails('Аккаунт с доступом к Live', 1490, 'Чистый аккаунт с историей, полностью готов к стримам и продвижению.', '1 год', 'Родная почта (Outlook)', 'Мгновенная (в личный кабинет)', [
+                    {author: 'Алексей', stars: '★★★★★', text: 'Всё пришло моментально, вошел на почту и в аккаунт без проблем!'},
+                    {author: 'Дмитрий', stars: '★★★★★', text: 'Стрим запустил в тот же вечер, трансляция не лагает. Топ!'}
+                ])">
                     <div>
                         <h3>Аккаунт с доступом к Live (Трансляции)</h3>
                         <p>Чистый аккаунт с историей, полностью готов к стримам и продвижению.</p>
@@ -234,7 +237,10 @@
                 </div>
 
                 <!-- Товар 2 -->
-                <div class="card" data-category="tiktok" data-name="Аккаунт 1,000+ подписчиков" onclick="openDetails('Аккаунт 1,000+ подписчиков', 2990, 'Живая аудитория, открыта монетизация и стримы, без нарушений.', '6 месяцев', 'Авторег + почта', 'Мгновенная')">
+                <div class="card" data-category="tiktok" data-name="Аккаунт 1,000+ подписчиков" onclick="openDetails('Аккаунт 1,000+ подписчиков', 2990, 'Живая аудитория, открыта монетизация и стримы, без нарушений.', '6 месяцев', 'Авторег + почта', 'Мгновенная', [
+                    {author: 'Марина', stars: '★★★★★', text: 'Отличный магазин, беру не первый раз. Поддержка помогла сменить пароль.'},
+                    {author: 'Иван', stars: '★★★★☆', text: 'Подписчики реальные, кнопка Live активна. Рекомендую продавца.'}
+                ])">
                     <div>
                         <h3>Аккаунт 1,000+ подписчиков</h3>
                         <p>Живая аудитория, открыта монетизация и стримы, без нарушений.</p>
@@ -253,7 +259,10 @@
                 </div>
 
                 <!-- Товар 3 -->
-                <div class="card" data-category="telegram" data-name="Telegram канал с монетизацией" onclick="openDetails('Telegram канал с монетизацией', 12900, 'Готовый канал с живой аудиторией и подключенными источниками дохода.', '2 года', 'Передача владельца (Owner)', 'Ручная (до 15 минут)')">
+                <div class="card" data-category="telegram" data-name="Telegram канал с монетизацией" onclick="openDetails('Telegram канал с монетизацией', 12900, 'Готовый канал с живой аудиторией и подключенными источниками дохода.', '2 года', 'Передача владельца (Owner)', 'Ручная (до 15 минут)', [
+                    {author: 'Сергей', stars: '★★★★★', text: 'Передали права владельца через бота за 5 минут. Статистика чистая!'},
+                    {author: 'Артур', stars: '★★★★★', text: 'Окупаемость отличная, рекламу уже продаю.'}
+                ])">
                     <div>
                         <h3>Telegram канал с монетизацией</h3>
                         <p>Готовый канал с живой аудиторией и подключенными источниками дохода.</p>
@@ -272,7 +281,10 @@
                 </div>
 
                 <!-- Товар 4 -->
-                <div class="card" data-category="numbers" data-name="Номер для регистрации TikTok" onclick="openDetails('Виртуальный номер TikTok', 150, 'Чистый виртуальный номер для безопасной регистрации и верификации.', 'Одноразовый', 'СМС-получение на сайте', 'Моментально')">
+                <div class="card" data-category="numbers" data-name="Номер для регистрации TikTok" onclick="openDetails('Виртуальный номер TikTok', 150, 'Чистый виртуальный номер для безопасной регистрации и верификации.', 'Одноразовый', 'СМС-получение на сайте', 'Моментально', [
+                    {author: 'Евгений', stars: '★★★★★', text: 'СМС прилетело через 3 секунды. Аккаунт зарегистрировался с первого раза.'},
+                    {author: 'Ольга', stars: '★★★★★', text: 'Дешевле чем на других сайтах, спасибо сервису!'}
+                ])">
                     <div>
                         <h3>Номер для регистрации TikTok</h3>
                         <p>Чистый виртуальный номер для безопасной регистрации и верификации аккаунта.</p>
@@ -291,7 +303,10 @@
                 </div>
 
                 <!-- Товар 5 -->
-                <div class="card" data-category="boost" data-name="TikTok Подписчики" onclick="openDetails('Накрутка TikTok: Подписчики (1000)', 490, 'Быстрое добавление качественных подписчиков на ваш профиль.', 'Без списаний', 'По ссылке на профиль', 'Автозапуск за 5 мин')">
+                <div class="card" data-category="boost" data-name="TikTok Подписчики" onclick="openDetails('Накрутка TikTok: Подписчики (1000)', 490, 'Быстрое добавление качественных подписчиков на ваш профиль.', 'Без списаний', 'По ссылке на профиль', 'Автозапуск за 5 мин', [
+                    {author: 'Кирилл', stars: '★★★★☆', text: 'Накрутка пошла плавно, без списаний. Очень доволен.'},
+                    {author: 'Виктория', stars: '★★★★★', text: 'Заказ выполнили даже быстрее, чем указано. Рекомендую!'}
+                ])">
                     <div>
                         <h3>TikTok: Подписчики (1 000 шт)</h3>
                         <p>Быстрое добавление живых подписчиков на ваш TikTok профиль.</p>
@@ -310,7 +325,10 @@
                 </div>
 
                 <!-- Товар 6 -->
-                <div class="card" data-category="boost" data-name="Telegram Подписчики на канал" onclick="openDetails('Накрутка Telegram: Подписчики (1000)', 590, 'Привлечение целевой аудитории и подписчиков в ваш Telegram канал.', 'С гарантией', 'По ссылке на канал', 'Плавный старт')">
+                <div class="card" data-category="boost" data-name="Telegram Подписчики на канал" onclick="openDetails('Накрутка Telegram: Подписчики (1000)', 590, 'Привлечение целевой аудитории и подписчиков в ваш Telegram канал.', 'С гарантией', 'По ссылке на канал', 'Плавный старт', [
+                    {author: 'Максим', stars: '★★★★★', text: 'Отличные подписчики, бот отработал четко.'},
+                    {author: 'Павел', stars: '★★★★★', text: 'Качественная услуга, всё супер!'}
+                ])">
                     <div>
                         <h3>Telegram: Подписчики на канал (1 000 шт)</h3>
                         <p>Привлечение целевой аудитории и подписчиков в ваш Telegram канал.</p>
@@ -349,16 +367,11 @@
                 <button class="btn" id="det-buy">Купить сразу</button>
             </div>
 
-            <!-- Блок отзывов в карточке -->
+            <!-- Блок уникальных отзывов в карточке -->
             <div class="reviews-section">
                 <h4 style="font-size: 13px; margin-bottom: 8px; color: #fff;">Отзывы покупателей:</h4>
-                <div class="review-card">
-                    <div class="review-author">Алексей ★★★★★</div>
-                    <div>Всё пришло моментально после оплаты, аккаунт рабочий, вошел без проблем!</div>
-                </div>
-                <div class="review-card">
-                    <div class="review-author">Марина ★★★★★</div>
-                    <div>Отличный магазин, беру не первый раз. Поддержка отвечает быстро.</div>
+                <div id="det-reviews-container">
+                    <!-- Заполняется динамически уникальными отзывами товара -->
                 </div>
             </div>
         </div>
@@ -441,7 +454,7 @@
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         let cart = [];
-        let myPurchases = []; // Хранилище купленных товаров
+        let myPurchases = [];
 
         // Трекинг посетителей
         async function trackVisitor() {
@@ -496,8 +509,8 @@
             });
         }
 
-        // Детальное модальное окно товара
-        function openDetails(name, price, desc, age, mail, delivery) {
+        // Детальное модальное окно товара с уникальными отзывами
+        function openDetails(name, price, desc, age, mail, delivery, reviews) {
             document.getElementById('det-title').textContent = name;
             document.getElementById('det-desc').textContent = desc;
             document.getElementById('det-age').textContent = age;
@@ -505,6 +518,18 @@
             document.getElementById('det-delivery').textContent = delivery;
             document.getElementById('det-price').textContent = price + ' ₽';
             
+            // Динамическая генерация отзывов для конкретного товара
+            const reviewsContainer = document.getElementById('det-reviews-container');
+            reviewsContainer.innerHTML = '';
+            reviews.forEach(rev => {
+                reviewsContainer.innerHTML += `
+                    <div class="review-card">
+                        <div class="review-author">${rev.author} <span style="color: #facc15;">${rev.stars}</span></div>
+                        <div>${rev.text}</div>
+                    </div>
+                `;
+            });
+
             document.getElementById('det-add-cart').onclick = () => { addToCart(name, price); closeDetailsModal(); };
             document.getElementById('det-buy').onclick = () => { buyDirect(name, price); closeDetailsModal(); };
             
@@ -565,7 +590,6 @@
                 return;
             }
             
-            // Добавляем товары в симуляцию личного кабинета (мои покупки)
             cart.forEach(item => {
                 myPurchases.push({
                     name: item.name,
