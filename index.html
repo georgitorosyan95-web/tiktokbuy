@@ -10,10 +10,10 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: #0b0f19; color: #f8fafc; line-height: 1.6; overflow-x: hidden; }
         
-        header { background: #1e293b; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; flex-wrap: wrap; gap: 10px; position: sticky; top: 0; z-index: 100; }
+        header { background: rgba(30, 41, 59, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(51, 65, 85, 0.8); flex-wrap: wrap; gap: 10px; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
         
         .logo { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: bold; color: #fff; white-space: nowrap; cursor: pointer; }
-        .logo-img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; flex-shrink: 0; display: block; }
+        .logo-img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; flex-shrink: 0; display: block; box-shadow: 0 0 10px rgba(37, 244, 238, 0.4); }
         .logo span { background: linear-gradient(90deg, #fe2c55, #229ed9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
         .header-right { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
@@ -28,8 +28,9 @@
             cursor: pointer; 
             font-weight: 700; 
             font-size: 12px; 
-            transition: all 0.2s; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
             white-space: nowrap;
+            box-shadow: 0 0 10px rgba(37, 244, 238, 0.1);
         }
 
         .hero-title-container {
@@ -49,6 +50,10 @@
             display: inline-block;
             background: #0f172a;
             box-shadow: 0 0 30px rgba(37, 244, 238, 0.5), 0 0 50px rgba(254, 44, 85, 0.3);
+            transition: transform 0.3s ease;
+        }
+        .glitch-logo-wrapper:hover {
+            transform: scale(1.05);
         }
 
         .glitch-logo-img {
@@ -140,15 +145,16 @@
             81% { text-shadow: -3px 0 #fe2c55, 3px 0 #25f4ee; transform: skew(-2deg); }
         }
 
-        .nav-btn:hover { border-color: #fe2c55; color: #fff; }
+        .nav-btn:hover { border-color: #fe2c55; color: #fff; box-shadow: 0 0 15px rgba(254, 44, 85, 0.4); }
         .nav-btn.register { 
             background: linear-gradient(90deg, #fe2c55, #25f4ee); 
             border: 1px solid #fe2c55; 
             color: white; 
+            box-shadow: 0 0 15px rgba(254, 44, 85, 0.3);
         }
 
         .cart-btn, .cabinet-btn, .seller-btn {
-            background: #0f172a;
+            background: rgba(15, 23, 42, 0.8);
             border: 1px solid #fe2c55;
             color: #fff;
             padding: 5px 10px;
@@ -159,42 +165,138 @@
             display: flex;
             align-items: center;
             gap: 5px;
-            transition: all 0.2s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
+            box-shadow: 0 0 12px rgba(254, 44, 85, 0.2);
         }
-        .cart-btn:hover, .cabinet-btn:hover, .seller-btn:hover { background: #fe2c55; }
-        .seller-btn { border-color: #229ed9; }
-        .seller-btn:hover { background: #229ed9; }
+        .cart-btn:hover, .cabinet-btn:hover { background: #fe2c55; box-shadow: 0 0 20px rgba(254, 44, 85, 0.6); transform: translateY(-1px); }
+        .seller-btn { border-color: #229ed9; box-shadow: 0 0 12px rgba(34, 158, 217, 0.2); }
+        .seller-btn:hover { background: #229ed9; box-shadow: 0 0 20px rgba(34, 158, 217, 0.6); transform: translateY(-1px); }
         .cart-badge { background: #25f4ee; color: #0f172a; padding: 1px 5px; border-radius: 10px; font-size: 10px; font-weight: 900; }
 
         .user-info { display: flex; align-items: center; gap: 8px; color: #94a3b8; font-size: 12px; }
-        .logout-btn { background: transparent; border: 1px solid #ef4444; color: #ef4444; padding: 4px 8px; border-radius: 6px; cursor: pointer; font-weight: 600; }
-        .logout-btn:hover { background: #ef4444; color: white; }
+        .logout-btn { background: transparent; border: 1px solid #ef4444; color: #ef4444; padding: 4px 8px; border-radius: 6px; cursor: pointer; font-weight: 600; transition: all 0.2s; }
+        .logout-btn:hover { background: #ef4444; color: white; box-shadow: 0 0 10px rgba(239, 68, 68, 0.4); }
 
         .search-bar-container { max-width: 600px; margin: 20px auto 10px auto; padding: 0 15px; position: relative; z-index: 2; }
-        .search-input { width: 100%; padding: 12px 16px; background: rgba(30, 41, 59, 0.9); border: 2px solid #334155; border-radius: 12px; color: #fff; font-size: 14px; outline: none; }
-        .search-input:focus { border-color: #25f4ee; }
+        .search-input { width: 100%; padding: 12px 16px; background: rgba(30, 41, 59, 0.8); backdrop-filter: blur(10px); border: 2px solid #334155; border-radius: 12px; color: #fff; font-size: 14px; outline: none; transition: all 0.3s; box-shadow: inset 0 2px 4px rgba(0,0,0,0.3); }
+        .search-input:focus { border-color: #25f4ee; box-shadow: 0 0 20px rgba(37, 244, 238, 0.3), inset 0 2px 4px rgba(0,0,0,0.3); }
 
         .categories-scroll { display: flex; gap: 8px; overflow-x: auto; max-width: 1100px; margin: 15px auto; padding: 0 15px; scrollbar-width: none; }
         .categories-scroll::-webkit-scrollbar { display: none; }
-        .cat-chip { background: #1e293b; border: 1px solid #334155; color: #94a3b8; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
-        .cat-chip:hover, .cat-chip.active { background: linear-gradient(90deg, #fe2c55, #25f4ee); color: #fff; border-color: transparent; }
+        .cat-chip { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(8px); border: 1px solid #334155; color: #94a3b8; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.3s; }
+        .cat-chip:hover, .cat-chip.active { background: linear-gradient(90deg, #fe2c55, #25f4ee); color: #fff; border-color: transparent; box-shadow: 0 0 15px rgba(37, 244, 238, 0.4); transform: translateY(-1px); }
+
+        /* Блок доверия и преимуществ («Почему выбирают нас») */
+        .trust-section {
+            max-width: 1200px;
+            margin: 25px auto 10px auto;
+            padding: 0 12px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        @media(min-width: 768px) {
+            .trust-section { grid-template-columns: repeat(3, 1fr); }
+        }
+        .trust-card {
+            background: rgba(30, 41, 59, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(37, 244, 238, 0.2);
+            border-radius: 14px;
+            padding: 18px;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 15px rgba(37, 244, 238, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        .trust-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transition: 0.5s;
+        }
+        .trust-card:hover::before {
+            left: 100%;
+        }
+        .trust-card:hover {
+            border-color: #25f4ee;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 25px rgba(37, 244, 238, 0.3), 0 0 10px rgba(254, 44, 85, 0.2);
+        }
+        .trust-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+            display: inline-block;
+            filter: drop-shadow(0 0 8px rgba(37, 244, 238, 0.5));
+        }
+        .trust-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+        .trust-desc {
+            font-size: 11px;
+            color: #94a3b8;
+            line-height: 1.4;
+        }
+
+        /* Динамическая сортировка товаров */
+        .catalog-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 25px 0 12px 0;
+            border-bottom: 2px solid #334155;
+            padding-bottom: 6px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .sort-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: #94a3b8;
+        }
+        .sort-select {
+            background: rgba(30, 41, 59, 0.9);
+            border: 1px solid #334155;
+            color: #fff;
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            outline: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .sort-select:focus {
+            border-color: #25f4ee;
+            box-shadow: 0 0 12px rgba(37, 244, 238, 0.3);
+        }
 
         .support-float {
             position: fixed; bottom: 20px; right: 20px;
             background: linear-gradient(135deg, #229ed9, #1b8ec2);
             color: white; padding: 10px 16px; border-radius: 30px;
             display: flex; align-items: center; gap: 8px; text-decoration: none;
-            font-weight: 700; font-size: 13px; box-shadow: 0 4px 20px rgba(34, 158, 217, 0.5);
-            z-index: 99; transition: transform 0.2s; border: 1px solid rgba(255, 255, 255, 0.2);
+            font-weight: 700; font-size: 13px; box-shadow: 0 4px 25px rgba(34, 158, 217, 0.6);
+            z-index: 99; transition: transform 0.3s, box-shadow 0.3s; border: 1px solid rgba(255, 255, 255, 0.3);
         }
-        .support-float:hover { transform: scale(1.05); }
+        .support-float:hover { transform: scale(1.08); box-shadow: 0 6px 30px rgba(34, 158, 217, 0.8); }
         .support-float svg { width: 18px; height: 18px; fill: white; }
 
         .hero { 
             text-align: center; padding: 45px 15px; 
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(30, 41, 59, 0.92)); 
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95)); 
             position: relative; overflow: hidden; border-bottom: 1px solid #334155;
+            box-shadow: inset 0 -10px 20px rgba(0,0,0,0.3);
         }
         .hero-content { position: relative; z-index: 3; }
         .hero h1 { font-size: 22px; font-weight: 900; margin-bottom: 10px; color: #fff; text-shadow: -2px -2px 0 #25f4ee, 2px 2px 0 #fe2c55; }
@@ -209,59 +311,86 @@
         }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 15px 12px; position: relative; z-index: 2; }
-        .section-title { font-size: 17px; margin: 25px 0 12px 0; color: #fff; border-bottom: 2px solid #334155; padding-bottom: 6px; }
+        .section-title { font-size: 17px; color: #fff; margin: 0; }
 
         .products-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
         @media(min-width: 640px) { .products-grid { grid-template-columns: repeat(2, 1fr); } }
         @media(min-width: 1024px) { .products-grid { grid-template-columns: repeat(3, 1fr); } }
 
-        .card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 16px; transition: transform 0.2s, border-color 0.2s; display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; position: relative; }
-        .card:hover { border-color: #fe2c55; transform: translateY(-2px); }
-        .card.promo-card { border: 2px solid #fe2c55; background: linear-gradient(145deg, #1e293b, #2a1b2e); box-shadow: 0 0 15px rgba(254,44,85,0.2); }
+        .card { 
+            background: rgba(30, 41, 59, 0.75); 
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(51, 65, 85, 0.9); 
+            border-radius: 14px; 
+            padding: 16px; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between; 
+            cursor: pointer; 
+            position: relative; 
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        .card:hover { 
+            border-color: #25f4ee; 
+            transform: translateY(-4px); 
+            box-shadow: 0 12px 35px rgba(0,0,0,0.4), 0 0 20px rgba(37, 244, 238, 0.25); 
+        }
+        .card.promo-card { 
+            border: 2px solid #fe2c55; 
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.85), rgba(42, 27, 46, 0.85)); 
+            box-shadow: 0 8px 35px rgba(254,44,85,0.25), 0 0 20px rgba(254, 44, 85, 0.15); 
+        }
+        .card.promo-card:hover {
+            box-shadow: 0 12px 40px rgba(254,44,85,0.4), 0 0 30px rgba(254, 44, 85, 0.4);
+        }
         .card h3 { font-size: 15px; margin-bottom: 6px; color: #fff; }
         .card p { color: #94a3b8; font-size: 12px; margin-bottom: 10px; flex-grow: 1; }
         
-        .quantity-selector-box { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 8px; margin-bottom: 10px; }
+        .quantity-selector-box { background: rgba(15, 23, 42, 0.8); border: 1px solid #334155; border-radius: 8px; padding: 8px; margin-bottom: 10px; }
         .quantity-selector-box label { display: block; font-size: 11px; color: #94a3b8; margin-bottom: 4px; font-weight: 600; }
         .quantity-selector-box select { width: 100%; background: #1e293b; color: #fff; border: 1px solid #334155; padding: 6px; border-radius: 6px; font-size: 12px; outline: none; }
         .quantity-selector-box select:focus { border-color: #25f4ee; }
 
         .card-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 11px; color: #64748b; }
-        .rating { color: #facc15; font-weight: bold; }
-        .price { font-size: 16px; font-weight: bold; color: #22c55e; margin-bottom: 12px; }
+        .rating { color: #facc15; font-weight: bold; text-shadow: 0 0 8px rgba(250, 204, 21, 0.3); }
+        .price { font-size: 16px; font-weight: bold; color: #22c55e; margin-bottom: 12px; text-shadow: 0 0 10px rgba(34, 197, 94, 0.2); }
         .price-old { text-decoration: line-through; color: #ef4444; font-size: 12px; margin-right: 6px; }
         .card-buttons { display: flex; gap: 8px; }
         
-        .btn { display: block; width: 100%; background: linear-gradient(90deg, #fe2c55, #25f4ee); color: white; text-align: center; padding: 9px; border-radius: 8px; border: none; font-weight: bold; font-size: 13px; cursor: pointer; transition: opacity 0.2s; }
-        .btn:hover { opacity: 0.9; }
-        .btn-secondary { background: #334155; color: #fff; }
-        .btn-secondary:hover { background: #475569; }
+        .btn { display: block; width: 100%; background: linear-gradient(90deg, #fe2c55, #25f4ee); color: white; text-align: center; padding: 9px; border-radius: 8px; border: none; font-weight: bold; font-size: 13px; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 15px rgba(254, 44, 85, 0.3); }
+        .btn:hover { opacity: 0.95; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(254, 44, 85, 0.5), 0 0 15px rgba(37, 244, 238, 0.3); }
+        .btn-secondary { background: rgba(51, 65, 85, 0.8); color: #fff; box-shadow: none; }
+        .btn-secondary:hover { background: #475569; box-shadow: 0 4px 15px rgba(71, 85, 105, 0.4); }
 
-        .badge-seller { position: absolute; top: 12px; right: 16px; font-size: 10px; background: rgba(34, 158, 217, 0.2); color: #229ed9; padding: 2px 6px; border-radius: 4px; font-weight: bold; border: 1px solid rgba(34, 158, 217, 0.4); }
+        .badge-seller { position: absolute; top: 12px; right: 16px; font-size: 10px; background: rgba(34, 158, 217, 0.2); color: #229ed9; padding: 2px 6px; border-radius: 4px; font-weight: bold; border: 1px solid rgba(34, 158, 217, 0.4); box-shadow: 0 0 10px rgba(34, 158, 217, 0.2); }
 
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(5px); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 12px; }
-        .modal-box { background: #1e293b; border: 1px solid #334155; border-radius: 16px; padding: 20px; width: 100%; max-width: 480px; position: relative; box-shadow: 0 20px 25px rgba(0,0,0,0.5); max-height: 90vh; overflow-y: auto; color: #fff; }
-        .close-modal { position: absolute; top: 12px; right: 15px; background: none; border: none; color: #94a3b8; font-size: 22px; cursor: pointer; }
-        .close-modal:hover { color: #fff; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(8px); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 12px; animation: fadeIn 0.2s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .modal-box { background: rgba(30, 41, 59, 0.95); backdrop-filter: blur(16px); border: 1px solid rgba(51, 65, 85, 0.9); border-radius: 16px; padding: 20px; width: 100%; max-width: 480px; position: relative; box-shadow: 0 25px 50px rgba(0,0,0,0.6), 0 0 30px rgba(37, 244, 238, 0.15); max-height: 90vh; overflow-y: auto; color: #fff; }
+        .close-modal { position: absolute; top: 12px; right: 15px; background: none; border: none; color: #94a3b8; font-size: 22px; cursor: pointer; transition: color 0.2s; }
+        .close-modal:hover { color: #fff; text-shadow: 0 0 8px rgba(255,255,255,0.5); }
         
         .modal-box h2 { font-size: 18px; margin-bottom: 12px; }
         .modal-details-prop { font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: flex; justify-content: space-between; border-bottom: 1px solid #334155; padding-bottom: 4px; }
         .modal-details-prop span:last-child { font-weight: bold; color: #fff; text-align: right; }
 
         .pay-methods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 12px 0; }
-        .pay-method { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 8px; text-align: center; font-size: 11px; cursor: pointer; color: #94a3b8; }
-        .pay-method.active { border-color: #25f4ee; color: #fff; background: rgba(37,244,238,0.1); }
+        .pay-method { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 8px; text-align: center; font-size: 11px; cursor: pointer; color: #94a3b8; transition: all 0.2s; }
+        .pay-method.active { border-color: #25f4ee; color: #fff; background: rgba(37,244,238,0.15); box-shadow: 0 0 10px rgba(37, 244, 238, 0.2); }
 
         .cabinet-tabs { display: flex; gap: 10px; margin-bottom: 15px; border-bottom: 1px solid #334155; padding-bottom: 8px; }
-        .cab-tab { background: none; border: none; color: #94a3b8; font-weight: bold; font-size: 13px; cursor: pointer; }
-        .cab-tab.active { color: #25f4ee; }
+        .cab-tab { background: none; border: none; color: #94a3b8; font-weight: bold; font-size: 13px; cursor: pointer; transition: color 0.2s; }
+        .cab-tab.active { color: #25f4ee; text-shadow: 0 0 8px rgba(37, 244, 238, 0.4); }
         .purchase-item { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 10px; margin-bottom: 8px; font-size: 12px; }
         .purchase-data { background: #1e293b; padding: 6px; border-radius: 6px; margin-top: 6px; font-family: monospace; color: #22c55e; word-break: break-all; }
 
         .form-group { margin-bottom: 12px; }
         .form-group label { display: block; margin-bottom: 4px; color: #94a3b8; font-size: 12px; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #fff; font-size: 14px; outline: none; }
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #25f4ee; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #fff; font-size: 14px; outline: none; transition: border-color 0.2s; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #25f4ee; box-shadow: 0 0 10px rgba(37, 244, 238, 0.2); }
         
         .cart-items-list { max-height: 180px; overflow-y: auto; margin-bottom: 12px; }
         .cart-item { display: flex; justify-content: space-between; align-items: center; background: #0f172a; padding: 8px 12px; border-radius: 8px; margin-bottom: 6px; border: 1px solid #334155; }
@@ -274,7 +403,7 @@
         .review-card { background: #0f172a; padding: 8px 10px; border-radius: 6px; margin-bottom: 6px; font-size: 12px; border: 1px solid #1e293b; }
         .review-author { font-weight: bold; color: #25f4ee; margin-bottom: 2px; display: flex; justify-content: space-between; }
 
-        footer { text-align: center; padding: 20px; background: #1e293b; color: #64748b; margin-top: 40px; border-top: 1px solid #334155; font-size: 13px; }
+        footer { text-align: center; padding: 20px; background: rgba(30, 41, 59, 0.8); backdrop-filter: blur(10px); color: #64748b; margin-top: 40px; border-top: 1px solid #334155; font-size: 13px; }
     </style>
 </head>
 <body>
@@ -322,6 +451,25 @@
         </div>
     </div>
 
+    <!-- Блок доверия и преимуществ («Почему выбирают нас») -->
+    <div class="trust-section">
+        <div class="trust-card">
+            <div class="trust-icon">🛡️</div>
+            <div class="trust-title">Эскроу-гарантия</div>
+            <div class="trust-desc">Деньги хранятся на защищенном счете и перечисляются продавцу только после вашей проверки и подтверждения получения.</div>
+        </div>
+        <div class="trust-card">
+            <div class="trust-icon">⚡</div>
+            <div class="trust-title">Моментальная доставка</div>
+            <div class="trust-desc">Данные от аккаунтов и цифровых товаров доставляются на ваш email автоматически сразу после успешной оплаты.</div>
+        </div>
+        <div class="trust-card">
+            <div class="trust-icon">💬</div>
+            <div class="trust-title">Поддержка 24/7</div>
+            <div class="trust-desc">Наша команда профессионалов готова помочь с любыми вопросами по сделке в любое время суток без выходных.</div>
+        </div>
+    </div>
+
     <div class="search-bar-container">
         <input type="text" id="searchInput" class="search-input" placeholder="🔍 Поиск: аккаунты, подписчики, лайки, просмотры..." oninput="filterProducts()">
     </div>
@@ -339,8 +487,21 @@
     </div>
 
     <div class="container">
-        <div id="catalog-container">
+        <!-- Блок управления каталогом и динамической сортировкой -->
+        <div class="catalog-controls">
             <h2 class="section-title">🔥 Акционные предложения (Все соцсети)</h2>
+            <div class="sort-wrapper">
+                <label for="sortSelect">Сортировка:</label>
+                <select id="sortSelect" class="sort-select" onchange="sortProducts()">
+                    <option value="popularity">По популярности</option>
+                    <option value="rating">По рейтингу</option>
+                    <option value="price-asc">Сначала дешевле</option>
+                    <option value="price-desc">Сначала дороже</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="catalog-container">
             <div class="products-grid" id="products-grid">
                 
                 <!-- Акционные предложения для всех соцсетей на самом видном месте -->
@@ -767,6 +928,51 @@
             const calculatedPrice = Math.round(qty * basePrice);
             const priceEl = card.querySelector('.card-price-el');
             priceEl.textContent = calculatedPrice.toLocaleString() + ' ₽';
+        }
+
+        // Динамическая сортировка товаров
+        function sortProducts() {
+            const sortBy = document.getElementById('sortSelect').value;
+            const grid = document.getElementById('products-grid');
+            const cardsArray = Array.from(grid.getElementsByClassName('card'));
+
+            cardsArray.sort((a, b) => {
+                const getPrice = (card) => {
+                    const priceEl = card.querySelector('.price');
+                    if (!priceEl) return 0;
+                    const clone = priceEl.cloneNode(true);
+                    const oldSpan = clone.querySelector('.price-old');
+                    if (oldSpan) oldSpan.remove();
+                    return parseInt(clone.textContent.replace(/[^0-9]/g, '')) || 0;
+                };
+
+                const getRating = (card) => {
+                    const ratingEl = card.querySelector('.rating');
+                    if (!ratingEl) return 0;
+                    const match = ratingEl.textContent.match(/★\s*([0-9.]+)/);
+                    return match ? parseFloat(match[1]) : 0;
+                };
+
+                const getPopularity = (card) => {
+                    const ratingEl = card.querySelector('.rating');
+                    if (!ratingEl) return 0;
+                    const match = ratingEl.textContent.match(/\(([0-9]+)\)/);
+                    return match ? parseInt(match[1]) : 0;
+                };
+
+                if (sortBy === 'price-asc') {
+                    return getPrice(a) - getPrice(b);
+                } else if (sortBy === 'price-desc') {
+                    return getPrice(b) - getPrice(a);
+                } else if (sortBy === 'rating') {
+                    return getRating(b) - getRating(a);
+                } else if (sortBy === 'popularity') {
+                    return getPopularity(b) - getPopularity(a);
+                }
+                return 0;
+            });
+
+            cardsArray.forEach(card => grid.appendChild(card));
         }
 
         function filterCategory(cat, element) {
