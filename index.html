@@ -1010,7 +1010,15 @@
             });
         }
 
-        function openCreateProductModal() { document.getElementById('createProductModal').style.display = 'flex'; }
+        async function openCreateProductModal() { 
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            if (!session) {
+                showModal('Для размещения товара необходимо войти в систему.');
+                openAuth('login');
+                return;
+            }
+            document.getElementById('createProductModal').style.display = 'flex'; 
+        }
         function closeCreateProductModal() { document.getElementById('createProductModal').style.display = 'none'; }
 
         const createProductForm = document.getElementById('create-product-form');
